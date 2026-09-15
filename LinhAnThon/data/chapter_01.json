@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "version": "1.0.0",
+  "chapter_id": "chapter_01",
+  "chapter_name": "Linh An Thôn - Chương 1",
+  "chapter_title_vi": "Cúng thế mạng",
+  "language": "vi-VN",
+  "design_resolution": {
+    "width": 1920,
+    "height": 1080,
+    "origin": "TOP_LEFT"
+  },
+  "cdn_base_url": "https://cdn.linhanthon.game/assets",
+  "start_area_id": "area_san_gach",
+  "area_order": [
+    "area_san_gach",
+    "area_hien_nha",
+    "area_gian_tho",
+    "area_bep_gieng",
+    "area_gac_xep"
+  ],
+  "area_files": [
+    "areas/area_san_gach.json",
+    "areas/area_hien_nha.json",
+    "areas/area_gian_tho.json",
+    "areas/area_bep_gieng.json",
+    "areas/area_gac_xep.json"
+  ],
+  "areas": [
+    {
+      "area_id": "area_san_gach",
+      "ten_vi": "Sân gạch và ngõ vào",
+      "order": 1,
+      "file": "areas/area_san_gach.json",
+      "background_asset_url": "https://cdn.linhanthon.game/assets/bg_san_gach.bundle",
+      "unlock_condition": {
+        "type": "NONE",
+        "required_items": [],
+        "required_flags": [],
+        "entry_hotspot_id": null,
+        "from_area_id": null,
+        "locked_text_key": null,
+        "mo_ta_vi": "Mở màn Chương 1 - không cần điều kiện, người chơi dắt xe đạp từ ngõ tre bước vào sân."
+      }
+    },
+    {
+      "area_id": "area_hien_nha",
+      "ten_vi": "Hiên nhà và bức bình phong",
+      "order": 2,
+      "file": "areas/area_hien_nha.json",
+      "background_asset_url": "https://cdn.linhanthon.game/assets/bg_hien_nha.bundle",
+      "unlock_condition": {
+        "type": "ALL_OF",
+        "required_items": [
+          "item_chia_khoa_dong"
+        ],
+        "required_flags": [],
+        "entry_hotspot_id": "hs_cua_vao_hien",
+        "from_area_id": "area_san_gach",
+        "locked_text_key": "txt_khoa_cua_vao_hien",
+        "mo_ta_vi": "Dùng item_chia_khoa_dong mở ổ khóa cửa bức bàn (phần thưởng của puz_khoa_bat_quai)."
+      }
+    },
+    {
+      "area_id": "area_gian_tho",
+      "ten_vi": "Gian thờ giữa và bàn thờ họ",
+      "order": 3,
+      "file": "areas/area_gian_tho.json",
+      "background_asset_url": "https://cdn.linhanthon.game/assets/bg_gian_tho.bundle",
+      "unlock_condition": {
+        "type": "ALL_OF",
+        "required_items": [],
+        "required_flags": [
+          "flag_binh_phong_da_tra"
+        ],
+        "entry_hotspot_id": "hs_cua_buc_ban",
+        "from_area_id": "area_hien_nha",
+        "locked_text_key": "txt_khoa_cua_buc_ban",
+        "mo_ta_vi": "Đặt item_ban_rap_chu_the vào ô lõm hình chữ nhật trên bức bình phong để then cửa gian giữa nhả ra."
+      }
+    },
+    {
+      "area_id": "area_bep_gieng",
+      "ten_vi": "Bếp tro và giếng khơi sau nhà",
+      "order": 4,
+      "file": "areas/area_bep_gieng.json",
+      "background_asset_url": "https://cdn.linhanthon.game/assets/bg_bep_gieng.bundle",
+      "unlock_condition": {
+        "type": "ALL_OF",
+        "required_items": [],
+        "required_flags": [
+          "flag_puz_tuan_tu_le_cung_solved"
+        ],
+        "entry_hotspot_id": "hs_cua_hau_xuong_bep",
+        "from_area_id": "area_gian_tho",
+        "locked_text_key": "txt_khoa_cua_hau",
+        "mo_ta_vi": "Hoàn thành puz_tuan_tu_le_cung; sau khi hóa vàng, thanh gỗ chèn cánh cửa hậu xuống bếp tự rơi xuống."
+      }
+    },
+    {
+      "area_id": "area_gac_xep",
+      "ten_vi": "Gác xép thờ Bà Cô",
+      "order": 5,
+      "file": "areas/area_gac_xep.json",
+      "background_asset_url": "https://cdn.linhanthon.game/assets/bg_gac_xep.bundle",
+      "unlock_condition": {
+        "type": "ALL_OF",
+        "required_items": [
+          "item_den_dau_sang"
+        ],
+        "required_flags": [
+          "flag_then_gac_da_tra"
+        ],
+        "entry_hotspot_id": "hs_cau_thang_gac",
+        "from_area_id": "area_gian_tho",
+        "locked_text_key": "txt_khoa_cau_thang_gac",
+        "mo_ta_vi": "Cần item_den_dau_sang để soi cầu thang gỗ mọt, đồng thời tra item_bai_vi_khuyet_danh vào khe mộng cửa gác xép để dùng làm then mở."
+      }
+    }
+  ],
+  "item_catalog": [
+    {
+      "item_id": "item_chia_khoa_dong",
+      "ten_vi": "Chìa khóa đồng gỉ",
+      "icon_asset": "icon_item_chia_khoa_dong.png",
+      "mo_ta_vi": "Chiếc chìa khoá đồng nhỏ, thân gỉ xanh, đầu chìa khắc một chữ Nho đã mòn. Cầm lên thấy còn ấm, dù nó nằm trong ruột khoá gỗ đã lâu lắm rồi.",
+      "nhat_o_area": "area_san_gach",
+      "nguon": "puz_khoa_bat_quai"
+    },
+    {
+      "item_id": "item_giay_ban_va_than",
+      "ten_vi": "Xấp giấy bản và thỏi than củi",
+      "icon_asset": "icon_item_giay_ban_va_than.png",
+      "mo_ta_vi": "Ba tờ giấy bản mỏng như cánh chuồn và một thỏi than củi vót nhọn đầu. Loại giấy các cụ vẫn dùng để rập lại chữ trên bia mộ.",
+      "nhat_o_area": "area_hien_nha",
+      "nguon": "hs_giay_ban_va_than"
+    },
+    {
+      "item_id": "item_ban_rap_chu_the",
+      "ten_vi": "Bản rập chữ \"Thế Mệnh\"",
+      "icon_asset": "icon_item_ban_rap_chu_the.png",
+      "mo_ta_vi": "Tờ giấy bản đã hiện rõ hai chữ than đen: \"Thế Mệnh\" - thay mạng. Nét chữ nghiêng về bên phải, của một người thuận tay trái.",
+      "nhat_o_area": "area_hien_nha",
+      "nguon": "puz_rap_chu_the_menh"
+    },
+    {
+      "item_id": "item_den_dau",
+      "ten_vi": "Đèn dầu Hoa Kỳ vỏ ám khói",
+      "icon_asset": "icon_item_den_dau.png",
+      "mo_ta_vi": "Cây đèn dầu Hoa Kỳ vỏ thuỷ tinh ám khói đen. Bầu cạn, tim cụt, cổ đèn rỗng - thiếu đúng ba thứ: sợi tim, một ít dầu, và một mồi lửa.",
+      "nhat_o_area": "area_hien_nha",
+      "nguon": "hs_den_dau_treo"
+    },
+    {
+      "item_id": "item_dui_mo",
+      "ten_vi": "Dùi mõ gỗ mít",
+      "icon_asset": "icon_item_dui_mo.png",
+      "mo_ta_vi": "Chiếc dùi gỗ mít nặng tay, cán mòn nhẵn đúng ba chỗ - chỗ ngón cái, chỗ ngón trỏ, chỗ lòng bàn tay. Ai đó đã cầm nó rất nhiều năm.",
+      "nhat_o_area": "area_gian_tho",
+      "nguon": "hs_dui_mo"
+    },
+    {
+      "item_id": "item_bai_vi_khuyet_danh",
+      "ten_vi": "Bài vị khuyết danh",
+      "icon_asset": "icon_item_bai_vi_khuyet_danh.png",
+      "mo_ta_vi": "Tấm bài vị gỗ vàng tâm còn mới, mặt trước nhẵn thín không một nét chữ. Lật sau thì thấy mộng gỗ đã đẽo sẵn - như đẽo cho vừa một cái khe nào đó.",
+      "nhat_o_area": "area_gian_tho",
+      "nguon": "hs_bai_vi_khuyet_danh"
+    },
+    {
+      "item_id": "item_dai_vai_dieu",
+      "ten_vi": "Dải vải điều phủ bài vị",
+      "icon_asset": "icon_item_dai_vai_dieu.png",
+      "mo_ta_vi": "Dải vải điều đỏ đã bạc thành màu gạch, dệt dày. Xé dọc thì tước ra thành sợi - các cụ vẫn se loại vải này làm tim đèn.",
+      "nhat_o_area": "area_gian_tho",
+      "nguon": "hs_dai_vai_dieu"
+    },
+    {
+      "item_id": "item_chai_dau_hoa",
+      "ten_vi": "Chai dầu hỏa nút lá chuối",
+      "icon_asset": "icon_item_chai_dau_hoa.png",
+      "mo_ta_vi": "Chai thuỷ tinh còn hơn nửa dầu hoả, nút bằng lá chuối khô vê chặt. Mở nút ra là mùi hắc xộc lên tận óc, mùi của những đêm mất điện.",
+      "nhat_o_area": "area_bep_gieng",
+      "nguon": "hs_chai_dau_hoa"
+    },
+    {
+      "item_id": "item_den_dau_sang",
+      "ten_vi": "Đèn dầu đã thắp",
+      "icon_asset": "icon_item_den_dau_sang.png",
+      "mo_ta_vi": "Cây đèn đã cháy, ngọn lửa cao bằng hạt thóc, quầng sáng vàng đục chỉ soi được chừng một sải tay. Ngoài cái vòng sáng ấy thì tối đặc.",
+      "nhat_o_area": "area_bep_gieng",
+      "nguon": "puz_thap_lai_den_dau"
+    },
+    {
+      "item_id": "item_ao_cuoi_giay",
+      "ten_vi": "Áo cưới giấy khổ người lớn",
+      "icon_asset": "icon_item_ao_cuoi_giay.png",
+      "mo_ta_vi": "Bộ áo cưới bằng giấy đỏ, khổ người lớn, đường hồ dán còn mới. Gấu áo có ghi mấy con số bằng bút chì - và chúng khớp với số đo của chính bạn.",
+      "nhat_o_area": "area_gac_xep",
+      "nguon": "hs_ao_cuoi_giay"
+    }
+  ],
+  "puzzle_index": [
+    {
+      "puzzle_id": "puz_khoa_bat_quai",
+      "area_id": "area_san_gach",
+      "type": "ROTATION_LOCK",
+      "reward_item_id": "item_chia_khoa_dong"
+    },
+    {
+      "puzzle_id": "puz_rap_chu_the_menh",
+      "area_id": "area_hien_nha",
+      "type": "PATTERN_TRACE",
+      "reward_item_id": "item_ban_rap_chu_the"
+    },
+    {
+      "puzzle_id": "puz_tuan_tu_le_cung",
+      "area_id": "area_gian_tho",
+      "type": "SEQUENCE_ORDER",
+      "reward_item_id": "item_bai_vi_khuyet_danh"
+    },
+    {
+      "puzzle_id": "puz_ba_hoi_chin_tieng",
+      "area_id": "area_gian_tho",
+      "type": "AUDIO_MATCH",
+      "reward_item_id": "item_dai_vai_dieu"
+    },
+    {
+      "puzzle_id": "puz_thap_lai_den_dau",
+      "area_id": "area_bep_gieng",
+      "type": "ITEM_COMBINE",
+      "reward_item_id": "item_den_dau_sang"
+    },
+    {
+      "puzzle_id": "puz_xep_anh_gia_pha",
+      "area_id": "area_gac_xep",
+      "type": "SLIDING_TILE",
+      "reward_item_id": "item_ao_cuoi_giay"
+    }
+  ],
+  "jumpscare_index": [
+    {
+      "scare_id": "scare_bong_trong_chum",
+      "area_id": "area_san_gach",
+      "trigger_type": "ON_PUZZLE_FAIL_COUNT"
+    },
+    {
+      "scare_id": "scare_ban_tay_giay_sau_manh",
+      "area_id": "area_hien_nha",
+      "trigger_type": "ON_COLLECT_ITEM"
+    },
+    {
+      "scare_id": "scare_di_anh_quay_mat",
+      "area_id": "area_gian_tho",
+      "trigger_type": "ON_COLLECT_ITEM"
+    },
+    {
+      "scare_id": "scare_khoi_tu_hinh_nguoi",
+      "area_id": "area_gian_tho",
+      "trigger_type": "ON_PUZZLE_FAIL_COUNT"
+    },
+    {
+      "scare_id": "scare_mat_duoi_day_gieng",
+      "area_id": "area_bep_gieng",
+      "trigger_type": "ON_PUZZLE_FAIL_COUNT"
+    },
+    {
+      "scare_id": "scare_hinh_nhan_chan_loi",
+      "area_id": "area_gac_xep",
+      "trigger_type": "ON_ENTER_AREA"
+    },
+    {
+      "scare_id": "scare_anh_tho_thieu_mat",
+      "area_id": "area_gac_xep",
+      "trigger_type": "ON_PUZZLE_FAIL_COUNT"
+    },
+    {
+      "scare_id": "scare_ao_cuoi_quay_dau",
+      "area_id": "area_gac_xep",
+      "trigger_type": "ON_TIMER"
+    }
+  ]
+}

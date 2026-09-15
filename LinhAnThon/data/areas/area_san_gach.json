@@ -1,0 +1,173 @@
+{
+  "chapter_id": "chapter_01",
+  "area_id": "area_san_gach",
+  "background_asset_url": "https://cdn.linhanthon.game/assets/bg_san_gach.bundle",
+  "hotspots": [
+    {
+      "id": "hs_guong_bat_quai",
+      "bounds": {
+        "x": 296,
+        "y": 150,
+        "width": 130,
+        "height": 130
+      },
+      "action_type": "EXAMINE",
+      "text_key": "txt_examine_guong_bat_quai"
+    },
+    {
+      "id": "hs_loa_phat_thanh",
+      "bounds": {
+        "x": 700,
+        "y": 120,
+        "width": 200,
+        "height": 150
+      },
+      "action_type": "DIALOGUE",
+      "text_key": "txt_thoai_loa_phat_thanh"
+    },
+    {
+      "id": "hs_cau_doi_trai",
+      "bounds": {
+        "x": 88,
+        "y": 300,
+        "width": 110,
+        "height": 420
+      },
+      "action_type": "EXAMINE",
+      "text_key": "txt_examine_cau_doi_trai"
+    },
+    {
+      "id": "hs_o_khoa_cong",
+      "bounds": {
+        "x": 280,
+        "y": 430,
+        "width": 180,
+        "height": 180
+      },
+      "action_type": "ZOOM_PUZZLE",
+      "target_puzzle_id": "puz_khoa_bat_quai"
+    },
+    {
+      "id": "hs_cau_doi_phai",
+      "bounds": {
+        "x": 520,
+        "y": 300,
+        "width": 110,
+        "height": 420
+      },
+      "action_type": "EXAMINE",
+      "text_key": "txt_examine_cau_doi_phai"
+    },
+    {
+      "id": "hs_cao_pho",
+      "bounds": {
+        "x": 1000,
+        "y": 330,
+        "width": 150,
+        "height": 210
+      },
+      "action_type": "EXAMINE",
+      "text_key": "txt_examine_cao_pho"
+    },
+    {
+      "id": "hs_cua_vao_hien",
+      "bounds": {
+        "x": 1180,
+        "y": 380,
+        "width": 300,
+        "height": 520
+      },
+      "action_type": "CHANGE_AREA",
+      "target_area_id": "area_hien_nha"
+    },
+    {
+      "id": "hs_day_phoi_khan_xo",
+      "bounds": {
+        "x": 1540,
+        "y": 230,
+        "width": 340,
+        "height": 150
+      },
+      "action_type": "EXAMINE",
+      "text_key": "txt_examine_khan_xo"
+    },
+    {
+      "id": "hs_xe_dap_tui_vai",
+      "bounds": {
+        "x": 60,
+        "y": 760,
+        "width": 240,
+        "height": 230
+      },
+      "action_type": "EXAMINE",
+      "text_key": "txt_examine_xe_dap_tui_vai"
+    },
+    {
+      "id": "hs_chum_nuoc_mua",
+      "bounds": {
+        "x": 330,
+        "y": 730,
+        "width": 300,
+        "height": 260
+      },
+      "action_type": "EXAMINE",
+      "text_key": "txt_examine_chum_nuoc"
+    },
+    {
+      "id": "hs_gao_dua",
+      "bounds": {
+        "x": 648,
+        "y": 800,
+        "width": 130,
+        "height": 110
+      },
+      "action_type": "EXAMINE",
+      "text_key": "txt_examine_gao_dua"
+    },
+    {
+      "id": "hs_dong_tro_hoa_vang",
+      "bounds": {
+        "x": 820,
+        "y": 820,
+        "width": 280,
+        "height": 170
+      },
+      "action_type": "EXAMINE",
+      "text_key": "txt_examine_dong_tro_hoa_vang"
+    },
+    {
+      "id": "hs_khe_gach_thu_tay",
+      "bounds": {
+        "x": 1560,
+        "y": 800,
+        "width": 220,
+        "height": 120
+      },
+      "action_type": "EXAMINE",
+      "text_key": "txt_examine_khe_gach_thu_tay"
+    }
+  ],
+  "puzzles": [
+    {
+      "id": "puz_khoa_bat_quai",
+      "type": "ROTATION_LOCK",
+      "solution": [
+        6,
+        3,
+        8
+      ],
+      "reward_item_id": "item_chia_khoa_dong",
+      "wrong_action_jumpscare": "scare_bong_trong_chum"
+    }
+  ],
+  "jumpscares": [
+    {
+      "id": "scare_bong_trong_chum",
+      "trigger_type": "ON_PUZZLE_FAIL_COUNT",
+      "max_fails": 3,
+      "audio_asset": "sfx_scare_gao_dua_roi.ogg",
+      "sprite_animation": "anim_bong_khan_xo_trong_chum",
+      "screen_flash": true
+    }
+  ]
+}

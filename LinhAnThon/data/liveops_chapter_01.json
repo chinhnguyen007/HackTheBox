@@ -1,0 +1,861 @@
+{
+  "schema_version": 1,
+  "config_id": "liveops_chapter_01",
+  "config_version": "1.0.0",
+  "chapter_id": "chapter_01",
+  "project": "Linh An Thon - Chapter 1",
+  "language": "vi-VN",
+  "last_updated_utc": "2026-09-15T00:00:00Z",
+  "owner": "liveops_team",
+  "remote_config_namespace": "linhanthon_liveops",
+  "server_time_source": "NTP_UTC",
+  "rollout": {
+    "state": "STAGING",
+    "percent": 100,
+    "min_app_version": "1.0.0",
+    "min_addressables_catalog_version": "2026.09.15.1",
+    "kill_switches": {
+      "kill_switch_ads": false,
+      "kill_switch_iap": false,
+      "kill_switch_event_theme": false,
+      "kill_switch_paid_hints": false,
+      "kill_switch_telemetry": false
+    }
+  },
+
+  "hint_system": {
+    "enabled": true,
+    "hint_cost_gems": 5,
+    "ads_reward_hints": 1,
+    "free_path_guaranteed": true,
+    "max_wait_sec_to_full_solution": 300,
+    "hint_button": {
+      "button_id": "btn_thap_nhang_xin_keo",
+      "ten_vi": "Thắp nhang xin keo",
+      "bounds": { "x": 1700, "y": 930, "width": 150, "height": 110 },
+      "visible_when": "PUZZLE_OPEN",
+      "blocked_during": ["CUTSCENE", "JUMPSCARE_ENVELOPE", "SAFETY_WARNING_SCREEN", "AREA_TRANSITION"]
+    },
+    "tiers": [
+      {
+        "tier": 1,
+        "tier_id": "hint_tier_1_huong_mat",
+        "ten_vi": "Hướng mắt",
+        "content_type": "NUDGE",
+        "mo_ta_vi": "Chỉ nói người chơi nên nhìn vào đâu, không nói phải làm gì.",
+        "unlock_free_after_sec": 60,
+        "unlock_free_after_fails": 1,
+        "gem_cost": 0,
+        "gem_cost_multiplier": 0,
+        "ads_required": 0,
+        "requires_confirm": false,
+        "text_key_pattern": "txt_hint_{puzzle_id}_t1"
+      },
+      {
+        "tier": 2,
+        "tier_id": "hint_tier_2_giang_phep",
+        "ten_vi": "Giảng phép",
+        "content_type": "METHOD",
+        "mo_ta_vi": "Giải thích quy tắc/nguyên lý để tự suy ra lời giải, vẫn không đọc đáp án.",
+        "unlock_free_after_sec": 150,
+        "unlock_free_after_fails": 2,
+        "gem_cost": 5,
+        "gem_cost_multiplier": 1.0,
+        "ads_required": 1,
+        "requires_confirm": true,
+        "text_key_pattern": "txt_hint_{puzzle_id}_t2"
+      },
+      {
+        "tier": 3,
+        "tier_id": "hint_tier_3_dap_an",
+        "ten_vi": "Đáp án trực tiếp",
+        "content_type": "SOLUTION",
+        "mo_ta_vi": "Đọc thẳng dãy lời giải bằng lời văn trong game. Đắt nhất, mở chậm nhất.",
+        "unlock_free_after_sec": 300,
+        "unlock_free_after_fails": 4,
+        "gem_cost": 12,
+        "gem_cost_multiplier": 2.4,
+        "ads_required": 2,
+        "requires_confirm": true,
+        "confirm_text_key": "txt_hint_xac_nhan_doc_dap_an",
+        "text_key_pattern": "txt_hint_{puzzle_id}_t3"
+      }
+    ],
+    "unlock_sources": [
+      { "source": "FREE_WAIT", "gem_cost": 0, "ads_required": 0, "always_available": true },
+      { "source": "FREE_FAIL_COUNT", "gem_cost": 0, "ads_required": 0, "always_available": true },
+      { "source": "MERCY_GRANT", "gem_cost": 0, "ads_required": 0, "always_available": true },
+      { "source": "REWARDED_AD", "gem_cost": 0, "ads_required": 1, "always_available": false },
+      { "source": "GEM_SPEND", "gem_cost": 5, "ads_required": 0, "always_available": false }
+    ],
+    "price_escalation": {
+      "enabled": true,
+      "scope": "SESSION",
+      "mo_ta_vi": "Mỗi lần mua gợi ý bằng gem trong cùng phiên, giá đơn vị tăng thêm để chống lạm dụng; luôn có trần và luôn có đường miễn phí.",
+      "gem_increment_per_paid_hint": 3,
+      "gem_cost_cap": 20,
+      "applies_to_tiers": [2, 3],
+      "reset_on": ["SESSION_END", "CHAPTER_COMPLETE", "DAILY_RESET"]
+    },
+    "daily_limits": {
+      "timezone": "DEVICE_LOCAL",
+      "reset_hour_local": 4,
+      "rewarded_ads_per_day": 6,
+      "gem_hints_per_day": 10,
+      "paid_hints_per_puzzle_per_day": 4,
+      "free_wait_hints_per_day": null,
+      "on_ads_limit_text_key": "txt_liveops_het_luot_xem_ads",
+      "on_gem_limit_text_key": "txt_liveops_het_luot_mua_goi_y"
+    },
+    "mercy_hint": {
+      "enabled": true,
+      "mo_ta_vi": "Chống rage-quit: kẹt quá lâu hoặc sai quá nhiều thì game tự tặng gợi ý, không hỏi tiền, không mời quảng cáo.",
+      "stuck_threshold_sec": 240,
+      "never_shows_ad": true,
+      "never_shows_paywall": true,
+      "auto_open_panel": false,
+      "toast_text_key": "txt_hint_mercy_thap_ho_nen_nhang",
+      "escalation": [
+        { "fail_count": 3, "grant_tier": 1, "cost": "FREE" },
+        { "fail_count": 5, "grant_tier": 2, "cost": "FREE" },
+        { "fail_count": 7, "grant_tier": 3, "cost": "FREE" }
+      ]
+    },
+    "per_puzzle_overrides": [
+      {
+        "puzzle_id": "puz_khoa_bat_quai",
+        "area_id": "area_san_gach",
+        "difficulty": 2,
+        "target_solve_sec": 90,
+        "tier1_unlock_free_after_sec": 60,
+        "tier2_unlock_free_after_sec": 150,
+        "tier3_unlock_free_after_sec": 300,
+        "tier2_gem_cost": 5,
+        "tier3_gem_cost": 12,
+        "mercy_fail_threshold": 3,
+        "ghi_chu_vi": "Câu đố dạy cơ chế. Tier 1 hiện nút ngay sau 60 giây bế tắc theo 02_puzzle.md."
+      },
+      {
+        "puzzle_id": "puz_rap_chu_the_menh",
+        "area_id": "area_hien_nha",
+        "difficulty": 3,
+        "target_solve_sec": 150,
+        "tier1_unlock_free_after_sec": 60,
+        "tier2_unlock_free_after_sec": 150,
+        "tier3_unlock_free_after_sec": 300,
+        "tier2_gem_cost": 5,
+        "tier3_gem_cost": 12,
+        "mercy_fail_threshold": 3,
+        "force_free_tier1_on_event": "PAPER_STACK_REFILL",
+        "ghi_chu_vi": "Hết tờ giấy thứ 3 thì tự mở Tier 1 miễn phí (đã chốt ở 02_puzzle.md mục 2.5)."
+      },
+      {
+        "puzzle_id": "puz_tuan_tu_le_cung",
+        "area_id": "area_gian_tho",
+        "difficulty": 3,
+        "target_solve_sec": 120,
+        "tier1_unlock_free_after_sec": 40,
+        "tier2_unlock_free_after_sec": 150,
+        "tier3_unlock_free_after_sec": 300,
+        "tier2_gem_cost": 5,
+        "tier3_gem_cost": 12,
+        "mercy_fail_threshold": 3,
+        "diegetic_hint": {
+          "enabled": true,
+          "trigger_after_sec": 40,
+          "mo_ta_vi": "Cuốn văn khấn tự lật sang trang bước kế tiếp - gợi ý trong thế giới, miễn phí, không tính vào tier.",
+          "text_key": "txt_hint_van_khan_tu_lat"
+        }
+      },
+      {
+        "puzzle_id": "puz_ba_hoi_chin_tieng",
+        "area_id": "area_gian_tho",
+        "difficulty": 4,
+        "target_solve_sec": 180,
+        "tier1_unlock_free_after_sec": 60,
+        "tier1_unlock_free_after_fails": 2,
+        "tier2_unlock_free_after_sec": 150,
+        "tier3_unlock_free_after_sec": 300,
+        "tier2_gem_cost": 5,
+        "tier3_gem_cost": 12,
+        "mercy_fail_threshold": 2,
+        "dynamic_free_hint": {
+          "enabled": true,
+          "on_fail_count": 2,
+          "mo_ta_vi": "Thanh nhịp hiện mờ số tiếng đúng của hồi 1 trong 2 giây - miễn phí, không tính tier.",
+          "text_key": "txt_hint_thanh_nhip_hoi_mot"
+        },
+        "ghi_chu_vi": "Câu đố khó nhất nửa đầu chương; ngưỡng thương xót hạ xuống 2 lần sai."
+      },
+      {
+        "puzzle_id": "puz_thap_lai_den_dau",
+        "area_id": "area_bep_gieng",
+        "difficulty": 3,
+        "target_solve_sec": 110,
+        "tier1_unlock_free_after_sec": 60,
+        "tier2_unlock_free_after_sec": 150,
+        "tier3_unlock_free_after_sec": 300,
+        "tier2_gem_cost": 5,
+        "tier3_gem_cost": 12,
+        "mercy_fail_threshold": 3
+      },
+      {
+        "puzzle_id": "puz_xep_anh_gia_pha",
+        "area_id": "area_gac_xep",
+        "difficulty": 4,
+        "target_solve_sec": 240,
+        "tier1_unlock_free_after_sec": 90,
+        "tier2_unlock_free_after_sec": 210,
+        "tier3_unlock_free_after_sec": 420,
+        "tier2_gem_cost": 5,
+        "tier3_gem_cost": 12,
+        "mercy_fail_threshold": 3,
+        "ghi_chu_vi": "SLIDING_TILE dài nhất chương; mốc chờ giãn ra để Tier 3 không phá trải nghiệm của người đang xếp đúng hướng."
+      }
+    ],
+    "constraints": {
+      "hint_never_blocks_progress": true,
+      "hint_never_consumes_items": true,
+      "accessibility_never_gated": true,
+      "no_ad_inside_puzzle_fail_moment": true,
+      "max_fails_never_overridden": true
+    }
+  },
+
+  "iap": {
+    "enabled": true,
+    "store_price_source": "STORE_LOCALIZED_PRICE",
+    "price_display_rule": "Luôn hiển thị chuỗi giá bản địa hoá do store trả về; giá trong file này chỉ để đối chiếu và dựng bảng.",
+    "products": [
+      {
+        "iap_product_id": "com.game.chapter02",
+        "product_type": "NON_CONSUMABLE",
+        "ten_vi": "Chương 2 - Người thế mạng",
+        "mo_ta_vi": "Mở khoá toàn bộ Chương 2. Mua một lần, chơi trọn đời, khôi phục được trên mọi máy cùng tài khoản store.",
+        "price_usd": 1.99,
+        "store_price_tier": { "apple": "Tier 2", "google": "MANUAL_PER_COUNTRY" },
+        "unlock": {
+          "chapter_id": "chapter_02",
+          "grants_flags": ["flag_chapter_02_unlocked"],
+          "grants_gems": 0
+        },
+        "requires": { "flag": "flag_chapter_01_completed" },
+        "regional_pricing": [
+          { "region_code": "VN", "ten_vi": "Việt Nam", "currency": "VND", "price_local": 49000, "price_usd_equiv": 1.93, "tax_note_vi": "Giá đã gồm VAT do store thu hộ" },
+          { "region_code": "US", "ten_vi": "Hoa Kỳ", "currency": "USD", "price_local": 1.99, "price_usd_equiv": 1.99, "tax_note_vi": "Chưa gồm sales tax theo bang, store cộng khi thanh toán" },
+          { "region_code": "TH", "ten_vi": "Thái Lan", "currency": "THB", "price_local": 69, "price_usd_equiv": 1.95, "tax_note_vi": "Đã gồm VAT 7%" },
+          { "region_code": "ID", "ten_vi": "Indonesia", "currency": "IDR", "price_local": 29000, "price_usd_equiv": 1.86, "tax_note_vi": "Đã gồm PPN 11%" },
+          { "region_code": "PH", "ten_vi": "Philippines", "currency": "PHP", "price_local": 99, "price_usd_equiv": 1.75, "tax_note_vi": "Đã gồm VAT 12%" },
+          { "region_code": "MY", "ten_vi": "Malaysia", "currency": "MYR", "price_local": 8.9, "price_usd_equiv": 1.97, "tax_note_vi": "Đã gồm SST 6%" },
+          { "region_code": "SG", "ten_vi": "Singapore", "currency": "SGD", "price_local": 2.98, "price_usd_equiv": 2.26, "tax_note_vi": "Đã gồm GST 9%" },
+          { "region_code": "SEA_DEFAULT", "ten_vi": "Đông Nam Á - mặc định", "currency": "USD", "price_local": 1.99, "price_usd_equiv": 1.99, "tax_note_vi": "Áp cho thị trường SEA chưa có bảng giá riêng" }
+        ]
+      },
+      {
+        "iap_product_id": "com.game.season01.bundle",
+        "product_type": "NON_CONSUMABLE",
+        "ten_vi": "Trọn mùa 1 - Linh An Thôn",
+        "mo_ta_vi": "Gói cả mùa: mở khoá Chương 2, 3, 4 và phần vĩ thanh. Rẻ hơn khoảng 25% so với mua lẻ từng chương.",
+        "price_usd": 5.99,
+        "store_price_tier": { "apple": "Tier 6", "google": "MANUAL_PER_COUNTRY" },
+        "contains_product_ids": ["com.game.chapter02", "com.game.chapter03", "com.game.chapter04", "com.game.epilogue"],
+        "unlock": {
+          "chapter_id": "season_01",
+          "grants_flags": ["flag_chapter_02_unlocked", "flag_chapter_03_unlocked", "flag_chapter_04_unlocked", "flag_epilogue_unlocked"],
+          "grants_gems": 50
+        },
+        "upgrade_rule": {
+          "enabled": true,
+          "mo_ta_vi": "Người đã mua com.game.chapter02 vẫn mua được gói mùa; phần đã sở hữu được bù bằng 60 gem và ghi rõ trên màn hình trước khi mua.",
+          "credit_gems_if_owns": { "com.game.chapter02": 60 }
+        },
+        "regional_pricing": [
+          { "region_code": "VN", "ten_vi": "Việt Nam", "currency": "VND", "price_local": 149000, "price_usd_equiv": 5.86 },
+          { "region_code": "US", "ten_vi": "Hoa Kỳ", "currency": "USD", "price_local": 5.99, "price_usd_equiv": 5.99 },
+          { "region_code": "TH", "ten_vi": "Thái Lan", "currency": "THB", "price_local": 209, "price_usd_equiv": 5.9 },
+          { "region_code": "ID", "ten_vi": "Indonesia", "currency": "IDR", "price_local": 89000, "price_usd_equiv": 5.7 },
+          { "region_code": "PH", "ten_vi": "Philippines", "currency": "PHP", "price_local": 299, "price_usd_equiv": 5.29 },
+          { "region_code": "MY", "ten_vi": "Malaysia", "currency": "MYR", "price_local": 26.9, "price_usd_equiv": 5.95 },
+          { "region_code": "SG", "ten_vi": "Singapore", "currency": "SGD", "price_local": 8.98, "price_usd_equiv": 6.81 },
+          { "region_code": "SEA_DEFAULT", "ten_vi": "Đông Nam Á - mặc định", "currency": "USD", "price_local": 5.99, "price_usd_equiv": 5.99 }
+        ]
+      },
+      {
+        "iap_product_id": "com.game.gems.pack_60",
+        "product_type": "CONSUMABLE",
+        "ten_vi": "Túi 60 nén hương",
+        "mo_ta_vi": "60 gem. Chỉ dùng để mở gợi ý sớm và mua nội dung phụ - không mua được bất kỳ lợi thế giải đố nào.",
+        "price_usd": 0.99,
+        "grants_gems": 60,
+        "regional_pricing": [
+          { "region_code": "VN", "ten_vi": "Việt Nam", "currency": "VND", "price_local": 25000, "price_usd_equiv": 0.98 },
+          { "region_code": "US", "ten_vi": "Hoa Kỳ", "currency": "USD", "price_local": 0.99, "price_usd_equiv": 0.99 },
+          { "region_code": "SEA_DEFAULT", "ten_vi": "Đông Nam Á - mặc định", "currency": "USD", "price_local": 0.99, "price_usd_equiv": 0.99 }
+        ]
+      },
+      {
+        "iap_product_id": "com.game.gems.pack_200",
+        "product_type": "CONSUMABLE",
+        "ten_vi": "Bó 200 nén hương",
+        "mo_ta_vi": "200 gem, tặng thêm 20 gem. Nội dung nhận được ghi rõ trước khi bấm mua, không có yếu tố ngẫu nhiên.",
+        "price_usd": 2.99,
+        "grants_gems": 220,
+        "regional_pricing": [
+          { "region_code": "VN", "ten_vi": "Việt Nam", "currency": "VND", "price_local": 79000, "price_usd_equiv": 3.11 },
+          { "region_code": "US", "ten_vi": "Hoa Kỳ", "currency": "USD", "price_local": 2.99, "price_usd_equiv": 2.99 },
+          { "region_code": "SEA_DEFAULT", "ten_vi": "Đông Nam Á - mặc định", "currency": "USD", "price_local": 2.99, "price_usd_equiv": 2.99 }
+        ]
+      },
+      {
+        "iap_product_id": "com.game.cosmetic.den_dau_dong",
+        "product_type": "NON_CONSUMABLE",
+        "ten_vi": "Đèn dầu vỏ đồng (trang trí)",
+        "mo_ta_vi": "Đổi hình cây đèn trong thanh hành trang. Thuần trang trí: không tăng vùng sáng, không đổi câu đố, không mở lối đi.",
+        "price_usd": 0.99,
+        "gameplay_effect": "NONE",
+        "regional_pricing": [
+          { "region_code": "VN", "ten_vi": "Việt Nam", "currency": "VND", "price_local": 25000, "price_usd_equiv": 0.98 },
+          { "region_code": "US", "ten_vi": "Hoa Kỳ", "currency": "USD", "price_local": 0.99, "price_usd_equiv": 0.99 },
+          { "region_code": "SEA_DEFAULT", "ten_vi": "Đông Nam Á - mặc định", "currency": "USD", "price_local": 0.99, "price_usd_equiv": 0.99 }
+        ]
+      }
+    ],
+    "restore": {
+      "enabled": true,
+      "button_id": "btn_khoi_phuc_mua_hang",
+      "ten_vi": "Khôi phục mua hàng",
+      "locations": ["SETTINGS_SCREEN", "PAYWALL_SCREEN"],
+      "restorable_product_types": ["NON_CONSUMABLE"],
+      "consumable_recovery": "SERVER_LEDGER",
+      "ios_api": "SKPaymentQueue.restoreCompletedTransactions / StoreKit2 Transaction.currentEntitlements",
+      "android_api": "BillingClient.queryPurchasesAsync(INAPP)",
+      "verify_receipt_server_side": true,
+      "offline_grace_hours": 72,
+      "on_success_text_key": "txt_iap_khoi_phuc_thanh_cong",
+      "on_empty_text_key": "txt_iap_khong_tim_thay_giao_dich",
+      "on_fail_text_key": "txt_iap_khoi_phuc_that_bai"
+    },
+    "fair_play": {
+      "no_pay_to_win": true,
+      "sellable_categories": ["CONTENT_UNLOCK", "CONVENIENCE_HINT", "COSMETIC"],
+      "forbidden_categories": ["PUZZLE_SKIP_ONLY_FOR_PAY", "EXCLUSIVE_CLUE", "TIME_GATE_REMOVAL_REQUIRED", "RANDOMIZED_PAID_REWARD", "PAID_SAFETY_OPTION"],
+      "free_completion_guaranteed": true,
+      "mo_ta_vi": "Chương 1 chơi trọn vẹn không tốn một đồng. Mọi thứ bán ra chỉ là NỘI DUNG (chương sau) hoặc TIỆN ÍCH (rút ngắn thời gian chờ gợi ý) hoặc TRANG TRÍ. Không có manh mối nào chỉ người trả tiền mới có."
+    },
+    "paywall": {
+      "placement_id": "paywall_ket_chuong_01",
+      "trigger_flag": "flag_chapter_01_completed",
+      "show_after_sec_from_credits": 3,
+      "dismissible": true,
+      "max_impressions_per_day": 2,
+      "never_show_during": ["CUTSCENE", "PUZZLE", "JUMPSCARE_ENVELOPE", "SAFETY_WARNING_SCREEN"],
+      "must_show_price_before_confirm": true,
+      "must_show_contents_list": true,
+      "text_key": "txt_paywall_chuong_02"
+    }
+  },
+
+  "seasonal_events": [
+    {
+      "event_id": "evt_halloween_2026",
+      "ten_vi": "Đêm Hồn Ma 2026",
+      "enabled": true,
+      "priority": 10,
+      "event_start": "2026-10-25",
+      "event_end": "2026-11-03",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "server_authoritative_time": true,
+      "grace_period_hours": 24,
+      "override_bg": "bg_halloween.bundle",
+      "applies_to_areas": ["area_san_gach", "area_hien_nha"],
+      "theme_override": {
+        "ui_theme_id": "theme_halloween_2026",
+        "palette": {
+          "accent_hex": "#C2571E",
+          "panel_tint_hex": "#1A1108",
+          "text_hex": "#F2E4CE"
+        },
+        "hotspot_outline_color_hex": "#C2571E",
+        "inventory_frame_asset": "ui_frame_halloween.bundle",
+        "title_logo_asset": "logo_halloween.bundle",
+        "ambience_override": "amb_halloween_gio_lanh.bundle",
+        "does_not_change": ["hotspot_bounds", "puzzle_solution", "jumpscare_trigger_type", "max_fails", "item_ids", "area_gate"]
+      },
+      "addressables": {
+        "extra_bundle_labels": ["evt_halloween_2026"],
+        "bundles": ["bg_halloween.bundle", "ui_frame_halloween.bundle", "logo_halloween.bundle", "amb_halloween_gio_lanh.bundle"],
+        "estimated_download_mb": 6.4,
+        "download_policy": "ON_EVENT_ENTER",
+        "wifi_only_default": true,
+        "prefetch_days_before_start": 3,
+        "catalog_url_remote_config_key": "addressables_catalog_url"
+      },
+      "fallback": {
+        "on_download_fail": "USE_BASE_BACKGROUND",
+        "base_background_source": "data/areas/<area_id>.json:background_asset_url",
+        "timeout_sec": 8,
+        "retry_count": 2,
+        "retry_backoff_sec": [3, 9],
+        "disable_theme_for_session_after_fail": true,
+        "never_block_gameplay": true,
+        "never_show_error_modal": true,
+        "toast_text_key": "txt_liveops_khong_tai_duoc_giao_dien_su_kien",
+        "telemetry_event": "event_theme_apply"
+      },
+      "rewards": {
+        "login_gems_per_day": 3,
+        "completion_bonus_gems": 15,
+        "cosmetic_grant": "cosmetic_den_dau_halloween",
+        "no_exclusive_gameplay_content": true
+      }
+    },
+    {
+      "event_id": "evt_ram_thang_bay_2027",
+      "ten_vi": "Rằm tháng Bảy - Xá tội vong nhân",
+      "enabled": false,
+      "priority": 20,
+      "event_start": "2027-08-14",
+      "event_end": "2027-08-21",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "server_authoritative_time": true,
+      "grace_period_hours": 24,
+      "override_bg": "bg_ram_thang_bay.bundle",
+      "applies_to_areas": ["area_san_gach", "area_gian_tho"],
+      "theme_override": {
+        "ui_theme_id": "theme_ram_thang_bay",
+        "palette": { "accent_hex": "#8C1F1F", "panel_tint_hex": "#120C0A", "text_hex": "#EFE2C8" },
+        "hotspot_outline_color_hex": "#8C1F1F",
+        "inventory_frame_asset": "ui_frame_ram_thang_bay.bundle",
+        "title_logo_asset": "logo_ram_thang_bay.bundle",
+        "ambience_override": "amb_ram_thang_bay_mo_chua.bundle",
+        "does_not_change": ["hotspot_bounds", "puzzle_solution", "jumpscare_trigger_type", "max_fails", "item_ids", "area_gate"]
+      },
+      "addressables": {
+        "extra_bundle_labels": ["evt_ram_thang_bay_2027"],
+        "bundles": ["bg_ram_thang_bay.bundle", "ui_frame_ram_thang_bay.bundle", "logo_ram_thang_bay.bundle", "amb_ram_thang_bay_mo_chua.bundle"],
+        "estimated_download_mb": 5.8,
+        "download_policy": "ON_EVENT_ENTER",
+        "wifi_only_default": true,
+        "prefetch_days_before_start": 3,
+        "catalog_url_remote_config_key": "addressables_catalog_url"
+      },
+      "fallback": {
+        "on_download_fail": "USE_BASE_BACKGROUND",
+        "base_background_source": "data/areas/<area_id>.json:background_asset_url",
+        "timeout_sec": 8,
+        "retry_count": 2,
+        "retry_backoff_sec": [3, 9],
+        "disable_theme_for_session_after_fail": true,
+        "never_block_gameplay": true,
+        "never_show_error_modal": true,
+        "toast_text_key": "txt_liveops_khong_tai_duoc_giao_dien_su_kien",
+        "telemetry_event": "event_theme_apply"
+      },
+      "rewards": {
+        "login_gems_per_day": 3,
+        "completion_bonus_gems": 15,
+        "cosmetic_grant": "cosmetic_huong_vong_ram_thang_bay",
+        "no_exclusive_gameplay_content": true
+      }
+    },
+    {
+      "event_id": "evt_tet_dinh_mui_2027",
+      "ten_vi": "Tết Đinh Mùi - Nhà mới quét vôi",
+      "enabled": false,
+      "priority": 30,
+      "event_start": "2027-02-06",
+      "event_end": "2027-02-20",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "server_authoritative_time": true,
+      "grace_period_hours": 24,
+      "override_bg": "bg_tet_nguyen_dan.bundle",
+      "applies_to_areas": ["area_san_gach"],
+      "theme_override": {
+        "ui_theme_id": "theme_tet_2027",
+        "palette": { "accent_hex": "#B8342B", "panel_tint_hex": "#140F0C", "text_hex": "#F6E7C4" },
+        "hotspot_outline_color_hex": "#B8342B",
+        "inventory_frame_asset": "ui_frame_tet.bundle",
+        "title_logo_asset": "logo_tet.bundle",
+        "ambience_override": "amb_tet_phao_xa.bundle",
+        "does_not_change": ["hotspot_bounds", "puzzle_solution", "jumpscare_trigger_type", "max_fails", "item_ids", "area_gate"]
+      },
+      "addressables": {
+        "extra_bundle_labels": ["evt_tet_dinh_mui_2027"],
+        "bundles": ["bg_tet_nguyen_dan.bundle", "ui_frame_tet.bundle", "logo_tet.bundle", "amb_tet_phao_xa.bundle"],
+        "estimated_download_mb": 5.1,
+        "download_policy": "ON_EVENT_ENTER",
+        "wifi_only_default": true,
+        "prefetch_days_before_start": 5,
+        "catalog_url_remote_config_key": "addressables_catalog_url"
+      },
+      "fallback": {
+        "on_download_fail": "USE_BASE_BACKGROUND",
+        "base_background_source": "data/areas/<area_id>.json:background_asset_url",
+        "timeout_sec": 8,
+        "retry_count": 2,
+        "retry_backoff_sec": [3, 9],
+        "disable_theme_for_session_after_fail": true,
+        "never_block_gameplay": true,
+        "never_show_error_modal": true,
+        "toast_text_key": "txt_liveops_khong_tai_duoc_giao_dien_su_kien",
+        "telemetry_event": "event_theme_apply"
+      },
+      "rewards": {
+        "login_gems_per_day": 5,
+        "completion_bonus_gems": 20,
+        "cosmetic_grant": "cosmetic_phong_bao_li_xi",
+        "no_exclusive_gameplay_content": true
+      }
+    }
+  ],
+
+  "gem_economy": {
+    "currency_id": "gem",
+    "ten_vi": "Nén hương",
+    "icon_asset": "icon_gem_nen_huong.png",
+    "max_balance": 9999,
+    "server_authoritative": true,
+    "starting_balance": 15,
+    "sources": [
+      { "source_id": "src_first_launch", "ten_vi": "Quà mở game lần đầu", "amount": 15, "cap": "ONCE", "type": "FREE" },
+      { "source_id": "src_area_first_clear", "ten_vi": "Lần đầu qua mỗi khu vực", "amount": 5, "cap": "ONCE_PER_AREA", "max_total": 25, "type": "FREE" },
+      { "source_id": "src_chapter_complete", "ten_vi": "Hoàn thành Chương 1", "amount": 20, "cap": "ONCE", "type": "FREE" },
+      { "source_id": "src_read_all_text_in_area", "ten_vi": "Đọc hết mọi thứ trong một khu vực", "amount": 3, "cap": "ONCE_PER_AREA", "max_total": 15, "type": "FREE" },
+      { "source_id": "src_daily_login", "ten_vi": "Thắp nhang mỗi ngày", "amount": 2, "cap": "DAILY", "type": "FREE" },
+      { "source_id": "src_rewarded_ad", "ten_vi": "Xem quảng cáo thưởng", "amount": 2, "cap": "DAILY_6", "type": "AD", "note_vi": "Chỉ khi người chơi chọn nhận gem thay vì nhận thẳng gợi ý" },
+      { "source_id": "src_event_login", "ten_vi": "Điểm danh sự kiện", "amount": 3, "cap": "DAILY_DURING_EVENT", "type": "FREE" },
+      { "source_id": "src_iap_gem_pack", "ten_vi": "Mua túi nén hương", "amount": null, "cap": "UNLIMITED", "type": "IAP" }
+    ],
+    "sinks": [
+      { "sink_id": "snk_hint_tier2", "ten_vi": "Mở sớm gợi ý Tier 2", "amount": 5, "category": "CONVENIENCE" },
+      { "sink_id": "snk_hint_tier3", "ten_vi": "Mở sớm gợi ý Tier 3 (đáp án)", "amount": 12, "category": "CONVENIENCE" },
+      { "sink_id": "snk_lore_page", "ten_vi": "Mở trang nhật ký bà nội (nội dung phụ)", "amount": 25, "category": "BONUS_CONTENT" },
+      { "sink_id": "snk_cosmetic_lantern", "ten_vi": "Đổi hình cây đèn hành trang", "amount": 40, "category": "COSMETIC" },
+      { "sink_id": "snk_gallery_unlock", "ten_vi": "Mở phòng tranh khái niệm", "amount": 30, "category": "BONUS_CONTENT" }
+    ],
+    "balance_targets": {
+      "expected_free_earn_chapter_01": 75,
+      "expected_spend_median_player": 0,
+      "expected_spend_p90_player": 29,
+      "free_player_can_finish_without_gems": true,
+      "mo_ta_vi": "Người chơi miễn phí kiếm đủ 75 gem trong Chương 1 trong khi mức chi nặng nhất (P90) chỉ 29 gem - dư địa an toàn, không tạo áp lực mua."
+    },
+    "forbidden": {
+      "gem_cannot_buy": ["SAFETY_OPTIONS", "ACCESSIBILITY_OPTIONS", "EXCLUSIVE_CLUES", "RANDOM_BOXES", "PUZZLE_AUTO_SOLVE_WITHOUT_TEXT"],
+      "no_negative_balance": true
+    }
+  },
+
+  "ad_placements": [
+    {
+      "placement_id": "ad_hint_unlock",
+      "ad_format": "REWARDED_VIDEO",
+      "opt_in_only": true,
+      "ten_vi": "Xem quảng cáo để mở gợi ý",
+      "reward": { "type": "HINT_CREDIT", "amount": 1 },
+      "max_per_day": 6,
+      "min_gap_sec": 60,
+      "entry_points": ["HINT_PANEL"],
+      "blocked_windows": [
+        "DURING_CUTSCENE",
+        "DURING_PUZZLE_INPUT",
+        "DURING_JUMPSCARE_ENVELOPE",
+        "WITHIN_90S_AFTER_ANY_JUMPSCARE",
+        "DURING_SAFETY_WARNING_SCREEN",
+        "DURING_ENDING_CUTSCENE",
+        "DURING_AREA_TRANSITION"
+      ],
+      "audio_rule": "Hạ toàn bộ bus game xuống -inf trước khi quảng cáo phát; khôi phục sau 400 ms khi đóng quảng cáo."
+    },
+    {
+      "placement_id": "ad_gem_top_up",
+      "ad_format": "REWARDED_VIDEO",
+      "opt_in_only": true,
+      "ten_vi": "Xem quảng cáo nhận nén hương",
+      "reward": { "type": "GEM", "amount": 2 },
+      "max_per_day": 6,
+      "min_gap_sec": 60,
+      "entry_points": ["GEM_SHOP", "SETTINGS_SCREEN"],
+      "blocked_windows": [
+        "DURING_CUTSCENE",
+        "DURING_PUZZLE_INPUT",
+        "DURING_JUMPSCARE_ENVELOPE",
+        "WITHIN_90S_AFTER_ANY_JUMPSCARE",
+        "DURING_SAFETY_WARNING_SCREEN",
+        "DURING_ENDING_CUTSCENE"
+      ],
+      "audio_rule": "Như trên."
+    }
+  ],
+
+  "telemetry": {
+    "enabled": true,
+    "provider": "FIREBASE_ANALYTICS + BIGQUERY_EXPORT",
+    "naming_convention": "snake_case, tối đa 40 ký tự tên sự kiện, tối đa 25 tham số mỗi sự kiện",
+    "user_id_policy": "install_id ẩn danh do máy sinh; KHÔNG gửi email, số điện thoại, IDFA/GAID khi chưa có đồng ý",
+    "sampling_rate": 1.0,
+    "common_params": ["install_id", "session_id", "build_version", "config_version", "platform", "country_code", "ab_variants", "safety_profile"],
+    "events": [
+      { "event_name": "chapter_start", "muc_dich_vi": "Mốc 0 của phễu", "params": ["chapter_id", "is_first_run", "resumed_from_save", "playtime_seconds_before"] },
+      { "event_name": "area_enter", "muc_dich_vi": "Bước phễu theo khu vực", "params": ["area_id", "area_order", "from_area_id", "entry_source", "elapsed_sec_in_chapter", "visit_index"] },
+      { "event_name": "area_exit", "muc_dich_vi": "Thời gian ở lại và lý do rời", "params": ["area_id", "dwell_sec", "exit_reason", "hotspots_examined", "hotspots_total"] },
+      { "event_name": "hotspot_interact", "muc_dich_vi": "Đo mức khám phá và hotspot bị bỏ sót", "params": ["area_id", "hotspot_id", "action_type", "is_first_time", "blocked_by_missing_item", "required_item"] },
+      { "event_name": "item_collect", "muc_dich_vi": "Kiểm tra chuỗi phụ thuộc vật phẩm", "params": ["item_id", "area_id", "hotspot_id", "elapsed_sec_in_chapter"] },
+      { "event_name": "item_use", "muc_dich_vi": "Đo thao tác dùng vật phẩm sai chỗ", "params": ["item_id", "hotspot_id", "area_id", "is_correct_target"] },
+      { "event_name": "puzzle_open", "muc_dich_vi": "Mẫu số của tỷ lệ giải", "params": ["puzzle_id", "area_id", "puzzle_type", "attempt_index", "has_required_item", "fail_count_carried"] },
+      { "event_name": "puzzle_fail", "muc_dich_vi": "Đo độ khó thực tế và điểm kẹt", "params": ["puzzle_id", "area_id", "fail_count", "sec_in_puzzle", "input_signature", "hint_tier_unlocked", "will_trigger_jumpscare"] },
+      { "event_name": "puzzle_solve", "muc_dich_vi": "Tử số của tỷ lệ giải", "params": ["puzzle_id", "area_id", "time_to_solve_sec", "fail_count_total", "hint_tier_max_used", "hint_source", "solved_after_hint_sec"] },
+      { "event_name": "puzzle_abandon", "muc_dich_vi": "ĐIỂM KẸT: mở câu đố rồi thoát mà chưa giải", "params": ["puzzle_id", "area_id", "sec_in_puzzle", "fail_count", "hint_tier_max_used", "exit_reason"] },
+      { "event_name": "puzzle_stuck", "muc_dich_vi": "ĐIỂM KẸT: bắn tại mốc 60/150/300/600 giây", "params": ["puzzle_id", "area_id", "stuck_bucket_sec", "fail_count", "hint_tier_available", "hint_panel_opened"] },
+      { "event_name": "hint_offer_shown", "muc_dich_vi": "Mẫu số của tỷ lệ chuyển đổi gợi ý", "params": ["puzzle_id", "tier", "offer_types", "gem_cost", "ads_required", "gem_balance", "free_wait_remaining_sec"] },
+      { "event_name": "hint_unlock", "muc_dich_vi": "Ai mở gợi ý bằng đường nào", "params": ["puzzle_id", "tier", "unlock_source", "gem_cost", "gem_balance_after", "ads_watched", "sec_in_puzzle"] },
+      { "event_name": "hint_view", "muc_dich_vi": "Gợi ý có thực sự cứu được người chơi không", "params": ["puzzle_id", "tier", "view_duration_sec", "solved_within_60s", "solved_within_180s"] },
+      { "event_name": "hint_mercy_grant", "muc_dich_vi": "Đo tần suất chống rage-quit phải can thiệp", "params": ["puzzle_id", "tier_granted", "fail_count", "sec_in_puzzle"] },
+      { "event_name": "ad_request", "muc_dich_vi": "Sức khoẻ nguồn quảng cáo", "params": ["placement_id", "ad_unit_id", "network"] },
+      { "event_name": "ad_impression", "muc_dich_vi": "Doanh thu quảng cáo và trải nghiệm", "params": ["placement_id", "network", "latency_ms", "ecpm_estimate"] },
+      { "event_name": "ad_reward_granted", "muc_dich_vi": "Xác nhận trao thưởng đúng", "params": ["placement_id", "reward_type", "reward_amount", "watched_to_end"] },
+      { "event_name": "ad_fail", "muc_dich_vi": "Lỗi quảng cáo không được chặn tiến độ", "params": ["placement_id", "error_code", "error_message", "fallback_applied"] },
+      { "event_name": "ad_blocked_by_rule", "muc_dich_vi": "Kiểm chứng luật cấm chen quảng cáo quanh jumpscare", "params": ["placement_id", "block_reason", "sec_since_last_jumpscare", "last_scare_id"] },
+      { "event_name": "paywall_view", "muc_dich_vi": "Mẫu số chuyển đổi IAP", "params": ["placement_id", "iap_product_id", "price_local", "currency_code", "price_usd", "impression_index_today"] },
+      { "event_name": "paywall_dismiss", "muc_dich_vi": "Đo mức khó chịu của paywall", "params": ["placement_id", "iap_product_id", "sec_on_screen", "dismiss_method"] },
+      { "event_name": "iap_purchase_start", "muc_dich_vi": "Rơi rớt trong luồng thanh toán", "params": ["iap_product_id", "placement_id", "price_local", "currency_code", "price_usd", "store"] },
+      { "event_name": "iap_purchase_success", "muc_dich_vi": "Doanh thu", "params": ["iap_product_id", "order_id", "price_local", "currency_code", "price_usd", "store", "is_first_purchase", "receipt_verified"] },
+      { "event_name": "iap_purchase_fail", "muc_dich_vi": "Lỗi thanh toán theo vùng", "params": ["iap_product_id", "error_code", "store", "country_code"] },
+      { "event_name": "iap_restore_result", "muc_dich_vi": "Khôi phục mua hàng có hoạt động không", "params": ["result", "restored_product_ids", "duration_ms", "error_code"] },
+      { "event_name": "gem_earn", "muc_dich_vi": "Kiểm tra lạm phát tiền tệ", "params": ["source_id", "amount", "balance_after", "type"] },
+      { "event_name": "gem_spend", "muc_dich_vi": "Kiểm tra chỗ chi tiền thật sự", "params": ["sink_id", "amount", "balance_after", "context_id"] },
+      { "event_name": "jumpscare_play", "muc_dich_vi": "Đối chiếu cú doạ với tỷ lệ bỏ game", "params": ["scare_id", "area_id", "trigger_type", "intensity_profile", "screen_flash_applied", "deferred_by_cooldown", "sec_since_last_scare"] },
+      { "event_name": "jumpscare_quit_signal", "muc_dich_vi": "Thoát app trong vòng 20 giây sau một cú doạ", "params": ["scare_id", "area_id", "sec_after_scare", "safety_profile"] },
+      { "event_name": "safety_setting_change", "muc_dich_vi": "Bao nhiêu người cần chế độ nhẹ nhàng", "params": ["setting_key", "old_value", "new_value", "changed_at_screen", "after_scare_id"] },
+      { "event_name": "bundle_download", "muc_dich_vi": "Sức khoẻ Addressables và fallback sự kiện", "params": ["bundle_name", "label", "result", "bytes", "duration_ms", "error_code", "network_type", "retry_index"] },
+      { "event_name": "event_theme_apply", "muc_dich_vi": "Theme sự kiện áp được hay phải fallback", "params": ["event_id", "override_bg", "applied", "fallback_reason", "area_id"] },
+      { "event_name": "remote_config_fetch", "muc_dich_vi": "Cấu hình tới máy đúng phiên bản chưa", "params": ["config_version", "success", "latency_ms", "used_cached", "ab_variants"] },
+      { "event_name": "session_start", "muc_dich_vi": "Retention", "params": ["session_index", "days_since_install", "entry_screen"] },
+      { "event_name": "session_end", "muc_dich_vi": "Nơi người chơi rời đi", "params": ["session_sec", "last_area_id", "last_puzzle_id", "last_scare_id", "sec_since_last_scare", "exit_reason"] },
+      { "event_name": "chapter_complete", "muc_dich_vi": "Đích của phễu Chương 1", "params": ["chapter_id", "total_playtime_sec", "puzzles_hinted_count", "hints_paid_count", "ads_watched_total", "gems_spent_total", "jumpscares_seen"] }
+    ],
+    "funnel": {
+      "funnel_id": "funnel_chapter_01",
+      "steps": [
+        { "step": 0, "step_id": "f0_first_open", "event": "session_start", "condition": "session_index = 1", "target_rate_pct": 100 },
+        { "step": 1, "step_id": "f1_chapter_start", "event": "chapter_start", "condition": "chapter_id = chapter_01", "target_rate_pct": 96 },
+        { "step": 2, "step_id": "f2_solve_p1", "event": "puzzle_solve", "condition": "puzzle_id = puz_khoa_bat_quai", "target_rate_pct": 92 },
+        { "step": 3, "step_id": "f3_enter_hien_nha", "event": "area_enter", "condition": "area_id = area_hien_nha", "target_rate_pct": 90 },
+        { "step": 4, "step_id": "f4_solve_p2", "event": "puzzle_solve", "condition": "puzzle_id = puz_rap_chu_the_menh", "target_rate_pct": 84 },
+        { "step": 5, "step_id": "f5_enter_gian_tho", "event": "area_enter", "condition": "area_id = area_gian_tho", "target_rate_pct": 82 },
+        { "step": 6, "step_id": "f6_solve_p3", "event": "puzzle_solve", "condition": "puzzle_id = puz_tuan_tu_le_cung", "target_rate_pct": 77 },
+        { "step": 7, "step_id": "f7_solve_p4", "event": "puzzle_solve", "condition": "puzzle_id = puz_ba_hoi_chin_tieng", "target_rate_pct": 68 },
+        { "step": 8, "step_id": "f8_enter_bep_gieng", "event": "area_enter", "condition": "area_id = area_bep_gieng", "target_rate_pct": 72 },
+        { "step": 9, "step_id": "f9_solve_p5", "event": "puzzle_solve", "condition": "puzzle_id = puz_thap_lai_den_dau", "target_rate_pct": 67 },
+        { "step": 10, "step_id": "f10_enter_gac_xep", "event": "area_enter", "condition": "area_id = area_gac_xep", "target_rate_pct": 64 },
+        { "step": 11, "step_id": "f11_solve_p6", "event": "puzzle_solve", "condition": "puzzle_id = puz_xep_anh_gia_pha", "target_rate_pct": 59 },
+        { "step": 12, "step_id": "f12_chapter_complete", "event": "chapter_complete", "condition": "chapter_id = chapter_01", "target_rate_pct": 58 },
+        { "step": 13, "step_id": "f13_paywall_view", "event": "paywall_view", "condition": "iap_product_id = com.game.chapter02", "target_rate_pct": 55 },
+        { "step": 14, "step_id": "f14_purchase", "event": "iap_purchase_success", "condition": "iap_product_id = com.game.chapter02", "target_rate_pct": 4 }
+      ],
+      "alert_rules": [
+        { "rule_id": "alrt_step_drop", "condition": "tỷ lệ qua một bước thấp hơn mục tiêu quá 8 điểm phần trăm trong 24 giờ", "severity": "HIGH" },
+        { "rule_id": "alrt_p4_wall", "condition": "puzzle_abandon(puz_ba_hoi_chin_tieng) / puzzle_open > 12%", "severity": "HIGH" },
+        { "rule_id": "alrt_hint_useless", "condition": "hint_view(tier=3).solved_within_180s < 80%", "severity": "MEDIUM" },
+        { "rule_id": "alrt_scare_quit", "condition": "jumpscare_quit_signal / jumpscare_play > 6% ở bất kỳ scare_id nào", "severity": "HIGH" },
+        { "rule_id": "alrt_bundle_fail", "condition": "bundle_download(result=FAIL) > 3% tổng lượt", "severity": "HIGH" }
+      ]
+    },
+    "stuck_detection": {
+      "stuck_buckets_sec": [60, 150, 300, 600],
+      "abandon_definition": "Mở puzzle rồi rời khỏi puzzle hoặc kết thúc phiên mà không có puzzle_solve trong 10 phút",
+      "review_metrics": ["p50_time_to_solve_sec", "p90_time_to_solve_sec", "fail_count_mean", "abandon_rate_pct", "hint_tier3_rate_pct"],
+      "tuning_thresholds": {
+        "p50_over_target_multiplier": 2.0,
+        "abandon_rate_pct_max": 12,
+        "hint_tier3_rate_pct_max": 35
+      }
+    }
+  },
+
+  "remote_config_keys": [
+    { "key": "liveops_config_version", "type": "string", "default": "1.0.0", "requires_restart": false, "owner": "liveops_team" },
+    { "key": "hint_cost_gems", "type": "int", "default": 5, "min": 0, "max": 50, "requires_restart": false, "owner": "liveops_team" },
+    { "key": "ads_reward_hints", "type": "int", "default": 1, "min": 0, "max": 5, "requires_restart": false, "owner": "liveops_team" },
+    { "key": "hint_tier2_gem_cost", "type": "int", "default": 5, "min": 0, "max": 50, "requires_restart": false, "owner": "liveops_team" },
+    { "key": "hint_tier3_gem_cost", "type": "int", "default": 12, "min": 0, "max": 99, "requires_restart": false, "owner": "liveops_team" },
+    { "key": "hint_free_wait_sec_tier1", "type": "int", "default": 60, "min": 10, "max": 600, "requires_restart": false, "owner": "design_team" },
+    { "key": "hint_free_wait_sec_tier2", "type": "int", "default": 150, "min": 30, "max": 900, "requires_restart": false, "owner": "design_team" },
+    { "key": "hint_free_wait_sec_tier3", "type": "int", "default": 300, "min": 60, "max": 900, "requires_restart": false, "owner": "design_team" },
+    { "key": "hint_price_escalation_gems", "type": "int", "default": 3, "min": 0, "max": 20, "requires_restart": false, "owner": "liveops_team" },
+    { "key": "hint_gem_cost_cap", "type": "int", "default": 20, "min": 1, "max": 99, "requires_restart": false, "owner": "liveops_team" },
+    { "key": "mercy_hint_fail_threshold", "type": "int", "default": 3, "min": 1, "max": 10, "requires_restart": false, "owner": "design_team" },
+    { "key": "mercy_hint_stuck_sec", "type": "int", "default": 240, "min": 60, "max": 900, "requires_restart": false, "owner": "design_team" },
+    { "key": "rewarded_ads_daily_cap", "type": "int", "default": 6, "min": 0, "max": 20, "requires_restart": false, "owner": "liveops_team" },
+    { "key": "ad_cooldown_after_scare_sec", "type": "int", "default": 90, "min": 90, "max": 600, "requires_restart": false, "owner": "horror_team", "note_vi": "Chỉ được tăng, không được hạ dưới 90 - luật an toàn của 04_horror.md" },
+    { "key": "iap_chapter02_enabled", "type": "bool", "default": true, "requires_restart": false, "owner": "liveops_team" },
+    { "key": "iap_season_bundle_enabled", "type": "bool", "default": true, "requires_restart": false, "owner": "liveops_team" },
+    { "key": "paywall_max_impressions_per_day", "type": "int", "default": 2, "min": 0, "max": 5, "requires_restart": false, "owner": "liveops_team" },
+    { "key": "paywall_show_after_sec_from_credits", "type": "int", "default": 3, "min": 0, "max": 300, "requires_restart": false, "owner": "liveops_team" },
+    { "key": "event_active_id", "type": "string", "default": "", "requires_restart": false, "owner": "liveops_team", "note_vi": "Rỗng = không ép sự kiện, engine tự chọn theo event_start/event_end" },
+    { "key": "event_theme_enabled", "type": "bool", "default": true, "requires_restart": false, "owner": "liveops_team" },
+    { "key": "addressables_catalog_url", "type": "string", "default": "https://cdn.linhanthon.game/addressables/catalog_chapter_01.json", "requires_restart": true, "owner": "tech_team" },
+    { "key": "bundle_download_timeout_sec", "type": "int", "default": 8, "min": 3, "max": 60, "requires_restart": false, "owner": "tech_team" },
+    { "key": "bundle_retry_count", "type": "int", "default": 2, "min": 0, "max": 5, "requires_restart": false, "owner": "tech_team" },
+    { "key": "bundle_wifi_only_default", "type": "bool", "default": true, "requires_restart": false, "owner": "tech_team" },
+    { "key": "telemetry_sampling_rate", "type": "float", "default": 1.0, "min": 0.0, "max": 1.0, "requires_restart": false, "owner": "data_team" },
+    { "key": "kill_switch_ads", "type": "bool", "default": false, "requires_restart": false, "owner": "liveops_team" },
+    { "key": "kill_switch_iap", "type": "bool", "default": false, "requires_restart": false, "owner": "liveops_team" },
+    { "key": "kill_switch_event_theme", "type": "bool", "default": false, "requires_restart": false, "owner": "liveops_team" },
+    { "key": "kill_switch_paid_hints", "type": "bool", "default": false, "requires_restart": false, "owner": "liveops_team" },
+    { "key": "ab_slot_hint_pricing", "type": "string", "default": "control", "requires_restart": false, "owner": "data_team" },
+    { "key": "ab_slot_paywall_timing", "type": "string", "default": "control", "requires_restart": false, "owner": "data_team" },
+    { "key": "ab_slot_mercy_threshold", "type": "string", "default": "control", "requires_restart": false, "owner": "design_team" }
+  ],
+
+  "ab_tests": {
+    "assignment": {
+      "unit": "install_id",
+      "hash_salt": "linhanthon_ab_2026",
+      "sticky": true,
+      "holdout_pct": 5,
+      "mutually_exclusive_slots": ["ab_slot_hint_pricing", "ab_slot_paywall_timing"]
+    },
+    "slots": [
+      {
+        "slot_id": "ab_slot_hint_pricing",
+        "ten_vi": "Giá gợi ý",
+        "gia_thuyet_vi": "Hạ giá Tier 3 xuống 8 gem làm tăng tỷ lệ giải câu đố khó mà không làm giảm doanh thu tổng.",
+        "primary_metric": "f12_chapter_complete_rate",
+        "secondary_metrics": ["hint_tier3_rate_pct", "gem_spend_per_user", "ad_impression_per_user"],
+        "guardrail_metrics": ["iap_purchase_success_rate", "day1_retention", "puzzle_abandon_rate"],
+        "variants": [
+          { "variant_id": "control", "allocation_pct": 50, "overrides": { "hint_tier3_gem_cost": 12, "ads_reward_hints": 1 } },
+          { "variant_id": "cheaper_t3", "allocation_pct": 25, "overrides": { "hint_tier3_gem_cost": 8, "ads_reward_hints": 1 } },
+          { "variant_id": "ads_only_t3", "allocation_pct": 25, "overrides": { "hint_tier3_gem_cost": 0, "ads_reward_hints": 2 } }
+        ],
+        "min_sample_per_variant": 3000,
+        "min_duration_days": 14,
+        "stop_rule_vi": "Dừng sớm nếu bất kỳ guardrail nào tụt quá 5% tương đối với p < 0.05."
+      },
+      {
+        "slot_id": "ab_slot_paywall_timing",
+        "ten_vi": "Thời điểm hiện paywall",
+        "gia_thuyet_vi": "Hiện paywall sau khi credits chạy hết (thay vì 3 giây sau cảnh kết) làm tăng chuyển đổi vì người chơi đã tiêu hoá xong cú twist.",
+        "primary_metric": "f14_purchase_rate",
+        "secondary_metrics": ["paywall_dismiss_sec_on_screen", "paywall_view_rate"],
+        "guardrail_metrics": ["day1_retention", "store_review_rating", "session_end_after_paywall_rate"],
+        "variants": [
+          { "variant_id": "control", "allocation_pct": 50, "overrides": { "paywall_show_after_sec_from_credits": 3 } },
+          { "variant_id": "after_credits", "allocation_pct": 50, "overrides": { "paywall_show_after_sec_from_credits": 45 } }
+        ],
+        "min_sample_per_variant": 2500,
+        "min_duration_days": 14,
+        "stop_rule_vi": "Dừng sớm nếu điểm đánh giá store giảm quá 0.2 sao trong 7 ngày."
+      },
+      {
+        "slot_id": "ab_slot_mercy_threshold",
+        "ten_vi": "Ngưỡng gợi ý thương xót",
+        "gia_thuyet_vi": "Tặng gợi ý miễn phí sớm hơn (sau 2 lần sai thay vì 3) giảm rage-quit ở puz_ba_hoi_chin_tieng mà không làm câu đố mất giá trị.",
+        "primary_metric": "puzzle_abandon_rate(puz_ba_hoi_chin_tieng)",
+        "secondary_metrics": ["hint_mercy_grant_rate", "f7_solve_p4_rate"],
+        "guardrail_metrics": ["chapter_complete_rate", "median_time_to_solve_sec", "gem_spend_per_user"],
+        "variants": [
+          { "variant_id": "control", "allocation_pct": 50, "overrides": { "mercy_hint_fail_threshold": 3 } },
+          { "variant_id": "early_mercy", "allocation_pct": 50, "overrides": { "mercy_hint_fail_threshold": 2 } }
+        ],
+        "min_sample_per_variant": 2000,
+        "min_duration_days": 10,
+        "stop_rule_vi": "Dừng nếu tỷ lệ dùng Tier 3 vượt 45% (câu đố mất giá trị)."
+      }
+    ]
+  },
+
+  "player_safety_compliance": {
+    "no_loot_box": {
+      "randomized_paid_rewards": false,
+      "randomized_product_ids": [],
+      "mo_ta_vi": "Không có hộp quà ngẫu nhiên, không gacha, không quay số. Mọi sản phẩm trả phí đều liệt kê chính xác nội dung nhận được.",
+      "validator_rule": "Mọi products[].grants_* phải là giá trị xác định; cấm trường có ngữ nghĩa xác suất."
+    },
+    "price_transparency": {
+      "show_localized_price_before_confirm": true,
+      "show_contents_list_before_confirm": true,
+      "two_step_confirm": true,
+      "no_auto_renew_subscription_in_chapter_01": true,
+      "no_pre_checked_purchase_option": true,
+      "no_dark_pattern_countdown": true,
+      "gem_price_shown_with_balance": true,
+      "mo_ta_vi": "Giá bản địa hoá lấy từ store, hiển thị cùng danh sách nội dung và số dư gem hiện có; người chơi phải bấm xác nhận lần hai mới tính tiền."
+    },
+    "age_rating": {
+      "content_descriptors_vi": ["Kinh dị", "Cảnh giật mình", "Đề tài tang lễ", "Cái chết của trẻ em", "Hủ tục hiến tế", "Ánh sáng nhấp nháy", "Rung phản hồi"],
+      "target_rating": {
+        "apple_app_store": "17+",
+        "google_play_iarc": "Mature 17+",
+        "pegi": "16",
+        "esrb": "Mature 17+",
+        "vietnam": "16+ (dự kiến, cần bộ phận pháp chế xác nhận theo quy định phân loại trò chơi điện tử trên mạng hiện hành)"
+      },
+      "store_questionnaire_answers_locked": true,
+      "no_ads_for_under_age_users": true,
+      "ad_content_rating_max": "MATURE_AUDIENCES_OFF",
+      "ad_content_filter_vi": "Chặn quảng cáo cờ bạc, rượu bia, hẹn hò, nội dung người lớn và quảng cáo giả lập giao diện hệ thống.",
+      "legal_review_required": true
+    },
+    "ads_placement_safety": {
+      "no_interstitial_ads": true,
+      "rewarded_opt_in_only": true,
+      "never_interrupt_jumpscare": true,
+      "min_sec_after_jumpscare": 90,
+      "never_interrupt_cutscene": true,
+      "never_interrupt_puzzle_input": true,
+      "never_on_safety_warning_screen": true,
+      "audio_ducking_required": true,
+      "mo_ta_vi": "Quảng cáo chỉ xuất hiện khi người chơi tự bấm, ở màn hình gợi ý hoặc cửa hàng gem. Tuyệt đối không có quảng cáo tự bật xen giữa cú doạ, giữa cutscene, giữa thao tác giải đố hay trên màn hình cảnh báo an toàn.",
+      "validator_rule": "Mọi ad_placements[].blocked_windows phải chứa DURING_JUMPSCARE_ENVELOPE và WITHIN_90S_AFTER_ANY_JUMPSCARE."
+    },
+    "accessibility_never_monetized": {
+      "gentle_mode_free": true,
+      "photosensitive_safe_free": true,
+      "reduce_motion_free": true,
+      "haptic_toggle_free": true,
+      "subtitle_free": true,
+      "mo_ta_vi": "Kế thừa ràng buộc 4.7.5 của 04_horror.md: không một tuỳ chọn an toàn nào nằm sau tường trả phí, sau quảng cáo thưởng hay sau mốc tiến trình. Đổi được bất cứ lúc nào, kể cả giữa một cú doạ."
+    },
+    "data_privacy": {
+      "pii_in_telemetry": false,
+      "identifier_used": "install_id ẩn danh",
+      "att_prompt_ios": true,
+      "personalized_ads_require_consent": true,
+      "consent_frameworks": ["GDPR", "GDPR-K", "CCPA", "Nghị định 13/2023/NĐ-CP về bảo vệ dữ liệu cá nhân"],
+      "data_deletion_request_supported": true,
+      "retention_days": 400
+    },
+    "spending_protection": {
+      "daily_spend_soft_cap_usd": 20,
+      "soft_cap_action": "Hiện nhắc nhở và yêu cầu xác nhận lần nữa, không tự chặn",
+      "purchase_history_visible_in_settings": true,
+      "refund_guidance_link_in_settings": true,
+      "no_purchase_prompt_during_horror_peak": true
+    }
+  },
+
+  "validation": {
+    "invariants": [
+      "hint_system.tiers[*].gem_cost phải tăng dần theo tier (0 <= t1 <= t2 <= t3)",
+      "hint_system.tiers[*].unlock_free_after_sec phải tăng dần theo tier",
+      "hint_system.tiers[3].unlock_free_after_sec <= hint_system.max_wait_sec_to_full_solution",
+      "hint_system.free_path_guaranteed = true và mọi tier phải có ít nhất một unlock_source với gem_cost = 0 và ads_required = 0",
+      "iap.products[*].iap_product_id duy nhất và khớp id đã khai báo trên store",
+      "iap.products[*].regional_pricing[*].region_code duy nhất trong cùng sản phẩm và bắt buộc có VN, US, SEA_DEFAULT",
+      "seasonal_events[*].event_start < seasonal_events[*].event_end",
+      "Hai sự kiện enabled = true không được chồng cửa sổ thời gian trên cùng một area",
+      "seasonal_events[*].override_bg phải nằm trong seasonal_events[*].addressables.bundles",
+      "seasonal_events[*].theme_override.does_not_change phải chứa hotspot_bounds, puzzle_solution, jumpscare_trigger_type, max_fails",
+      "ad_placements[*].blocked_windows phải chứa DURING_JUMPSCARE_ENVELOPE và WITHIN_90S_AFTER_ANY_JUMPSCARE",
+      "player_safety_compliance.no_loot_box.randomized_paid_rewards = false",
+      "telemetry.events[*].event_name duy nhất, snake_case, độ dài <= 40",
+      "ab_tests.slots[*].variants[*].allocation_pct cộng lại = 100 cho mỗi slot",
+      "remote_config_keys[*].key duy nhất và mọi khoá dùng trong ab_tests.overrides phải tồn tại trong remote_config_keys",
+      "gem_economy.balance_targets.expected_free_earn_chapter_01 >= expected_spend_p90_player"
+    ],
+    "schema_file": "schema/liveops.schema.json",
+    "validator_tool": "tools/validate_level.py --liveops data/liveops_chapter_01.json"
+  }
+}

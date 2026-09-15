@@ -1,0 +1,188 @@
+{
+  "chapter_id": "chapter_01",
+  "area_id": "area_bep_gieng",
+  "background_asset_url": "https://cdn.linhanthon.game/assets/bg_bep_gieng.bundle",
+  "hotspots": [
+    {
+      "id": "hs_so_cho_ba_noi",
+      "bounds": {
+        "x": 700,
+        "y": 110,
+        "width": 220,
+        "height": 130
+      },
+      "action_type": "EXAMINE",
+      "text_key": "txt_examine_so_cho"
+    },
+    {
+      "id": "hs_gac_bep_bo_dom",
+      "bounds": {
+        "x": 260,
+        "y": 200,
+        "width": 400,
+        "height": 190
+      },
+      "action_type": "EXAMINE",
+      "text_key": "txt_examine_gac_bep"
+    },
+    {
+      "id": "hs_cay_gao",
+      "bounds": {
+        "x": 1200,
+        "y": 96,
+        "width": 260,
+        "height": 260
+      },
+      "action_type": "EXAMINE",
+      "text_key": "txt_examine_cay_gao"
+    },
+    {
+      "id": "hs_den_dau_ghep",
+      "bounds": {
+        "x": 850,
+        "y": 280,
+        "width": 290,
+        "height": 300
+      },
+      "action_type": "ZOOM_PUZZLE",
+      "target_puzzle_id": "puz_thap_lai_den_dau"
+    },
+    {
+      "id": "hs_gau_ton",
+      "bounds": {
+        "x": 1500,
+        "y": 280,
+        "width": 170,
+        "height": 190
+      },
+      "action_type": "EXAMINE",
+      "text_key": "txt_examine_gau_ton"
+    },
+    {
+      "id": "hs_thanh_gieng_chu_khac",
+      "bounds": {
+        "x": 1700,
+        "y": 290,
+        "width": 180,
+        "height": 160
+      },
+      "action_type": "EXAMINE",
+      "text_key": "txt_examine_thanh_gieng"
+    },
+    {
+      "id": "hs_vach_bo_hong_hinh_ve",
+      "bounds": {
+        "x": 60,
+        "y": 420,
+        "width": 180,
+        "height": 300
+      },
+      "action_type": "EXAMINE",
+      "text_key": "txt_examine_vach_bo_hong"
+    },
+    {
+      "id": "hs_vach_bep_chu_than",
+      "bounds": {
+        "x": 270,
+        "y": 420,
+        "width": 300,
+        "height": 160
+      },
+      "action_type": "EXAMINE",
+      "text_key": "txt_examine_vach_bep_chu_than"
+    },
+    {
+      "id": "hs_cot_bep_vach_dao",
+      "bounds": {
+        "x": 680,
+        "y": 420,
+        "width": 130,
+        "height": 520
+      },
+      "action_type": "EXAMINE",
+      "text_key": "txt_examine_cot_vach_dao"
+    },
+    {
+      "id": "hs_gieng_khoi",
+      "bounds": {
+        "x": 1300,
+        "y": 520,
+        "width": 460,
+        "height": 420
+      },
+      "action_type": "USE_ITEM",
+      "required_item": "item_den_dau_sang",
+      "item_id": "item_den_dau_sang"
+    },
+    {
+      "id": "hs_kieng_ba_chan",
+      "bounds": {
+        "x": 340,
+        "y": 620,
+        "width": 260,
+        "height": 130
+      },
+      "action_type": "EXAMINE",
+      "text_key": "txt_examine_kieng_ba_chan"
+    },
+    {
+      "id": "hs_chai_dau_hoa",
+      "bounds": {
+        "x": 850,
+        "y": 640,
+        "width": 120,
+        "height": 180
+      },
+      "action_type": "COLLECT_ITEM",
+      "item_id": "item_chai_dau_hoa",
+      "required_item": null
+    },
+    {
+      "id": "hs_len_gian_tho",
+      "bounds": {
+        "x": 1000,
+        "y": 700,
+        "width": 150,
+        "height": 290
+      },
+      "action_type": "CHANGE_AREA",
+      "target_area_id": "area_gian_tho"
+    },
+    {
+      "id": "hs_dong_tro_than",
+      "bounds": {
+        "x": 300,
+        "y": 780,
+        "width": 340,
+        "height": 210
+      },
+      "action_type": "EXAMINE",
+      "text_key": "txt_examine_dong_tro_than"
+    }
+  ],
+  "puzzles": [
+    {
+      "id": "puz_thap_lai_den_dau",
+      "type": "ITEM_COMBINE",
+      "solution": [
+        2,
+        5,
+        1,
+        3,
+        4
+      ],
+      "reward_item_id": "item_den_dau_sang",
+      "wrong_action_jumpscare": "scare_mat_duoi_day_gieng"
+    }
+  ],
+  "jumpscares": [
+    {
+      "id": "scare_mat_duoi_day_gieng",
+      "trigger_type": "ON_PUZZLE_FAIL_COUNT",
+      "max_fails": 3,
+      "audio_asset": "sfx_scare_mat_gieng.ogg",
+      "sprite_animation": "anim_mat_trang_ngoai_cua_bep",
+      "screen_flash": true
+    }
+  ]
+}
