@@ -267,14 +267,14 @@ LoRA linhanthon_style_v1 : 0.75 | Clip skip 2
 |---|---|---|
 | Gương bát quái trên xà cổng | `hs_guong_bat_quai` | `{296,150,130,130}` — trên, trái |
 | Loa phát thanh trên cột | `hs_loa_phat_thanh` | `{700,120,200,150}` — trên, giữa |
-| Cột gạch trái / phải + câu đối khắc chìm, dán giấy trắng để tang | `hs_cau_doi_trai` / `hs_cau_doi_phai` | `{88,300,110,420}` / `{520,300,110,420}` |
+| Cột gạch trái / phải + câu đối khắc chìm, dán giấy trắng để tang | `hs_cau_doi_trai` / `hs_cau_doi_phai` | vùng chạm `{83,300,120,420}` / `{515,300,120,420}`; **nét vẽ** câu đối vẫn rộng 110 px — `visual_bounds` `{88,300,110,420}` / `{520,300,110,420}` |
 | Ổ khoá gỗ ba vòng giữa hai cánh cổng | `hs_o_khoa_cong` | `{280,430,180,180}` |
 | Cáo phó trên cột hiên | `hs_cao_pho` | `{1000,330,150,210}` |
 | Bậc tam cấp + cửa bức bàn | `hs_cua_vao_hien` | `{1180,380,300,520}` |
 | Dây phơi + khăn xô | `hs_day_phoi_khan_xo` | `{1540,230,340,150}` |
 | Xe đạp + túi vải | `hs_xe_dap_tui_vai` | `{60,760,240,230}` |
 | Chum nước mưa (góc Bắc) | `hs_chum_nuoc_mua` | `{330,730,300,260}` |
-| Gáo dừa rơi trên gạch | `hs_gao_dua` | `{648,800,130,110}` |
+| Gáo dừa rơi trên gạch | `hs_gao_dua` | vùng chạm `{648,795,130,120}`; **nét vẽ** `{648,800,130,110}` |
 | Chậu hoá vàng | `hs_dong_tro_hoa_vang` | `{820,820,280,170}` |
 | Khe gạch chân tường | `hs_khe_gach_thu_tay` | `{1560,800,220,120}` |
 
@@ -334,15 +334,15 @@ LoRA linhanthon_style_v1 : 0.75 | Clip skip 2
 | Vở tập viết chữ Nho trên đôn | `hs_vo_tap_viet` | `{170,430,220,140}` |
 | Bậc tam cấp mép trái | `hs_xuong_san_gach` | `{30,600,120,270}` |
 | Chõng tre + điếu bát | `hs_chong_tre` | `{170,600,390,270}` |
-| Sổ bìa xanh dưới manh chiếu | `hs_nhat_ky_duoi_chieu` | `{160,890,280,105}` |
-| Đôi guốc mộc | `hs_guoc_moc` | `{640,890,240,105}` |
-| Xấp giấy bản + thỏi than | `hs_giay_ban_va_than` | `{940,890,200,105}` |
+| Sổ bìa xanh dưới manh chiếu | `hs_nhat_ky_duoi_chieu` | vùng chạm `{160,882,280,120}`; **nét vẽ** `{160,890,280,105}` |
+| Đôi guốc mộc | `hs_guoc_moc` | vùng chạm `{640,882,240,120}`; **nét vẽ** `{640,890,240,105}` |
+| Xấp giấy bản + thỏi than | `hs_giay_ban_va_than` | vùng chạm `{940,882,200,120}`; **nét vẽ** `{940,890,200,105}` |
 
 ---
 
 ## A3 · `bg_gian_tho` — `area_gian_tho` "Gian thờ giữa và bàn thờ họ"
 
-*18h40. Trung tâm thông tin của chương, mật độ chữ cao nhất, và cũng là area đông hotspot nhất (17 cái). Cột trái là "trục Bà Cô" (khám thờ → bài vị → vải điều → mõ), cột phải là "trục tài liệu" (gia phả → văn khấn → vách buồng). Bàn thờ giữ trọn tâm màn hình.*
+*18h40. Trung tâm thông tin của chương, mật độ chữ cao nhất, và cũng là area đông hotspot nhất (17 cái). Cột trái là "trục Bà Cô" (khám thờ → bài vị → vải điều → **bộ pháp khí chuông-mõ trên đôn gỗ thấp**), cột phải là "trục tài liệu" (gia phả → văn khấn → vách buồng). Bàn thờ giữ trọn tâm màn hình.*
 
 **Prompt**
 
@@ -379,8 +379,8 @@ LoRA linhanthon_style_v1 : 0.75 | Clip skip 2
 
 - **Bát hương phải lệch 45°** so với hoành phi (`hs_bat_huong` `{1330,520,150,150}`). Đây là điềm nặng nhất trong tín ngưỡng Bắc Bộ — hoạ sĩ vẽ thẳng hàng là **hỏng cả beat B05a**.
 - **Khám thờ Bà Cô** (`hs_kham_tho_ba_co` `{110,240,290,240}`) phải **thấp hơn bát hương gia tiên một tấc** và **bịt kín bằng vải điều**, không ảnh, không tên, không bát hương riêng.
-- **Khe mộng cửa gác** (`hs_khe_mong_cua_gac` `{430,120,150,110}`) là một **khe rỗng hình chữ nhật** ngay trên khuôn cửa gác — phải nhìn ra ngay là "thiếu một thanh then".
-- Hai hotspot **chỉ hiện sau khi giải câu đố** (`hs_bai_vi_khuyet_danh` `{130,500,250,120}`, `hs_dai_vai_dieu` `{130,640,250,110}`) cần **vẽ riêng thành lớp bật/tắt**, không nung vào nền.
+- **Khe mộng cửa gác** (vùng chạm `{430,115,150,120}`, **nét vẽ** `{430,120,150,110}`) là một **khe rỗng hình chữ nhật** ngay trên khuôn cửa gác — phải nhìn ra ngay là "thiếu một thanh then".
+- Hai hotspot **chỉ hiện sau khi giải câu đố** (`hs_bai_vi_khuyet_danh` `{130,500,250,120}`, `hs_dai_vai_dieu` vùng chạm `{130,635,250,120}` / **nét vẽ** `{130,640,250,110}`) cần **vẽ riêng thành lớp bật/tắt**, không nung vào nền.
 
 ---
 
@@ -472,7 +472,7 @@ Ghi chú: lớp _l3_fx xuất RIÊNG quầng đèn dạng radial alpha 520px đ�
 **Chốt bố cục (11 hotspot — `03_world.md` §1.5.2). Hai chỗ dễ sai:**
 
 - `hs_ao_cuoi_giay` `{1650,200,230,370}` **chỉ hiện sau khi giải `puz_xep_anh_gia_pha`** → vẽ thành lớp bật/tắt riêng, nền mặc định là **móc gỗ trống sau lưng khung ảnh**.
-- `hs_hinh_nhan` `{820,280,290,620}` kết thúc ở `y = 900`, `hs_chieu_coi_trai_san` `{730,910,440,88}` bắt đầu ở `y = 910` — **cách nhau đúng 10px**. Hoạ sĩ phải giữ ranh giới chân hình nhân / mép chiếu thật rõ, đừng vẽ tà giấy tràn xuống chiếu.
+- `hs_hinh_nhan` `{820,280,290,620}` kết thúc ở `y = 900`; `hs_chieu_coi_trai_san` có **vùng chạm** `{730,901,440,120}` bắt đầu ngay ở `y = 901` — **cách nhau đúng 1 px**, cặp sát nhất toàn chương. **Nhưng phần VẼ của chiếu vẫn là `{730,910,440,88}`** (`visual_bounds`), tức mép trên nét vẽ vẫn cách chân hình nhân 10 px. **Hoạ sĩ vẽ theo `visual_bounds`, không vẽ theo vùng chạm.** Phải giữ ranh giới chân hình nhân / mép chiếu thật rõ, đừng vẽ tà giấy tràn xuống chiếu.
 
 ---
 
@@ -483,7 +483,9 @@ Ghi chú: lớp _l3_fx xuất RIÊNG quầng đèn dạng radial alpha 520px đ�
 > **Luật chung của MỤC B — đọc trước khi sinh tấm đầu tiên:**
 > 1. Mỗi câu đố xuất **hai file**: `_plate` (nền tĩnh, không có phần tử thao tác được) và `_parts` (atlas các phần tử rời, nền trong suốt). Nếu vẽ dính vào nhau thì không lập trình được.
 > 2. **Không vẽ UI.** Nút bấm, thanh nhịp, ô chiếu lễ do tổ UI dựng bằng 9-slice. Prompt chỉ mô tả **chỗ trống đã chừa sẵn** cho chúng.
-> 3. **Mỗi phần tử thao tác được phải ≥ 88 x 88 px @1920** và có silhouette phân biệt được **khi nhìn ở 30% độ sáng** — vì Area 4 và Area 5 tối.
+> 3. **Mỗi phần tử thao tác được phải ≥ 120 x 120 px @1920** — sàn chạm chính thức của dự án (`01_KICH_BAN_CHAPTER_01.md` §6 mục X18, `docs/03_DATA_SPEC.md` §2.2 mức G3). **Ngưỡng 88 px của bản cũ đã bị bãi bỏ** vì quy đổi *"88 px ≈ 44 pt"* là sai số học: fit-width cho ra 29–43 pt/dp, dưới cả Apple HIG lẫn Material. Phần tử còn phải có silhouette phân biệt được **khi nhìn ở 30% độ sáng** — vì Area 4 và Area 5 tối.
+>
+>    **Một ngoại lệ, và chỉ một:** **bề rộng NÉT** trong `B2 · PATTERN_TRACE` là **≥ 44 px**, không phải 120 px. Nét là **đường vuốt**, không phải mục tiêu chạm: ngón tay bám theo nét chứ không phải bấm trúng nó một lần. Sàn 120 px áp cho **mục tiêu chạm rời rạc** — nút, icon, ô, phần tử kéo-thả. Mọi con số khác của MỤC B đều đã ở trên sàn: B1 vành 800/600/400, B3 icon 150×150, B5 phần tử ≥ 160×160, B6 ô 280×280.
 > 4. Ánh sáng zoom **kế thừa ánh sáng của area mẹ**, không được đột ngột sáng lên chỉ vì đang "cận cảnh".
 
 ---
@@ -607,15 +609,17 @@ LoRA linhanthon_style_v1 : 0.75 | Clip skip 2
 
 ## B4 · `zoom_puz_ba_hoi_chin_tieng` — `AUDIO_MATCH` · Ba hồi chín tiếng (`area_gian_tho`)
 
-*Chỉ **hai nút gõ**: mặt mõ cá `{520,420,520,420}` và chuông đồng nhỏ `{1240,380,260,260}`. Thanh nhịp chạy ngang phía trên `{360,180,1200,90}`. Nút "Áp tai vào vách" `{1620,180,220,120}`. Nền là vách buồng trống — nơi tiếng mõ vọng ra. Lời giải `[3,3,5,3,7,3]`.*
+> **⚠️ HOÁN VAI NHẠC KHÍ — X14, đã chốt. Bản trước của mục B4 vẽ NGƯỢC.** Bản trước đặt **mõ cá** vào ô lớn `{520,420,520,420}` và **chuông** vào ô nhỏ `{1240,380,260,260}`, đồng thời khắc ba chữ số Hán lên thân mõ. **Sai cả ba chỗ.** Theo `01_KICH_BAN_CHAPTER_01.md` §3.3.6: **CHUÔNG ĐỒNG** mang trọn phần *"ba hồi chín tiếng"* nên nó là **nhạc khí chính, chiếm ô LỚN**; **MÕ** chỉ điểm **một tiếng chốt mỗi hồi**, ba lần trong cả bài, nên nó là **nhạc khí phụ, ô NHỎ**; và **ba chữ 三 五 七 khắc trên VÀNH CHUÔNG**, không khắc trên mõ — vì chuông mới là thứ mang ba con số ấy (clue C2). `solution` `[3,3,5,3,7,3]` **không đổi một chữ số nào**.
+
+*Chỉ **hai nút gõ**: **chuông đồng nhỏ treo trên giá gỗ chữ U** `{520,420,520,420}` *(nhạc khí chính, chiếm phần lớn khung)* và **mặt mõ cá** `{1240,380,260,260}` *(chỉ dùng đúng ba lần cả bài)*. Thanh nhịp chạy ngang phía trên `{360,180,1200,90}`. Nút "Áp tai vào vách" `{1620,180,220,120}`. Nền là vách buồng trống — nơi **tiếng chuông** vọng ra, mỗi hồi khép lại bằng một tiếng mõ cụt lủn. Lời giải `[3,3,5,3,7,3]` — **cả sáu số đều là số tiếng CHUÔNG**.*
 
 **Prompt**
 
 ```plaintext
-2D hand-painted close-up puzzle plate for a point-and-click horror game — a jackfruit-wood fish-shaped temple block and a small bronze hand bell in front of the cracked plank partition of an empty inner chamber, seen straight on in a very quiet dark ancestral room.
+2D hand-painted close-up puzzle plate for a point-and-click horror game — a small bronze temple bell hanging in a U-shaped wooden stand, with a jackfruit-wood fish-shaped temple block set beside it, in front of the cracked plank partition of an empty inner chamber, seen straight on in a very quiet dark ancestral room.
 Style: Vietnamese folk horror, "Ao Cuoi Giay" paper-bride style, hand-painted 2D point-and-click adventure art, 1990s Northern Vietnam village, muted desaturated palette #0E0F12 #2E2A24 #55604A #8C3A2E #FFD9A0, one warm oil-lamp key light against cold twilight fill, dry-brush stroke and paper grain visible, flat orthographic front view, no perspective distortion, no lens effects.
-Details: left of centre a large carved wooden fish-shaped temple block the size of a melon resting on a low stool, its lacquer worn to bare wood on the striking face, its mouth slot a deep black opening, three incised Han numerals carved into its flank; right of centre a small dark bronze bell hanging from a short cord on a nail, unpolished and green at the lip; behind them the plank wall of the empty chamber, boards split into long vertical gaps with absolute darkness behind, one board rubbed pale and smooth at ear height where someone has leaned against it many times; a mallet-shaped hollow on the stool where the beater usually rests, currently empty; dust on every horizontal surface except the striking face of the block. The top strip of the frame and the top right corner are deliberately left as plain dark wall with nothing on them. Lighting inherits the altar room: one weak warm lamp far left, the wall gaps reading colder than the wood, heavy vignette.
-Format: 1920x1080, 16:9, flat orthographic dead-on view, temple block occupying roughly 520 by 420 pixels left of centre, bell occupying roughly 260 by 260 pixels right of centre, the strip from y 180 to y 270 across the top kept visually empty for the UI rhythm bar, no UI, no buttons, no musical notation, no sound wave graphics, no hands, no people, no legible text; deliver as two files — a static plate of the wall and stool, and a transparent-background parts atlas containing the temple block, the bell and the mallet as separate elements.
+Details: left of centre and dominating the frame, a dark bronze temple bell hanging inside a U-shaped wooden stand on a low stool, unpolished and green-tarnished at the lip, three incised Han numerals cut into the outer rim of the bell with a clear gap between each one, the bronze rubbed bright in one small patch where it has been struck for decades; right of centre and much smaller, a carved wooden fish-shaped temple block resting directly on the same low stool, its lacquer worn to bare wood on the striking face, its mouth slot a deep black opening, no numerals and no carving on its flank; behind them the plank wall of the empty chamber, boards split into long vertical gaps with absolute darkness behind, one board rubbed pale and smooth at ear height where someone has leaned against it many times; a mallet-shaped hollow on the stool where the beater usually rests, currently empty; dust on every horizontal surface except the striking face of the block and the struck patch of the bell. The top strip of the frame and the top right corner are deliberately left as plain dark wall with nothing on them. Lighting inherits the altar room: one weak warm lamp far left, the wall gaps reading colder than the wood, heavy vignette.
+Format: 1920x1080, 16:9, flat orthographic dead-on view, bell and its wooden stand occupying roughly 520 by 420 pixels left of centre, temple block occupying roughly 260 by 260 pixels right of centre, the strip from y 180 to y 270 across the top kept visually empty for the UI rhythm bar, no UI, no buttons, no musical notation, no sound wave graphics, no hands, no people, no legible text apart from the three incised numerals on the bell rim; deliver as two files — a static plate of the wall and stool, and a transparent-background parts atlas containing the bell with its stand, the temple block and the mallet as separate elements.
 ```
 
 **Negative prompt**
@@ -636,11 +640,13 @@ Aspect ratio: **16:9 — 1920 x 1080**
 
 ```plaintext
 Sampler DPM++ 2M Karras | Steps 34 | CFG 6.5 | Seed 179624 | Size 1024x576 -> Hires Latent 1.5x denoise 0.38 -> 1920x1080
-ControlNet lineart weight 0.60 — ảnh điều khiển = khối mõ 520x420 trái, chuông 260x260 phải, dải trống 1200x90 phía trên
+ControlNet lineart weight 0.60 — ảnh điều khiển = chuông + giá gỗ 520x420 trái, khối mõ 260x260 phải, dải trống 1200x90 phía trên
 LoRA linhanthon_style_v1 : 0.75 | Clip skip 2
 ```
 
 **Yêu cầu xuất riêng:** cần **2 khung phản hồi gõ** cho mỗi nút (`_idle`, `_hit`) — `_hit` chỉ khác ở **biến dạng 3% và một vòng bụi bật lên**, tuyệt đối **không phát sáng**. Game này không có vật thể phát quang.
+
+**Cây dùi phải vẽ hai đầu khác nhau.** `item_dui_mo` là **một cây dùi dùng cho cả hai nhạc khí**: **một đầu quấn một lớp vải điều đã bạc — đầu ấy đánh CHUÔNG**, **đầu kia để trần — gõ MÕ**. Đây vừa là clue C4 của câu đố vừa là điều kiện mở khoá, nên hai đầu phải phân biệt được **ngay trong icon túi đồ** (`icon_item_dui_mo.png`, §C13) chứ không chỉ ở atlas `_parts`. Cán mòn nhẵn **đúng ba chỗ** — chỗ ngón cái, chỗ ngón trỏ, chỗ lòng bàn tay.
 
 ---
 
@@ -1205,7 +1211,7 @@ Bắt buộc: chạy ADetailer hand_yolov8n + inpaint tay ở mọi bản trư�
 
 ## C13 · `icon_item_*` — Bộ 10 icon vật phẩm trong túi đồ
 
-*Thanh inventory 6 ô ở dải `y ∈ [1000, 1080]`, mỗi ô **160 x 80 px**, vùng chạm mở rộng lên **160 x 88**. Mười `item_id` đúng và đủ theo SPINE — **không phát sinh id mới**.*
+*Thanh inventory 6 ô ở dải `y ∈ [1000, 1080]`, mỗi ô **vẽ 160 x 80 px**, **vùng chạm mở rộng lên 160 x 120** để đạt sàn chạm 120 px @1920 — vùng chạm trùm dải `y ∈ [960, 1080]`, không đụng hotspot nào vì luật bố cục đã chừa `y + height ≤ 1000` cho hotspot trong cảnh. Mười `item_id` đúng và đủ theo SPINE — **không phát sinh id mới**.*
 
 **Prompt**
 
@@ -1213,7 +1219,7 @@ Bắt buộc: chạy ADetailer hand_yolov8n + inpaint tay ở mọi bản trư�
 2D hand-painted inventory icon set for a point-and-click horror game — ten 1990s Northern Vietnamese rural objects painted as separate flat inventory icons.
 Style: Vietnamese folk horror, "Ao Cuoi Giay" paper-bride style, hand-painted 2D point-and-click adventure art, 1990s Northern Vietnam village, muted desaturated palette #0E0F12 #2E2A24 #55604A #8C3A2E #FFD9A0, one warm oil-lamp key light against cold twilight fill, dry-brush stroke and paper grain visible, flat orthographic front view, no perspective distortion, no lens effects.
 Details: ten objects, each rendered alone, three-quarter tilted flat with no perspective, lit identically from the upper left so the whole set reads as one family — 1 a small verdigris-green brass key with a worn Han character on its bow, 2 a stack of three thin do paper sheets weighted by a sharpened charcoal stick, 3 a single do paper sheet bearing two black charcoal-rubbed Han characters, 4 an unlit American-style kerosene hurricane lamp with soot-blackened glass and a dry fount, 5 a jackfruit-wood temple-block mallet with its handle polished smooth in exactly three places and a frayed cloth-wrapped head, 6 a blank ancestral tablet of pale new wood with a bare unlettered face and a cut tenon visible at its foot, 7 a strip of faded brick-red altar cloth, thick weave, one end already frayed into threads, 8 a glass bottle of kerosene half full, stoppered with a twist of dried banana leaf, 9 the same hurricane lamp now lit with a flame the size of a grain of rice, 10 an adult-sized votive-paper wedding dress in offering red with flaking gold trim, folded; every object slightly worn, nothing new, nothing shiny.
-Format: ten separate square icons, each object centred and occupying seventy percent of its own cell, consistent scale logic and identical light direction across the whole set, readable in silhouette at 160 by 88 pixels; centred on a flat solid #808080 grey background, no cast shadow on the background, no gradient, no vignette, no ground plane, subject fully inside frame with a ten percent margin on every side, clean hard alpha edge ready for background removal, no text, no UI, no watermark, no frames, no borders.
+Format: ten separate square icons, each object centred and occupying seventy percent of its own cell, consistent scale logic and identical light direction across the whole set, readable in silhouette at 160 by 80 pixels; centred on a flat solid #808080 grey background, no cast shadow on the background, no gradient, no vignette, no ground plane, subject fully inside frame with a ten percent margin on every side, clean hard alpha edge ready for background removal, no text, no UI, no watermark, no frames, no borders.
 ```
 
 **Negative prompt**
@@ -1276,7 +1282,7 @@ Mỗi bối cảnh = **4 lớp PNG + 1 bản dẹt duyệt**. A4 có thêm bản
 | B1 | `zoom_puz_khoa_bat_quai` | `puz_khoa_bat_quai` | `ROTATION_LOCK` | 179621 | `{560,140,800,800}` |
 | B2 | `zoom_puz_rap_chu_the_menh` | `puz_rap_chu_the_menh` | `PATTERN_TRACE` | 179622 | 2 ô dọc, 8 nét ≥ 44px |
 | B3 | `zoom_puz_tuan_tu_le_cung` | `puz_tuan_tu_le_cung` | `SEQUENCE_ORDER` | 179623 | 6 icon 150x150 + chiếu lễ `{360,830,1200,170}` |
-| B4 | `zoom_puz_ba_hoi_chin_tieng` | `puz_ba_hoi_chin_tieng` | `AUDIO_MATCH` | 179624 | mõ `{520,420,520,420}` + chuông `{1240,380,260,260}` |
+| B4 | `zoom_puz_ba_hoi_chin_tieng` | `puz_ba_hoi_chin_tieng` | `AUDIO_MATCH` | 179624 | **chuông** `{520,420,520,420}` + **mõ** `{1240,380,260,260}` |
 | B5 | `zoom_puz_thap_lai_den_dau` | `puz_thap_lai_den_dau` | `ITEM_COMBINE` | 179625 | đèn `{760,380,400,520}` + 5 phần tử ≥ 160x160 |
 | B6 | `zoom_puz_xep_anh_gia_pha` | `puz_xep_anh_gia_pha` | `SLIDING_TILE` | 179626 | `{660,120,840,840}`, ô 280x280 |
 
@@ -1334,9 +1340,9 @@ Mỗi zoom = **`_plate` + `_parts`** → **12 file**, cộng 2 biến thể ph�
 - [ ] Bà đồng Tơ **không** bị vẽ thành mụ phù thuỷ.
 
 **Khớp dữ liệu (soát chéo `03_world.md` + `data/areas/*.json`)**
-- [ ] Mỗi đồ vật tương tác được nằm **đúng vùng bounds** của hotspot tương ứng, sai số ≤ 24px.
+- [ ] Mỗi đồ vật tương tác được nằm **đúng vùng `visual_bounds`** của hotspot tương ứng, sai số ≤ 24px. **Đừng soát theo `bounds`** — `bounds` là VÙNG CHẠM và cố ý lớn hơn hình vẽ (sàn 120 x 120 px @1920). Luật hoà giải đầy đủ ở `docs/03_DATA_SPEC.md` §2.3.5.4.
 - [ ] Không có hai đồ vật tương tác vẽ dính nhau ở chỗ bounds cách nhau 20px (đặc biệt `hs_binh_phong` ↔ `hs_o_lom_binh_phong`, `hs_mo_ca` ↔ `hs_dui_mo`, `hs_hinh_nhan` ↔ `hs_chieu_coi_trai_san`).
-- [ ] Không đồ vật quan trọng nào nằm trong dải `y < 80` (notch) hoặc `y > 1000` (inventory bar).
+- [ ] Không đồ vật quan trọng nào nằm trong dải `y < 80` (notch) hoặc `y > 1000` (inventory bar) — luật này áp cho **nét vẽ** (`visual_bounds`); vùng chạm được phép chạm mép dưới khung.
 - [ ] Hotspot **hiện sau khi giải câu đố** (`hs_bai_vi_khuyet_danh`, `hs_dai_vai_dieu`, `hs_ao_cuoi_giay`) đã tách thành lớp bật/tắt, **không nung vào nền**.
 - [ ] Tên file khớp **chính xác** asset id trong JSON (§2). Chạy `tools/validate_level.py` để đối chiếu.
 

@@ -12,6 +12,10 @@
         "height": 130
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_so_cho"
     },
     {
@@ -23,6 +27,10 @@
         "height": 190
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_gac_bep"
     },
     {
@@ -34,6 +42,10 @@
         "height": 260
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_cay_gao"
     },
     {
@@ -45,9 +57,12 @@
         "height": 300
       },
       "action_type": "ZOOM_PUZZLE",
+      "item_id": null,
+      "required_item": null,
       "target_puzzle_id": "puz_thap_lai_den_dau",
+      "target_area_id": null,
       "fallback_text_key": "txt_examine_ghep_den_thieu_do",
-      "ghi_chu_vi": "Khi thiếu nguyên liệu, fallback_text_key phải gọi ĐÍCH DANH thứ còn thiếu (biện pháp bảo đảm số 1 ở 02_puzzle.md muc 7.4)."
+      "ghi_chu_vi": "Khi thiếu nguyên liệu, fallback_text_key phải gọi ĐÍCH DANH thứ còn thiếu (biện pháp bảo đảm số 1 ở docs/01_KICH_BAN_CHAPTER_01.md mục 7.4)."
     },
     {
       "id": "hs_gau_ton",
@@ -58,6 +73,10 @@
         "height": 190
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_gau_ton"
     },
     {
@@ -69,6 +88,10 @@
         "height": 160
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_thanh_gieng"
     },
     {
@@ -80,6 +103,10 @@
         "height": 300
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_vach_bo_hong"
     },
     {
@@ -91,6 +118,10 @@
         "height": 160
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_vach_bep_chu_than"
     },
     {
@@ -102,6 +133,10 @@
         "height": 520
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_cot_vach_dao"
     },
     {
@@ -113,10 +148,15 @@
         "height": 420
       },
       "action_type": "USE_ITEM",
+      "item_id": "item_den_dau_sang",
       "required_item": "item_den_dau_sang",
+      "target_puzzle_id": null,
+      "target_area_id": null,
+      "consumes_item": false,
+      "locks_item": false,
       "grants_flag": "flag_gieng_da_soi",
       "fallback_text_key": "txt_thieu_do_gieng_khoi",
-      "ghi_chu_vi": "Soi đèn xuống lòng giếng. Đèn KHÔNG bị tiêu huỷ (còn cần để lên gác xép). Hiệu ứng: bật cờ flag_gieng_da_soi, mở nhánh lore mặt dưới đáy giếng."
+      "ghi_chu_vi": "Soi đèn xuống lòng giếng. consumes_item = false, locks_item = false: đèn giữ nguyên trong túi vì còn phải cầm lên gác xép (gate area_gac_xep) và mở khoá puz_xep_anh_gia_pha. Hiệu ứng máy đọc được: bật cờ flag_gieng_da_soi, mở nhánh lore đáy giếng. Căn cứ: docs/01_KICH_BAN_CHAPTER_01.md mục 4.3."
     },
     {
       "id": "hs_kieng_ba_chan",
@@ -127,6 +167,10 @@
         "height": 130
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_kieng_ba_chan"
     },
     {
@@ -140,6 +184,8 @@
       "action_type": "COLLECT_ITEM",
       "item_id": "item_chai_dau_hoa",
       "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "one_shot": true
     },
     {
@@ -151,6 +197,9 @@
         "height": 290
       },
       "action_type": "CHANGE_AREA",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
       "target_area_id": "area_gian_tho"
     },
     {
@@ -162,6 +211,10 @@
         "height": 210
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_dong_tro_than"
     }
   ],

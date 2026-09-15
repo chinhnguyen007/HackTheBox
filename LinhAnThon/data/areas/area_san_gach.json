@@ -12,6 +12,10 @@
         "height": 130
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_guong_bat_quai"
     },
     {
@@ -23,6 +27,10 @@
         "height": 150
       },
       "action_type": "DIALOGUE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_thoai_loa_phat_thanh"
     },
     {
@@ -40,6 +48,10 @@
         "height": 420
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_cau_doi_trai"
     },
     {
@@ -51,7 +63,10 @@
         "height": 180
       },
       "action_type": "ZOOM_PUZZLE",
-      "target_puzzle_id": "puz_khoa_bat_quai"
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": "puz_khoa_bat_quai",
+      "target_area_id": null
     },
     {
       "id": "hs_cau_doi_phai",
@@ -68,6 +83,10 @@
         "height": 420
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_cau_doi_phai"
     },
     {
@@ -79,6 +98,10 @@
         "height": 210
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_cao_pho"
     },
     {
@@ -90,8 +113,10 @@
         "height": 520
       },
       "action_type": "CHANGE_AREA",
-      "target_area_id": "area_hien_nha",
+      "item_id": null,
       "required_item": "item_chia_khoa_dong",
+      "target_puzzle_id": null,
+      "target_area_id": "area_hien_nha",
       "fallback_text_key": "txt_khoa_cua_vao_hien",
       "ghi_chu_vi": "Soi gương cổng: điều kiện phản chiếu unlock_condition của area_hien_nha trong chapter_01.json (required_items: item_chia_khoa_dong)."
     },
@@ -104,6 +129,10 @@
         "height": 150
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_khan_xo"
     },
     {
@@ -115,6 +144,10 @@
         "height": 230
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_xe_dap_tui_vai"
     },
     {
@@ -126,6 +159,10 @@
         "height": 260
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_chum_nuoc"
     },
     {
@@ -143,6 +180,10 @@
         "height": 110
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_gao_dua"
     },
     {
@@ -154,6 +195,10 @@
         "height": 170
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_dong_tro_hoa_vang"
     },
     {
@@ -165,6 +210,10 @@
         "height": 120
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_khe_gach_thu_tay"
     }
   ],

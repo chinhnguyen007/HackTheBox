@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://cdn.linhanthon.game/schema/level.schema.json",
   "title": "Linh An Thon - Chapter 1 - Area (Level) Schema",
-  "description": "Hop dong du lieu cho moi file trong data/areas/<area_id>.json. Ma hoa day du QUY TAC BAT BUOC cua Master Form: tap action_type, tap puzzle type, tap trigger_type, rang buoc co dieu kien theo tung action_type / trigger_type, quy uoc tien to id, va khung toa do 1920x1080 goc tren-trai. Cac rang buoc KHONG bieu dien duoc bang JSON Schema deu do tools/validate_level.py kiem: tham chieu cheo, id duy nhat toan chuong, hotspot chong lan, visual_bounds nam tron trong bounds, chu trinh phu thuoc vat pham, hotspot USE_ITEM khong sinh hieu ung (no-op), cu doa ON_COLLECT_ITEM khong bao gio ban duoc (cu doa chet), nguon cap co tien trinh, va chung minh KHA GIAI bang mo phong diem bat dong. LUU Y VE CO TIEN TRINH: tu ban nay tro di trinh kiem CHI chap nhan nguon cap TUONG MINH (truong grants_flag) va mot luat suy dien co dinh duy nhat (giai cau do X bat co flag_<X>_solved). Che do doan nguon cap bang cach so ten da bi go bo khoi phan chung minh kha giai - no tung lam trinh kiem tu ket luan 'kha giai' cho mot man choi khong the choi duoc.",
+  "description": "Hop dong du lieu cho moi file trong data/areas/<area_id>.json. Ma hoa day du QUY TAC BAT BUOC cua Master Form: tap action_type, tap puzzle type, tap trigger_type, rang buoc co dieu kien theo tung action_type / trigger_type, quy uoc tien to id, va khung toa do 1920x1080 goc tren-trai. Cac rang buoc KHONG bieu dien duoc bang JSON Schema deu do tools/validate_level.py kiem: tham chieu cheo, id duy nhat toan chuong, hotspot chong lan, visual_bounds nam tron trong bounds, chu trinh phu thuoc vat pham, hotspot USE_ITEM khong sinh hieu ung (no-op), cu doa ON_COLLECT_ITEM khong bao gio ban duoc (cu doa chet), nguon cap co tien trinh, va chung minh KHA GIAI bang mo phong diem bat dong. LUU Y VE CO TIEN TRINH: nguon cap co DUY NHAT duoc chap nhan la GIA TRI cua truong 'grants_flag' doc thang trong JSON. Khong con luat suy dien nao het - ke ca luat 'giai cau do X bat co flag_<X>_solved' tung duoc goi la quy uoc chinh tac. Luat do la mot canh AO: trinh kiem tu tay cap co bang cong thuc 'flag_%s_solved' % puzzle_id, tuc dung TEN DINH DANH chu khong dung bat ky truong nao trong du lieu, nen xoa grants_flag cua mot cau do di ma trinh kiem van bao 'sach hoan toan'. Bu lai, 'grants_flag' cua puzzle nay la truong BAT BUOC. Che do tu kiem dot bien 'python3 tools/validate_level.py --self-test' xoa lan luot tung grants_flag trong bo nho va doi trinh kiem phai bao loi - no la co che ngan dung kieu canh ao nay quay lai. LUU Y VE TIEU HAO VAT PHAM: moi hotspot USE_ITEM phai khai bao 'consumes_item' - mo phong kha giai doc truong do thay vi tu chon mot gia dinh. LUU Y VE CO KET CHUONG: manifest data/chapter_01.json phai khai bao TUONG MINH truong 'chapter_complete_flag'. DI TOI duoc khu vuc cuoi khong dong nghia voi KET duoc chuong: truoc khi co truong nay, xoa grants_flag cua hotspot ket chuong van cho ra '[OK] KHA GIAI ... 5/5 khu vuc' vi GIAI DOAN 10 khong co gi de doi chieu. Trinh kiem KHONG duoc dung ra ten co nay tu chapter_id hay tu ten hotspot - gia tri phai doc tu chinh truong do.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -197,32 +197,49 @@
     "hotspot": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "bounds", "action_type"],
+      "required": [
+        "id",
+        "bounds",
+        "action_type",
+        "item_id",
+        "required_item",
+        "target_puzzle_id",
+        "target_area_id"
+      ],
+      "$comment": "KHOA MASTER FORM: bay truong trong 'required' phai CO MAT tren MOI hotspot, khong mot ngoai le nao. Cho nao khong ap dung thi ghi null - TUYET DOI khong duoc xoa khoa. Ban truoc da noi long dung luat nay (bo 'item_id' khoi bon hotspot USE_ITEM cho gon) va vi ca schema lan validator deu noi long cung luc nen khong lop nao bat duoc. Tu ban nay, thieu khoa la loi o CA HAI lop.",
       "properties": {
         "id": { "$ref": "#/$defs/hotspot_id" },
         "bounds": { "$ref": "#/$defs/bounds" },
         "visual_bounds": { "$ref": "#/$defs/visual_bounds" },
         "action_type": { "$ref": "#/$defs/action_type" },
-        "target_puzzle_id": {
-          "oneOf": [{ "$ref": "#/$defs/puzzle_id" }, { "type": "null" }],
-          "description": "Tro toi mot puzzle ton tai trong CUNG file area."
-        },
-        "target_area_id": {
-          "$ref": "#/$defs/area_id",
-          "description": "Tro toi mot area ton tai trong chapter manifest."
-        },
         "item_id": {
-          "$ref": "#/$defs/item_id",
-          "description": "Vat pham duoc trao (COLLECT_ITEM) hoac vat pham duoc tieu thu/dat vao (USE_ITEM)."
+          "oneOf": [{ "$ref": "#/$defs/item_id" }, { "type": "null" }],
+          "description": "KHOA MASTER FORM - luon co mat. Vat pham ma hanh dong nay gan vao: voi COLLECT_ITEM la vat pham duoc TRAO cho nguoi choi; voi USE_ITEM la vat pham duoc dat vao / khoac len (luon BANG 'required_item', va ban than no KHONG ham y tieu huy - viec tieu huy do 'consumes_item' quyet dinh). null o moi truong hop khac."
         },
         "required_item": {
           "oneOf": [{ "$ref": "#/$defs/item_id" }, { "type": "null" }],
-          "description": "Vat pham phai co san trong tui do. null = khong can dieu kien."
+          "description": "KHOA MASTER FORM - luon co mat. Vat pham phai dang co trong tui do thi moi thao tac duoc. null = khong can dieu kien vat pham."
+        },
+        "target_puzzle_id": {
+          "oneOf": [{ "$ref": "#/$defs/puzzle_id" }, { "type": "null" }],
+          "description": "KHOA MASTER FORM - luon co mat. Tro toi mot puzzle ton tai trong CUNG file area, hoac null."
+        },
+        "target_area_id": {
+          "oneOf": [{ "$ref": "#/$defs/area_id" }, { "type": "null" }],
+          "description": "KHOA MASTER FORM - luon co mat. Tro toi mot area ton tai trong chapter manifest, hoac null. Chi CHANGE_AREA duoc mang gia tri khac null."
+        },
+        "consumes_item": {
+          "type": "boolean",
+          "description": "BAT BUOC CO MAT tren MOI hotspot USE_ITEM, va CAM tren moi action_type khac. true = vat pham bi XOA HAN khoi tui do sau khi dung; false = vat pham o lai. Day la truong DUY NHAT noi len ngu nghia tieu hao; truoc khi co no, ca engine lan trinh mo phong kha giai deu phai TU CHON mot gia dinh, va hai hotspot con mo ta hanh vi nguoc nhau bang van xuoi. Mo phong kha giai o tools/validate_level.py doc thang truong nay. Can cu gia tri: docs/01_KICH_BAN_CHAPTER_01.md muc 4.3."
+        },
+        "locks_item": {
+          "type": "boolean",
+          "description": "TUY CHON, va CHI co nghia khi consumes_item = false. true = vat pham O LAI trong tui do nhung bi KHOA: xam di, khong keo-tha len hotspot khac duoc nua, van EXAMINE duoc (vd bai vi lam then cua gac). false / vang mat = dung lai tu do. Can cu: docs/01_KICH_BAN_CHAPTER_01.md muc 4.3, chot X19."
         },
         "text_key": { "$ref": "#/$defs/text_key" },
         "grants_flag": {
           "oneOf": [{ "$ref": "#/$defs/flag_id" }, { "type": "null" }],
-          "description": "TUY CHON ve cu phap nhung BAT BUOC ve logic: day la NGUON CAP TUONG MINH duy nhat cho mot co tien trinh. Co duoc bat khi hotspot thuc hien thanh cong, dung cho unlock_condition.required_flags trong manifest va required_flags cua hotspot khac. Trinh kiem KHONG suy luan nguon cap tu ten nua: mot co duoc tham chieu ma khong hotspot/puzzle nao khai bao grants_flag cho no la [LOI], vi mo phong kha giai se khong bao gio bat duoc co do."
+          "description": "NGUON CAP CO TIEN TRINH TUONG MINH - va la nguon cap DUY NHAT ma trinh kiem chap nhan. Co duoc bat khi hotspot thuc hien thanh cong, dung cho unlock_condition.required_flags trong manifest va required_flags cua hotspot khac. Trinh kiem KHONG con suy luan, KHONG con 'quy uoc' sinh ten co tu id: mot co duoc tham chieu ma khong hotspot/puzzle nao khai bao grants_flag cho no la [LOI]."
         },
         "required_flags": {
           "type": "array",
@@ -251,7 +268,7 @@
 
       "allOf": [
         {
-          "title": "ZOOM_PUZZLE bat buoc co target_puzzle_id",
+          "title": "ZOOM_PUZZLE bat buoc co target_puzzle_id KHAC null",
           "if": {
             "required": ["action_type"],
             "properties": { "action_type": { "const": "ZOOM_PUZZLE" } }
@@ -262,42 +279,79 @@
           }
         },
         {
-          "title": "COLLECT_ITEM bat buoc co item_id va truong required_item (co the null)",
+          "title": "COLLECT_ITEM bat buoc co item_id KHAC null",
           "if": {
             "required": ["action_type"],
             "properties": { "action_type": { "const": "COLLECT_ITEM" } }
           },
           "then": {
-            "required": ["item_id", "required_item"]
+            "required": ["item_id", "required_item"],
+            "properties": { "item_id": { "$ref": "#/$defs/item_id" } }
           }
         },
         {
-          "title": "USE_ITEM bat buoc co required_item KHAC null, va it nhat mot HIEU UNG: grants_flag / item_id / target_puzzle_id",
-          "$comment": "CHONG NO-OP: USE_ITEM phai sinh ra it nhat mot hieu ung DOC DUOC BANG MAY. Dang thuong gap nhat trong Chuong 1 la 'dat vat pham vao cho' ma KHONG tieu huy vat pham va KHONG trao vat pham moi (vd dat ban rap vao o lom binh phong) - dang do chi de lai dau vet bang \"grants_flag\", nen grants_flag duoc tinh la mot hieu ung hop le o day. Hotspot chi co item_id TRUNG required_item va khong gi khac la hotspot khong lam gi ca: khong mot bit trang thai nao doi, unlock_condition khong the doc duoc viec da dat vat pham, va mo phong kha giai dung lai tai do. JSON Schema khong so sanh duoc hai truong voi nhau nen tools/validate_level.py kiem truong hop item_id == required_item.",
+          "title": "USE_ITEM: required_item KHAC null, consumes_item BAT BUOC co mat, va it nhat mot HIEU UNG doc duoc bang may",
+          "$comment": "CHONG NO-OP: USE_ITEM phai sinh ra it nhat mot hieu ung DOC DUOC BANG MAY - grants_flag, item_id, target_puzzle_id hoac target_area_id khac null. Dang thuong gap nhat trong Chuong 1 la 'dat vat pham vao cho' ma khong tieu huy va khong trao gi moi (vd dat ban rap vao o lom binh phong); dang do de lai dau vet bang grants_flag. LUU Y: vi Master Form bat USE_ITEM mang item_id BANG required_item, mot 'item_id khac null' KHONG tu no chung to co hieu ung - nen tools/validate_level.py con siet chat hon schema o cho nay: no chi tinh item_id la hieu ung khi item_id KHAC required_item. JSON Schema khong so sanh duoc hai truong voi nhau.",
           "if": {
             "required": ["action_type"],
             "properties": { "action_type": { "const": "USE_ITEM" } }
           },
           "then": {
-            "required": ["required_item"],
-            "properties": { "required_item": { "$ref": "#/$defs/item_id" } },
+            "required": ["required_item", "consumes_item"],
+            "properties": {
+              "required_item": { "$ref": "#/$defs/item_id" },
+              "consumes_item": { "type": "boolean" }
+            },
             "anyOf": [
-              { "required": ["grants_flag"] },
-              { "required": ["item_id"] },
-              { "required": ["target_puzzle_id"] }
+              { "required": ["grants_flag"], "properties": { "grants_flag": { "$ref": "#/$defs/flag_id" } } },
+              { "required": ["item_id"], "properties": { "item_id": { "$ref": "#/$defs/item_id" } } },
+              { "required": ["target_puzzle_id"], "properties": { "target_puzzle_id": { "$ref": "#/$defs/puzzle_id" } } },
+              { "required": ["target_area_id"], "properties": { "target_area_id": { "$ref": "#/$defs/area_id" } } }
             ]
           }
         },
         {
-          "title": "CHANGE_AREA bat buoc co target_area_id",
+          "title": "consumes_item / locks_item CHI thuoc ve USE_ITEM",
+          "if": {
+            "required": ["action_type"],
+            "properties": {
+              "action_type": {
+                "enum": ["ZOOM_PUZZLE", "COLLECT_ITEM", "EXAMINE", "CHANGE_AREA", "DIALOGUE"]
+              }
+            }
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                { "required": ["consumes_item"] },
+                { "required": ["locks_item"] }
+              ]
+            }
+          }
+        },
+        {
+          "title": "locks_item chi co nghia khi consumes_item = false",
+          "$comment": "Vat pham da bi xoa han khoi tui do thi khong the dong thoi 'o lai nhung bi khoa'. Khai bao ca hai la mot mau thuan im lang.",
+          "if": {
+            "required": ["consumes_item"],
+            "properties": { "consumes_item": { "const": true } }
+          },
+          "then": { "not": { "required": ["locks_item"] } }
+        },
+        {
+          "title": "CHANGE_AREA bat buoc co target_area_id KHAC null",
           "if": {
             "required": ["action_type"],
             "properties": { "action_type": { "const": "CHANGE_AREA" } }
           },
-          "then": { "required": ["target_area_id"] }
+          "then": {
+            "required": ["target_area_id"],
+            "properties": { "target_area_id": { "$ref": "#/$defs/area_id" } }
+          }
         },
         {
-          "title": "EXAMINE / DIALOGUE bat buoc co text_key va khong mang tham so hanh dong khac",
+          "title": "EXAMINE / DIALOGUE bat buoc co text_key, va bon khoa hanh dong deu phai la null",
+          "$comment": "Bon khoa van PHAI CO MAT (chung la khoa Master Form) - chung chi bi ep ve gia tri null, chu khong bi xoa.",
           "if": {
             "required": ["action_type"],
             "properties": {
@@ -305,19 +359,17 @@
             }
           },
           "then": {
-            "required": ["text_key"],
-            "not": {
-              "anyOf": [
-                { "required": ["item_id"] },
-                { "required": ["required_item"] },
-                { "required": ["target_puzzle_id"] },
-                { "required": ["target_area_id"] }
-              ]
+            "required": ["text_key", "item_id", "required_item", "target_puzzle_id", "target_area_id"],
+            "properties": {
+              "item_id": { "type": "null" },
+              "required_item": { "type": "null" },
+              "target_puzzle_id": { "type": "null" },
+              "target_area_id": { "type": "null" }
             }
           }
         },
         {
-          "title": "Chi CHANGE_AREA duoc mang target_area_id",
+          "title": "Chi CHANGE_AREA duoc mang target_area_id KHAC null",
           "if": {
             "required": ["action_type"],
             "properties": {
@@ -326,7 +378,10 @@
               }
             }
           },
-          "then": { "not": { "required": ["target_area_id"] } }
+          "then": {
+            "required": ["target_area_id"],
+            "properties": { "target_area_id": { "type": "null" } }
+          }
         }
       ]
     },
@@ -334,7 +389,8 @@
     "puzzle": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "type", "solution", "reward_item_id", "wrong_action_jumpscare"],
+      "required": ["id", "type", "solution", "required_items", "reward_item_id", "grants_flag", "wrong_action_jumpscare"],
+      "$comment": "KHOA MASTER FORM cua puzzle. 'grants_flag' nam trong danh sach nay mot cach CO CHU DICH: truoc day no la truong tuy chon vi trinh kiem tu suy ra ten co theo mot 'quy uoc' flag_<puzzle_id>_solved. Quy uoc do da bi go bo - khong con luat suy dien nao ca - nen nguon cap co PHAI duoc ghi thang ra trong JSON, neu khong khong mot lop nao biet cau do bat co gi.",
       "properties": {
         "id": { "$ref": "#/$defs/puzzle_id" },
         "type": { "$ref": "#/$defs/puzzle_type" },
@@ -347,7 +403,7 @@
         },
         "reward_item_id": {
           "oneOf": [{ "$ref": "#/$defs/item_id" }, { "type": "null" }],
-          "description": "Vat pham trao khi giai dung. null = cau do chi bat co tien trinh, khong trao vat pham."
+          "description": "Vat pham trao khi giai dung. null = cau do chi bat co tien trinh, khong trao vat pham. DUONG GIAO HANG (mo phong kha giai o GIAI DOAN 10 thi hanh dung luat nay): neu trong chuong CO mot hotspot COLLECT_ITEM khai \"item_id\" bang chinh vat pham nay thi phan thuong KHONG roi thang vao tui do - no lo ra tai cho va chi vao tui QUA hotspot ay, tuc phai vuot het cong \"required_flags\" cua hotspot ay. Chi khi KHONG hotspot nao giao no thi cau do moi trao thang. Luat doc tu CAU TRUC du lieu, khong doc tu ten; no khop voi item_catalog[].hotspot_trao trong manifest. Ban truoc cong thang vat pham vao tui ngay khi giai xong - mot canh AO dung ra duong vao tui do khong ton tai trong game va lam chet cong required_flags cua hotspot giao hang."
         },
         "wrong_action_jumpscare": {
           "oneOf": [{ "$ref": "#/$defs/scare_id" }, { "type": "null" }],
@@ -361,8 +417,8 @@
           "description": "TUY CHON nhung RAT KHUYEN NGHI. Cac vat pham cong cu phai co trong tui do thi moi nhap duoc loi giai (vd puz_ba_hoi_chin_tieng can item_dui_mo). Thieu truong nay thi validator coi cau do la giai duoc ngay khi vao khu vuc, va moi vat pham cong cu se bi bao [CANH BAO] la vat pham chet. Moi item_id o day phai co trong item_catalog cua chapter manifest."
         },
         "grants_flag": {
-          "oneOf": [{ "$ref": "#/$defs/flag_id" }, { "type": "null" }],
-          "description": "Co tien trinh PHU bat khi giai dung, ngoai co chinh tac. QUY UOC CHINH TAC: giai xong cau do X luon bat co 'flag_<X>_solved' - day la luat suy dien co dinh, khong phai doan mo, engine va trinh kiem cung hien thuc no. Dung truong nay khi muon them mot ten co khac (vd flag_then_gac_da_tra)."
+          "$ref": "#/$defs/flag_id",
+          "description": "NGUON CAP CO TIEN TRINH TUONG MINH cua cau do, BAT BUOC va khong duoc null. Giai dung cau do nay bat dung cai co ghi o day. KHONG con 'quy uoc chinh tac' nao suy ra ten co tu puzzle_id: trinh kiem tung tu tay cap co bang cong thuc 'flag_%s_solved' % puzzle_id va do la mot canh AO - xoa grants_flag khoi du lieu ma trinh kiem van bao sach. Quy uoc DAT TEN van la flag_<puzzle_id>_solved, nhung gia tri phai duoc GHI THANG RA o day."
         },
         "ten_vi": { "type": "string", "maxLength": 120 },
         "ghi_chu_vi": { "$ref": "#/$defs/ghi_chu_vi" }
@@ -479,15 +535,14 @@
     "jumpscare": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "trigger_type", "audio_asset", "sprite_animation", "screen_flash"],
+      "required": ["id", "trigger_type", "max_fails", "audio_asset", "sprite_animation", "screen_flash"],
+      "$comment": "KHOA MASTER FORM cua jumpscare. 'max_fails' luon CO MAT: so nguyen >= 1 voi ON_PUZZLE_FAIL_COUNT, va null voi moi trigger_type khac. Ghi null chu khong xoa khoa.",
       "properties": {
         "id": { "$ref": "#/$defs/scare_id" },
         "trigger_type": { "$ref": "#/$defs/trigger_type" },
         "max_fails": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 20,
-          "description": "CHI dung cho ON_PUZZLE_FAIL_COUNT. So lan giai sai lien tiep truoc khi cu doa ban."
+          "oneOf": [{ "type": "integer", "minimum": 1, "maximum": 20 }, { "type": "null" }],
+          "description": "KHOA MASTER FORM - luon co mat. So lan giai sai lien tiep truoc khi cu doa ban. CHI co nghia voi ON_PUZZLE_FAIL_COUNT; voi moi trigger_type khac phai la null."
         },
         "delay_sec": {
           "type": "number",
@@ -515,7 +570,7 @@
         "cooldown_exempt": {
           "type": "boolean",
           "default": false,
-          "description": "TUY CHON. true = cu doa nay CO CHU DICH khong co cooldown_sec, va trinh kiem thoi nhac. Chi dung cho cu doa nhe (dread / ambience) duoc mien tru luat nghi toi thieu theo 04_horror.md. Luon di kem 'ghi_chu_vi' noi ro can cu mien tru."
+          "description": "TUY CHON. true = cu doa nay CO CHU DICH khong co cooldown_sec, va trinh kiem thoi nhac. Chi dung cho cu doa nhe (dread / ambience) duoc mien tru luat nghi toi thieu theo docs/01_KICH_BAN_CHAPTER_01.md muc 6.6. Luon di kem 'ghi_chu_vi' noi ro can cu mien tru."
         },
         "ten_vi": { "type": "string", "maxLength": 120 },
         "ghi_chu_vi": { "$ref": "#/$defs/ghi_chu_vi" }
@@ -534,7 +589,7 @@
           }
         },
         {
-          "title": "Cac trigger khac KHONG duoc mang max_fails",
+          "title": "Cac trigger khac phai co max_fails = null (co mat, gia tri null)",
           "if": {
             "required": ["trigger_type"],
             "properties": {
@@ -543,7 +598,10 @@
               }
             }
           },
-          "then": { "not": { "required": ["max_fails"] } }
+          "then": {
+            "required": ["max_fails"],
+            "properties": { "max_fails": { "type": "null" } }
+          }
         },
         {
           "title": "ON_TIMER bat buoc co delay_sec (so >= 0)",

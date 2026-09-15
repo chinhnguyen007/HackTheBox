@@ -176,7 +176,7 @@ Ba quy ước nữa, dùng nhất quán trong mọi bảng dưới đây:
 | Icon | `icon_item_*` × 10, một atlas | 1024 × 1024 | 1 | ASTC 6×6 | 3,556 | 0,4462 | **0,446** |
 | | **Tổng byte GPU** | | **65 file** | | | | **64,097** |
 | | **Sau LZMA ×0,92** | | | | | | **58,97** |
-| | **Cộng âm thanh** (`04_horror.md` §3.10) | | | | | | **+18,80** |
+| | **Cộng âm thanh** (ngân sách tổ âm thanh — §1.6.6) | | | | | | **+18,80** |
 | | **TỔNG NỘI DUNG REMOTE — chưa cắt** | | | | | | **77,77** |
 
 **Ba con số cũ đều sai, và sai theo hướng có thể giải thích được:**
@@ -205,11 +205,11 @@ Manifest gốc là **77,77 MB**, vượt T3 **25,77 MB**. Phải **cắt nội d
 | **C1** | **Bỏ 5 lớp `_l3_fx` full-frame.** Khói / bụi / vignette dựng bằng shader; nguồn ảnh còn lại là **1 texture nhiễu tile 512×512** + **1 quầng đèn radial alpha 512×512**, dùng chung cả chương, nằm trong `remote_shared_ui` | 5 × 0,8789 = **4,395** | 2 × 0,1129 = **0,226** | **4,17** | Lớp FX không còn vẽ tay riêng cho từng khu vực; mỗi khu vực chỉ còn tham số (màu, mật độ, tốc độ trôi). **Hệ quả build:** module Particle System **không được gỡ** nữa, hoặc FX phải làm hoàn toàn bằng shader — chốt ở §1.5 |
 | **C2** | **`_l2_fore` alpha-trim, trần khung 1920 × 600** thay vì full-frame. Tiền cảnh parallax 0,03–0,06 chỉ chiếm dải dưới và hai mép | 5 × 0,8789 = **4,395** | 5 × 0,4883 = **2,441** | **1,95** | Tổ đồ hoạ phải giữ toàn bộ tiền cảnh trong một dải cao ≤ 600 px. Thêm một mục checklist QA |
 | **C3** | **Bỏ bản `_lit` của A4 và lớp quầng đèn rời của A5.** Khoảnh khắc "đã thắp đèn" = quầng đèn dùng chung ở C1 + đổi tham số tint trên `_l1_mid` | 2 × 0,8789 = **1,758** | **0** | **1,76** | Ánh sáng thắp đèn không còn được vẽ tay theo từng vật thể trong cảnh |
-| **C4** | **Hạ atlas `_parts` câu đố theo nội dung thật**, thay vì 2048² đồng loạt: B1 **1536×1024** (3 vành đồng tâm 800/600/400), B2 **512²** (8 nét ≥ 44 px), B3 **512²** (6 icon 150×150), B4 **1024²** (mõ 520×420 + chuông 260×260), B5 **1024²** (đèn 400×520 + 5 phần tử ≥160²), B6 **1024²** (9 ô 280×280 = 840×840) | 6 × 1,7847 = **10,708** | **2,232** | **8,48** | Không mất phần tử nào. 2048² vốn là con số mặc định, không phải con số đo |
+| **C4** | **Hạ atlas `_parts` câu đố theo nội dung thật**, thay vì 2048² đồng loạt: B1 **1536×1024** (3 vành đồng tâm 800/600/400), B2 **512²** (8 nét ≥ 44 px), B3 **512²** (6 icon 150×150), B4 **1024²** (**chuông + giá gỗ** 520×420 + **mõ** 260×260 — hoán vai nhạc khí X14, `01_KICH_BAN_CHAPTER_01.md` §3.3.6), B5 **1024²** (đèn 400×520 + 5 phần tử ≥160²), B6 **1024²** (9 ô 280×280 = 840×840) | 6 × 1,7847 = **10,708** | **2,232** | **8,48** | Không mất phần tử nào. 2048² vốn là con số mặc định, không phải con số đo |
 | **C5** | **Chốt luật đóng sheet cú doạ:** khung dài nhất **768 px**, **tối đa 6 khung** cho sheet gốc (0,3–0,8 s ở 8–12 fps ⇒ 3–10 khung), **3 khung** cho `_soft` (tốc độ 60%, biên độ ≤ 1,04 ⇒ chỉ cần đầu–giữa–cuối), **1 khung** cho `_static` (`02` §2.2 đã định nghĩa đúng như vậy) | 24 × 1,0 = **24,000** | **10,136** | **13,86** | Sprite doạ phóng lên màn 1080 px với hệ số 1,1 – 1,4×. Chính §3.1 đã lập luận: cú doạ chạy 0,3–0,8 giây, mắt không kịp bắt lỗi nén — lập luận đó áp được cho cả độ phân giải |
 | **C6** | **Hoãn biến thể `_lo` 1280×720 và biến thể ETC2**, cùng lý do với §3.1: chỉ dựng khi telemetry chứng minh có người dùng thật cần. Cả hai đều chọn bằng **nhãn**, nên chúng **không bao giờ** cộng vào lượt tải của một máy — chúng chỉ cộng vào dung lượng lưu trên CDN | +8,62 lưu trữ CDN | **0** | **0 (tải) / 8,62 (CDN)** | Máy rất yếu chưa có đường lui hạ độ phân giải. Phải theo dõi `bundle_download_fail` và thời gian tải theo phân vị |
 
-> **Nhát cắt KHÔNG được phép:** bỏ, gộp, hoặc đẩy ra sau cổng bất kỳ biến thể `_soft` / `_static` nào. Chúng gắn với tuỳ chọn trợ năng (`gentle_mode`, `reduce_motion`, `scare_intensity = 0`) và `02` §6.5 cùng `04_horror.md` §4.7.5 ghi rõ: **không tài sản an toàn nào được đặt sau tường trả phí** — mà một bundle tải riêng, tải sau, hoặc tải theo điều kiện *chính là* một cổng. Vì vậy `_soft` và `_static` nằm **cùng bundle với khu vực**, tải cùng lúc, cộng thẳng vào ngân sách khu vực. Giá của nguyên tắc ấy là **5,43 MB / 10,14 MB = 54%** ngân sách sprite doạ, và nó được trả đầy đủ trong bảng §1.6.4.
+> **Nhát cắt KHÔNG được phép:** bỏ, gộp, hoặc đẩy ra sau cổng bất kỳ biến thể `_soft` / `_static` nào. Chúng gắn với tuỳ chọn trợ năng (`gentle_mode`, `reduce_motion`, `scare_intensity = 0`) và `docs/02_PROMPT_DO_HOA.md` §6.5 cùng **`docs/06_AN_TOAN_NGUOI_CHOI.md` §1.1 (N1–N3)** ghi rõ: **không tài sản an toàn nào được đặt sau tường trả phí** — mà một bundle tải riêng, tải sau, hoặc tải theo điều kiện *chính là* một cổng. Vì vậy `_soft` và `_static` nằm **cùng bundle với khu vực**, tải cùng lúc, cộng thẳng vào ngân sách khu vực. Giá của nguyên tắc ấy là **5,43 MB / 10,14 MB = 54%** ngân sách sprite doạ, và nó được trả đầy đủ trong bảng §1.6.4.
 
 ### 1.6.4. Bảng tính sau cắt — kiểm lại được từng dòng
 
@@ -326,7 +326,7 @@ Manifest gốc là **77,77 MB**, vượt T3 **25,77 MB**. Phải **cắt nội d
 
 ### 1.6.6. Âm thanh — phân bổ lại, không tính lại
 
-Tổng **18,80 MB** là số của tổ âm thanh (`04_horror.md` §3.10) và **không bị đụng tới**. Việc của tài liệu này là chia nó theo **cách nạp**, vì §3.3 đặt hai chế độ nạp hoàn toàn khác nhau cho hai loại file.
+Tổng **18,80 MB** là số của **tổ âm thanh** và **không bị đụng tới** — tài liệu này kế thừa nó, không tính lại. Trong **18,80 MB** ấy có phần bắt buộc của an toàn người chơi: **8 stinger biến thể `_soft`** (`<tên>_soft.ogg`) mà `docs/06_AN_TOAN_NGUOI_CHOI.md` §4.3 bắt phải xuất, và chúng **nằm cùng bundle khu vực với bản gốc** theo đúng nguyên tắc ở §1.6.3 / §2.1. Việc của tài liệu này là chia nó theo **cách nạp**, vì §3.3 đặt hai chế độ nạp hoàn toàn khác nhau cho hai loại file.
 
 **Phần ADPCM tính được chính xác** — ADPCM 4 bit/mẫu, 22 050 Hz, mono ⇒ `22050 × 4 / 8 = 11 025 B/s = 10,77 KB/s`:
 
@@ -387,7 +387,7 @@ Tức **97% của 18,80 MB là nội dung dạng streaming** (ambience, độc t
 | Mỗi cú doạ: sheet gốc + **`_soft`** + **`_static`** | 3 × số cú doạ | **Bắt buộc cùng bundle** — xem khung dưới |
 | Stinger + tell ADPCM + biến thể `_soft` âm thanh | 2 – 6 | Decompress On Load |
 
-> **Vì sao `_soft` và `_static` KHÔNG được tách nhãn riêng để tải sau.** Chúng là tài sản của **tuỳ chọn trợ năng** (`gentle_mode`, `reduce_motion`, `scare_intensity = 0`). `02_PROMPT_DO_HOA.md` §6.5 và `04_horror.md` §4.7.5 quy định: *không tuỳ chọn an toàn nào được đặt sau bất kỳ cổng nào*. Một nhãn tải riêng **là** một cổng — cổng mạng. Người chơi bật chế độ nhẹ giữa lúc mất sóng mà biến thể nhẹ chưa có trong cache thì hoặc họ bị ném vào bản gốc (vi phạm), hoặc cú doạ không bắn (vỡ kịch bản). Vì vậy ba file đi cùng một bundle, tải cùng một lúc, và **chi phí của chúng nằm thẳng trong ngân sách khu vực**: 5,43 MB trên tổng 10,14 MB sprite doạ, tức **54%**. Đó là giá của nguyên tắc, và nó đã được trả trong §1.6.4.
+> **Vì sao `_soft` và `_static` KHÔNG được tách nhãn riêng để tải sau.** Chúng là tài sản của **tuỳ chọn trợ năng** (`gentle_mode`, `reduce_motion`, `scare_intensity = 0`). `docs/02_PROMPT_DO_HOA.md` §6.5 và **`docs/06_AN_TOAN_NGUOI_CHOI.md` §1.1** quy định: *không tuỳ chọn an toàn nào được đặt sau bất kỳ cổng nào* — N2 *"ngay từ màn hình đầu"* và N3 *"không sau bất kỳ cổng nào"*, kể cả **cổng mạng**. Một nhãn tải riêng **là** một cổng — cổng mạng. Người chơi bật chế độ nhẹ giữa lúc mất sóng mà biến thể nhẹ chưa có trong cache thì hoặc họ bị ném vào bản gốc (vi phạm), hoặc cú doạ không bắn (vỡ kịch bản). Vì vậy ba file đi cùng một bundle, tải cùng một lúc, và **chi phí của chúng nằm thẳng trong ngân sách khu vực**: 5,43 MB trên tổng 10,14 MB sprite doạ, tức **54%**. Đó là giá của nguyên tắc, và nó đã được trả trong §1.6.4.
 
 **Năm nhóm khu vực là năm nhóm riêng biệt, không gộp.** Lý do không phải thẩm mỹ:
 
@@ -481,7 +481,7 @@ Nhóm này dùng **LZ4** thay vì LZMA vì nó nằm trên đường găng của
 1. **Force To Mono cho mọi thứ dưới 2 giây.** Cú doạ phát ở giữa không gian âm thanh; stereo chỉ nhân đôi dung lượng vô ích.
 2. **Không bao giờ dùng Streaming cho cú doạ.** Streaming đọc từ đĩa lúc phát — đúng thứ gây trễ mà §3.3 đang tránh.
    **Và Streaming không có nghĩa là "phát thẳng từ mạng".** Load Type = *Streaming* đọc từng khối từ **file bundle trên đĩa**; Addressables **không** phát audio thẳng từ URL. Trình tự luôn là *tải trọn bundle → cache → streaming từ cache*. Hệ quả ngân sách nằm ở §1.6.6.
-3. **Nạp trước `AudioClip` cú doạ khi vào khu vực, không phải khi cú doạ bắn.** Nằm trong bundle khu vực, nên bước tải trước ở §4 đã lo. `04_horror.md` quy định envelope; engine chỉ cần bảo đảm clip đã ở trong RAM trước đó.
+3. **Nạp trước `AudioClip` cú doạ khi vào khu vực, không phải khi cú doạ bắn.** Nằm trong bundle khu vực, nên bước tải trước ở §4 đã lo. Envelope và các thông số phát do `docs/06_AN_TOAN_NGUOI_CHOI.md` quy định (§4.4 bảng đối chiếu từng cú doạ, §6.3 luật nghỉ 90 giây); engine chỉ cần bảo đảm **cả clip gốc lẫn clip `_soft`** đã ở trong RAM trước đó — người chơi đổi `gentle_mode` được **bất cứ lúc nào, kể cả giữa envelope** (§3.2 của tài liệu ấy), nên không được nạp lười biến thể nào.
 
 `[[ Định dạng file trong dữ liệu ghi là ".ogg" (xem jumpscares[].audio_asset, 03_DATA_SPEC.md muc 2.5.1 tro nguoc ve DUNG muc 3.3 nay). Đó là tên asset nguồn; thiết lập import của Unity mới quyết định định dạng lúc chạy. Một file .ogg nguồn hoàn toàn có thể được import thành ADPCM — và với sfx_scare_* thì bắt buộc phải thế. ]]`
 
@@ -532,7 +532,7 @@ t=14-24s  Xong cả ba → vào area_san_gach
 | `remote_ambience_<khu vực kế tiếp>` | **Tải trước, ngầm** — sau bundle hình của cùng khu vực | Vào khu vực hiện tại | Thấp |
 | `remote_area_<còn lại>` | **Lazy** | Ngay trước khi `CHANGE_AREA` chạy | Theo yêu cầu |
 | `remote_ambience_shared` | **Tải trước, ngầm** | Sau khi khu vực kế tiếp xong | Thấp nhất |
-| `remote_ending` | **Tải trước, ngầm** | Vào `area_bep_gieng` (theo `04_horror.md` §3.10) | Thấp |
+| `remote_ending` | **Tải trước, ngầm** | Vào `area_bep_gieng` — tức **trước** `area_gac_xep` một khu vực, để cutscene kết chương `seq_ending_ch01_khoac_ao` không bao giờ phải chờ mạng (`01_KICH_BAN_CHAPTER_01.md` §8.1) | Thấp |
 | `remote_event_*` | Theo `download_policy` của sự kiện | Xem `04_LIVEOPS` §4 | Thấp nhất |
 
 **Quy tắc thứ tự trong một lượt tải trước:** hình trước, tiếng sau. Nếu chỉ tải kịp một thứ trước khi người chơi mở cửa, thì thứ phải kịp là bộ nền — thiếu nền là màn hình chờ, thiếu ambience chỉ là im lặng.
@@ -895,7 +895,9 @@ Bốn quy tắc này là hệ quả trực tiếp của nguyên tắc **A3** và
 - [ ] Mọi `background_asset_url` phân giải được **qua `InternalIdTransformFunc`** (§5.2.1), không phải bằng cách gọi thẳng chuỗi URL trong dữ liệu
 - [ ] Mỗi khu vực có **đủ bốn lớp parallax**: hai texture full-frame, một `_l2_fore` ≤ 1920×600, và lớp `_l3_fx` dựng từ texture dùng chung
 - [ ] Mọi `audio_asset` và `sprite_animation` có mặt trong đúng bundle khu vực của nó
-- [ ] **Mỗi cú doạ có đủ ba file trong CÙNG bundle khu vực**: sheet gốc + `_soft` + `_static`. Không file nào trong ba file đó nằm ở nhóm khác, nhãn khác, hay bundle tải sau
+- [ ] **Mỗi cú doạ có đủ ba file sprite trong CÙNG bundle khu vực**: sheet gốc + `_soft` + `_static`. Không file nào trong ba file đó nằm ở nhóm khác, nhãn khác, hay bundle tải sau. Quy tắc nối hậu tố và yêu cầu nội dung của từng biến thể: **`docs/06_AN_TOAN_NGUOI_CHOI.md` §4.3** — **8 cú doạ × 2 = 16 file sprite**
+- [ ] **Mỗi cú doạ có đủ hai file stinger trong CÙNG bundle khu vực**: `<tên>.ogg` + `<tên>_soft.ogg` — **8 file `_soft`**, cũng theo `docs/06` §4.3. Thiếu một file = engine rơi về bản gốc = người bật chế độ an toàn vẫn ăn nguyên cú doạ đầy đủ. **Chặn phát hành**
+- [ ] **Không tài sản an toàn nào nằm sau một cổng mạng.** Một nhãn Addressables tải riêng **là** một cổng (`docs/06` §1.1, N3). Kiểm bằng cách liệt kê nhãn của cả 24 file biến thể và xác nhận chúng trùng nhãn với bản gốc
 - [ ] Mỗi khu vực có `ambience_address` trỏ tới `remote_ambience_<area_id>` tồn tại trong catalog
 - [ ] Mọi `icon_item_*` có trong `remote_item_icons`
 - [ ] `override_bg` của mọi sự kiện nằm trong `addressables.bundles` của chính sự kiện đó

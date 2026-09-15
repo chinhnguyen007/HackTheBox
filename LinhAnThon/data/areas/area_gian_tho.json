@@ -12,6 +12,10 @@
         "height": 140
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_hoanh_phi"
     },
     {
@@ -23,6 +27,10 @@
         "height": 170
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_huong_vong"
     },
     {
@@ -40,11 +48,16 @@
         "height": 110
       },
       "action_type": "USE_ITEM",
+      "item_id": "item_bai_vi_khuyet_danh",
       "required_item": "item_bai_vi_khuyet_danh",
+      "target_puzzle_id": null,
+      "target_area_id": null,
+      "consumes_item": false,
+      "locks_item": true,
       "grants_flag": "flag_then_gac_da_tra",
       "fallback_text_key": "txt_thieu_do_khe_mong_cua_gac",
       "one_shot": true,
-      "ghi_chu_vi": "Tra bài vị vào khe mộng làm then. Bài vị ở lại vĩnh viễn (tiêu thụ khỏi túi đồ), không câu đố nào sau đó cần nó nữa. Hiệu ứng: bật cờ flag_then_gac_da_tra."
+      "ghi_chu_vi": "Tra bài vị vào khe mộng làm then. consumes_item = false, locks_item = true: bài vị KHÔNG bị xoá khỏi túi đồ - nó ở lại, xám đi, không kéo-thả được nữa (vẫn EXAMINE được), để cú twist cuối chương còn chỗ nhắc lại. Hiệu ứng máy đọc được: bật cờ flag_then_gac_da_tra. Căn cứ: docs/01_KICH_BAN_CHAPTER_01.md mục 4.3, chốt X19."
     },
     {
       "id": "hs_cau_thang_gac",
@@ -55,8 +68,10 @@
         "height": 330
       },
       "action_type": "CHANGE_AREA",
-      "target_area_id": "area_gac_xep",
+      "item_id": null,
       "required_item": "item_den_dau_sang",
+      "target_puzzle_id": null,
+      "target_area_id": "area_gac_xep",
       "required_flags": [
         "flag_then_gac_da_tra"
       ],
@@ -72,6 +87,10 @@
         "height": 240
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_kham_tho"
     },
     {
@@ -85,6 +104,8 @@
       "action_type": "COLLECT_ITEM",
       "item_id": "item_bai_vi_khuyet_danh",
       "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "required_flags": [
         "flag_puz_tuan_tu_le_cung_solved"
       ],
@@ -109,12 +130,14 @@
       "action_type": "COLLECT_ITEM",
       "item_id": "item_dai_vai_dieu",
       "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "required_flags": [
         "flag_puz_ba_hoi_chin_tieng_solved"
       ],
       "fallback_text_key": "txt_thieu_do_dai_vai_dieu",
       "one_shot": true,
-      "ghi_chu_vi": "Chỉ hiện sau khi gõ đủ ba hồi chín tiếng (puz_ba_hoi_chin_tieng). Nếu nhặt tự do thì P4 bị bỏ qua và toàn bộ nhịp Beat 8 mất tác dụng."
+      "ghi_chu_vi": "Chỉ hiện sau khi đánh đủ ba hồi chín tiếng chuông của puz_ba_hoi_chin_tieng (mỗi hồi chốt đúng một tiếng mõ). Nếu nhặt tự do thì P4 bị bỏ qua và toàn bộ nhịp Beat 8 mất tác dụng."
     },
     {
       "id": "hs_ban_tho_ho",
@@ -125,7 +148,10 @@
         "height": 420
       },
       "action_type": "ZOOM_PUZZLE",
-      "target_puzzle_id": "puz_tuan_tu_le_cung"
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": "puz_tuan_tu_le_cung",
+      "target_area_id": null
     },
     {
       "id": "hs_gia_pha",
@@ -136,6 +162,10 @@
         "height": 300
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_gia_pha"
     },
     {
@@ -147,6 +177,10 @@
         "height": 150
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_bat_huong"
     },
     {
@@ -158,6 +192,10 @@
         "height": 290
       },
       "action_type": "DIALOGUE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_thoai_vach_buong"
     },
     {
@@ -169,6 +207,10 @@
         "height": 140
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_van_khan"
     },
     {
@@ -180,7 +222,10 @@
         "height": 210
       },
       "action_type": "ZOOM_PUZZLE",
+      "item_id": null,
+      "required_item": null,
       "target_puzzle_id": "puz_ba_hoi_chin_tieng",
+      "target_area_id": null,
       "fallback_text_key": "txt_thieu_do_go_mo"
     },
     {
@@ -200,6 +245,8 @@
       "action_type": "COLLECT_ITEM",
       "item_id": "item_dui_mo",
       "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "one_shot": true
     },
     {
@@ -211,6 +258,10 @@
         "height": 190
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_chieu_coi"
     },
     {
@@ -222,6 +273,9 @@
         "height": 200
       },
       "action_type": "CHANGE_AREA",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
       "target_area_id": "area_bep_gieng",
       "required_flags": [
         "flag_puz_tuan_tu_le_cung_solved"
@@ -244,6 +298,9 @@
         "height": 95
       },
       "action_type": "CHANGE_AREA",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
       "target_area_id": "area_hien_nha"
     }
   ],
@@ -282,7 +339,7 @@
       "reward_item_id": "item_dai_vai_dieu",
       "grants_flag": "flag_puz_ba_hoi_chin_tieng_solved",
       "wrong_action_jumpscare": "scare_khoi_tu_hinh_nguoi",
-      "ghi_chu_vi": "Phần thưởng item_dai_vai_dieu lộ ra tại chỗ khi giải đúng; vào túi đồ qua hotspot hs_dai_vai_dieu (khoá bằng flag_puz_ba_hoi_chin_tieng_solved)."
+      "ghi_chu_vi": "CHỐT X14 - hoán vai nhạc khí: cả sáu số trong solution đều là tiếng CHUÔNG (ba cặp dồn/rời: 3+3, 5+3, 7+3), tức CHUÔNG giữ phần 'ba hồi chín tiếng'; MÕ chỉ điểm đúng MỘT tiếng chốt ở cuối mỗi hồi và KHÔNG được mã hoá trong mảng solution. item_dui_mo là dùi hai đầu: đầu quấn vải đánh chuông, đầu để trần gõ mõ. Phần thưởng item_dai_vai_dieu lộ ra tại chỗ khi giải đúng; vào túi đồ qua hotspot hs_dai_vai_dieu (khoá bằng flag_puz_ba_hoi_chin_tieng_solved)."
     }
   ],
   "jumpscares": [
@@ -290,6 +347,7 @@
       "id": "scare_di_anh_quay_mat",
       "trigger_type": "ON_COLLECT_ITEM",
       "trigger_item_id": "item_dui_mo",
+      "max_fails": null,
       "delay_sec": 0.25,
       "cooldown_sec": 90,
       "audio_asset": "sfx_scare_chan_nhang_boc.ogg",

@@ -3,7 +3,7 @@
 
 Tài liệu: `docs/06_AN_TOAN_NGUOI_CHOI.md` — **Deliverable bắt buộc, không phải phụ lục.**
 Chủ sở hữu: Horror/Audio Designer (nội dung) · QA Lead (nghiệm thu) · LiveOps (ràng buộc thương mại).
-Nguồn sự thật: **SPINE đã chốt** + `data/areas/*.json` (5 trường `jumpscares[]` của Master Form) + `data/liveops_chapter_01.json` (khoá cấu hình).
+Nguồn sự thật: **SPINE đã chốt** + `data/areas/*.json` (**6 trường `jumpscares[]` của Master Form**) + `data/liveops_chapter_01.json` (khoá cấu hình).
 Nền tảng: Android / iOS. Chơi bằng **loa điện thoại ở nơi công cộng** là trường hợp phổ biến, không phải ngoại lệ.
 Độ phân giải thiết kế: **1920 x 1080**, gốc toạ độ **(0,0) ở góc TRÊN-BÊN TRÁI**.
 Ngôn ngữ: giải thích **tiếng Việt có dấu**; mọi `id` / khoá JSON **snake_case không dấu**.
@@ -22,7 +22,7 @@ Ngôn ngữ: giải thích **tiếng Việt có dấu**; mọi `id` / khoá JSON
 | **§3** | Màn hình cảnh báo trước khi vào game + chỗ đổi lại trong Cài đặt | UI/UX, Localization |
 | **§4** | **`gentle_mode`** — định nghĩa chính xác + bảng đối chiếu từng jump-scare | Code, Audio, Art |
 | **§5** | `photosensitive_safe` — hồ sơ độc lập | VFX, Code |
-| **§6** | Haptic, rung lắc màn hình, giảm âm stinger | Code, Audio |
+| **§6** | Haptic, rung lắc màn hình, giảm âm stinger, **luật nghỉ 90 giây giữa hai cú doạ và điều kiện miễn trừ duy nhất (§6.3)** | Code, Audio, **LiveOps** |
 | **§7** | Các tuỳ chọn còn lại + phụ đề âm thanh + người chơi khiếm thính | Code, Audio, Narrative |
 | **§8** | Kiến trúc override (lớp trang trí, **không sửa dữ liệu gốc**) | Code |
 | **§9** | Đối chiếu tuân thủ cửa hàng ứng dụng cho game kinh dị | Product, Legal, LiveOps |
@@ -48,11 +48,11 @@ Ngôn ngữ: giải thích **tiếng Việt có dấu**; mọi `id` / khoá JSON
 | Không bao giờ bị override | Vì sao |
 |---|---|
 | `puzzles[].solution` của cả 6 câu đố | Lời giải là hợp đồng cứng đã đối chiếu 3 nguồn. An toàn **không** được làm câu đố dễ đi hay khác đi. |
-| `puzzles[].type` · `puzzles[].reward_item_id` · `puzzles[].target_puzzle_id` | Đổi = đổi luồng tiến trình = người bật chế độ an toàn chơi một game khác. |
+| `puzzles[].type` · `puzzles[].reward_item_id` · `puzzles[].required_items` · `puzzles[].grants_flag` | Đổi = đổi luồng tiến trình = người bật chế độ an toàn chơi một game khác. |
 | `jumpscares[].max_fails` | Giữ nguyên tuyệt đối, để chứng minh khả giải của tổ câu đố vẫn đúng từng chữ. |
 | `jumpscares[].trigger_type` · `jumpscares[].id` | Cú doạ vẫn bắn, đúng chỗ, đúng lý do. |
 | `puzzles[].wrong_action_jumpscare` | Vẫn trỏ tới cú doạ ấy; **chỉ cường độ đổi**. |
-| `hotspots[].*` (bounds, action_type, item_id, required_item) | Không tuỳ chọn an toàn nào được đụng vào vùng chạm hay hành vi tương tác. |
+| `hotspots[].*` — cả bảy khoá Master Form: `id`, `bounds`, `action_type`, `item_id`, `required_item`, `target_puzzle_id`, `target_area_id`, cộng `consumes_item` trên các hotspot `USE_ITEM` | Không tuỳ chọn an toàn nào được đụng vào vùng chạm hay hành vi tương tác. Đặc biệt: **`bounds` không bao giờ bị thu nhỏ** — sàn chạm **120 × 120 px @1920** (`docs/03_DATA_SPEC.md` §2.2, mức G3) là sàn **trợ năng**, không phải sàn thẩm mỹ, nên không chế độ nào được hạ nó. Và **`consumes_item` không bao giờ bị lật** — lật nó là đổi luồng vật phẩm, tức người bật chế độ an toàn chơi một game khác. |
 | `chapter_id` · `area_id` · `background_asset_url` | — |
 | 6 khoá Master Form của LiveOps: `hint_cost_gems`, `ads_reward_hints`, `iap_product_id`, `price_usd`, `event_start`, `override_bg` | An toàn **không nằm trong mạch tiền tệ**. Không một tuỳ chọn nào trong tài liệu này đọc, ghi hay phụ thuộc vào 6 khoá này. |
 
@@ -192,6 +192,7 @@ Không tuỳ chọn nào làm bạn mất nội dung hay phần thưởng.
 | **Mô tả từng tuỳ chọn** | Mỗi tuỳ chọn có một dòng giải thích bằng tiếng Việt thường ngày. Không dùng từ kỹ thuật (`alpha`, `envelope`, `LFO`) trong UI. |
 | **Nhãn trấn an** | Ngay dưới tiêu đề mục: *"Mọi tuỳ chọn ở đây đều miễn phí và không làm bạn mất nội dung hay phần thưởng nào."* |
 | **Không cổng** | Không khoá theo tiến trình, không khoá theo tài khoản, không "mở khoá sau chương 1". |
+| **Kích thước chạm** | Mọi nút, công tắc và tay trượt trong mục này **≥ 120 × 120 px @1920** — cùng sàn chạm với hotspot trong game (`docs/03_DATA_SPEC.md` §2.2 mức G3, `01_KICH_BAN_CHAPTER_01.md` §6 mục X18). Người đang run tay sau một cú doạ là **đúng** người đang cần bấm trúng ngay lần đầu. Ngưỡng 88 px của bản cũ đã bị bãi bỏ. |
 
 ---
 
@@ -217,7 +218,7 @@ Không tuỳ chọn nào làm bạn mất nội dung hay phần thưởng.
 
 ### 4.2. Trường Master Form nào bị override lúc chạy
 
-> **Không một tuỳ chọn nào ghi đè lên file trên đĩa.** `data/areas/*.json` luôn giữ **đủ và đúng** 5 trường Master Form của `jumpscares[]` (`id`, `trigger_type`, `max_fails`, `audio_asset`, `sprite_animation`, `screen_flash`) với giá trị thiết kế gốc, để `tools/validate_level.py` luôn kiểm được đúng thứ designer định. Xem §8.
+> **Không một tuỳ chọn nào ghi đè lên file trên đĩa.** `data/areas/*.json` luôn giữ **đủ và đúng** **6 trường** Master Form của `jumpscares[]` (`id`, `trigger_type`, `max_fails`, `audio_asset`, `sprite_animation`, `screen_flash`) với giá trị thiết kế gốc, để `tools/validate_level.py` luôn kiểm được đúng thứ designer định. Xem §8.
 
 | Trường schema | Bị override bởi | Gốc → sau override |
 |---|---|---|
@@ -337,6 +338,69 @@ Dành cho người chơi muốn **cú doạ đầy đủ** nhưng không chịu 
 - Máy **không có haptic engine** → **bỏ qua im lặng**. Cấm thay bằng rung thô của motor ERM: một xung ERM kéo dài 400 ms sẽ phá hoàn toàn timing của envelope.
 - Không bao giờ đặt haptic > 0,5 ở mốc **0 ms** cho một **dread scare** (S4, S8) — làm vậy biến nó thành impulse scare.
 
+### 6.3. LUẬT NGHỈ 90 GIÂY GIỮA HAI CÚ DOẠ — và điều kiện miễn trừ duy nhất
+
+> **Tài liệu này là chủ sở hữu của luật 90 giây.** Mọi tài liệu khác trích dẫn về đây: `docs/03_DATA_SPEC.md` §2.7.9 (`cooldown_sec`, `cooldown_exempt`), `docs/04_LIVEOPS_MONETIZATION.md` §7.1 (`ad_cooldown_after_scare_sec`) và §9.1 mục 16.
+
+**Luật:** giữa hai cú doạ bất kỳ phải có **tối thiểu 90 giây**. Trong dữ liệu, luật này được khai bằng `jumpscares[].cooldown_sec: 90`. Lý do là sinh lý chứ không phải nhịp kể: nhịp tim và mức cortisol cần khoảng một phút rưỡi để về nền; doạ dồn dập không làm người chơi sợ hơn, nó làm người chơi **tê**, và cú doạ thứ ba trở đi mất sạch hiệu lực.
+
+**Cùng con số, ba nơi, phải bằng nhau:**
+
+| Nơi | Khoá | Giá trị |
+|---|---|---|
+| `data/areas/*.json` | `jumpscares[].cooldown_sec` | **90** |
+| `data/liveops_chapter_01.json` | `ad_cooldown_after_scare_sec` | **90** — chỉ được **tăng**, không bao giờ hạ (§10.2) |
+| Cửa sổ cấm quảng cáo | `WITHIN_90S_AFTER_ANY_JUMPSCARE` | **90** |
+
+Trong `gentle_mode`, con số này **tăng lên 180 giây** (§4.1 mục 9, §8.2). Tăng thì được, hạ thì không — đây là chiều duy nhất mà tuỳ chọn an toàn được phép đi.
+
+#### 6.3.1. Điều kiện miễn trừ — cả bốn phải đúng cùng lúc
+
+Một cú doạ được phép **không khai** `cooldown_sec` khi và chỉ khi nó thoả **cả bốn** điều kiện sau. Thiếu một điều là mất quyền miễn trừ:
+
+Đây là **nguyên văn luật miễn trừ đã ghi ở `01_KICH_BAN_CHAPTER_01.md` §6.6**, viết lại dưới dạng bảng để QA soát được từng dòng:
+
+```
+mien_tru  ==  (impulse == false)
+          AND (screen_flash == false)
+          AND (camera_punch_pct == 0)
+          AND (haptic_pattern_at_0ms == null)
+```
+
+| # | Điều kiện | Kiểm bằng |
+|---|---|---|
+| 1 | `impulse == false` — **không transient**: attack của stinger ép ≥ 25 ms, không có xung sắc ở mốc 0 ms | Đo envelope file `.ogg`, §2.5 |
+| 2 | `screen_flash == false` | Đọc thẳng từ `data/areas/*.json` |
+| 3 | `camera_punch_pct == 0` (và `camera_shake_px == 0`) | Bảng §4.4.1 |
+| 4 | `haptic_pattern_at_0ms == null` — tức không có haptic > 0,5 ở mốc 0 ms (§6.2) | Bảng pattern haptic §6.2 |
+
+Cú doạ thoả cả bốn là **dread scare** (hoặc ambience scare): nó không tạo phản xạ giật mình, nên nó không tiêu hao quỹ sinh lý mà luật 90 giây bảo vệ.
+
+#### 6.3.2. Khai miễn trừ thế nào — bằng dữ liệu, không bằng văn xuôi
+
+Đặt `"cooldown_exempt": true` **và** kèm `ghi_chu_vi` nêu rõ căn cứ. Trường boolean là thứ trình kiểm đọc được; `ghi_chu_vi` là thứ người sau đọc được. Cần cả hai.
+
+**Hai cú doạ THOẢ điều kiện, nhưng chỉ MỘT thực sự dùng quyền miễn trừ:**
+
+| Cú doạ | `trigger_type` | Thoả 4 điều kiện? | Có dùng miễn trừ không? |
+|---|---|---|---|
+| `scare_ao_cuoi_quay_dau` (S8, cú đóng chương) | `ON_TIMER`, `delay_sec: 0.4` | **Có** — dread scare thuần: `screen_flash: false`, không punch, không shake, `hap_long_rumble` ramp **lên** chứ không đánh ở mốc 0 ms | **CÓ.** `cooldown_exempt: true`, không khai `cooldown_sec`. Nó cũng là **cú cuối cùng của chương** — không có cú nào sau nó để mà giữ khoảng nghỉ |
+| `scare_khoi_tu_hinh_nguoi` (S4) | `ON_PUZZLE_FAIL_COUNT`, `max_fails: 3` | **Có** — `screen_flash: false`, dread scare | **KHÔNG — tự nguyện tuân thủ.** Vẫn khai `cooldown_sec: 90`. Lý do ở `01_KICH_BAN_CHAPTER_01.md` §6.6: nó nằm trong `area_gian_tho`, khu vực **còn một cú doạ khác** (`scare_di_anh_quay_mat`, S3, là impulse thật). Miễn trừ cho S4 sẽ làm cặp S4 → S3 dồn sát nhau |
+
+Bảy cú doạ còn lại đều khai `cooldown_sec: 90`. Một cú doạ thiếu `cooldown_sec` mà **không** khai `cooldown_exempt: true` là **[CẢNH BÁO]** của bất biến B15 (`docs/03_DATA_SPEC.md` §5.1); khai `cooldown_exempt: true` mà **không** thoả bốn điều kiện ở §6.3.1 là **[LỖI] nghiệm thu** của §11.
+
+> **Luật miễn trừ KHÔNG phải luật bắt buộc dùng.** Thoả điều kiện chỉ cho *quyền*; quyết định dùng hay không thuộc về nhịp kinh dị, mà chủ sở hữu là `01_KICH_BAN_CHAPTER_01.md` §6.4–§6.7. Tài liệu này chỉ đặt **trần an toàn**, không đặt sàn nhịp.
+
+#### 6.3.3. Ba cơ chế khác của nhịp nghỉ mà tài liệu này KHÔNG sở hữu
+
+Luật 90 giây không đứng một mình. Ba cơ chế dưới đây do `01_KICH_BAN_CHAPTER_01.md` sở hữu; ghi ra đây để QA không đi tìm nhầm chỗ, và để không ai "tối ưu" mất chúng khi chỉnh tuỳ chọn an toàn:
+
+| Cơ chế | Chủ sở hữu | Vì sao nó cũng là chuyện an toàn |
+|---|---|---|
+| **Năm khoá hoãn L1–L5** (khoá đọc, khoá cửa, khoá hành trang, **khoá gợi ý**, khoá hồi phục) | `01` §6.5 | **L4 — khoá gợi ý** là ràng buộc an toàn trực tiếp: người đang bế tắc là người đang bực, doạ lúc bực sinh ra giận chứ không sinh ra sợ. Nó khớp với ràng buộc của `docs/04_LIVEOPS_MONETIZATION.md` §2.6 (bảng gợi ý bị chặn trong `JUMPSCARE_ENVELOPE`) — **hai chiều, cả hai đều phải giữ** |
+| **HOÃN chứ không HUỶ** (`ARMED`) + bốn cặp rủi ro S1→S2, S4→S3, S6→S7, S7→S8 | `01` §6.6 | Cú doạ bị hoãn **chuyển sang biến thể dread**, không biến mất. Đây cùng một triết lý với §1.3 ở đây: *hạ tải sinh lý, giữ nguyên sự kiện* |
+| **Trần cứng `SCARE_MAX_PER_CHAPTER = 10`** | `01` §6.6 | Chạm trần → mọi cú còn lại chuyển vĩnh viễn sang biến thể dread câm. Đây là một **`gentle_mode` tự động** dành cho người chơi kém nhất, và nó chạy **kể cả khi người chơi chưa bật gì cả** |
+
 ---
 
 ## 7. CÁC TUỲ CHỌN CÒN LẠI
@@ -348,7 +412,7 @@ Dành cho người chơi muốn **cú doạ đầy đủ** nhưng không chịu 
 | Thanh trượt cường độ doạ | `scare_intensity` | `1.0` | `1.0` đầy đủ · `0.5` = `gentle_mode` · `0.0` = không envelope (§4.5) |
 | Báo trước cú doạ | `scare_pre_warning` | `false` *(mặc định BẬT trong `gentle_mode`)* | Vignette mờ dần ở viền màn hình **1.500 ms** trước cú doạ |
 | Âm lượng riêng theo bus | `vol_amb` · `vol_drn` · `vol_fol` · `vol_mus` · `vol_vox` · `vol_ui` · `vol_scare` | `1.0` | `vol_scare` kéo được về `0` **độc lập** với các bus khác |
-| Phụ đề cho âm thanh | `subtitle_sfx` | `false` | Hiện mô tả chữ cho **âm thanh có nghĩa**: *"[tiếng mõ vọng sau vách — ba tiếng]"*, *"[tiếng nước dội dưới giếng]"*. **Bắt buộc phải có** — xem §7.2 |
+| Phụ đề cho âm thanh | `subtitle_sfx` | `false` | Hiện mô tả chữ cho **âm thanh có nghĩa**: *"[tiếng chuông vọng sau vách — ba tiếng]"*, *"[một tiếng mõ chốt hồi]"*, *"[tiếng nước dội dưới giếng]"*. **Bắt buộc phải có** — xem §7.2 |
 | Giới hạn độ ồn đỉnh | `peak_limit_db` | `0` | `−6` / `−12` |
 
 ### 7.2. Ràng buộc bắt buộc: `puz_ba_hoi_chin_tieng` và người chơi khiếm thính
@@ -357,8 +421,10 @@ Dành cho người chơi muốn **cú doạ đầy đủ** nhưng không chịu 
 
 **Giải pháp — bắt buộc triển khai, KHÔNG phải tuỳ chọn:**
 
-1. Khi mõ bên kia vách gõ, một **thanh nhịp trực quan** ở cạnh dưới màn hình hiện từng xung — **chấm tròn** cho tiếng mõ, **vành tròn** cho tiếng chuông — đồng bộ từng mili-giây.
-2. Mỗi tiếng mõ kèm **một nhịp haptic**: nếu `haptic_enabled = true`, người chơi giải được câu đố **hoàn toàn bằng xúc giác**.
+> **Nhạc khí — đọc trước, đây là chỗ hay bị chép sai (hoán vai X14, `01_KICH_BAN_CHAPTER_01.md` §3.3.6).** **CHUÔNG ĐỒNG** mang trọn phần *"ba hồi chín tiếng"* — cả sáu cụm mã hoá trong `solution` `[3, 3, 5, 3, 7, 3]` đều là **số tiếng chuông**. **MÕ** giữ đúng một vai: **điểm một tiếng chốt khép mỗi hồi**, ba lần trong cả bài, và con số ấy **không** nằm trong mảng. Chuông là thứ **gọi**, mõ là thứ **chốt**.
+
+1. Khi bên kia vách gõ, một **thanh nhịp trực quan** ở cạnh dưới màn hình hiện từng xung — **chấm tròn** cho tiếng **chuông**, **chấm vuông** cho tiếng **mõ**, cộng **một vạch ngắt dọc** mỗi lần một cụm tự chốt — đồng bộ từng mili-giây. Người chơi nhìn thấy **đúng thứ engine đang kiểm**: số tiếng mỗi cụm, và thứ tự chuông/mõ.
+2. **Hai mẫu haptic phân biệt được bằng tay**, để người chơi vừa khiếm thính vừa tắt màn hình vẫn đếm được: **chuông** = xung **12 ms, biên độ 0,35** (sắc, ngắn); **mõ** = xung **30 ms, biên độ 0,70** (nặng, đục). Nếu `haptic_enabled = true`, người chơi giải được câu đố **hoàn toàn bằng xúc giác**. Khi `haptic_enabled = false`, kênh thị giác ở điểm 1 phải đủ một mình — nó **không** được phép là kênh phụ.
 3. Nút **"Nghe lại"**: **không giới hạn số lần, không tính là lần sai** — tức không đẩy `fail_count` lên và không kích hoạt `scare_khoi_tu_hinh_nguoi`.
 4. **Đường giải bằng chữ số luôn tồn tại**: gợi ý Tier 2 hiện thẳng dãy số của lời giải.
 
@@ -578,7 +644,7 @@ Cột "Khoá cấu hình" là **đường dẫn JSON nguyên văn** trong `data/
 
 **Bất biến dữ liệu (§1.2, §4.2, §8)**
 - [ ] `tools/validate_level.py` chạy sạch: `data/areas/*.json` còn **đủ** các trường Master Form, không thiếu trường nào.
-- [ ] Không hồ sơ an toàn nào đổi `solution`, `max_fails`, `type`, `reward_item_id`, `wrong_action_jumpscare`, `trigger_type`, `id`, hay bất kỳ `hotspots[].*`.
+- [ ] Không hồ sơ an toàn nào đổi `solution`, `max_fails`, `type`, `reward_item_id`, `wrong_action_jumpscare`, `required_items`, `grants_flag`, `trigger_type`, `id`, hay bất kỳ `hotspots[].*` — kể cả `consumes_item` và `locks_item`.
 - [ ] Đối chiếu 6 lời giải sau khi bật từng hồ sơ an toàn — phải **khớp 100 %** với bản mặc định.
 - [ ] Không có ghi đè nào chạm vào file trên đĩa; toàn bộ override nằm ở `ScareConfigResolver`.
 
@@ -589,9 +655,15 @@ Cột "Khoá cấu hình" là **đường dẫn JSON nguyên văn** trong `data/
 - [ ] Đổi tuỳ chọn **giữa một cú doạ** có hiệu lực ngay khung hình kế tiếp.
 - [ ] Không kill switch nào tắt được trợ năng.
 
+**Luật nghỉ 90 giây (§6.3)**
+- [ ] Bảy cú doạ khai `cooldown_sec: 90` trong `data/areas/*.json`; **đúng một** cú (`scare_ao_cuoi_quay_dau`) khai `cooldown_exempt: true` kèm `ghi_chu_vi` nêu căn cứ.
+- [ ] Cú doạ được miễn trừ thoả **cả bốn** điều kiện §6.3.1 — đo lại envelope, `screen_flash`, punch/shake, haptic ở mốc 0 ms.
+- [ ] Ba con số 90 bằng nhau: `jumpscares[].cooldown_sec`, `ad_cooldown_after_scare_sec`, cửa sổ `WITHIN_90S_AFTER_ANY_JUMPSCARE`.
+- [ ] Bật `gentle_mode` → cả ba thành **180**, không nơi nào còn 90.
+
 **Thính giác & khiếm thính (§7.2)**
-- [ ] Giải trọn `puz_ba_hoi_chin_tieng` với **âm lượng tổng = 0** — bằng thanh nhịp trực quan.
-- [ ] Giải trọn `puz_ba_hoi_chin_tieng` **tắt màn hình chỉ dùng haptic** (kiểm bằng log xung).
+- [ ] Giải trọn `puz_ba_hoi_chin_tieng` với **âm lượng tổng = 0** — bằng thanh nhịp trực quan: **chấm tròn = chuông, chấm vuông = mõ**.
+- [ ] Giải trọn `puz_ba_hoi_chin_tieng` **tắt màn hình chỉ dùng haptic** (kiểm bằng log xung): chuông 12 ms / 0,35 và mõ 30 ms / 0,70 phân biệt được bằng tay.
 - [ ] "Nghe lại" không tăng `fail_count` và không kích hoạt `scare_khoi_tu_hinh_nguoi`.
 
 **Cảnh báo & cửa hàng (§3, §9)**
@@ -606,9 +678,12 @@ Cột "Khoá cấu hình" là **đường dẫn JSON nguyên văn** trong `data/
 
 | Tài liệu / tổ đích | Thứ tài liệu này cung cấp |
 |---|---|
+| `docs/01_KICH_BAN_CHAPTER_01.md` | Chủ sở hữu của nhịp kinh dị và đường cong sợ hãi (§6 của tài liệu ấy) trích về đây cho **mọi** ràng buộc an toàn; và §3.3.6 của tài liệu ấy là nguồn cho hoán vai nhạc khí X14 mà §7.2 dưới đây phải theo |
 | `docs/02_PROMPT_DO_HOA.md` | Yêu cầu **16 file biến thể** `_soft` / `_static` (§4.3), trần độ sáng & bảng màu flash hợp lệ (§2.4), ràng buộc "không tài sản an toàn nào sau tường trả phí" (§1) |
+| `docs/03_DATA_SPEC.md` | Ranh giới dữ liệu ↔ runtime: **những trường nào của `jumpscares[]` bị `gentle_mode` ghi đè lúc chạy** (ghi ở §2.5.1 của tài liệu ấy), điều kiện miễn trừ `cooldown_exempt` (§2.7.9 ↔ §6.3.1 ở đây), và sàn chạm 120 × 120 px là **sàn trợ năng** không được hạ (§2.2 mức G3 ↔ §1.2 ở đây) |
+| `docs/05_TICH_HOP_UNITY_ADDRESSABLES.md` | Luật đóng gói: **24 file biến thể an toàn** (16 sprite + 8 stinger `_soft`) phải nằm **cùng bundle, cùng nhãn** với bản gốc — một nhãn tải riêng là một **cổng mạng**, vi phạm N3 (§8.2 của tài liệu ấy) |
 | `docs/04_LIVEOPS_MONETIZATION.md` | **Ràng buộc cứng**: 5 cờ `*_free`, `accessibility_never_gated`, chặn quảng cáo quanh cú doạ, cấm kill switch cho trợ năng (§10) |
-| `data/areas/*.json` | Danh sách 8 jump-scare với 5 trường Master Form giữ nguyên trên đĩa (§4.4.1) — **không** tuỳ chọn nào sửa file |
+| `data/areas/*.json` | Danh sách 8 jump-scare với **6 trường** Master Form giữ nguyên trên đĩa (§4.4.1) — **không** tuỳ chọn nào sửa file |
 | `data/liveops_chapter_01.json` | Bảng truy vết đầy đủ ở §10 — mọi khoá đã tồn tại, không thêm khoá mới, không đổi tên khoá nào |
 | `tools/validate_level.py` | Luật kiểm: đủ trường Master Form, `max_fails` / `solution` không bị override, đủ file biến thể `_soft` / `_static` |
 | Tổ QA | Quy trình đo nhạy sáng §2.5 + ngưỡng chặn build + checklist §11 |

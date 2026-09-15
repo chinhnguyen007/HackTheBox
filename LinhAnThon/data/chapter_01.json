@@ -327,6 +327,7 @@
       "area_id": "area_hien_nha",
       "trigger_type": "ON_COLLECT_ITEM",
       "trigger_item_id": "item_ban_rap_chu_the",
+      "max_fails": null,
       "delay_sec": 0.35,
       "cooldown_sec": 90
     },
@@ -335,6 +336,7 @@
       "area_id": "area_gian_tho",
       "trigger_type": "ON_COLLECT_ITEM",
       "trigger_item_id": "item_dui_mo",
+      "max_fails": null,
       "delay_sec": 0.25,
       "cooldown_sec": 90
     },
@@ -356,6 +358,7 @@
       "scare_id": "scare_hinh_nhan_chan_loi",
       "area_id": "area_gac_xep",
       "trigger_type": "ON_ENTER_AREA",
+      "max_fails": null,
       "delay_sec": 0.9,
       "cooldown_sec": 90
     },
@@ -370,17 +373,20 @@
       "scare_id": "scare_ao_cuoi_quay_dau",
       "area_id": "area_gac_xep",
       "trigger_type": "ON_TIMER",
+      "max_fails": null,
       "delay_sec": 0.4,
       "cooldown_exempt": true
     }
   ],
+  "chapter_complete_flag": "flag_chapter_01_hoan_thanh",
+  "ghi_chu_chapter_complete_flag_vi": "Cờ KẾT CHƯƠNG, khai báo TƯỜNG MINH ở đây để trình kiểm chứng minh được rằng mô phỏng khả giải thật sự CHẠM tới hành động kết chương, chứ không chỉ tới được khu vực cuối. Trước bản này, xoá grants_flag của hs_hinh_nhan vẫn cho ra \"KHA GIAI 5/5 khu vuc\" vì giai đoạn 10 không có gì để đối chiếu. Trình kiểm KHÔNG được suy ra tên cờ này từ chapter_id hay từ tên hotspot - giá trị phải đọc từ chính trường này.",
   "exported_flags": [
     "flag_puz_khoa_bat_quai_solved",
     "flag_puz_thap_lai_den_dau_solved",
     "flag_gieng_da_soi",
     "flag_chapter_01_hoan_thanh"
   ],
-  "ghi_chu_exported_flags_vi": "Bon co nay duoc bat trong Chuong 1 nhung KHONG mot unlock_condition / required_flags nao cua Chuong 1 doc toi - chung la co BAN GIAO, ghi vao lop luu game va doc o chuong sau. Khai bao tuong minh o day de trinh kiem phan biet duoc co ban giao voi co chet. Can cu: (1) flag_chapter_01_hoan_thanh - moc ket Chuong 1, lop luu game va man chon chuong doc; (2) flag_gieng_da_soi - nhanh lore tuy chon (soi den xuong long gieng, thay chiec guoc tre con), Chuong 2 dung de doi mot nhanh thoai, dung co che voi flag_da_doc_bay_dieu trong 01_narrative.md muc 6; (3) + (4) flag_puz_khoa_bat_quai_solved va flag_puz_thap_lai_den_dau_solved - hai phan le \"khoa huong\" va \"soi duong\" trong nam phan le cua chuong; bon phan le con lai da co noi doc ngay trong Chuong 1, rieng hai phan nay khong chan gi ca (phan thuong vat pham moi la thu chan duong), nen chung chi ton tai de Chuong 2 doc lai so le da lam. Khong co nao trong danh sach nay duoc phep dung lam dieu kien mo khoa trong Chuong 1.",
+  "ghi_chu_exported_flags_vi": "Bon co nay duoc bat trong Chuong 1 nhung KHONG mot unlock_condition / required_flags nao cua Chuong 1 doc toi - chung la co BAN GIAO, ghi vao lop luu game va doc o chuong sau. Khai bao tuong minh o day de trinh kiem phan biet duoc co ban giao voi co chet. Can cu: (1) flag_chapter_01_hoan_thanh - moc ket Chuong 1, lop luu game va man chon chuong doc; (2) flag_gieng_da_soi - nhanh lore tuy chon (soi den xuong long gieng, thay chiec guoc tre con), Chuong 2 dung de doi mot nhanh thoai, dung co che voi flag_da_doc_bay_dieu_cam_ky trong docs/01_KICH_BAN_CHAPTER_01.md muc 2.3.6; (3) + (4) flag_puz_khoa_bat_quai_solved va flag_puz_thap_lai_den_dau_solved - hai phan le \"khoa huong\" va \"soi duong\" trong nam phan le cua chuong; bon phan le con lai da co noi doc ngay trong Chuong 1, rieng hai phan nay khong chan gi ca (phan thuong vat pham moi la thu chan duong), nen chung chi ton tai de Chuong 2 doc lai so le da lam. Khong co nao trong danh sach nay duoc phep dung lam dieu kien mo khoa trong Chuong 1.",
   "flag_registry": [
     {
       "flag_id": "flag_puz_khoa_bat_quai_solved",
@@ -430,7 +436,7 @@
       "nguon_kieu": "PUZZLE",
       "nguon_id": "puz_ba_hoi_chin_tieng",
       "area_id": "area_gian_tho",
-      "mo_ta_vi": "Bật khi gõ đúng ba hồi chín tiếng mõ. Dải vải điều được nhấc ra khỏi bài vị.",
+      "mo_ta_vi": "Bật khi đánh đúng ba hồi chín tiếng CHUÔNG (mỗi hồi chốt đúng một tiếng mõ). Dải vải điều được nhấc ra khỏi bài vị.",
       "duoc_doc_boi": [
         "hs_dai_vai_dieu"
       ]

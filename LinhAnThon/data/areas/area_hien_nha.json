@@ -12,6 +12,10 @@
         "height": 130
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_manh_nua"
     },
     {
@@ -25,6 +29,8 @@
       "action_type": "COLLECT_ITEM",
       "item_id": "item_den_dau",
       "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "one_shot": true
     },
     {
@@ -36,7 +42,10 @@
         "height": 560
       },
       "action_type": "ZOOM_PUZZLE",
+      "item_id": null,
+      "required_item": null,
       "target_puzzle_id": "puz_rap_chu_the_menh",
+      "target_area_id": null,
       "fallback_text_key": "txt_thieu_do_rap_chu"
     },
     {
@@ -48,11 +57,16 @@
         "height": 180
       },
       "action_type": "USE_ITEM",
+      "item_id": "item_ban_rap_chu_the",
       "required_item": "item_ban_rap_chu_the",
+      "target_puzzle_id": null,
+      "target_area_id": null,
+      "consumes_item": false,
+      "locks_item": false,
       "grants_flag": "flag_binh_phong_da_tra",
       "fallback_text_key": "txt_thieu_do_o_lom_binh_phong",
       "one_shot": true,
-      "ghi_chu_vi": "Đặt bản rập vào ô lõm -> then cửa gian giữa nhả. KHÔNG tiêu huỷ vật phẩm: người chơi lấy lại bản rập (còn cần cho clue C4 của puz_xep_anh_gia_pha). Hiệu ứng duy nhất là bật cờ flag_binh_phong_da_tra."
+      "ghi_chu_vi": "Đặt bản rập vào ô lõm -> then cửa gian giữa nhả. consumes_item = false, locks_item = false: người chơi RÚT LẠI được bản rập, vì nó còn là clue C4 của puz_xep_anh_gia_pha (đối chiếu nét chữ với hs_so_ghi_ten). Hiệu ứng máy đọc được: bật cờ flag_binh_phong_da_tra. Căn cứ: docs/01_KICH_BAN_CHAPTER_01.md mục 4.3."
     },
     {
       "id": "hs_ban_rap_tren_binh_phong",
@@ -66,6 +80,8 @@
       "action_type": "COLLECT_ITEM",
       "item_id": "item_ban_rap_chu_the",
       "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "required_flags": [
         "flag_puz_rap_chu_the_menh_solved"
       ],
@@ -82,6 +98,9 @@
         "height": 450
       },
       "action_type": "CHANGE_AREA",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
       "target_area_id": "area_gian_tho",
       "required_flags": [
         "flag_binh_phong_da_tra"
@@ -98,6 +117,10 @@
         "height": 140
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_vo_tap_viet"
     },
     {
@@ -109,6 +132,9 @@
         "height": 270
       },
       "action_type": "CHANGE_AREA",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
       "target_area_id": "area_san_gach"
     },
     {
@@ -120,6 +146,10 @@
         "height": 270
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_chong_tre"
     },
     {
@@ -137,6 +167,10 @@
         "height": 105
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_nhat_ky_1976"
     },
     {
@@ -154,6 +188,10 @@
         "height": 105
       },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_guoc_moc"
     },
     {
@@ -173,6 +211,8 @@
       "action_type": "COLLECT_ITEM",
       "item_id": "item_giay_ban_va_than",
       "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "one_shot": true
     }
   ],
@@ -204,6 +244,7 @@
       "id": "scare_ban_tay_giay_sau_manh",
       "trigger_type": "ON_COLLECT_ITEM",
       "trigger_item_id": "item_ban_rap_chu_the",
+      "max_fails": null,
       "delay_sec": 0.35,
       "cooldown_sec": 90,
       "audio_asset": "sfx_scare_manh_nua_bat.ogg",

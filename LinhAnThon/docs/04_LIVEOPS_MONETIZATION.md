@@ -9,7 +9,7 @@
 | Schema kiểm tra | `schema/liveops.schema.json` |
 | Công cụ kiểm tra | `tools/validate_level.py --liveops data/liveops_chapter_01.json` |
 | Nền tảng | Android & iOS — APK engine ≤ 30 MB, toàn bộ asset qua Unity Addressables |
-| Nguồn sự thật | SPINE đã chốt + `02_puzzle.md` (hệ gợi ý 3 tier) + `04_horror.md` §4.7.5 (ràng buộc an toàn) |
+| Nguồn sự thật | SPINE đã chốt + `02_puzzle.md` (hệ gợi ý 3 tier) + **`docs/06_AN_TOAN_NGUOI_CHOI.md`** (mọi ràng buộc an toàn — **deliverable chính thức, thay cho file nháp `04_horror.md`**) + `data/liveops_chapter_01.json` |
 | Ngôn ngữ | Tài liệu: tiếng Việt có dấu. Mọi `id` / khoá JSON: snake_case không dấu |
 | Ngày cập nhật | 2026-09-15 |
 
@@ -29,7 +29,7 @@ Mọi quyết định trong tài liệu này đều phải tra ngược về nă
 | **N1** | **Chương 1 chơi trọn vẹn mà không tốn một đồng.** | Mọi gợi ý đều có đường mở miễn phí bằng thời gian chờ, trần **300 giây**. `free_path_guaranteed: true`. |
 | **N2** | **Chỉ bán NỘI DUNG, TIỆN ÍCH và TRANG TRÍ — không bán lợi thế chơi.** | `iap.fair_play.sellable_categories` chỉ gồm `CONTENT_UNLOCK`, `CONVENIENCE_HINT`, `COSMETIC`. Không có manh mối nào chỉ người trả tiền mới thấy. |
 | **N3** | **Không kiếm tiền trên nỗi sợ.** | Không quảng cáo xen giữa cú doạ, giữa cutscene, giữa thao tác giải đố. Không mời mua hàng ở đỉnh sợ. |
-| **N4** | **Tuỳ chọn an toàn luôn miễn phí.** (kế thừa `04_horror.md` §4.7.5) | `accessibility_never_monetized` = tất cả `true`. Không tuỳ chọn nào nằm sau tường trả phí / quảng cáo / mốc tiến trình. |
+| **N4** | **Tuỳ chọn an toàn luôn miễn phí.** Kế thừa nguyên văn bốn câu N1–N4 của **`docs/06_AN_TOAN_NGUOI_CHOI.md` §1.1**, và danh sách *không-bao-giờ-bị-override* ở §1.2 của tài liệu ấy. | `accessibility_never_monetized` = tất cả `true`. Không tuỳ chọn nào nằm sau tường trả phí / quảng cáo / mốc tiến trình. |
 | **N5** | **Người chơi luôn biết mình trả bao nhiêu và nhận được gì trước khi bấm.** | Giá bản địa hoá lấy từ store, kèm danh sách nội dung, xác nhận hai bước, không hộp ngẫu nhiên. |
 
 ---
@@ -142,11 +142,11 @@ Cơ chế quan trọng nhất của toàn hệ gợi ý. Khi người chơi **k�
 | `puz_khoa_bat_quai` | 2/5 | 90 | 60 s | 150 s | 300 s | 3 sai | Câu đố dạy cơ chế |
 | `puz_rap_chu_the_menh` | 3/5 | 150 | 60 s | 150 s | 300 s | 3 sai | Hết tờ giấy thứ 3 → **tự mở Tier 1 miễn phí** |
 | `puz_tuan_tu_le_cung` | 3/5 | 120 | **40 s** | 150 s | 300 s | 3 sai | Thêm gợi ý diegetic: **cuốn văn khấn tự lật trang** sau 40 giây |
-| `puz_ba_hoi_chin_tieng` | 4/5 | 180 | 60 s / **2 sai** | 150 s | 300 s | **2 sai** | Khó nhất nửa đầu chương; thanh nhịp hiện mờ số tiếng hồi 1 sau lần sai thứ 2 |
+| `puz_ba_hoi_chin_tieng` | 4/5 | 180 | 60 s / **2 sai** | 150 s | 300 s | **2 sai** | Khó nhất nửa đầu chương; thanh nhịp hiện mờ **số tiếng chuông** của hồi 1 sau lần sai thứ 2. Kênh thị giác + haptic của câu đố này là **ràng buộc trợ năng bắt buộc**, không phải gợi ý bán được — `docs/06_AN_TOAN_NGUOI_CHOI.md` §7.2 |
 | `puz_thap_lai_den_dau` | 3/5 | 110 | 60 s | 150 s | 300 s | 3 sai | |
 | `puz_xep_anh_gia_pha` | 4/5 | 240 | **90 s** | **210 s** | **420 s** | 3 sai | `SLIDING_TILE` dài nhất chương — giãn mốc để Tier 3 không phá trải nghiệm người đang xếp đúng hướng |
 
-**Gợi ý diegetic (trong thế giới) không tính vào tier, luôn miễn phí:** cuốn văn khấn tự lật trang (`puz_tuan_tu_le_cung`), thanh nhịp nhấp nháy số tiếng (`puz_ba_hoi_chin_tieng`), gáo dừa khẽ xoay ở hậu cảnh khi sai lần 2 (`puz_khoa_bat_quai`), mành nứa đung đưa (`puz_rap_chu_the_menh`). Đây vừa là hệ gợi ý vừa là kể chuyện — **không bao giờ được gắn tiền vào chúng**.
+**Gợi ý diegetic (trong thế giới) không tính vào tier, luôn miễn phí:** cuốn văn khấn tự lật trang (`puz_tuan_tu_le_cung`), thanh nhịp nhấp nháy số tiếng **chuông** (`puz_ba_hoi_chin_tieng` — cả sáu cụm của `solution` đều là tiếng chuông, mõ chỉ điểm một tiếng chốt mỗi hồi; xem `01_KICH_BAN_CHAPTER_01.md` §3.3.6), gáo dừa khẽ xoay ở hậu cảnh khi sai lần 2 (`puz_khoa_bat_quai`), mành nứa đung đưa (`puz_rap_chu_the_menh`). Đây vừa là hệ gợi ý vừa là kể chuyện — **không bao giờ được gắn tiền vào chúng**.
 
 ## 2.6. Luồng UI khi bấm nút gợi ý
 
@@ -162,10 +162,11 @@ Cơ chế quan trọng nhất của toàn hệ gợi ý. Khi người chơi **k�
 ```
 
 Ràng buộc UI bắt buộc:
+- **Kích thước nút gợi ý và mọi nút trong bảng ba lựa chọn: ≥ 120 × 120 px @1920.** Đây là **sàn chạm chính thức của dự án**, dùng chung với hotspot trong game — `01_KICH_BAN_CHAPTER_01.md` §6 (mục X18) và `docs/03_DATA_SPEC.md` §2.2 mức G3. **Ngưỡng 88 px của bản cũ đã bị bãi bỏ**: quy đổi *"88 px ≈ 44 pt"* là sai số học, fit-width chỉ cho ra 29–43 pt/dp. Khoảng đệm giữa hai nút kề nhau ≥ 20 px — **người đang bực vì kẹt câu đố là đúng người dễ bấm nhầm nhất**, và bấm nhầm ở đây là bấm nhầm vào nút tiêu gem.
 - Đường **miễn phí luôn nằm trên cùng**, cỡ chữ bằng hai đường còn lại, **không làm mờ, không thu nhỏ**.
 - Luôn hiện **số dư gem** và **số lượt quảng cáo còn lại** trước khi người chơi chọn.
 - Tiêu gem phải **xác nhận hai bước**; Tier 3 còn thêm một lớp hỏi: *"Đọc đáp án thật chứ? Không quay lại được cảm giác tự giải đâu."* (`txt_hint_xac_nhan_doc_dap_an`).
-- Bảng gợi ý **bị chặn** trong các cửa sổ: `CUTSCENE`, `JUMPSCARE_ENVELOPE`, `SAFETY_WARNING_SCREEN`, `AREA_TRANSITION`.
+- Bảng gợi ý **bị chặn** trong các cửa sổ: `CUTSCENE`, `JUMPSCARE_ENVELOPE`, `SAFETY_WARNING_SCREEN`, `AREA_TRANSITION`. Ràng buộc `SAFETY_WARNING_SCREEN` do **`docs/06_AN_TOAN_NGUOI_CHOI.md` §3.1** đặt ra và không được nới.
 
 ## 2.7. Ràng buộc bất biến (validator bắt lỗi)
 
@@ -261,14 +262,25 @@ Ba thông báo bắt buộc: `txt_iap_khoi_phuc_thanh_cong`, `txt_iap_khong_tim_
 | Trường | Giá trị |
 |---|---|
 | Mã vị trí | `paywall_ket_chuong_01` |
-| Điều kiện kích hoạt | `flag_chapter_01_completed = true` |
+| Điều kiện kích hoạt | `flag_chapter_01_hoan_thanh = true` — **cờ kết chương THẬT**, tức giá trị của `chapter_complete_flag` trong `data/chapter_01.json`. Xem §3.6.1 |
 | Thời điểm | **3 giây sau khi cảnh kết chương khép lại** (biến thể A/B: sau credits — xem §8) |
 | Đóng được | **Có** — nút đóng rõ ràng, không đếm ngược giả |
 | Trần hiển thị | **2 lần/ngày** |
 | Cấm tuyệt đối | Trong `CUTSCENE`, trong `PUZZLE`, trong `JUMPSCARE_ENVELOPE`, trên `SAFETY_WARNING_SCREEN` |
 | Bắt buộc | Hiện giá bản địa + danh sách nội dung **trước** nút xác nhận |
 
-`[[ Paywall đặt SAU cú twist, không bao giờ đặt TRƯỚC. Cắt ngang khoảnh khắc tiếng mõ nổi khắp làng để mời mua hàng là phá hỏng đúng thứ khiến người ta muốn mua chương sau. ]]`
+### 3.6.1. Cờ chặn cổng bán phải là cờ CÓ THẬT — bất biến 17
+
+| Mục | Nội dung |
+|---|---|
+| **Khoá dữ liệu** | `iap.products[*].requires.flag` trong `data/liveops_chapter_01.json` |
+| **Giá trị đúng** | `flag_chapter_01_hoan_thanh` — chính là `chapter_complete_flag` của `data/chapter_01.json`, do `hs_hinh_nhan` cấp qua `grants_flag`, và có mặt trong `exported_flags` |
+| **Luật** | Cờ chặn cổng bán phải **hoặc** được Chương 1 cấp **và** khai là bàn giao (`exported_flags` / `chapter_complete_flag`), **hoặc** do chính một `unlock.grants_flags` trong file này cấp |
+| **Validator** | `tools/validate_level.py` giai đoạn 11 — đặc tả đầy đủ ở `docs/03_DATA_SPEC.md` §4.4.1 |
+
+> **⚠️ ĐÍNH CHÍNH — bản trước ghi SAI và nó là lỗi chặn doanh thu.** Bản trước chặn bằng `flag_chapter_01_completed`. **Cờ ấy không tồn tại**: Chương 1 không có chỗ nào khai `"grants_flag": "flag_chapter_01_completed"`, nên nó không bao giờ bật lên. Hệ quả là **cổng mua `com.game.chapter02` khoá vĩnh viễn với 100% người chơi** — paywall hiện ra rồi từ chối bán. Cả `data/liveops_chapter_01.json` lẫn `data/chapter_01.json` đều parse sạch và đều đúng schema riêng; lỗi nằm đúng ở chỗ **giữa** hai file, nơi trước vòng này không ai kiểm. Nay có bất biến 17 canh.
+
+`[[ Paywall dat SAU cu twist, khong bao gio dat TRUOC. Cat ngang khoanh khac tieng MO noi ren khap lang — tieng CHOT, ca lang cung chot so — de moi mua hang la pha hong dung thu khien nguoi ta muon mua chuong sau. ]]`
 
 ---
 
@@ -315,7 +327,7 @@ Ba thông báo bắt buộc: `txt_iap_khoi_phuc_thanh_cong`, `txt_iap_khong_tim_
 | `hotspot_bounds` | Đổi toạ độ là đổi độ khó và phá chứng minh không-chồng-lấn ở `03_world.md` |
 | `puzzle_solution` | Người chơi sự kiện và người chơi thường phải giải cùng một câu đố |
 | `jumpscare_trigger_type` | Nhịp doạ thuộc thiết kế kinh dị, không thuộc LiveOps |
-| `max_fails` | Kế thừa `04_horror.md` §4.0 |
+| `max_fails` | Kế thừa `data/areas/*.json`; **`docs/06_AN_TOAN_NGUOI_CHOI.md` §1.2** liệt nó vào danh sách không bao giờ bị override — kể cả bởi `gentle_mode` |
 | `item_ids` | Phá chuỗi phụ thuộc vật phẩm |
 | `area_gate` | Phá chứng minh khả giải |
 
@@ -539,7 +551,7 @@ Quy tắc giám sát vận hành: nếu telemetry cho thấy **P90 chi > 60% thu
 
 ## 6.5. Đo hiệu quả jumpscare
 
-Ba phép đo, đối chiếu chéo với `04_horror.md`:
+Ba phép đo, đối chiếu chéo với **`docs/06_AN_TOAN_NGUOI_CHOI.md`** (§6.3 luật nghỉ 90 giây, §10.4 telemetry an toàn):
 
 1. **Doạ có tác dụng không:** `jumpscare_play` → `session_end` trong 20 giây → `jumpscare_quit_signal`. Tỷ lệ **lành mạnh là 1–4%**. Trên **6%** là doạ quá tay.
 2. **Doạ có bị nhờn không:** so `sec_since_last_scare` với tỷ lệ người chơi đổi `safety_setting`. Nếu khoảng cách trung bình tụt dưới **90 giây** ở bất kỳ phiên nào → luật cooldown đang bị vi phạm → lỗi kỹ thuật, báo tổ kinh dị ngay.
@@ -588,7 +600,7 @@ Ba phép đo, đối chiếu chéo với `04_horror.md`:
 
 ## 7.2. Ba luật của remote config
 
-1. **`ad_cooldown_after_scare_sec` chỉ được tăng, không bao giờ hạ dưới 90.** Đây là luật an toàn kế thừa từ `04_horror.md`, không phải tham số kinh doanh. Quyền sở hữu thuộc tổ kinh dị, LiveOps không được sửa.
+1. **`ad_cooldown_after_scare_sec` chỉ được tăng, không bao giờ hạ dưới 90.** Đây là luật an toàn, không phải tham số kinh doanh. **Chủ sở hữu của luật 90 giây là `docs/06_AN_TOAN_NGUOI_CHOI.md` §6.3**, nơi ghi cả điều kiện miễn trừ duy nhất và ba nơi con số 90 phải bằng nhau. LiveOps không được sửa.
 2. **Không khoá nào được phép biến đường miễn phí thành không tồn tại.** `hint_free_wait_sec_tier3` có trần cứng **900 giây** ở tầng validator; đẩy quá là bị từ chối ở phía máy chủ.
 3. **Kill-switch phải có hiệu lực trong vòng một phiên chơi**, không cần cập nhật app. Bật `kill_switch_ads` → nút quảng cáo biến mất, người chơi vẫn dùng được đường chờ miễn phí và đường gem.
 
@@ -681,18 +693,18 @@ Ba phép đo, đối chiếu chéo với `04_horror.md`:
 | **2** | **Rõ giá trước khi mua** | Hiện giá bản địa hoá do store trả về + danh sách nội dung + số dư gem, xác nhận **hai bước** | `price_transparency.*` toàn bộ `true` | QA thủ công 5 vùng; ảnh chụp màn hình lưu hồ sơ phát hành |
 | **3** | **Không mẫu tối (dark pattern)** | Không đồng hồ đếm ngược giả, không ô chọn mua tick sẵn, không nút đóng ẩn | `no_dark_pattern_countdown`, `no_pre_checked_purchase_option` | Duyệt UI trước khi build |
 | **4** | **Tuân thủ độ tuổi** | Dự kiến: **Apple 17+**, **Google Play/IARC Mature 17+**, **PEGI 16**, **ESRB Mature 17+**, **Việt Nam 16+ (cần pháp chế xác nhận)** | `age_rating.target_rating`, `legal_review_required: true` | Bảng khai nội dung của store khoá lại, không đổi giữa các bản cập nhật |
-| **5** | **Mô tả nội dung trung thực** | Khai đủ: kinh dị, cảnh giật mình, đề tài tang lễ, **cái chết của trẻ em**, hủ tục hiến tế, ánh sáng nhấp nháy, rung phản hồi | `age_rating.content_descriptors_vi` | Đối chiếu với màn hình cảnh báo ở `04_horror.md` §4.1 — hai nơi phải trùng từng mục |
+| **5** | **Mô tả nội dung trung thực** | Khai đủ: kinh dị, cảnh giật mình, đề tài tang lễ, **cái chết của trẻ em**, hủ tục hiến tế, ánh sáng nhấp nháy, rung phản hồi | `age_rating.content_descriptors_vi` | Đối chiếu với màn hình cảnh báo ở **`docs/06_AN_TOAN_NGUOI_CHOI.md` §3.1** — hai nơi phải trùng từng mục |
 | **6** | **Lọc nội dung quảng cáo** | Chặn quảng cáo cờ bạc, rượu bia, hẹn hò, nội dung người lớn và quảng cáo **giả lập giao diện hệ thống** | `ad_content_rating_max: MATURE_AUDIENCES_OFF` | Cấu hình phía mạng quảng cáo + kiểm tra mẫu hằng tuần |
 | **7** | **Quảng cáo không xen giữa jumpscare** | **Không có interstitial.** Chỉ quảng cáo thưởng, người chơi tự bấm | `no_interstitial_ads: true`, `rewarded_opt_in_only: true` | Sự kiện `ad_blocked_by_rule` phải bắn đúng mọi lần bị chặn |
 | **8** | **Khoảng cách với cú doạ** | Không quảng cáo trong **90 giây** sau bất kỳ jumpscare nào | `min_sec_after_jumpscare: 90` | Validator bắt buộc `blocked_windows` chứa `WITHIN_90S_AFTER_ANY_JUMPSCARE` |
 | **9** | **Không cắt ngang trải nghiệm** | Cấm quảng cáo trong cutscene, trong thao tác giải đố, trên màn hình cảnh báo an toàn, giữa chuyển cảnh | `blocked_windows` đủ 7 mục | Kiểm tự động lúc chạy |
 | **10** | **Âm thanh quảng cáo** | Hạ toàn bộ bus game xuống −∞ trước khi quảng cáo phát, khôi phục sau **400 ms** | `ad_placements[*].audio_rule` | QA tai nghe — quảng cáo không được to hơn game |
-| **11** | **Trợ năng luôn miễn phí** | Chế độ nhẹ nhàng, giảm chớp sáng, giảm chuyển động, tắt rung, phụ đề — **tất cả miễn phí, đổi bất cứ lúc nào** | `accessibility_never_monetized.*` toàn bộ `true` | Kế thừa ràng buộc `04_horror.md` §4.7.5 |
+| **11** | **Trợ năng luôn miễn phí** | Chế độ nhẹ nhàng, giảm chớp sáng, giảm chuyển động, tắt rung, phụ đề — **tất cả miễn phí, đổi bất cứ lúc nào** | `accessibility_never_monetized.*` toàn bộ `true` | Kế thừa ràng buộc **`docs/06_AN_TOAN_NGUOI_CHOI.md` §1.1** (N1–N3) và bảng truy vết §10.1 |
 | **12** | **Không pay-to-win** | Chỉ bán nội dung, tiện ích, trang trí | `fair_play.forbidden_categories` | Phép thử một dòng ở §3.5 |
 | **13** | **Quyền riêng tư dữ liệu** | Không PII trong telemetry; dùng `install_id` ẩn danh; ATT trên iOS; quảng cáo cá nhân hoá cần đồng ý | `data_privacy.*` | Tuân thủ GDPR, GDPR-K, CCPA, **Nghị định 13/2023/NĐ-CP** |
 | **14** | **Xoá dữ liệu theo yêu cầu** | Hỗ trợ yêu cầu xoá; lưu trữ tối đa **400 ngày** | `data_deletion_request_supported`, `retention_days` | Quy trình hỗ trợ khách hàng |
 | **15** | **Bảo vệ chi tiêu** | Trần mềm **20 USD/ngày** → nhắc nhở và xác nhận lại (**không tự chặn**); lịch sử mua hàng xem được trong Cài đặt; có đường dẫn hướng dẫn hoàn tiền | `spending_protection.*` | QA luồng mua nhiều lần liên tiếp |
-| **16** | **Không mời mua ở đỉnh sợ** | Không hiện paywall/cửa hàng trong vùng cao trào kinh dị | `no_purchase_prompt_during_horror_peak: true` | Đối chiếu với đường cong sợ hãi `04_horror.md` §1.2 |
+| **16** | **Không mời mua ở đỉnh sợ** | Không hiện paywall/cửa hàng trong vùng cao trào kinh dị | `no_purchase_prompt_during_horror_peak: true` | Đối chiếu với đường cong sợ hãi ở **`01_KICH_BAN_CHAPTER_01.md` §6** (bảng beats, hai thang đo) và luật nghỉ 90 giây ở **`docs/06_AN_TOAN_NGUOI_CHOI.md` §6.3** |
 | **17** | **Khôi phục mua hàng** | Nút rõ ràng ở Cài đặt và paywall | `iap.restore.enabled: true` | Bắt buộc theo App Store Guideline 3.1.1 |
 
 ## 9.2. Ba điều tuyệt đối không làm — ghi để người sau đọc
@@ -766,6 +778,7 @@ Ba phép đo, đối chiếu chéo với `04_horror.md`:
 | `docs/03_DATA_SPEC.md` | Mô tả `hint_tier_unlocked`, `hint_timer_accumulated` trong save state — phải khớp §2.5 tài liệu này |
 | `docs/05_TICH_HOP_UNITY_ADDRESSABLES.md` | Nhãn bundle sự kiện (`evt_halloween_2026`) và luật fallback §4.4 |
 | `data/areas/*.json` | Nguồn `background_asset_url` cho fallback khi `override_bg` tải hỏng |
+| **`docs/06_AN_TOAN_NGUOI_CHOI.md`** | **Chủ sở hữu mọi ràng buộc an toàn mà tài liệu này phải tuân theo** — N1–N4 (§1.1), danh sách không-bao-giờ-override (§1.2), màn hình cảnh báo (§3.1), luật nghỉ 90 giây và điều kiện miễn trừ (§6.3), bảng truy vết tuỳ chọn an toàn ↔ `data/liveops_chapter_01.json` (§10). **Khi tài liệu này lệch với docs/06 ở bất kỳ điểm an toàn nào, docs/06 thắng.** |
 
 ## 11.3. Mười sáu bất biến validator phải kiểm
 

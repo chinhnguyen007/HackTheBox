@@ -141,13 +141,15 @@ Hai thứ đó không khớp nhau. **Luật hoà giải, áp cho cả engine l�
 |---|---|---|---|
 | G1 | `width ≤ 0` hoặc `height ≤ 0` | **[LỖI]** | Vùng chạm suy biến, người chơi không bao giờ bấm trúng |
 | G2 | `x + width > 1920` hoặc `y + height > 1080` | **[LỖI]** | Tràn ra ngoài khung thiết kế; trên máy tỉ lệ khác sẽ bị cắt mất |
-| G3 | `width < 88` hoặc `height < 88` | **[LỖI]** | Sàn chạm tuyệt đối của `01_KICH_BAN_CHAPTER_01.md` §6: **88 × 88 px @1920, không ngoại lệ**. *(Trước đây mức này là [CẢNH BÁO]; nâng lên [LỖI] vì không dữ liệu nào của Chương 1 vi phạm — nhỏ nhất hiện là 120 × 120 — nên không có gì để phá.)* |
-| G4 | `88 ≤ min(width, height) < 120` **và KHÔNG** khai `visual_bounds` | **[CẢNH BÁO]** | Hai khả năng, cả hai đều phải sửa: hoặc quên **nới** vùng chạm cho đồ vật nhỏ, hoặc đã nới nhưng quên **khai** `visual_bounds`. Xem §2.3.4 |
-| G5 | `88 ≤ min(width, height) < 120` **và CÓ** khai `visual_bounds` | **Chấp nhận** | Khai `visual_bounds` là cách nói với trình kiểm *"nhỏ ở đây là có chủ đích, không phải bỏ sót"* (nguyên văn mô tả trong `schema/level.schema.json`). **Nhưng sàn thiết kế vẫn là 120 × 120** — đừng dùng ngoại lệ này trừ khi bất khả kháng |
+| G3 | `width < 120` hoặc `height < 120` | **[LỖI]** | **Sàn chạm duy nhất của dự án: 120 × 120 px @1920, không ngoại lệ.** Chốt ở `01_KICH_BAN_CHAPTER_01.md` §6 (mục X18) và Phần 3 của tài liệu ấy. Toàn bộ dữ liệu Chương 1 hiện đã đạt sàn này — nhỏ nhất là `hs_dui_mo` và `hs_khe_mong_cua_gac`, cùng `120 × 120` — nên [LỖI] không phá gì cả |
+| G4 | `min(width, height) = 120` (vừa khít sàn) **và KHÔNG** khai `visual_bounds` | **[CẢNH BÁO]** | Hotspot vừa khít sàn hầu như luôn là hotspot **đã phải nới** từ một sprite nhỏ hơn. Hai khả năng, cả hai đều phải sửa: hoặc quên **nới**, hoặc đã nới nhưng quên **khai** `visual_bounds`. Xem §2.3.5 |
+| G5 | `min(width, height) = 120` **và CÓ** khai `visual_bounds` | **Chấp nhận** | Khai `visual_bounds` là cách nói với trình kiểm *"nhỏ ở đây là có chủ đích, không phải bỏ sót"* (nguyên văn mô tả trong `schema/level.schema.json`) |
 
-**Sàn thiết kế của vùng chạm là 120 × 120, không phải 88 × 88.** 88 là ngưỡng *"bấm được"*; 120 là ngưỡng *"bấm trúng ngay lần đầu, một tay, trên máy 5 inch, trong bóng tối"* — đúng tư thế chơi mà game này nhắm tới. Toàn bộ dữ liệu Chương 1 hiện đạt sàn 120: nhỏ nhất là `hs_dui_mo` với `120 × 120`. Giữ nguyên trạng đó.
+> **⚠️ NGƯỠNG 88 px ĐÃ BỊ BÃI BỎ — đừng đọc lại nó ở bất cứ đâu.** Bản trước của tài liệu này đặt [LỖI] ở `< 88` và coi dải `88–119` là vùng xám. **Không còn dải xám nào.** Căn cứ: ghi chú quy đổi cũ *"88 px @1920 ≈ 44 pt"* là một **lỗi số học** — game trình bày fit-width, nên 88 px chỉ cho ra **29–43 pt/dp** trên máy thật, dưới cả 44 pt của Apple HIG lẫn 48 dp của Material. Đính chính đầy đủ kèm bảng quy đổi ba lớp máy nằm ở `01_KICH_BAN_CHAPTER_01.md` §6 (ngay dưới bảng "Luật / Giá trị"), và mục X18 của bảng đính chính.
 
-> **`bounds` là VÙNG CHẠM, không phải vùng vẽ.** Đây là phân biệt quan trọng nhất của mục §2. `bounds` nói *"chạm vào đây thì có chuyện xảy ra"*; **`visual_bounds`** (§2.3.4) nói *"pixel của đồ vật nằm ở đây"*. Với đồ vật nhỏ — gáo dừa, gương bát quái, dùi mõ — hai hình chữ nhật đó **cố ý khác nhau**, và `bounds` **luôn** là hình lớn hơn.
+**Sàn thiết kế và sàn cưỡng chế nay là MỘT con số: 120 × 120.** 120 là ngưỡng *"bấm trúng ngay lần đầu, một tay, trên máy 5 inch, trong bóng tối"* — đúng tư thế chơi mà game này nhắm tới, và nó đưa mọi hotspot lên **40–59 pt/dp**. Toàn bộ dữ liệu Chương 1 hiện đạt sàn 120. Giữ nguyên trạng đó.
+
+> **`bounds` là VÙNG CHẠM, không phải vùng vẽ.** Đây là phân biệt quan trọng nhất của mục §2. `bounds` nói *"chạm vào đây thì có chuyện xảy ra"*; **`visual_bounds`** (§2.3.5) nói *"pixel của đồ vật nằm ở đây"*. Với đồ vật nhỏ — gáo dừa, gương bát quái, dùi mõ — hai hình chữ nhật đó **cố ý khác nhau**, và `bounds` **luôn** là hình lớn hơn.
 
 > **Vì sao gốc toạ độ ở góc trên-trái mà Unity thì không?** Unity dùng gốc dưới-trái. Tổ engine chịu trách nhiệm lật trục **một lần duy nhất** ở lớp nạp dữ liệu: `unity_y = 1080 - (y + height)`. Tổ thiết kế **luôn** làm việc theo hệ trên-trái vì mọi phần mềm dựng bố cục (Figma, Photoshop, Krita) đều dùng hệ này. Đừng lật trục trong file dữ liệu.
 
@@ -159,13 +161,15 @@ Hai thứ đó không khớp nhau. **Luật hoà giải, áp cho cả engine l�
 |---|---|---|---|---|
 | `id` | string | **Có** | Mã vùng chạm | `^hs_[a-z0-9_]+$`, **duy nhất toàn chương** |
 | `bounds` | Bounds | **Có (MF)** | **Vùng chạm** — vị trí và kích thước của vùng người chơi bấm được | §2.2. **Không được chồng lấn** `bounds` của hotspot khác trong cùng khu vực |
-| `visual_bounds` | Bounds \| null | Không ★ | **Vùng vẽ thật** của sprite bên trong `bounds` | Phải **nằm trọn** trong `bounds`. Bắt buộc khai khi sprite nhỏ hơn `bounds`. §2.3.4 |
-| `action_type` | enum | **Có** | Việc xảy ra khi bấm | `ZOOM_PUZZLE` \| `COLLECT_ITEM` \| `EXAMINE` \| `USE_ITEM` \| `CHANGE_AREA` \| `DIALOGUE` |
-| `target_puzzle_id` | string \| null | **Có ¹** | Câu đố sẽ mở | `^puz_...$`. Phải tồn tại **trong chính file này** |
-| `target_area_id` | string | **Có ¹** | Khu vực sẽ đi tới | `^area_...$`. Phải có trong manifest. **Chỉ** `CHANGE_AREA` được mang trường này |
-| `item_id` | string | **Có ¹** | Vật phẩm được trao (`COLLECT_ITEM`) hoặc được đặt vào (`USE_ITEM`) | `^item_...$`. Phải có trong `item_catalog` |
-| `required_item` | string \| null | **Có ¹** | Vật phẩm phải có sẵn trong túi đồ | `^item_...$` hoặc `null`. Phải có trong `item_catalog` |
-| `text_key` | string | **Có ¹** | Khoá localization của lời kể | `^txt_[a-z0-9_]+$`. **Cấm** nhúng chuỗi tiếng Việt vào file dữ liệu |
+| `visual_bounds` | Bounds \| null | Không ★ | **Vùng vẽ thật** của sprite bên trong `bounds` | Phải **nằm trọn** trong `bounds`. Bắt buộc khai khi sprite nhỏ hơn `bounds`. §2.3.5 |
+| `action_type` | enum | **Có (MF)** | Việc xảy ra khi bấm | `ZOOM_PUZZLE` \| `COLLECT_ITEM` \| `EXAMINE` \| `USE_ITEM` \| `CHANGE_AREA` \| `DIALOGUE` |
+| `item_id` | string \| null | **Có (MF)** | Vật phẩm hotspot **TRAO** cho người chơi. `null` = hotspot không trao gì | `^item_...$` hoặc `null`. Phải có trong `item_catalog`. **Khoá phải CÓ MẶT trên mọi hotspot**, kể cả `EXAMINE` |
+| `required_item` | string \| null | **Có (MF)** | Vật phẩm **phải đang cầm** thì mới thao tác được. `null` = không đòi gì | `^item_...$` hoặc `null`. Phải có trong `item_catalog`. **Khoá phải CÓ MẶT trên mọi hotspot** |
+| `target_puzzle_id` | string \| null | **Có (MF)** | Câu đố sẽ mở. `null` = không mở câu đố nào | `^puz_...$` hoặc `null`. Phải tồn tại **trong chính file này** |
+| `target_area_id` | string \| null | **Có (MF)** | Khu vực sẽ đi tới. `null` = không chuyển khu vực | `^area_...$` hoặc `null`. Phải có trong manifest |
+| `consumes_item` | boolean | **Có ¹** | **CHỈ** cho `USE_ITEM`. `true` = `required_item` **bị tiêu huỷ** sau khi dùng; `false` = vật phẩm ở lại túi đồ | Bắt buộc có mặt trên **mọi** hotspot `USE_ITEM`. **Cấm** trên 5 `action_type` còn lại. Không có mặc định — engine **không được** tự đoán. §2.3.4 |
+| `locks_item` | boolean | Không | **CHỈ** có nghĩa khi `consumes_item: false`. `true` = vật phẩm **ở lại túi nhưng bị khoá**: xám, không kéo-thả được nữa, **vẫn `EXAMINE` được** | Mặc định `false`. Khai `true` cùng `consumes_item: true` là **[LỖI]** — vật đã biến mất thì không khoá được. Căn cứ: `01_KICH_BAN_CHAPTER_01.md` §4.3.1 (chốt X19). §2.3.4.2 |
+| `text_key` | string \| null | **Có ¹** | Khoá localization của lời kể | `^txt_[a-z0-9_]+$` hoặc `null`. Bắt buộc **khác null** với `EXAMINE` / `DIALOGUE`. **Cấm** nhúng chuỗi tiếng Việt vào file dữ liệu |
 | `grants_flag` | string \| null | Không ★ | Cờ tiến trình bật lên sau khi hotspot chạy xong | `^flag_[a-z0-9_]+$`. Xem §5.3 — thiếu trường này thì validator phải suy luận |
 | `required_flags` | array\<string\> | Không | Các cờ phải bật trước thì hotspot mới hoạt động | Mặc định `[]`. Mọi cờ phải có nguồn cấp. §2.7 |
 | `fallback_text_key` | string \| null | Không ★ | Lời kể hiện ra khi hotspot **bị chặn** — thiếu vật phẩm hoặc thiếu cờ | `^txt_[a-z0-9_]+$` hoặc `null`. Khác `text_key`. §2.7 |
@@ -178,49 +182,113 @@ Hai thứ đó không khớp nhau. **Luật hoà giải, áp cho cả engine l�
 
 Đây là phần được mã hoá thành các khối `if/then` trong `schema/level.schema.json`.
 
-| `action_type` | Bắt buộc có | Bắt buộc **không** có | Ngữ nghĩa |
-|---|---|---|---|
-| `ZOOM_PUZZLE` | `target_puzzle_id` | `target_area_id` | Phóng to vào một câu đố trong cùng khu vực |
-| `COLLECT_ITEM` | `item_id`, **và trường** `required_item` (giá trị được phép là `null`) | `target_area_id` | Nhặt vật phẩm vào túi đồ |
-| `USE_ITEM` | `required_item` **khác null**, **và** ít nhất một trong `item_id` / `target_puzzle_id` | `target_area_id` | Dùng vật phẩm lên một điểm trong cảnh |
-| `CHANGE_AREA` | `target_area_id` | — | Chuyển sang khu vực khác |
-| `EXAMINE` | `text_key` | `item_id`, `required_item`, `target_puzzle_id`, `target_area_id` | Quan sát, hiện một đoạn mô tả |
-| `DIALOGUE` | `text_key` | `item_id`, `required_item`, `target_puzzle_id`, `target_area_id` | Độc thoại nội tâm hoặc lời thoại |
+> **LUẬT NỀN CỦA MA TRẬN NÀY (chốt vòng 3 — đọc trước khi đọc bảng).** Bốn khoá `item_id`, `required_item`, `target_puzzle_id`, `target_area_id` là **khoá Master Form**: chúng **phải CÓ MẶT trên MỌI hotspot**, không trừ `EXAMINE` hay `DIALOGUE`. Khi không áp dụng thì **giá trị là `null`**, **không phải là xoá khoá**. Vì vậy bảng dưới đây nói *"phải khác null"* / *"phải bằng null"* — nó **không bao giờ** nói *"không được có khoá"*.
+>
+> Lý do: `null` nghĩa là *"đã cân nhắc, ở đây không có gì"*; thiếu khoá nghĩa là *"không ai biết"*. Hai trạng thái ấy phải phân biệt được bằng máy, nếu không thì mọi cổng CI đọc hotspot đều phải suy đoán.
 
-**Phân biệt hai lỗi hay gặp nhất:**
+| `action_type` | Phải **khác `null`** | Phải bằng **`null`** | Khoá riêng | Ngữ nghĩa |
+|---|---|---|---|---|
+| `ZOOM_PUZZLE` | `target_puzzle_id` | `target_area_id` | — | Phóng to vào một câu đố trong cùng khu vực |
+| `COLLECT_ITEM` | `item_id` | `target_area_id` | — | Nhặt vật phẩm vào túi đồ. `required_item` được phép `null` (nhặt tự do) hoặc khác `null` (phải cầm sẵn thứ khác mới nhặt được) |
+| `USE_ITEM` | `required_item`, **và ít nhất một hiệu ứng đọc được bằng máy** (xem dưới bảng) | — | **`consumes_item` BẮT BUỘC có mặt** | Dùng vật phẩm lên một điểm trong cảnh |
+| `CHANGE_AREA` | `target_area_id` | `target_puzzle_id` | — | Chuyển sang khu vực khác |
+| `EXAMINE` | `text_key` | `item_id`, `required_item`, `target_puzzle_id`, `target_area_id` | — | Quan sát, hiện một đoạn mô tả |
+| `DIALOGUE` | `text_key` | `item_id`, `required_item`, `target_puzzle_id`, `target_area_id` | — | Độc thoại nội tâm hoặc lời thoại |
 
-- `COLLECT_ITEM` với `"required_item": null` → nhặt được ngay. **Xoá hẳn** trường `required_item` → **[LỖI]**, vì không phân biệt được "không cần điều kiện" với "quên khai báo điều kiện".
+**Ràng buộc "hiệu ứng đọc được bằng máy" của `USE_ITEM`.** Một hotspot `USE_ITEM` phải sinh **ít nhất một** trong bốn thứ sau, nếu không nó là một nút bấm không làm gì và validator phát **[LỖI]**:
+
+1. `grants_flag` khác `null` — bật một cờ tiến trình;
+2. `item_id` khác `null` — trao lại / trao thêm một vật phẩm;
+3. `target_puzzle_id` khác `null` — mở một câu đố;
+4. `target_area_id` khác `null` — mở đường sang khu vực khác.
+
+`consumes_item` **không** tính là hiệu ứng: tiêu huỷ vật phẩm mà không bật cờ, không trao gì, không mở gì là một ngõ cụt có thể phá vỡ phép chứng minh khả giải ở §5.5.
+
+**Phân biệt ba lỗi hay gặp nhất:**
+
+- `"required_item": null` trên `COLLECT_ITEM` → nhặt được ngay, **hợp lệ**. **Xoá hẳn** khoá `required_item` → **[LỖI]** ở mọi `action_type`, vì không phân biệt được "không cần điều kiện" với "quên khai báo điều kiện".
 - `USE_ITEM` với `"required_item": null` → **[LỖI]**. Dùng vật phẩm thì bắt buộc phải nói rõ *vật phẩm nào*.
+- `USE_ITEM` **thiếu khoá** `consumes_item` → **[LỖI]**, kể cả khi ý định là `false`. Xem §2.3.4.
 
-### 2.3.3. Bốn dạng `USE_ITEM` trong Chương 1
+### 2.3.3. Bốn hotspot `USE_ITEM` của Chương 1 — bảng chốt
 
-| Dạng | `required_item` | `item_id` | `target_puzzle_id` | `grants_flag` | Ví dụ trong chương |
-|---|---|---|---|---|---|
-| Đặt vào để mở đường | có | = `required_item` | — | **nên có** | `hs_o_lom_binh_phong` — tra bản rập vào ô lõm |
-| Dùng làm then cửa | có | = `required_item` | — | **nên có** | `hs_khe_mong_cua_gac` — tra bài vị vào khe mộng |
-| Soi sáng để lộ thông tin | có | = `required_item` | — | tuỳ | `hs_gieng_khoi` — soi đèn xuống lòng giếng |
-| Dùng để mở câu đố | có | — | có | — | (dự phòng, chưa dùng ở Chương 1) |
+Chương 1 có **đúng 4 hotspot `USE_ITEM`**. Bảng này là bảng chốt: mọi giá trị dưới đây phải trùng từng chữ với `data/areas/*.json`.
 
-`[[ Khi item_id trùng required_item nghĩa là vật phẩm KHÔNG bị tiêu thụ, chỉ được đặt vào chỗ. Engine giữ nguyên nó trong túi đồ. ]]`
+| Hotspot | Khu vực | `required_item` = `item_id` | `consumes_item` | `locks_item` | `grants_flag` | Sau khi dùng, người chơi… |
+|---|---|---|---|---|---|---|
+| `hs_o_lom_binh_phong` | `area_hien_nha` | `item_ban_rap_chu_the` | **`false`** | **`false`** | `flag_binh_phong_da_tra` | …**rút lại được** bản rập — nó còn là clue C4 của `puz_xep_anh_gia_pha` (đối chiếu nét chữ với `hs_so_ghi_ten`) |
+| `hs_khe_mong_cua_gac` | `area_gian_tho` | `item_bai_vi_khuyet_danh` | **`false`** | **`true`** | `flag_then_gac_da_tra` | …**không rút lại được** — bài vị đang làm then cửa gác. Nhưng biểu tượng **vẫn nằm trong túi**, xám lại, `EXAMINE` vẫn ra chữ: cú twist cuối chương còn chỗ nhắc lại *cái then giữ cửa gác là bài vị của chính mình* |
+| `hs_gieng_khoi` | `area_bep_gieng` | `item_den_dau_sang` | **`false`** | **`false`** | `flag_gieng_da_soi` | …**giữ nguyên đèn** — còn phải cầm đèn lên gác (`hs_cau_thang_gac`) và mở khoá `puz_xep_anh_gia_pha`. Tiêu huỷ ở đây là **khoá chết chương** |
+| `hs_hinh_nhan` | `area_gac_xep` | `item_ao_cuoi_giay` | **`true`** | *(không khai — vô nghĩa khi đã tiêu huỷ)* | `flag_chapter_01_hoan_thanh` | …**mất hẳn áo**. Vật phẩm **duy nhất** của cả chương bị tiêu huỷ thật, và đó là hành động kết chương |
 
-### 2.3.4. Vùng chạm mở rộng — `bounds` so với `visual_bounds`
+**Đọc bảng theo ba luật:**
 
-`01_KICH_BAN_CHAPTER_01.md` §6 đặt một cơ chế **bắt buộc**: *"Kích thước chạm tối thiểu 88 × 88 px @1920 cho mọi hotspot, không ngoại lệ. Sprite nhỏ hơn thì dùng **vùng chạm mở rộng**."* Cơ chế ấy có thật trong kịch bản — `hs_guong_bat_quai` có sprite thật **96 × 96** nằm trong vùng chạm **130 × 130**, `hs_gao_dua` có sprite **86 × 62** trong vùng chạm **130 × 120** — nhưng **hợp đồng dữ liệu không có trường nào để khai nó**. Kết quả: thông tin ấy chỉ sống trong văn xuôi của `docs/01`, không cổng CI nào kiểm được, và tổ đồ hoạ không có gì để đối chiếu.
+1. **Với `USE_ITEM`, `item_id` LUÔN bằng `required_item`** — đây là quy ước X19, chốt ở `01_KICH_BAN_CHAPTER_01.md` §4.3.1. `required_item` nói *"phải đang cầm cái gì"*; `item_id` nói *"hành động này gắn vào vật nào"* để engine biết kéo-thả cái gì lên cái gì. **Bản thân `item_id` KHÔNG hàm ý tiêu thụ** — chỉ `consumes_item` mới nói điều đó.
+2. **`consumes_item: true` chỉ được phép xuất hiện ĐÚNG MỘT LẦN trong cả chương**, ở `hs_hinh_nhan`. Đây là luật kiểm được bằng máy, xem C7 ở §2.3.4.1.
+3. **Ba trong bốn hotspot này là mắt xích sống-chết của phép chứng minh khả giải.** Lật `consumes_item` từ `false` sang `true` trên `hs_gieng_khoi` là khoá chết chương ngay lập tức (không còn đèn để lên gác), trên `hs_o_lom_binh_phong` là phá clue C4. Không cổng nào bắt được nếu trường bị bỏ trống cho engine đoán — đó chính là lý do nó **bắt buộc tường minh**.
+
+### 2.3.4. `consumes_item` — đặc tả đầy đủ
+
+| Mục | Nội dung |
+|---|---|
+| **Kiểu** | `boolean` — **không** chấp nhận `null`, **không** chấp nhận chuỗi `"true"` |
+| **Bắt buộc** | **Có**, trên **mọi** hotspot `action_type = USE_ITEM`. Thiếu → **[LỖI]**, chặn build |
+| **Cấm** | Trên `ZOOM_PUZZLE`, `COLLECT_ITEM`, `EXAMINE`, `CHANGE_AREA`, `DIALOGUE` → **[LỖI]**. Tiêu huỷ vật phẩm chỉ có nghĩa khi có vật phẩm được dùng |
+| **Mặc định** | **KHÔNG CÓ MẶC ĐỊNH.** Engine **cấm** suy ra giá trị từ bất cứ thứ gì — không từ `item_id`, không từ `grants_flag`, không từ `one_shot`, không từ `ghi_chu_vi` |
+| **`true` nghĩa là** | Sau khi thao tác thành công, `required_item` **bị gỡ khỏi túi đồ vĩnh viễn**. Nó không quay lại, kể cả khi người chơi vào lại khu vực |
+| **`false` nghĩa là** | Vật phẩm **ở nguyên trong túi đồ** sau thao tác. Hotspot có thể `one_shot` hay không, đó là chuyện khác và độc lập |
+| **Quan hệ với `one_shot`** | **Hai trường độc lập.** `one_shot` nói *hotspot* có biến mất không; `consumes_item` nói *vật phẩm* có biến mất không. Cả 4 hotspot `USE_ITEM` của Chương 1 đều `one_shot: true`, nhưng chỉ **1 trong 4** có `consumes_item: true` |
+| **Quan hệ với `locks_item`** | `locks_item` chỉ có nghĩa khi `consumes_item: false` — xem §2.3.4.2. Ba trạng thái hợp lệ, không có trạng thái thứ tư |
+
+#### 2.3.4.1. Validator kiểm gì
+
+| # | Kiểm | Mức |
+|---|---|---|
+| C1 | `action_type = USE_ITEM` mà **thiếu khoá** `consumes_item` | **[LỖI]** |
+| C2 | `consumes_item` xuất hiện trên `action_type` khác `USE_ITEM` | **[LỖI]** |
+| C3 | `consumes_item` không phải kiểu boolean | **[LỖI]** |
+| C4 | `consumes_item: true` mà `required_item` còn nằm trong `required_items` của **một câu đố xuất hiện sau nó** trên đồ thị tiến trình | **[LỖI]** — khoá chết chương, phát hiện bởi thuật toán ở §5.5 |
+| C5 | `consumes_item: true` mà `required_item` còn là `required_item` / `required_items` của **bất kỳ** hotspot hay câu đố nào có thể tới sau | **[LỖI]** — cùng họ với C4 |
+| C6 | `consumes_item: true` mà hotspot **không** sinh hiệu ứng đọc được bằng máy nào (§2.3.2) | **[LỖI]** — vật phẩm biến mất, không đổi lại được gì |
+| C7 | Có **quá một** hotspot `consumes_item: true` trong cả chương | **[LỖI]** — luật riêng của Chương 1: đúng một, ở `hs_hinh_nhan` (§2.3.3) |
+| C8 | `locks_item: true` đi cùng `consumes_item: true` | **[LỖI]** — không khoá được thứ đã biến mất |
+| C9 | `locks_item` xuất hiện trên `action_type` khác `USE_ITEM` | **[LỖI]** |
+
+#### 2.3.4.2. `locks_item` — ba trạng thái của một vật phẩm sau khi dùng
+
+`consumes_item` một mình chỉ tách được hai trạng thái, nhưng Chương 1 có **ba**:
+
+| `consumes_item` | `locks_item` | Trạng thái | Hotspot |
+|---|---|---|---|
+| `false` | `false` | **Dùng lại tự do** — vật ở nguyên trong túi, kéo-thả được như cũ | `hs_o_lom_binh_phong`, `hs_gieng_khoi` |
+| `false` | `true` | **Khoá tại chỗ dùng** — vật **ở lại trong túi** nhưng xám, **không kéo-thả được nữa**, **vẫn `EXAMINE` được** | `hs_khe_mong_cua_gac` |
+| `true` | *(không khai)* | **Tiêu huỷ hẳn** — vật rời túi vĩnh viễn | `hs_hinh_nhan` |
+| `true` | `true` | **KHÔNG TỒN TẠI** — **[LỖI]** C8 | — |
+
+**Vì sao trạng thái thứ hai phải có tên riêng.** Bài vị khuyết danh bị tra vào khe mộng làm then: về mặt luồng chơi nó **đã đi**, không dùng lại được, nên `puz_xep_anh_gia_pha` **không** liệt nó vào `required_items` (§2.7.5). Nhưng về mặt kể chuyện nó **phải còn trong túi**, vì cú twist cuối chương cần người chơi mở túi ra và đọc lại nó: *cái then giữ cửa gác là bài vị của chính mình*. Nếu chỉ có `consumes_item`, một trong hai thứ ấy phải hy sinh — hoặc phép chứng minh khả giải sai, hoặc cú twist mất chỗ tựa.
+
+`[[ Luu y cho to engine: trang thai locks_item=true KHONG duoc mo hinh bang cach xoa item roi them mot item moi "da dung". Lam the la sinh mot item_id khong co trong item_catalog — vi pham luat phan tang so 1 o muc 1. No la mot CO tren chinh item ay. ]]`
+
+`[[ C4 va C5 la ly do that su khien truong nay phai ton tai. Truoc vong 3, thong tin "bai vi bi tieu thu lam then" chi song trong mot chuoi ghi_chu_vi tieng Viet — may khong doc duoc, nen phep chung minh kha giai o §5.5 phai gia dinh moi vat pham deu con trong tui do mai mai. Gia dinh do sai o dung hai cho, va ca hai cho deu nam tren duong chinh cua chuong. ]]`
+
+### 2.3.5. Vùng chạm mở rộng — `bounds` so với `visual_bounds`
+
+`01_KICH_BAN_CHAPTER_01.md` §6 đặt một cơ chế **bắt buộc**: *"Kích thước chạm tối thiểu **120 × 120 px @1920** cho mọi hotspot, không ngoại lệ. Sprite nhỏ hơn thì giữ nguyên hình vẽ ở `visual_bounds` và **nới `bounds` ra cho đủ 120 px**."* Cơ chế ấy có thật trong dữ liệu — `hs_dui_mo` có sprite thật **110 × 120** nằm trong vùng chạm **120 × 120**, `hs_gao_dua` có sprite **130 × 110** trong vùng chạm **130 × 120**, `hs_chieu_coi_trai_san` có sprite **440 × 88** trong vùng chạm **440 × 120** — nhưng ở bản hợp đồng cũ **không có trường nào để khai nó**. Kết quả: thông tin ấy chỉ sống trong văn xuôi của `docs/01`, không cổng CI nào kiểm được, và tổ đồ hoạ không có gì để đối chiếu.
 
 **`visual_bounds` là trường khai cơ chế đó.**
 
-#### 2.3.4.1. Đặc tả trường
+#### 2.3.5.1. Đặc tả trường
 
 | Mục | Nội dung |
 |---|---|
 | **Kiểu** | `Bounds` (§2.2) hoặc `null` |
-| **Bắt buộc** | Không ★. **Bắt buộc trên thực tế** khi sprite nhỏ hơn `bounds` theo bất kỳ chiều nào quá **24 px** — xem §2.3.4.3 |
+| **Bắt buộc** | Không ★. **Bắt buộc trên thực tế** khi sprite nhỏ hơn `bounds` theo bất kỳ chiều nào quá **24 px** — xem §2.3.5.3 |
 | **Ý nghĩa** | Hình chữ nhật **pixel thật của đồ vật** trên lớp nền `_l1_mid`. `bounds` là nơi ngón tay chạm; `visual_bounds` là nơi mắt nhìn |
 | **Ràng buộc** | `visual_bounds` phải **nằm trọn** trong `bounds`: `vb.x ≥ b.x` **và** `vb.y ≥ b.y` **và** `vb.x + vb.width ≤ b.x + b.width` **và** `vb.y + vb.height ≤ b.y + b.height`. Cho phép trùng khít bốn cạnh |
 | **Không ràng buộc** | `visual_bounds` **không** bị luật chồng lấn B5 — hai đồ vật vẽ gần nhau là chuyện bình thường, miễn hai **vùng chạm** không giao nhau |
 | **Mặc định** | Không khai ⇒ engine coi `visual_bounds = bounds` |
 
-#### 2.3.4.2. Ví dụ — lấy nguyên văn từ `data/areas/`
+#### 2.3.5.2. Ví dụ — lấy nguyên văn từ `data/areas/`
 
 ```json
 {
@@ -234,7 +302,7 @@ Hai thứ đó không khớp nhau. **Luật hoà giải, áp cho cả engine l�
 }
 ```
 
-Đọc là: dùi mõ được vẽ rộng **110 px**, nhưng vùng chạm nới ra **120 px** và lệch sang trái 5 px để đạt sàn 120 × 120 của G5. Người chơi bấm hụt 5 px về bên trái vẫn nhặt được dùi.
+Đọc là: dùi mõ được vẽ rộng **110 px**, nhưng vùng chạm nới ra **120 px** và lệch sang trái 5 px để đạt sàn 120 × 120 của G3. Người chơi bấm hụt 5 px về bên trái vẫn nhặt được dùi.
 
 ```json
 {
@@ -247,25 +315,25 @@ Hai thứ đó không khớp nhau. **Luật hoà giải, áp cho cả engine l�
 
 Đọc là: chiếu cói chỉ cao **88 px** (dải `y ∈ [910, 998]`), nhưng vùng chạm cao **120 px** (`y ∈ [901, 1021]`) — nới đều 9 px lên trên và 23 px xuống dưới.
 
-#### 2.3.4.3. Validator kiểm gì
+#### 2.3.5.3. Validator kiểm gì
 
 | # | Kiểm | Mức |
 |---|---|---|
 | V1 | `visual_bounds` thoả G1 và G2 của §2.2 (không suy biến, không tràn khung 1920×1080) | **[LỖI]** |
-| V2 | `visual_bounds` **nằm trọn** trong `bounds` theo bốn bất đẳng thức ở §2.3.4.1 | **[LỖI]** |
-| V3 | Có `visual_bounds` mà `bounds` nhỏ hơn 120 × 120 (mức G5) | **[LỖI]** |
+| V2 | `visual_bounds` **nằm trọn** trong `bounds` theo bốn bất đẳng thức ở §2.3.5.1 | **[LỖI]** |
+| V3 | Có `visual_bounds` mà `bounds` vẫn nhỏ hơn 120 × 120 | **[LỖI]** — trùng G3. **Khai `visual_bounds` KHÔNG phải giấy miễn trừ sàn 120**: nó giải thích *vì sao* vùng chạm lớn hơn hình vẽ, nó không cho phép vùng chạm nhỏ đi |
 | V4 | `visual_bounds` **lớn hơn hoặc bằng** `bounds` cả bốn cạnh (tức khai mà không mở rộng gì) | **[CẢNH BÁO]** — bỏ trường đi cho gọn |
 | V5 | `bounds` lớn hơn `visual_bounds` quá **24 px** ở bất kỳ chiều nào mà **không** khai `visual_bounds` | **Không kiểm được từ dữ liệu.** Đây là lý do V6 tồn tại |
-| V6 | `bounds` nhỏ hơn 120 × 120 (mức G4) **và** không có `visual_bounds` | **[CẢNH BÁO]** — hoặc đồ vật thật sự nhỏ (cần mở rộng và khai `visual_bounds`), hoặc đang thiếu khai báo |
+| V6 | `bounds` **vừa khít** 120 × 120 (mức G4) **và** không có `visual_bounds` | **[CẢNH BÁO]** — hotspot vừa khít sàn hầu như luôn là hotspot đã phải nới; hoặc quên nới, hoặc quên khai |
 | V7 | Với hotspot `COLLECT_ITEM` / `USE_ITEM` có `visual_bounds`: tâm `visual_bounds` phải nằm trong `bounds` | **[LỖI]** — nếu không thì hiệu ứng nhặt vật bay ra ngoài vùng chạm |
 
 **Luật chồng lấn B5 (§5.2) vẫn chỉ áp cho `bounds`, không áp cho `visual_bounds`.** Nới vùng chạm ra mà đụng vùng chạm hàng xóm là **[LỖI]** — đó chính là điều kiện giữ cho việc mở rộng không biến thành việc ăn cắp vùng chạm của đồ vật bên cạnh. Ba cặp nguy hiểm nhất, đã ghi trong `02_PROMPT_DO_HOA.md` §6.5: `hs_binh_phong` ↔ `hs_o_lom_binh_phong`, `hs_mo_ca` ↔ `hs_dui_mo`, `hs_hinh_nhan` ↔ `hs_chieu_coi_trai_san`.
 
-#### 2.3.4.4. Checklist đồ hoạ kiểm gì — và luật hoà giải với ràng buộc "sai số ≤ 24px"
+#### 2.3.5.4. Checklist đồ hoạ kiểm gì — và luật hoà giải với ràng buộc "sai số ≤ 24px"
 
 `02_PROMPT_DO_HOA.md` §6.5 có một dòng: *"Mỗi đồ vật tương tác được nằm **đúng vùng bounds** của hotspot tương ứng, sai số ≤ 24px."*
 
-**Dòng đó mâu thuẫn trực tiếp với cơ chế vùng chạm mở rộng** — `hs_guong_bat_quai` có sprite 96 × 96 trong `bounds` 130 × 130, tức lệch **34 px**, vượt dung sai 24 px, dù nó **đúng** theo thiết kế. Nếu QA đồ hoạ soát theo dòng đó, họ sẽ báo lỗi cho những hotspot làm đúng nhất.
+**Dòng đó mâu thuẫn trực tiếp với cơ chế vùng chạm mở rộng** — `hs_chieu_coi_trai_san` có sprite **440 × 88** trong `bounds` **440 × 120**, tức lệch **32 px** theo chiều cao, vượt dung sai 24 px, dù nó **đúng** theo thiết kế và đúng theo dữ liệu thật. Nếu QA đồ hoạ soát theo dòng đó, họ sẽ báo lỗi cho những hotspot làm đúng nhất.
 
 > **LUẬT HOÀ GIẢI (bắt buộc, thay cho cách đọc cũ):** dung sai **≤ 24 px** áp cho cặp **`visual_bounds` ↔ pixel vẽ thật**, **không** áp cho cặp `bounds` ↔ pixel vẽ thật. Quan hệ giữa `bounds` và `visual_bounds` không phải là dung sai — nó là **chủ ý thiết kế**, và ràng buộc duy nhất của nó là "nằm trọn bên trong" (V2).
 
@@ -288,13 +356,13 @@ Bảng soát cho tổ đồ hoạ, thay cho một dòng cũ:
 
 | Trường | Kiểu | Bắt buộc | Ý nghĩa | Ràng buộc |
 |---|---|---|---|---|
-| `id` | string | **Có** | Mã câu đố | `^puz_[a-z0-9_]+$`, duy nhất toàn chương |
-| `type` | enum | **Có** | Thể loại cơ chế | `ROTATION_LOCK` \| `SEQUENCE_ORDER` \| `SLIDING_TILE` \| `ITEM_COMBINE` \| `PATTERN_TRACE` \| `AUDIO_MATCH` |
-| `solution` | array\<integer\> | **Có** | Lời giải đúng | Không rỗng, ≤ 16 phần tử. Ngữ nghĩa theo `type` — §2.4.3 |
-| `reward_item_id` | string \| null | **Có** | Vật phẩm trao khi giải đúng | `^item_...$` hoặc `null`. Phải có trong `item_catalog` |
-| `wrong_action_jumpscare` | string \| null | **Có** | Cú doạ bắn khi giải sai | `^scare_...$` hoặc `null`. Phải tồn tại **trong chính file này** |
-| `required_items` | array\<string\> | Không ★ | Vật phẩm **công cụ** phải có thì mới nhập được lời giải. **Không** bị tiêu thụ | Mặc định `[]`. Mọi phần tử phải có trong `item_catalog`. §2.7.5, §5.4 |
-| `grants_flag` | string \| null | Không | Cờ **PHỤ** bật khi giải đúng — **ngoài** cờ chính tắc | Cờ chính tắc `flag_<id>_solved` **luôn** bật, có khai hay không. §2.7.6 |
+| `id` | string | **Có (MF)** | Mã câu đố | `^puz_[a-z0-9_]+$`, duy nhất toàn chương |
+| `type` | enum | **Có (MF)** | Thể loại cơ chế | `ROTATION_LOCK` \| `SEQUENCE_ORDER` \| `SLIDING_TILE` \| `ITEM_COMBINE` \| `PATTERN_TRACE` \| `AUDIO_MATCH` |
+| `solution` | array\<integer\> | **Có (MF)** | Lời giải đúng | Không rỗng, ≤ 16 phần tử. Ngữ nghĩa theo `type` — §2.4.3. **Sáu mảng của Chương 1 là BẤT BIẾN** |
+| `reward_item_id` | string \| null | **Có (MF)** | Vật phẩm trao khi giải đúng | `^item_...$` hoặc `null`. Phải có trong `item_catalog` |
+| `wrong_action_jumpscare` | string \| null | **Có (MF)** | Cú doạ bắn khi giải sai | `^scare_...$` hoặc `null`. Phải tồn tại **trong chính file này** |
+| `required_items` | array\<string\> | **Có** | Vật phẩm **công cụ** phải có thì mới nhập được lời giải. **Không** bị tiêu thụ | Khoá **phải có mặt**; được phép là mảng rỗng `[]`. Mọi phần tử phải có trong `item_catalog`. §2.7.5, §5.4 |
+| `grants_flag` | string | **Có** | Cờ tiến trình bật khi giải đúng | **BẮT BUỘC, TƯỜNG MINH, khác `null`.** Quy ước đặt tên là `flag_<puzzle_id>_solved`, nhưng **giá trị phải được ghi thẳng ra trong JSON** — trình kiểm **không** suy ra từ tên câu đố. §2.7.6 |
 | `ten_vi`, `ghi_chu_vi` | string | Không | Nhãn và ghi chú nội bộ | `ten_vi` ≤ 120 ký tự, `ghi_chu_vi` ≤ 500 |
 
 ### 2.4.2. Ràng buộc `solution` theo `type`
@@ -315,7 +383,7 @@ Bảng soát cho tổ đồ hoạ, thay cho một dòng cũ:
 | `puz_khoa_bat_quai` | `ROTATION_LOCK` | `[6, 3, 8]` | Ba vòng đồng tâm, đánh số tám quẻ Bát quái theo chiều kim đồng hồ từ chính Bắc. Vòng ngoài → quẻ **Khảm** (nước, toạ Bắc), vòng giữa → quẻ **Ly** (lửa, hướng Nam), vòng trong → quẻ **Khôn** (đất, phận nữ — Bà Cô) |
 | `puz_rap_chu_the_menh` | `PATTERN_TRACE` | `[2,1,4,3,7,5,8,6]` | Thứ tự tám nét theo bút thuận Hán-Nôm: ngang trước sổ sau, trái trước phải sau, trên trước dưới sau, phẩy mác sau cùng |
 | `puz_tuan_tu_le_cung` | `SEQUENCE_ORDER` | `[3,6,4,1,5,2]` | Vị trí hiện tại của sáu lễ vật trên bàn thờ, xếp theo đúng thứ tự tuần lễ cúng: lau bài vị → thắp đèn → thắp nhang → rót rượu → đọc văn khấn → hoá vàng |
-| `puz_ba_hoi_chin_tieng` | `AUDIO_MATCH` | `[3,3,5,3,7,3]` | Ba cặp (số tiếng dồn, số tiếng chốt) của ba hồi mõ: hồi một 3+3, hồi hai 5+3, hồi ba 7+3 |
+| `puz_ba_hoi_chin_tieng` | `AUDIO_MATCH` | `[3,3,5,3,7,3]` | Ba cặp `[dồn, rời]` của ba hồi **CHUÔNG ĐỒNG**: hồi một 3+3, hồi hai 5+3, hồi ba 7+3. **Cả sáu số đều là số tiếng chuông.** Sau **mỗi cặp** người chơi điểm **đúng 1 tiếng MÕ** để chốt hồi — con số ấy **cố định, KHÔNG mã hoá trong mảng** (luôn = 1, ba lần). *(Hoán vai nhạc khí X14 — `01_KICH_BAN_CHAPTER_01.md` §3.3.6: chuông **thỉnh**, mõ **chốt**. `solution` không đổi một chữ số nào.)* |
 | `puz_thap_lai_den_dau` | `ITEM_COMBINE` | `[2,5,1,3,4]` | Thứ tự năm thao tác thắp đèn: xé vải điều se tim (2) → luồn tim qua cổ đèn (5) → chắt dầu vào bầu (1) → vặn tim vừa đủ (3) → mồi lửa bằng que đóm (4) |
 | `puz_xep_anh_gia_pha` | `SLIDING_TILE` | `[2,5,7,4,8,3,6,1,0]` | Khung 3×3 đọc theo hàng. Số là mã mảnh ván, `0` là ô trống — **đúng chỗ khuôn mặt bị khoét** |
 
@@ -327,17 +395,30 @@ Bảng soát cho tổ đồ hoạ, thay cho một dòng cũ:
 
 | Trường | Kiểu | Bắt buộc | Ý nghĩa | Ràng buộc |
 |---|---|---|---|---|
-| `id` | string | **Có** | Mã cú doạ | `^scare_[a-z0-9_]+$`, duy nhất toàn chương |
-| `trigger_type` | enum | **Có** | Điều kiện bắn | `ON_PUZZLE_FAIL_COUNT` \| `ON_ENTER_AREA` \| `ON_COLLECT_ITEM` \| `ON_TIMER` \| `ON_WRONG_ITEM_USE` |
-| `max_fails` | integer | **Có ¹** | Số lần giải sai liên tiếp trước khi bắn | `≥ 1`. **Chỉ** `ON_PUZZLE_FAIL_COUNT`; trigger khác mang trường này là **[LỖI]** |
-| `delay_sec` | number | **Có ¹** với `ON_TIMER`, Không ★ với trigger khác | Độ trễ từ lúc điều kiện kích hoạt được thoả tới lúc cú doạ thật sự bắn | `0 ≤ v ≤ 600`. Thiếu trên `ON_TIMER` → **[LỖI]**. §2.7 |
-| `trigger_item_id` | string | **Có ¹** với `ON_COLLECT_ITEM`, Không với `ON_WRONG_ITEM_USE` | Vật phẩm gắn với cú doạ | `^item_...$`, phải có trong `item_catalog`. **Cấm** với mọi `trigger_type` khác. §2.7 |
-| `audio_asset` | string | **Có (MF)** | File âm thanh | `<tên>.ogg` / `.mp3` / `.wav`. Chương 1 dùng **`.ogg`**; đó là **tên asset nguồn**, thiết lập import quyết định định dạng lúc chạy (`sfx_scare_*` bắt buộc import thành **ADPCM**) — xem `docs/05` **§3.3**, không phải §4.3 |
-| `sprite_animation` | string | **Có** | Hoạt ảnh sprite | `^anim_[a-z0-9_]+$` |
-| `screen_flash` | boolean | **Có** | Có loé trắng màn hình không | `true` / `false`. **Phải khai báo tường minh** |
+| `id` | string | **Có (MF)** | Mã cú doạ | `^scare_[a-z0-9_]+$`, duy nhất toàn chương |
+| `trigger_type` | enum | **Có (MF)** | Điều kiện bắn | `ON_PUZZLE_FAIL_COUNT` \| `ON_ENTER_AREA` \| `ON_COLLECT_ITEM` \| `ON_TIMER` \| `ON_WRONG_ITEM_USE` |
+| `max_fails` | integer | **Có ¹ (MF)** | Số lần giải sai liên tiếp trước khi bắn | `≥ 1`. **Chỉ** `ON_PUZZLE_FAIL_COUNT`; trigger khác mang trường này là **[LỖI]**. Là khoá Master Form nhưng **sự có mặt bị điều kiện hoá bởi `trigger_type`** — xem ghi chú dưới §2.5.2 |
+| `delay_sec` | number | **Có ¹ (MF)** với `ON_TIMER`, Không ★ với trigger khác | Độ trễ từ lúc điều kiện kích hoạt được thoả tới lúc cú doạ thật sự bắn | `0 ≤ v ≤ 600`. Thiếu trên `ON_TIMER` → **[LỖI]**. §2.7 |
+| `trigger_item_id` | string | **Có ¹ (MF)** với `ON_COLLECT_ITEM`, Không với `ON_WRONG_ITEM_USE` | Vật phẩm gắn với cú doạ | `^item_...$`, phải có trong `item_catalog`. **Cấm** với mọi `trigger_type` khác. §2.7 |
+| `audio_asset` | string | **Có (MF)** | File âm thanh | `<tên>.ogg` / `.mp3` / `.wav`. Chương 1 dùng **`.ogg`**; đó là **tên asset nguồn**, thiết lập import quyết định định dạng lúc chạy (`sfx_scare_*` bắt buộc import thành **ADPCM**) — xem `docs/05` **§3.3**, không phải §4.3. Biến thể mềm `<tên>_soft.ogg` bắt buộc tồn tại — `docs/06_AN_TOAN_NGUOI_CHOI.md` §4.3 |
+| `sprite_animation` | string | **Có (MF)** | Hoạt ảnh sprite | `^anim_[a-z0-9_]+$`. Biến thể an toàn `_soft` / `_static` sinh bằng nối hậu tố — `docs/06_AN_TOAN_NGUOI_CHOI.md` §4.3 |
+| `screen_flash` | boolean | **Có (MF)** | Có loé trắng màn hình không | `true` / `false`. **Phải khai báo tường minh.** Đặt `true` phải thoả **cả hai** điều kiện của `docs/06_AN_TOAN_NGUOI_CHOI.md` §2.3, và màu loé phải nằm trong danh sách đóng ở §2.4 của tài liệu ấy |
 | `cooldown_sec` | number | Không ★ | Thời gian nghỉ tối thiểu trước khi bắn lại | `0 ≤ v ≤ 3600`. Quy ước chương: **90**. §2.7 |
 | `cooldown_exempt` | boolean | Không | Khai báo **có chủ đích** rằng cú doạ này không có `cooldown_sec` | Mặc định `false`. Đặt `true` thì trình kiểm thôi nhắc — và **bắt buộc** kèm `ghi_chu_vi` nêu căn cứ miễn trừ. §2.7 |
 | `ten_vi`, `ghi_chu_vi` | string | Không | Nhãn và ghi chú sản xuất | `ten_vi` ≤ 120 ký tự, `ghi_chu_vi` ≤ 500. Không hiển thị trong game. **Bắt buộc** khi cú doạ được miễn trừ một quy ước (vd bỏ `cooldown_sec`) — ghi rõ miễn trừ theo điều nào |
+
+> **NHỮNG TRƯỜNG NÀO CỦA `jumpscares[]` BỊ `gentle_mode` GHI ĐÈ LÚC CHẠY — và vì sao dữ liệu trên đĩa vẫn không đổi.** Tổ trợ năng có một lớp `ScareConfigResolver` đọc `data/areas/*.json` rồi **phủ** một lớp giá trị runtime lên trên. Lớp ấy **không bao giờ ghi ngược xuống file dữ liệu**, và `tools/validate_level.py` **không** biết tới nó — validator luôn kiểm giá trị trên đĩa.
+>
+> | Khoá trong `jumpscares[]` | `gentle_mode` làm gì | Nguồn |
+> |---|---|---|
+> | `screen_flash` | `true` → **`false`** (và `flash_alpha → 0`) | `docs/06_AN_TOAN_NGUOI_CHOI.md` §8.2 |
+> | `audio_asset` | `<tên>.ogg` → **`<tên>_soft.ogg`** (−12 dB, low-pass 6 kHz, attack ≥ 25 ms) | `docs/06` §4.3 |
+> | `sprite_animation` | `<tên>` → **`<tên>_soft`**; ở `scare_intensity = 0` → **`<tên>_static`** | `docs/06` §4.3, §4.5 |
+> | `cooldown_sec` | `90` → **`180`** | `docs/06` §6.3, §8.2 |
+> | `delay_sec` | **giữ nguyên** | — |
+> | `max_fails` · `trigger_type` · `id` | **KHÔNG BAO GIỜ bị đụng** — giữ nguyên tuyệt đối để phép chứng minh khả giải (§5.5) vẫn đúng từng chữ | `docs/06` §1.2 |
+>
+> Hệ quả với tài liệu này: đọc thấy `"screen_flash": true` trong dữ liệu **không** có nghĩa là mọi người chơi đều thấy loé. Nó có nghĩa là *"cú doạ này loé ở hồ sơ mặc định"*. Bốn cú doạ `screen_flash: true` của Chương 1 đều đã qua kiểm định nhạy sáng ở `docs/06` §2.2.
 
 ### 2.5.2. Ma trận bắt buộc theo `trigger_type`
 
@@ -354,11 +435,21 @@ Bảng soát cho tổ đồ hoạ, thay cho một dòng cũ:
 > 1. **`delay_sec` không còn bị cấm trên `ON_ENTER_AREA` và `ON_COLLECT_ITEM`.** Ràng buộc cũ mâu thuẫn với ý đồ đạo diễn: `scare_hinh_nhan_chan_loi` (`ON_ENTER_AREA`) cần `delay_sec: 0.9` để bắn **sau** khi fade-in xong; `scare_di_anh_quay_mat` (`ON_COLLECT_ITEM`) cần `delay_sec: 0.25` để bắn **sau** khi dùi rời khỏi mõ. Độ trễ là công cụ dựng nhịp, không phải thứ riêng của `ON_TIMER`.
 > 2. **`trigger_item_id` là BẮT BUỘC với `ON_COLLECT_ITEM`**, không phải "lọc nếu có". Không có nó thì cú doạ bắn khi nhặt **bất kỳ** vật phẩm nào trong khu vực — không một cú doạ nào của Chương 1 muốn thế, và không ai kiểm thử lại được một khiếu nại về nó.
 
+> **Ghi chú về ba khoá Master Form có mặt theo điều kiện.** Bản Master Form liệt `max_fails`, `trigger_item_id` và `delay_sec` trong danh sách khoá của `jumpscares[]`, nhưng **sự có mặt của chúng bị `trigger_type` quyết định**, và ma trận ngay trên là bản có hiệu lực:
+>
+> | Khoá | Bắt buộc có khi | Cấm có khi |
+> |---|---|---|
+> | `max_fails` | `trigger_type = ON_PUZZLE_FAIL_COUNT` | 4 `trigger_type` còn lại |
+> | `trigger_item_id` | `trigger_type = ON_COLLECT_ITEM` | `ON_PUZZLE_FAIL_COUNT`, `ON_ENTER_AREA`, `ON_TIMER` |
+> | `delay_sec` | `trigger_type = ON_TIMER` | — (tuỳ chọn ở mọi trigger khác) |
+>
+> Khác hẳn bốn khoá Master Form của `hotspots[]` (`item_id`, `required_item`, `target_puzzle_id`, `target_area_id`), vốn phải **luôn có mặt** với giá trị `null` khi không áp dụng (§2.3.2). Lý do khác nhau: bốn khoá hotspot là **bốn ô của cùng một câu hỏi** *"hotspot này làm gì"* — bỏ trống một ô là bỏ lửng câu hỏi; còn `max_fails` trên một cú doạ `ON_TIMER` không có nghĩa nào để mà `null`.
+
 **Kiểm tra chéo bổ sung:** nếu một câu đố trỏ `wrong_action_jumpscare` tới cú doạ X, mà X có `trigger_type` **không phải** `ON_PUZZLE_FAIL_COUNT` hoặc `ON_WRONG_ITEM_USE`, validator phát **[CẢNH BÁO]** — cú doạ đó sẽ không bao giờ bắn vì giải sai, tham chiếu là vô nghĩa.
 
 ## 2.6. Ví dụ đầy đủ — `data/areas/area_gian_tho.json` (trích)
 
-Trích này lấy **nguyên văn giá trị từ dữ liệu thật**, và cố ý trưng ra cả chín trường logic mở rộng của §2.7.
+Trích này lấy **nguyên văn giá trị từ dữ liệu thật**, và cố ý trưng ra cả **mười một** trường logic mở rộng của §2.7. Nó cũng là **bản mẫu bắt buộc** cho luật Master Form ở §2.3.2: **mọi** hotspot in đủ bốn khoá `item_id` / `required_item` / `target_puzzle_id` / `target_area_id`, dùng `null` ở chỗ không áp dụng.
 
 ```json
 {
@@ -371,7 +462,10 @@ Trích này lấy **nguyên văn giá trị từ dữ liệu thật**, và cố 
       "id": "hs_ban_tho_ho",
       "bounds": { "x": 640, "y": 300, "width": 660, "height": 420 },
       "action_type": "ZOOM_PUZZLE",
-      "target_puzzle_id": "puz_tuan_tu_le_cung"
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": "puz_tuan_tu_le_cung",
+      "target_area_id": null
     },
     {
       "id": "hs_dui_mo",
@@ -380,6 +474,8 @@ Trích này lấy **nguyên văn giá trị từ dữ liệu thật**, và cố 
       "action_type": "COLLECT_ITEM",
       "item_id": "item_dui_mo",
       "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "one_shot": true
     },
     {
@@ -387,8 +483,12 @@ Trích này lấy **nguyên văn giá trị từ dữ liệu thật**, và cố 
       "bounds":        { "x": 430, "y": 115, "width": 150, "height": 120 },
       "visual_bounds": { "x": 430, "y": 120, "width": 150, "height": 110 },
       "action_type": "USE_ITEM",
-      "required_item": "item_bai_vi_khuyet_danh",
       "item_id": "item_bai_vi_khuyet_danh",
+      "required_item": "item_bai_vi_khuyet_danh",
+      "target_puzzle_id": null,
+      "target_area_id": null,
+      "consumes_item": false,
+      "locks_item": true,
       "grants_flag": "flag_then_gac_da_tra",
       "fallback_text_key": "txt_thieu_do_khe_mong_cua_gac",
       "one_shot": true
@@ -397,15 +497,22 @@ Trích này lấy **nguyên văn giá trị từ dữ liệu thật**, và cố 
       "id": "hs_van_khan",
       "bounds": { "x": 1330, "y": 740, "width": 230, "height": 140 },
       "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
       "text_key": "txt_examine_van_khan"
     },
     {
       "id": "hs_cua_hau_xuong_bep",
       "bounds": { "x": 60, "y": 790, "width": 200, "height": 200 },
       "action_type": "CHANGE_AREA",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
       "target_area_id": "area_bep_gieng",
       "required_flags": ["flag_puz_tuan_tu_le_cung_solved"],
-      "fallback_text_key": "txt_khoa_cua_hau_xuong_bep"
+      "fallback_text_key": "txt_khoa_cua_hau"
     }
   ],
   "puzzles": [
@@ -453,19 +560,21 @@ Trích này lấy **nguyên văn giá trị từ dữ liệu thật**, và cố 
 }
 ```
 
-**Đọc trích này theo bảy điểm:**
+**Đọc trích này theo chín điểm:**
 
 | Dòng | Vì sao nó ở đó |
 |---|---|
 | `"ambience_address"` | Nếu thiếu, engine phải ghép chuỗi `"remote_ambience_" + area_id` trong mã — một phụ thuộc ẩn không cổng CI nào bắt được (§2.1.2) |
-| `hs_dui_mo`: `bounds` 120×120 nhưng `visual_bounds` 110×120 | Dùi mõ vẽ rộng 110 px; vùng chạm nới sang trái 5 px để đạt sàn thiết kế 120. Đây là **vùng chạm mở rộng** (§2.3.4) |
+| `hs_dui_mo`: `bounds` 120×120 nhưng `visual_bounds` 110×120 | Dùi mõ vẽ rộng 110 px; vùng chạm nới sang trái 5 px để đạt sàn thiết kế 120. Đây là **vùng chạm mở rộng** (§2.3.5) |
 | `hs_khe_mong_cua_gac`: `bounds` cao 120, `visual_bounds` cao 110 | Cùng cơ chế, nới đều 5 px lên trên và 5 px xuống dưới |
 | `"grants_flag": "flag_then_gac_da_tra"` | Nguồn cấp **tường minh** cho cờ mở `area_gac_xep`. Không có nó là **[LỖI]** — trình kiểm không suy luận theo tên nữa (§5.3) |
 | `"fallback_text_key"` trên hai hotspot bị chặn | Người chơi bấm mà chưa đủ điều kiện thì **được nghe một câu**, thay vì thấy không có gì xảy ra (§2.7.4) |
-| `"required_items": ["item_dui_mo"]` | Mã hoá "phải cầm dùi mới gõ được mõ". Không có nó, `item_dui_mo` bị báo vật phẩm chết và phép chứng minh khả giải mất tính chặt (§5.4) |
+| `"required_items": ["item_dui_mo"]` | Mã hoá "phải cầm dùi mới thỉnh được chuông và điểm được mõ" — một đầu dùi quấn vải điều để đánh chuông, đầu kia để trần gõ mõ. Không có nó, `item_dui_mo` bị báo vật phẩm chết và phép chứng minh khả giải mất tính chặt (§5.4) |
 | `"trigger_item_id"` + `"delay_sec"` trên `scare_di_anh_quay_mat` | `trigger_item_id` **bắt buộc** với `ON_COLLECT_ITEM`; `delay_sec: 0.25` đặt cú doạ **sau** khoảnh khắc dùi rời khỏi mõ, đúng nhịp đạo diễn (§2.7.7, §2.7.8) |
+| Bốn khoá `null` lặp trên **mọi** hotspot, kể cả `hs_van_khan` (`EXAMINE`) | Đây là luật Master Form ở §2.3.2. `null` = *"đã cân nhắc, ở đây không có"*; thiếu khoá = *"không ai biết"*. Chỉ trạng thái thứ nhất mới đọc được bằng máy |
+| `"consumes_item": false` + `"locks_item": true` trên `hs_khe_mong_cua_gac` | Cặp giá trị này là **trạng thái thứ hai** ở §2.3.4.2: bài vị **không bị xoá khỏi túi** nhưng **khoá tại chỗ dùng**. Đây là hai dòng dữ liệu duy nhất giải thích vì sao `puz_xep_anh_gia_pha` **không** liệt `item_bai_vi_khuyet_danh` vào `required_items` (§2.3.3, §2.7.5) mà cú twist cuối chương vẫn đọc lại được nó |
 
-`[[ Luu y ve puz_tuan_tu_le_cung: "required_items": [] la mang RONG co chu dich — cau do nay khong can cong cu nao. Khac han voi viec khong khai truong. Con "grants_flag" o day khai lai dung co chinh tac flag_puz_tuan_tu_le_cung_solved: hop le, va co ich, vi no bien mot luat ngam thanh mot dong du lieu doc duoc. ]]`
+`[[ Luu y ve puz_tuan_tu_le_cung: "required_items": [] la mang RONG co chu dich — cau do nay khong can cong cu nao. Khac han voi viec khong khai truong. Con "grants_flag": "flag_puz_tuan_tu_le_cung_solved" KHONG phai la khai lai thua: tu vong 3, gia tri nay BAT BUOC duoc ghi thang ra trong JSON, trinh kiem khong con suy ra tu ten cau do nua (muc 2.7.6). ]]`
 
 ## 2.7. Đặc tả đầy đủ các trường logic mở rộng
 
@@ -482,6 +591,8 @@ Chín trường dưới đây được thêm vào dữ liệu **song song** vớ
 | 7 | `jumpscares[].trigger_item_id` | `string` | **Có** | Cú doạ bắn khi nhặt bất kỳ vật phẩm nào |
 | 8 | `jumpscares[].delay_sec` | `number` | **Có** | Thời điểm bắn không xác định, mỗi máy một kiểu |
 | 9 | `jumpscares[].cooldown_sec` (+ `cooldown_exempt`) | `number` / `boolean` | **Có** | Doạ liên tục, người chơi kỳ lại và cú doạ mất hết hiệu lực |
+| **10** | **`hotspots[].consumes_item`** | `boolean` | **MỚI — vòng 3** | Máy không biết vật phẩm nào bị tiêu huỷ ⇒ phép chứng minh khả giải (§5.5) phải giả định mọi vật phẩm còn mãi trong túi ⇒ khoá-chết-chương lọt lưới |
+| **11** | **`hotspots[].locks_item`** | `boolean` | **MỚI — vòng 3** | Không tách được *"khoá tại chỗ dùng"* khỏi *"tiêu huỷ"* ⇒ hoặc phép chứng minh khả giải sai, hoặc cú twist cuối chương mất chỗ tựa (§2.3.4.2) |
 | — | `areas[].ambience_address` | `string \| null` | **CHƯA CÓ — đề nghị** | Tên bundle tiếng nền là phụ thuộc ẩn trong mã, không cổng CI nào bắt được |
 
 ---
@@ -493,10 +604,10 @@ Chín trường dưới đây được thêm vào dữ liệu **song song** vớ
 | **Kiểu** | `Bounds` (§2.2) hoặc `null` |
 | **Bắt buộc khi nào** | Không bắt buộc về cú pháp. **Bắt buộc trên thực tế** khi vùng vẽ của sprite nhỏ hơn `bounds` quá 24 px ở bất kỳ chiều nào, và khi `min(bounds.width, bounds.height) < 120` |
 | **Ý nghĩa** | Vùng **vẽ thật** của sprite. `bounds` = nơi ngón tay chạm; `visual_bounds` = nơi mắt nhìn |
-| **Ràng buộc** | Nằm **trọn** trong `bounds` (bốn bất đẳng thức, §2.3.4.1). Không chịu luật chồng lấn B5. Không khai ⇒ engine coi bằng `bounds` |
-| **Ví dụ** | Xem §2.3.4.2 — `hs_dui_mo` và `hs_chieu_coi_trai_san` |
+| **Ràng buộc** | Nằm **trọn** trong `bounds` (bốn bất đẳng thức, §2.3.5.1). Không chịu luật chồng lấn B5. Không khai ⇒ engine coi bằng `bounds` |
+| **Ví dụ** | Xem §2.3.5.2 — `hs_dui_mo` và `hs_chieu_coi_trai_san` |
 
-Đặc tả đầy đủ, cùng phần validator và checklist đồ hoạ, nằm ở **§2.3.4**.
+Đặc tả đầy đủ, cùng phần validator và checklist đồ hoạ, nằm ở **§2.3.5**.
 
 ---
 
@@ -547,7 +658,7 @@ Chín trường dưới đây được thêm vào dữ liệu **song song** vớ
 | Mục | Nội dung |
 |---|---|
 | **Kiểu** | `array<string>`, mỗi phần tử khớp `^item_[a-z0-9_]+$`, **không trùng nhau** |
-| **Bắt buộc khi nào** | Không ★ — **rất khuyến nghị**. Mặc định `[]` |
+| **Bắt buộc khi nào** | **Khoá phải có mặt trên mọi câu đố.** Được phép là mảng rỗng `[]` — `[]` nghĩa là *"câu đố này cố ý không cần công cụ nào"*, khác hẳn việc thiếu khoá |
 | **Ý nghĩa** | Các vật phẩm **công cụ** phải có sẵn trong túi đồ thì mới **nhập được lời giải**. Chúng **không bị tiêu thụ** |
 | **Ràng buộc** | Mọi `item_id` phải có trong `item_catalog`. Thiếu trường ⇒ validator coi câu đố là giải được ngay khi vào khu vực, và mọi vật phẩm công cụ bị báo **[CẢNH BÁO]** vật phẩm chết (B7, §5.4) |
 | **Ví dụ** | `{"id": "puz_ba_hoi_chin_tieng", "type": "AUDIO_MATCH", "solution": [3,3,5,3,7,3], "required_items": ["item_dui_mo"]}` |
@@ -568,13 +679,26 @@ Chín trường dưới đây được thêm vào dữ liệu **song song** vớ
 
 | Mục | Nội dung |
 |---|---|
-| **Kiểu** | `string` khớp `^flag_[a-z0-9_]+$`, hoặc `null` |
-| **Bắt buộc khi nào** | Không |
-| **Ý nghĩa** | Cờ tiến trình **PHỤ**, bật khi giải đúng — **ngoài** cờ chính tắc |
-| **Ràng buộc** | **Quy ước chính tắc là luật cố định, không phải mặc định của trường này:** giải xong câu đố `X` **luôn** bật cờ `flag_<X>_solved`, dù có khai `grants_flag` hay không. Engine và trình kiểm cùng hiện thực luật đó. Dùng `grants_flag` khi muốn **thêm** một tên cờ khác |
-| **Ví dụ** | `{"id": "puz_tuan_tu_le_cung", "grants_flag": "flag_puz_tuan_tu_le_cung_solved"}` — khai lại đúng cờ chính tắc, hợp lệ và **có ích**: nó biến một luật ngầm thành một dòng dữ liệu đọc được |
+| **Kiểu** | `string` khớp `^flag_[a-z0-9_]+$`. **Không** chấp nhận `null`, **không** chấp nhận thiếu khoá |
+| **Bắt buộc khi nào** | **LUÔN LUÔN.** Thiếu khoá, hoặc để `null`, là **[LỖI]** chặn build |
+| **Ý nghĩa** | Cờ tiến trình bật khi câu đố được giải đúng. Đây là **nguồn cấp tường minh duy nhất** cho cờ ấy |
+| **Ràng buộc** | **Quy ước đặt tên vẫn là `flag_<puzzle_id>_solved`** — nhưng đó là *quy ước đặt tên*, **không phải** một luật ngầm mà trình kiểm được phép suy ra. **Giá trị phải được ghi thẳng ra trong JSON.** Trình kiểm **không** ghép chuỗi `"flag_" + id + "_solved"` nữa, và engine cũng không |
+| **Ví dụ** | `{"id": "puz_tuan_tu_le_cung", "grants_flag": "flag_puz_tuan_tu_le_cung_solved"}` |
 
-`[[ Khac biet tinh te voi hotspots[].grants_flag: hotspot KHONG co co chinh tac. Neu mot hotspot khong khai grants_flag thi no khong bat co nao het. Cau do thi luon bat flag_<id>_solved. Dung nham hai luat nay. ]]`
+**Sáu dòng bắt buộc của Chương 1** — cả sáu đều đã có mặt tường minh trong `data/areas/*.json`:
+
+| `puzzle_id` | `grants_flag` |
+|---|---|
+| `puz_khoa_bat_quai` | `flag_puz_khoa_bat_quai_solved` |
+| `puz_rap_chu_the_menh` | `flag_puz_rap_chu_the_menh_solved` |
+| `puz_tuan_tu_le_cung` | `flag_puz_tuan_tu_le_cung_solved` |
+| `puz_ba_hoi_chin_tieng` | `flag_puz_ba_hoi_chin_tieng_solved` |
+| `puz_thap_lai_den_dau` | `flag_puz_thap_lai_den_dau_solved` |
+| `puz_xep_anh_gia_pha` | `flag_puz_xep_anh_gia_pha_solved` |
+
+`[[ Vi sao bo luat "co chinh tac tu bat": mot luat ngam ma chi engine va trinh kiem biet la mot luat KHONG AI DOC DUOC tu du lieu. Nguoi doc file JSON khong thay co nao ca, roi di tim nguon cap cua flag_puz_ba_hoi_chin_tieng_solved va khong thay gi. Ghi thang ra ton sau dong, va doi lai thi §5.3 chi con MOT muc xac dinh nguon cap thay vi ba. ]]`
+
+`[[ Khac biet tinh te voi hotspots[].grants_flag: hotspot duoc phep khai null — mot hotspot co the co y khong cap co nao het. Cau do thi KHONG: moi cau do deu phai cap dung mot co, tuong minh. ]]`
 
 ---
 
@@ -609,7 +733,7 @@ Chín trường dưới đây được thêm vào dữ liệu **song song** vớ
 | **Kiểu** | `number`, `0 ≤ v ≤ 3600` |
 | **Bắt buộc khi nào** | Không ★. Thiếu trên cú doạ **có thể bắn nhiều lần** (`ON_ENTER_AREA`, `ON_TIMER`, `ON_PUZZLE_FAIL_COUNT`) ⇒ **[CẢNH BÁO]** |
 | **Ý nghĩa** | Thời gian nghỉ tối thiểu trước khi cú doạ này được bắn lại |
-| **Ràng buộc** | Quy ước Chương 1: **90 giây**, khớp `ad_cooldown_after_scare_sec` của LiveOps và cửa sổ cấm quảng cáo `WITHIN_90S_AFTER_ANY_JUMPSCARE` (§4.6). Hai con số ấy **phải bằng nhau** — lệch thì hoặc quảng cáo lọt vào ngay sau một cú doạ, hoặc chặn quảng cáo lâu hơn cần thiết |
+| **Ràng buộc** | Quy ước Chương 1: **90 giây**, khớp `ad_cooldown_after_scare_sec` của LiveOps và cửa sổ cấm quảng cáo `WITHIN_90S_AFTER_ANY_JUMPSCARE` (§4.6). Ba con số ấy **phải bằng nhau** — lệch thì hoặc quảng cáo lọt vào ngay sau một cú doạ, hoặc chặn quảng cáo lâu hơn cần thiết. **Chủ sở hữu của luật 90 giây là `docs/06_AN_TOAN_NGUOI_CHOI.md` §6.3**; trong `gentle_mode` con số này thành **180** (§8.2 của tài liệu ấy) — đó là **lớp runtime**, không ghi ngược vào `data/areas/*.json` |
 | **Ví dụ** | `{"id": "scare_bong_trong_chum", "trigger_type": "ON_PUZZLE_FAIL_COUNT", "max_fails": 3, "cooldown_sec": 90}` |
 
 | Mục | `cooldown_exempt` |
@@ -617,8 +741,8 @@ Chín trường dưới đây được thêm vào dữ liệu **song song** vớ
 | **Kiểu** | `boolean`, mặc định `false` |
 | **Bắt buộc khi nào** | Không. Đặt `true` **chỉ khi** cú doạ cố ý không có `cooldown_sec` |
 | **Ý nghĩa** | Khai báo bằng **dữ liệu** rằng việc thiếu `cooldown_sec` là có chủ đích, để trình kiểm thôi cảnh báo |
-| **Ràng buộc** | Chỉ dùng cho cú doạ **nhẹ** (dread / ambience) được `04_horror.md` §2.7.2 miễn trừ luật nghỉ 90 giây: không transient, không `screen_flash`, không punch camera, không haptic ở mốc 0 ms. **Bắt buộc đi kèm `ghi_chu_vi`** nêu rõ căn cứ miễn trừ |
-| **Ví dụ** | `scare_ao_cuoi_quay_dau` — cú đóng chương: `"trigger_type": "ON_TIMER", "delay_sec": 0.4, "screen_flash": false, "cooldown_exempt": true, "ghi_chu_vi": "S8 - dread scare, CO Y khong khai cooldown_sec: mien tru luat 90 s theo 04_horror.md muc 2.8.2..."` |
+| **Ràng buộc** | Chỉ dùng cho cú doạ **nhẹ** (dread / ambience) thoả **cả bốn** điều kiện miễn trừ luật nghỉ 90 giây ở **`docs/06_AN_TOAN_NGUOI_CHOI.md` §6.3.1**: không transient, `screen_flash: false`, không punch/shake camera, không haptic > 0,5 ở mốc 0 ms. **Bắt buộc đi kèm `ghi_chu_vi`** nêu rõ căn cứ miễn trừ (§6.3.2 của tài liệu ấy) |
+| **Ví dụ** | `scare_ao_cuoi_quay_dau` — cú đóng chương, **cú doạ duy nhất của Chương 1 được miễn trừ**: `"trigger_type": "ON_TIMER", "delay_sec": 0.4, "screen_flash": false, "cooldown_exempt": true, "ghi_chu_vi": "S8 - dread scare, CO Y khong khai cooldown_sec: mien tru luat 90 s theo docs/06_AN_TOAN_NGUOI_CHOI.md muc 6.3.1..."` |
 
 > **Vì sao miễn trừ phải là một trường chứ không phải một dòng ghi chú:** `ghi_chu_vi` là văn xuôi, trình kiểm không đọc được. Một cú doạ thiếu `cooldown_sec` mà chỉ có ghi chú sẽ hoặc bị cảnh báo mãi mãi (rồi người ta học cách bỏ qua cảnh báo), hoặc phải tắt luật kiểm (rồi mọi cú doạ khác cũng mất luật). Một trường boolean giải quyết cả hai: ý đồ thành dữ liệu, cảnh báo thành chính xác.
 
@@ -642,6 +766,22 @@ Chín trường dưới đây được thêm vào dữ liệu **song song** vớ
 | `areas` | array\<AreaEntry\> | **Có** | Bảng đăng ký khu vực | Mọi `area_id` trong `area_order` phải có mục tương ứng |
 | `item_catalog` | array\<ItemEntry\> | **Có** | **Sổ đăng ký vật phẩm duy nhất** của chương | Mọi `item_id` được tham chiếu ở bất kỳ đâu đều phải có ở đây |
 | `puzzle_index`, `jumpscare_index` | array | Không | Bảng tra cứu phẳng cho công cụ nội bộ | Phải nhất quán với file khu vực |
+| `chapter_complete_flag` | string | **Có** | **Cờ KẾT CHƯƠNG**, khai báo tường minh | `^flag_...$`. Phải có đúng một nguồn cấp `grants_flag`, và mô phỏng khả giải phải **thật sự bật được nó**. Xem §3.1.1 |
+| `exported_flags` | array\<string\> | Không | Cờ **bàn giao** cho chương sau / lớp lưu game | Mỗi tên phải có nguồn cấp `grants_flag`. Cờ nằm trong danh sách này được miễn cảnh báo "cờ không ai đọc" |
+
+### 3.1.1. `chapter_complete_flag` — vì sao "tới được khu vực cuối" là chưa đủ
+
+| Mục | Nội dung |
+|---|---|
+| **Kiểu** | `string`, `^flag_[a-z0-9_]+$` |
+| **Bắt buộc** | **Có** — thiếu là **[LỖI]** |
+| **Giá trị Chương 1** | `flag_chapter_01_hoan_thanh` |
+| **Nguồn cấp** | `hs_hinh_nhan` (`area_gac_xep`, `USE_ITEM`, `consumes_item: true`) qua `grants_flag` |
+| **Validator kiểm** | Giai đoạn 7a: cờ này phải có nguồn cấp `grants_flag`. Giai đoạn 10: sau khi mô phỏng đạt điểm bất động, cờ này **phải nằm trong tập cờ đã bật** |
+
+> **⚠️ VÌ SAO PHẢI CÓ TRƯỜNG NÀY.** Trước bản này, bằng chứng "khả giải" duy nhất về đoạn kết là *`area_order[-1]` phải tới được*. Nhưng **tới được gian gác xép không phải là kết được chương** — hành động kết chương là khoác áo cưới giấy lên hình nhân ở `hs_hinh_nhan`. Kiểm chứng bằng đột biến: xoá `grants_flag` của `hs_hinh_nhan` thì giai đoạn 10 vẫn in `[OK] KHA GIAI ... 5/5 khu vuc`, vì nó không có gì để đối chiếu. Một mô phỏng độc lập — loại có theo dõi cờ kết chương — thì gãy ngay. Khoảng trống ấy nay được bịt bằng **dữ liệu**, không bằng quy ước.
+>
+> **Và trình kiểm KHÔNG được tự dựng tên cờ này** từ `chapter_id` (kiểu `"flag_%s_hoan_thanh" % chapter_id`) hay từ tên hotspot. Đó đúng là kiểu suy diễn theo tên mà vòng này đi gỡ: nó dùng **tên định danh** chứ không dùng **trường dữ liệu**. Giá trị phải đọc thẳng từ `chapter_complete_flag`.
 
 ## 3.2. Kiểu `AreaEntry`
 
@@ -746,8 +886,22 @@ Tài liệu chủ quản là `docs/04_LIVEOPS_MONETIZATION.md`; mục này chỉ
 | `iap_product_id` | string | **Có (MF)** | Mã sản phẩm trên store | `^com\.game\.` — **duy nhất** trong mảng |
 | `product_type` | enum | **Có** | Loại sản phẩm | `NON_CONSUMABLE` \| `CONSUMABLE`. **Chương 1 cấm `SUBSCRIPTION`** |
 | `price_usd` | number | **Có (MF)** | Giá neo USD | `> 0`. Giá hiển thị thật **luôn** lấy từ store |
-| `unlock` | object | Không | Nội dung được mở | `{chapter_id, grants_flags[], grants_gems}` |
+| `unlock` | object | Không | Nội dung được mở | `{chapter_id, grants_flags[], grants_gems}`. **Lưu ý:** khoá ở đây là `grants_flags` (số nhiều, mảng) — **khác** `grants_flag` (số ít, chuỗi) của hotspot/câu đố trong `data/areas/*.json`. Hai hợp đồng khác nhau, đừng chép nhầm |
+| `requires` | object | Không | Cổng mở của sản phẩm | `{flag}`. **Bất biến 17 (§4.4.1):** `flag` phải có nguồn cấp THẬT |
 | `regional_pricing` | array | **Có** | Bảng giá theo vùng | `region_code` duy nhất, **bắt buộc đủ `VN`, `US`, `SEA_DEFAULT`** |
+
+### 4.4.1. Bất biến 17 — `requires.flag` phải có nguồn cấp thật
+
+Cổng bán hàng chặn bằng cờ. Một cờ **không ai cấp** thì cổng ấy khoá **vĩnh viễn với mọi người chơi** — và đây là loại lỗi không một phép kiểm nào của riêng màn chơi nhìn thấy, vì nó nằm **vắt ngang hai file dữ liệu**.
+
+Một `requires.flag` hợp lệ khi và chỉ khi nó đến từ **một trong hai** nguồn đọc được bằng máy:
+
+| # | Nguồn | Điều kiện |
+|---|---|---|
+| 1 | **Chương 1 cấp nó** | Có một `grants_flag` thật trong `data/areas/*.json`, **và** cờ ấy được `data/chapter_01.json` khai là bàn giao — nằm trong `exported_flags` hoặc là chính `chapter_complete_flag`. Lớp mua hàng ở ngoài chương, nó chỉ được đọc những gì chương **tuyên bố xuất ra** |
+| 2 | **Chính file LiveOps cấp nó** | Nằm trong một `iap.products[*].unlock.grants_flags` nào đó — ví dụ `flag_chapter_02_unlocked` do gói mua bàn giao |
+
+> **⚠️ LỖI ĐÃ BẮT ĐƯỢC Ở VÒNG NÀY.** `com.game.chapter02` từng chặn bằng `"requires": {"flag": "flag_chapter_01_completed"}`. **Không một hotspot hay câu đố nào trong Chương 1 khai cờ đó** — cờ kết chương thật tên là `flag_chapter_01_hoan_thanh`. Nghĩa là **không người chơi nào mua nổi Chương 2**. Hai file đều parse sạch, cả hai đều đúng schema của riêng mình, và đúng 16 bất biến cũ đều xanh. Lỗi chỉ lộ ra khi có người **đối chiếu cờ LiveOps đòi với cờ Chương 1 thật sự cấp** — nay là bất biến 17.
 
 ## 4.5. `seasonal_events[]`
 
@@ -849,13 +1003,16 @@ JSON Schema chỉ nhìn được **một file tại một thời điểm**. Các
 | B6 | Đồ thị phụ thuộc vật phẩm **không có chu trình** | **[LỖI]** | 8 |
 | B7 | Vật phẩm nhặt được mà **không nơi nào dùng tới** | **[CẢNH BÁO]** | 9 |
 | B8 | **Khả giải**: tới được mọi khu vực, giải được mọi câu đố, cầm được mọi vật phẩm, tới được khu vực kết chương | **[LỖI]** | 10 |
-| B9 | Mọi cờ trong `required_flags` **và** `unlock_condition.required_flags` đều có nguồn cấp **tường minh hoặc chính tắc** (§5.3) | **[LỖI]** | 7a |
+| B9 | Mọi cờ trong `required_flags` **và** `unlock_condition.required_flags` đều có nguồn cấp **tường minh** — một `grants_flag` ghi thẳng trong dữ liệu (§5.3) | **[LỖI]** | 7a |
 | B10 | 16 bất biến LiveOps trong `validation.invariants` | **[LỖI]** | 11 |
-| B11 | `visual_bounds` nằm **trọn** trong `bounds` của cùng hotspot (bốn bất đẳng thức, §2.3.4.1) | **[LỖI]** | 5 |
+| B11 | `visual_bounds` nằm **trọn** trong `bounds` của cùng hotspot (bốn bất đẳng thức, §2.3.5.1) | **[LỖI]** | 5 |
 | B12 | `basename` của `background_asset_url` bằng đúng `"bg_" + area_id` đã bỏ tiền tố `area_` (§2.1.1) | **[LỖI]** | 7b |
 | B13 | `ambience_address` khác `null` thì phần sau tiền tố phải bằng `area_id` (§2.1.2) | **[LỖI]** | 7b |
 | B14 | Hotspot có `required_item ≠ null` hoặc `required_flags ≠ []` mà thiếu `fallback_text_key` (§2.7.4) | **[CẢNH BÁO]** | 7a |
 | B15 | Cú doạ bắn được nhiều lần mà thiếu `cooldown_sec` và không có `cooldown_exempt: true` (§2.7.9) | **[CẢNH BÁO]** | 7b |
+| **B16** | Mọi hotspot `USE_ITEM` khai `consumes_item` (§2.3.4); và không vật phẩm nào bị `consumes_item: true` tiêu huỷ trước một chỗ còn cần nó | **[LỖI]** | 8 + 10 |
+| **B17** | Bốn khoá Master Form `item_id` / `required_item` / `target_puzzle_id` / `target_area_id` **có mặt trên mọi hotspot**, `null` khi không áp dụng (§2.3.2) | **[LỖI]** | 4 |
+| **B18** | Mọi câu đố khai `grants_flag` **tường minh, khác `null`** (§2.7.6) | **[LỖI]** | 4 |
 
 > **B5 và B11 là hai luật khác nhau, đừng gộp.** B5 cấm **`bounds` chồng `bounds`** — hai vùng chạm giao nhau thì người chơi bấm một chỗ ra hai kết quả. B11 chỉ kiểm **`visual_bounds` bên trong `bounds` của chính nó**. `visual_bounds` của hai hotspot khác nhau **được phép** gần nhau, thậm chí sát nhau — đồ vật vẽ cạnh đồ vật là chuyện thường; chỉ vùng chạm mới không được giẫm lên nhau.
 
@@ -870,17 +1027,18 @@ A.y < B.y + B.height     B.y < A.y + A.height
 
 Chạm **mép** không tính là chồng lấn: hotspot kết thúc ở `x = 640` và hotspot bắt đầu ở `x = 640` là hợp lệ. Đây là lý do `hs_khe_mong_cua_gac` (y: 120…230) đặt ngay trên `hs_cau_thang_gac` (y: 250…580) mà vẫn qua được kiểm tra.
 
-## 5.3. B9 — ba mức xác định nguồn cấp cờ tiến trình
+## 5.3. B9 — MỘT mức duy nhất để xác định nguồn cấp cờ tiến trình
 
-`unlock_condition.required_flags` là cách manifest diễn đạt "cửa này mở khi việc kia đã làm xong". Nhưng **hợp đồng khu vực không có trường nào nói cờ được bật ở đâu** — nên validator phải truy nguồn theo ba mức ưu tiên:
+`unlock_condition.required_flags` là cách manifest diễn đạt "cửa này mở khi việc kia đã làm xong". Từ vòng 3, việc truy nguồn chỉ còn **một mức**:
 
 | Mức | Cách xác định | Kết quả |
 |---|---|---|
-| 1. **Tường minh** | Một hotspot hoặc puzzle khai báo `"grants_flag": "<cờ>"` | Chấp nhận, không cảnh báo |
-| 2. **Quy ước chính tắc** | Tên cờ khớp mẫu `flag_<puzzle_id>_solved` và câu đố đó có thật. Đây là **luật cố định** của engine, không phải phỏng đoán (§2.7.6) | Chấp nhận, không cảnh báo |
-| — | Không thoả mức 1 lẫn mức 2 | **[LỖI]** |
+| 1. **Tường minh — mức duy nhất** | Một hotspot hoặc một câu đố khai báo `"grants_flag": "<cờ>"` ngay trong dữ liệu | Chấp nhận, không cảnh báo |
+| — | Không có dòng `grants_flag` nào cấp cờ ấy | **[LỖI]** |
 
-> **Mức 3 "suy luận theo từ khoá tên" đã bị BỎ.** Bản trước cho phép validator đối chiếu từ khoá giữa tên cờ và `id` các hotspot `USE_ITEM` trong khu vực nguồn, rồi gán tạm kèm cảnh báo. Ba lý do bỏ:
+> **Mức 2 "quy ước chính tắc `flag_<puzzle_id>_solved` tự bật" đã bị BỎ cùng lúc với mức 3.** Quy ước đặt tên vẫn còn nguyên và vẫn bắt buộc tuân theo — nhưng nó là **quy ước đặt tên**, không phải một luật ngầm cho phép bỏ trống dữ liệu. Cả sáu câu đố của Chương 1 nay khai `grants_flag` tường minh (§2.7.6), nên mức 2 không còn che cho ai cả. Đổi lại, người đọc file JSON nhìn thấy nguồn cấp của từng cờ ngay trên dòng dữ liệu, thay vì phải biết trước một luật chỉ nằm trong mã engine.
+
+> **Mức 3 "suy luận theo từ khoá tên" cũng đã bị BỎ.** Bản trước cho phép validator đối chiếu từ khoá giữa tên cờ và `id` các hotspot `USE_ITEM` trong khu vực nguồn, rồi gán tạm kèm cảnh báo. Ba lý do bỏ:
 >
 > 1. **Nó gãy lặng lẽ.** Đổi tên một hotspot là logic mở khoá đứt, mà cổng CI vẫn xanh vì suy luận tìm ra một ứng viên khác.
 > 2. **Nó không còn cần thiết.** Cả bốn hotspot `USE_ITEM` của Chương 1 nay đã khai `grants_flag` tường minh — không cờ nào còn phải đoán.
@@ -897,7 +1055,9 @@ Chạm **mép** không tính là chồng lấn: hotspot kết thúc ở `x = 640
 > | `hs_gieng_khoi` | `area_bep_gieng` | `flag_gieng_da_soi` | Soi sáng để lộ thông tin |
 > | `hs_hinh_nhan` | `area_gac_xep` | `flag_chapter_01_hoan_thanh` | Đóng chương |
 >
-> Suy luận theo tên (mức 3) là chỗ dựa tạm; đổi tên hotspot một lần là logic mở khoá gãy mà không ai biết.
+> Suy luận theo tên là chỗ dựa tạm; đổi tên hotspot một lần là logic mở khoá gãy mà không ai biết.
+
+**Mười cờ của Chương 1, mười nguồn cấp tường minh.** `flag_registry` trong `data/chapter_01.json` là bản đối chiếu: mỗi mục ghi `flag_id`, `nguon_kieu` (`PUZZLE` / `HOTSPOT`), `nguon_id` và `duoc_doc_boi`. Validator đọc `flag_registry` để **đối chiếu**, không để **thay thế** — nguồn sự thật vẫn là `grants_flag` trên đối tượng thật.
 
 ## 5.4. B7 — vì sao vật phẩm công cụ hay bị báo "chết"
 
@@ -915,7 +1075,7 @@ Trường `dung_de` trong `item_catalog` là văn xuôi cho người đọc, **k
 | `item_dui_mo` | `puz_ba_hoi_chin_tieng` |
 | `item_den_dau`, `item_dai_vai_dieu`, `item_chai_dau_hoa` | `puz_thap_lai_den_dau` |
 
-Khai báo đủ ba dòng của bảng trên (phủ cả năm vật phẩm) đem lại hai thứ cùng lúc: cảnh báo vật phẩm chết biến mất, **và** phép chứng minh khả giải ở giai đoạn 10 trở nên chặt thật sự — vì lúc đó nó mới kiểm được rằng người chơi đã cầm dùi mõ *trước khi* đứng trước cái mõ.
+Khai báo đủ ba dòng của bảng trên (phủ cả năm vật phẩm) đem lại hai thứ cùng lúc: cảnh báo vật phẩm chết biến mất, **và** phép chứng minh khả giải ở giai đoạn 10 trở nên chặt thật sự — vì lúc đó nó mới kiểm được rằng người chơi đã cầm cây dùi *trước khi* đứng trước bộ pháp khí chuông-mõ.
 
 ## 5.5. B8 — thuật toán chứng minh khả giải
 
@@ -930,12 +1090,26 @@ Lặp:
         Với mỗi hotspot trong đó:
             COLLECT_ITEM  → nếu required_item là null hoặc đã có  ⇒ nhặt item_id
             USE_ITEM      → nếu required_item đã có               ⇒ bật grants_flag, trao item_id
-            ZOOM_PUZZLE   → nếu đủ required_items                 ⇒ giải, bật cờ, nhận thưởng
+            ZOOM_PUZZLE   → nếu đủ required_items                 ⇒ giải, bật grants_flag,
+                                                              thưởng giao theo §5.6
             CHANGE_AREA   → nếu unlock_condition thoả             ⇒ tới khu vực đó
     Cho tới khi một vòng KHÔNG làm trạng thái thay đổi nữa.
 ```
 
-Điểm dừng chính là **mọi thứ người chơi có thể với tới**. Sau đó validator đối chiếu với mục tiêu và báo **[LỖI]** kèm chẩn đoán cụ thể (*thiếu vật phẩm nào*, *thiếu cờ nào*) cho từng mục không đạt. Chạy với `--trace` sẽ in ra nhật ký mô phỏng — đúng thứ tự game mở ra cho người chơi, dùng được luôn làm kịch bản QA.
+Điểm dừng chính là **mọi thứ người chơi có thể với tới**. Sau đó validator đối chiếu với mục tiêu — **5/5 khu vực, 6/6 câu đố, 10/10 vật phẩm, mọi `reward_item_id` cầm được, và `chapter_complete_flag` đã bật** (§3.1.1) — rồi báo **[LỖI]** kèm chẩn đoán cụ thể (*thiếu vật phẩm nào*, *thiếu cờ nào*) cho từng mục không đạt. Chạy với `--trace` sẽ in ra nhật ký mô phỏng — đúng thứ tự game mở ra cho người chơi, dùng được luôn làm kịch bản QA.
+
+## 5.6. Đường giao phần thưởng câu đố — `reward_item_id` **không** luôn rơi thẳng vào túi đồ
+
+Đây là chỗ bản trước của mô phỏng có một **cạnh ảo**, và nó chỉ lộ ra khi đem so với một mô phỏng viết độc lập.
+
+| Trường hợp | Đường vào túi đồ |
+|---|---|
+| Trong chương **CÓ** một hotspot `COLLECT_ITEM` khai `item_id` **bằng** `reward_item_id` | Phần thưởng **lộ ra tại chỗ**, chỉ vào túi **QUA hotspot ấy** — tức phải vượt hết `required_flags` của hotspot ấy |
+| **KHÔNG** hotspot nào giao vật phẩm đó | Câu đố **trao thẳng** vào túi đồ khi giải đúng |
+
+Luật này đọc từ **cấu trúc dữ liệu** (`action_type` + `item_id`), không đọc từ tên, và nó khớp đúng với `item_catalog[].hotspot_trao`. Chương 1 có **4 câu đố giao qua hotspot** (`puz_rap_chu_the_menh`, `puz_tuan_tu_le_cung`, `puz_ba_hoi_chin_tieng`, `puz_xep_anh_gia_pha`) và **2 câu đố trao thẳng** (`puz_khoa_bat_quai` → `item_chia_khoa_dong`, `puz_thap_lai_den_dau` → `item_den_dau_sang` — cả hai đều có `hotspot_trao: null`).
+
+> **⚠️ VÌ SAO KHÔNG ĐƯỢC TRAO THẲNG HẾT.** Bản trước cộng `reward_item_id` vào túi đồ ngay khi giải xong, bất kể có hotspot giao hàng hay không. Điều đó **dựng ra một đường vào túi đồ không tồn tại trong game**, và tệ hơn: nó **làm chết cổng `required_flags` của chính hotspot giao hàng**. Hậu quả đo được bằng đột biến — xoá `grants_flag` của `puz_rap_chu_the_menh`, `puz_ba_hoi_chin_tieng` hay `puz_xep_anh_gia_pha` thì giai đoạn 10 vẫn báo sạch, trong khi một mô phỏng tôn trọng hotspot giao hàng thì gãy. Nó cũng mâu thuẫn trực tiếp với §2.7.7: cú doạ `ON_COLLECT_ITEM` chỉ bắn được khi vật phẩm vào túi **qua một hotspot `COLLECT_ITEM`** — `scare_ban_tay_giay_sau_manh` và `scare_di_anh_quay_mat` sống bằng đúng luật ấy.
 
 ---
 
@@ -954,6 +1128,8 @@ Lặp:
 | `txt_` | Khoá localization | File localization | `txt_examine_van_khan` |
 | `anim_` | Hoạt ảnh | Addressables | `anim_khoi_tu_dang_nguoi` |
 
+> **⚠️ `scare_` LÀ TIỀN TỐ CỦA *ĐỊNH DANH CÚ DOẠ*, KHÔNG PHẢI CỦA MỌI THỨ CÓ CHỮ "SCARE".** Ba khoá `scare_intensity`, `scare_pre_warning` và `scare_runtime` xuất hiện ở `docs/06_AN_TOAN_NGUOI_CHOI.md` §4 **không** phải định danh cú doạ và **không** phải id trong `data/areas/*.json` — chúng là **tuỳ chọn trợ năng phía máy người chơi**, thuộc lớp thiết lập, không thuộc hợp đồng dữ liệu màn chơi. Validator chỉ áp luật tiền tố **bên trong dữ liệu màn chơi**, nên không có xung đột chức năng; ghi ra đây để không ai đi tìm `scare_intensity` trong `jumpscares[]` rồi báo thiếu.
+
 Mọi `id` chỉ dùng `[a-z0-9_]`: **không dấu tiếng Việt, không chữ hoa, không gạch ngang, không khoảng trắng**. Dấu tiếng Việt chỉ xuất hiện trong `ten_vi`, `mo_ta_vi`, `ghi_chu_vi` và trong file localization.
 
 ## 6.2. Quy ước `text_key`
@@ -962,7 +1138,8 @@ Mọi `id` chỉ dùng `[a-z0-9_]`: **không dấu tiếng Việt, không chữ 
 |---|---|---|
 | `txt_examine_<đối tượng>` | Hotspot `EXAMINE` | `txt_examine_bat_huong` |
 | `txt_thoai_<đối tượng>` | Hotspot `DIALOGUE` | `txt_thoai_vach_buong` |
-| `txt_khoa_<cửa>` | `locked_text_key` | `txt_khoa_cau_thang_gac` |
+| `txt_khoa_<cửa>` | `fallback_text_key` của hotspot **`CHANGE_AREA`** bị khoá | `txt_khoa_cau_thang_gac` · `txt_khoa_cua_hau` · `txt_khoa_cua_buc_ban` · `txt_khoa_cua_vao_hien` |
+| `txt_thieu_do_<đối tượng>` | `fallback_text_key` của hotspot bị chặn vì **thiếu vật phẩm hoặc thiếu cờ** (`COLLECT_ITEM`, `USE_ITEM`, `ZOOM_PUZZLE`) | `txt_thieu_do_go_mo` · `txt_thieu_do_hinh_nhan` · `txt_thieu_do_rap_chu` · `txt_thieu_do_xep_anh` |
 | `txt_hint_<puzzle_id>_t<n>` | Gợi ý tier n | `txt_hint_puz_khoa_bat_quai_t2` |
 | `txt_liveops_<tình huống>` | Thông báo vận hành | `txt_liveops_het_luot_xem_ads` |
 
