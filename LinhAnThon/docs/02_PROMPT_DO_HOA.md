@@ -2,9 +2,12 @@
 ## BỘ PROMPT ĐỒ HOẠ CHUẨN NGỮ CẢNH (MIDJOURNEY / STABLE DIFFUSION)
 
 Tài liệu: `docs/02_PROMPT_DO_HOA.md` — **Deliverable BƯỚC 2 của Master Form**
-Nguồn sự thật: **SPINE đã chốt** + `03_world.md` (toạ độ hotspot) + `04_horror.md` (sprite jump-scare) + `02_puzzle.md` (khung zoom câu đố) + `01_narrative.md` (không khí, bảng màu, danh sách cấm).
+Nguồn sự thật: **SPINE đã chốt** + `data/areas/*.json` (bounds hotspot, 8 `sprite_animation`) + `03_world.md` (bản phác bố cục dùng dựng ControlNet) + `02_puzzle.md` (khung zoom câu đố) + `01_narrative.md` (không khí, bảng màu, danh sách cấm) + **`docs/06_AN_TOAN_NGUOI_CHOI.md`** (mọi yêu cầu biến thể an toàn `_soft` / `_static`, trần độ sáng, bảng màu flash hợp lệ).
+
 Độ phân giải thiết kế: **1920 x 1080**, gốc toạ độ **(0,0) ở góc TRÊN-BÊN TRÁI**.
 Ngôn ngữ: phần giải thích bằng **tiếng Việt có dấu**; **prompt giữ nguyên tiếng Anh** để dán thẳng vào Midjourney / Stable Diffusion.
+
+> **Tài liệu an toàn người chơi nay là deliverable:** `docs/06_AN_TOAN_NGUOI_CHOI.md`. Mọi chỗ trong tài liệu này trước đây trỏ vào file nháp `04_horror.md` cho phần an toàn / nhạy sáng / biến thể `_soft` `_static` đã được trỏ lại sang `docs/06`.
 
 > **Nguyên tắc số 1 của tài liệu này:** không có "prompt template chung điền chỗ trống". Mỗi khu vực, mỗi câu đố, mỗi sprite có **một prompt riêng đã viết sẵn nội dung thật** — chuỗi `[TÊN KHU VỰC]` trong Master Form đã được thay bằng mô tả thật của chính khu vực đó, kèm chi tiết riêng khớp với bounds hotspot trong `03_world.md`.
 
@@ -46,11 +49,11 @@ Toàn bộ 24 tài sản dùng **đúng 14 màu này**. Hoạ sĩ được pha t
 | 5 | `moss_green` | `#55604A` | Xanh rêu mạch gạch | Sân gạch Bát Tràng, thành giếng, mép chum |
 | 6 | `ash_grey` | `#7E8B93` | Xám tro chạng vạng | Bầu trời xa, khói, sương |
 | 7 | `dusk_violet` | `#3A3F55` | Tím-xám giờ chạng vạng | Trời Area 1, fill lạnh toàn chương |
-| 8 | `dieu_red` | `#8C3A2E` | Đỏ vải điều đã bạc | Vải điều khám thờ, câu đối bợt màu |
+| 8 | `dieu_red` | `#8C3A2E` | Đỏ vải điều đã bạc | Vải điều bịt khám thờ Bà Cô, nẹp vải cũ đã bạc |
 | 9 | `votive_red` | `#A63328` | Đỏ giấy hàng mã | Áo cưới giấy, vàng mã, giấy điều mới |
 | 10 | `gilt_gold` | `#C9A227` | Sơn son thếp vàng tróc | Hoành phi, khám thờ, chữ đại tự |
 | 11 | `lamp_warm` | `#FFD9A0` | Ánh đèn dầu Hoa Kỳ | **Key light duy nhất** của cả chương |
-| 12 | `flash_bone` | `#FFF2DC` | Trắng ngà xung flash | Flash S1 / S2 (xem `04_horror.md` §2.10) |
+| 12 | `flash_bone` | `#FFF2DC` | Trắng ngà xung flash | Flash S1 / S2. **Bảng màu flash hợp lệ và trần alpha: `docs/06_AN_TOAN_NGUOI_CHOI.md` §2.4** |
 | 13 | `ban_paper` | `#D9C9A3` | Giấy bản / giấy dó | Giấy rập, sổ, cáo phó, da hình nhân |
 | 14 | `xo_white` | `#F2EDE3` | Trắng khăn xô | **Điểm trắng duy nhất** được phép trong khung hình |
 
@@ -73,12 +76,13 @@ Lý do khoá cứng: mô hình khuếch tán trôi phong cách rất nhanh giữ
 ### 1.3. Negative prompt gốc `NEG-CORE` — BẮT BUỘC cho mọi prompt
 
 ```plaintext
-3D render, CGI, octane, unreal engine, photorealistic, photograph, anime, manga, chibi, cel shading, western cartoon, comic book, concept art sketch, HDR, bloom, lens flare, depth of field, bokeh, fisheye, wide angle distortion, vanishing point perspective, isometric, tilt-shift, text, letters, watermark, signature, logo, UI, HUD, frame, border, Chinese lantern festival, red Chinese new year decor, Japanese torii, kimono, samurai, Thai temple, Halloween pumpkin, crucifix, rosary, pentagram, ouija board, exorcism, western demon, horned devil, Annabelle doll, evil clown, Sadako, long-haired white ghost climbing out of a well, ghost face close-up, hollow black eye sockets, screaming mouth, sharp teeth, blood, gore, entrails, decomposed corpse, body horror, neon colors, oversaturated, pastel, cheerful, sunny daylight, clean, brand new, glossy, plastic, clutter, unreadable silhouette
+3D render, CGI, octane, unreal engine, photorealistic, photograph, anime, manga, chibi, cel shading, western cartoon, comic book, concept art sketch, HDR, bloom, lens flare, depth of field, bokeh, fisheye, wide angle distortion, vanishing point perspective, isometric, tilt-shift, text, letters, watermark, signature, logo, UI, HUD, frame, border, Chinese lantern festival, red Chinese new year decor, yin-yang clay roof tiles, interlocking tube-and-pan roof tiles, glazed green roof tiles, upturned flying eaves, Chinese temple roof, Japanese torii, kimono, samurai, Thai temple, Halloween pumpkin, crucifix, rosary, pentagram, ouija board, exorcism, western demon, horned devil, Annabelle doll, evil clown, Sadako, long-haired white ghost climbing out of a well, ghost face close-up, hollow black eye sockets, screaming mouth, sharp teeth, blood, gore, entrails, decomposed corpse, body horror, neon colors, oversaturated, pastel, cheerful, sunny daylight, clean, brand new, glossy, plastic, clutter, unreadable silhouette
 ```
 
 Ba nhóm trong `NEG-CORE` và lý do:
 - **Nhóm kỹ thuật** (3D, HDR, DOF, perspective): game là **Orthographic phẳng**, mọi hiệu ứng ống kính sẽ phá cảm giác mặt phẳng và làm hotspot lệch khỏi bounds.
-- **Nhóm sai văn hoá** (Chinese new year, torii, kimono, Thai temple, crucifix, pentagram): mô hình rất hay trượt từ "Asian folk horror" sang Trung/Nhật/Thái hoặc sang exorcism phương Tây. Đây là lỗi **chí mạng** với dự án này.
+- **Nhóm sai văn hoá** (Chinese new year, **yin-yang / tube-and-pan roof tiles**, torii, kimono, Thai temple, crucifix, pentagram): mô hình rất hay trượt từ "Asian folk horror" sang Trung/Nhật/Thái hoặc sang exorcism phương Tây. Đây là lỗi **chí mạng** với dự án này.
+  > **Chỗ trượt âm thầm nhất là MÁI NHÀ.** Hễ nhắc "clay roof tiles" là mô hình vẽ **ngói âm dương** (ngói ống + ngói lòng máng úp ngửa xen kẽ) — đó là ngói Hoa / nhà miền núi phía Bắc, **không phải** nhà ba gian đồng bằng Bắc Bộ. Nhà ba gian Bắc Bộ lợp **ngói mũi hài** (ngói ta): viên dẹt, đầu bo tròn hình mũi hài, **xếp lớp chồng mép kiểu vảy cá**, mái thẳng dốc thoải, bờ nóc trơn, không đao cong. Mọi prompt có mái nhà **bắt buộc** ghi rõ `mui-hai` + `fish-scale courses`, và `yin-yang clay roof tiles` phải nằm trong negative.
 - **Nhóm cliché bị cấm** (Sadako, ghost face, blood, gore): trích thẳng từ `01_narrative.md` Phụ lục B.1. Đặc biệt `long-haired white ghost climbing out of a well` **phải luôn có mặt** vì Area 4 có giếng khơi — mô hình sẽ tự động vẽ Sadako nếu không chặn.
 
 ### 1.4. Giao thức seed / `--sref` / LoRA để giữ đồng bộ
@@ -142,7 +146,9 @@ Chọn **1 tấm tốt nhất** → upscale → lưu `art/_anchor/style_anchor_l
 | Máu, nội tạng, xác phân huỷ | Giấy rách, mực nhoè, mốc, tro, nước giếng |
 | Búp bê ma, hề ma, gương vỡ có tay thò ra | Hình nhân nan tre dán giấy bản |
 | Thánh giá, ngũ giác, ouija, phù thuỷ | Bát quái, bài vị, khám thờ, mõ cá, vàng mã |
-| Đèn lồng đỏ Trung Hoa, torii Nhật, kimono | Câu đối giấy điều đã bợt, mành nứa, guốc mộc, khăn mỏ quạ |
+| Đèn lồng đỏ Trung Hoa, torii Nhật, kimono | Mành nứa, guốc mộc, khăn mỏ quạ, chõng tre, điếu bát |
+| **Ngói âm dương** (ngói ống + lòng máng), mái đao cong vút, ngói men xanh | **Ngói mũi hài** (ngói ta) xếp lớp **kiểu vảy cá**, mái thẳng dốc thoải, bờ nóc trơn, rui mè ám bồ hóng |
+| Câu đối **giấy điều đỏ** treo ở nhà đang có tang | Câu đối **khắc chìm vào vữa bằng chữ Hán**, dán đè một dải **giấy trắng để tang** (giấy bản `#D9C9A3`), giấy bong/rách nên vẫn đọc được chữ bên dưới |
 | Màu neon, ánh sáng bão hoà, trời nắng | Chạng vạng, đèn dầu, than hồng, tối 70% khung ở Area 4 |
 
 ---
@@ -155,7 +161,7 @@ Chọn **1 tấm tốt nhất** → upscale → lưu `art/_anchor/style_anchor_l
 |---|---|---|---|
 | **Bối cảnh** | `bg_` + `<area_id>` bỏ tiền tố `area_` | `area_gian_tho` → **`bg_gian_tho`** | `background_asset_url: ".../bg_gian_tho.bundle"` |
 | **Zoom câu đố** | `zoom_` + `<puzzle_id>` **giữ nguyên** tiền tố `puz_` | `puz_khoa_bat_quai` → **`zoom_puz_khoa_bat_quai`** | `puzzles[].id` (engine ghép `zoom_` + id) |
-| **Sprite jump-scare** | `spr_<ten_khong_dau>` — **dùng đúng tên đã chốt ở `04_horror.md`** | **`spr_hinh_nhan_the_mang`** | `jumpscares[].sprite_animation` = `anim_<ten>` trỏ tới sheet của sprite này |
+| **Sprite jump-scare** | `spr_<ten_khong_dau>` — **dùng đúng tên đã chốt trong `data/areas/*.json`** (`jumpscares[].sprite_animation`); bảng đối chiếu đầy đủ 8 cú: `docs/06_AN_TOAN_NGUOI_CHOI.md` §4.4.1 | **`spr_hinh_nhan_the_mang`** | `jumpscares[].sprite_animation` = `anim_<ten>` trỏ tới sheet của sprite này |
 | **Sheet animation** | `anim_<ten_khong_dau>` | **`anim_hinh_nhan_hien_gan`** | `jumpscares[].sprite_animation` (nguyên văn) |
 | **Icon vật phẩm** | `icon_` + `<item_id>` **giữ nguyên** tiền tố `item_` | `item_ao_cuoi_giay` → **`icon_item_ao_cuoi_giay`** | `hotspots[].item_id` (engine ghép `icon_` + id) |
 
@@ -172,8 +178,8 @@ Chọn **1 tấm tốt nhất** → upscale → lưu `art/_anchor/style_anchor_l
 | `_flat` | Bản dẹt 1 lớp để duyệt nhanh / thumbnail | Mọi bối cảnh, **không đóng bundle** |
 | `_plate` | Nền tĩnh của khung zoom câu đố | Mọi zoom |
 | `_parts` | Atlas các phần tử người chơi thao tác được | Mọi zoom |
-| `_soft` | Biến thể **giảm chuyển động** (`gentle_mode` / `reduce_motion`) | 8 sprite jump-scare |
-| `_static` | Biến thể **không animation** (`scare_intensity = 0`) | 8 sprite jump-scare |
+| `_soft` | Biến thể **giảm chuyển động** (`gentle_mode` / `reduce_motion`) — xem `docs/06_AN_TOAN_NGUOI_CHOI.md` §4.3 | 8 sprite jump-scare |
+| `_static` | Biến thể **không animation** (`scare_intensity = 0`) — xem `docs/06_AN_TOAN_NGUOI_CHOI.md` §4.3 và §4.5 | 8 sprite jump-scare |
 | `_f00` … `_f11` | Khung hình rời trước khi đóng sheet | Sprite có animation |
 
 ### 2.3. Ví dụ đầy đủ một bộ (Area 3 — gian thờ)
@@ -229,14 +235,14 @@ art/icon/icon_item_dui_mo.png         320 x 320 -> đóng atlas 160 x 160 @1x
 ```plaintext
 2D hand-painted background plate for a point-and-click horror game — the moss-stained Bat Trang brick courtyard and bamboo-lane entrance of a three-bay Northern Vietnamese ancestral house, 17:40 on a rain-wet evening of the seventh lunar month, seen by a visitor standing at the closed gate.
 Style: Vietnamese folk horror, "Ao Cuoi Giay" paper-bride style, hand-painted 2D point-and-click adventure art, 1990s Northern Vietnam village, muted desaturated palette #0E0F12 #2E2A24 #55604A #8C3A2E #FFD9A0, one warm oil-lamp key light against cold twilight fill, dry-brush stroke and paper grain visible, flat orthographic front view, no perspective distortion, no lens effects.
-Details: BACKGROUND LAYER — violet-grey dusk sky #3A3F55 after rain, flat black bamboo-hedge silhouette across the whole top, a concrete pole carrying a rusted commune loudspeaker at upper centre-left, the ridged clay-tile roof of the three-bay house filling the right half, thin cooking smoke from a neighbour's kitchen. MIDGROUND LAYER — a closed double wooden gate in the left third between two brick pillars, each pillar wearing a faded red paper couplet strip with Nom characters and a small carved Vietnamese note at its base, a round wood-framed bat quai mirror hanging on the gate lintel above, a three-ring concentric wooden padlock carved with eight trigrams set between the gate leaves, on the right the house facade with closed buc ban wooden doors above three stone steps and a brass padlock dangling from the crossbar, a white mourning notice with rain-bled purple ink pasted on the veranda pillar, a washing line strung from the veranda pillar across to an areca palm. FOREGROUND LAYER — wet mossy brick paving with green-black joints, a Thong Nhat bicycle leaning on the left wall with a knotted cloth bag in its front basket, a large glazed stoneware rain jar at lower-left-of-centre brimming with black mirror-still water, a coconut ladle lying on the bricks one step away from the jar as if just dropped, a dented aluminium basin of votive ash mid-bottom with half-burnt joss paper still showing printed characters, a gap between two floor bricks at lower right with a folded yellowed note pushed deep inside. FX LAYER — backlit evening dust, a few mosquitoes, very light drizzle at ten percent opacity, cold blue vignette. Colour discipline: exactly ONE pure white note in the whole frame, the torn muslin mourning cloth #F2EDE3 hanging wet on the line; everything else stays grey, mud brown and moss green.
+Details: BACKGROUND LAYER — violet-grey dusk sky #3A3F55 after rain, flat black bamboo-hedge silhouette across the whole top, a concrete pole carrying a rusted commune loudspeaker at upper centre-left, the fish-scale mui-hai clay-tile roof of the three-bay house filling the right half, thin cooking smoke from a neighbour's kitchen. MIDGROUND LAYER — a closed double wooden gate in the left third between two brick pillars, each pillar carrying one half of a parallel couplet incised into the lime mortar in Han characters, the incision now pasted over with a strip of plain off-white do-paper mourning band #D9C9A3 because the house is in mourning, the band already lifting at one corner and torn along its length so the incised Han characters underneath stay fully readable, and a small carved Vietnamese note at the pillar base, a round wood-framed bat quai mirror hanging on the gate lintel above, a three-ring concentric wooden padlock carved with eight trigrams set between the gate leaves, on the right the house facade with closed buc ban wooden doors above three stone steps and a brass padlock dangling from the crossbar, a white mourning notice with rain-bled purple ink pasted on the veranda pillar, a washing line strung from the veranda pillar across to an areca palm. FOREGROUND LAYER — wet mossy brick paving with green-black joints, a Thong Nhat bicycle leaning on the left wall with a knotted cloth bag in its front basket, a large glazed stoneware rain jar at lower-left-of-centre brimming with black mirror-still water, a coconut ladle lying on the bricks one step away from the jar as if just dropped, a dented aluminium basin of votive ash mid-bottom with half-burnt joss paper still showing printed characters, a gap between two floor bricks at lower right with a folded yellowed note pushed deep inside. FX LAYER — backlit evening dust, a few mosquitoes, very light drizzle at ten percent opacity, cold blue vignette. Colour discipline: exactly ONE pure white note in the whole frame, the torn muslin mourning cloth #F2EDE3 hanging wet on the line; everything else stays grey, mud brown and moss green.
 Format: 1920x1080, 16:9, flat orthographic front elevation, locked camera, horizon at 45 percent height, every interactive prop fully inside frame with an 80px safe margin top and bottom, at least 20px of empty breathing space between neighbouring props, readable silhouettes, no characters, no people, no hands, no ghosts, no text, delivered as four separate layers BACKGROUND / MIDGROUND / FOREGROUND / FX on transparent PNG.
 ```
 
 **Negative prompt**
 
 ```plaintext
-NEG-CORE, sunny sky, blue sky, green healthy lawn, flowers in bloom, festive red lanterns, new paint, tourist heritage site, Chinese courtyard, Japanese garden, stone lion statues, people, silhouette of a person standing in the yard, reflection of a figure in the water jar, car, motorbike, power lines crossing the sky, modern plastic furniture
+NEG-CORE, red paper couplet banners, bright red couplet strips on the gate pillars, freshly pasted red paper, yin-yang tube-and-pan roof tiles, upturned curved eaves, sunny sky, blue sky, green healthy lawn, flowers in bloom, festive red lanterns, new paint, tourist heritage site, Chinese courtyard, Japanese garden, stone lion statues, people, silhouette of a person standing in the yard, reflection of a figure in the water jar, car, motorbike, power lines crossing the sky, modern plastic furniture
 ```
 
 Aspect ratio: **16:9 — 1920 x 1080**
@@ -261,7 +267,7 @@ LoRA linhanthon_style_v1 : 0.75 | Clip skip 2
 |---|---|---|
 | Gương bát quái trên xà cổng | `hs_guong_bat_quai` | `{296,150,130,130}` — trên, trái |
 | Loa phát thanh trên cột | `hs_loa_phat_thanh` | `{700,120,200,150}` — trên, giữa |
-| Cột gạch trái / phải + câu đối | `hs_cau_doi_trai` / `hs_cau_doi_phai` | `{88,300,110,420}` / `{520,300,110,420}` |
+| Cột gạch trái / phải + câu đối khắc chìm, dán giấy trắng để tang | `hs_cau_doi_trai` / `hs_cau_doi_phai` | `{88,300,110,420}` / `{520,300,110,420}` |
 | Ổ khoá gỗ ba vòng giữa hai cánh cổng | `hs_o_khoa_cong` | `{280,430,180,180}` |
 | Cáo phó trên cột hiên | `hs_cao_pho` | `{1000,330,150,210}` |
 | Bậc tam cấp + cửa bức bàn | `hs_cua_vao_hien` | `{1180,380,300,520}` |
@@ -271,6 +277,13 @@ LoRA linhanthon_style_v1 : 0.75 | Clip skip 2
 | Gáo dừa rơi trên gạch | `hs_gao_dua` | `{648,800,130,110}` |
 | Chậu hoá vàng | `hs_dong_tro_hoa_vang` | `{820,820,280,170}` |
 | Khe gạch chân tường | `hs_khe_gach_thu_tay` | `{1560,800,220,120}` |
+
+> **Ghi chú tục tang — bắt buộc đọc trước khi sinh A1.** Nhà này **vừa có tang ba ngày** (cáo phó còn dán, khăn xô còn ướt trên dây phơi). Theo lệ Bắc Bộ, nhà có tang thì **phủ hoặc thay câu đối**: dải **giấy điều đỏ** phải được gỡ xuống hoặc dán đè bằng **giấy trắng** cho tới khi mãn tang. Vì vậy trong A1 câu đối **không phải giấy đỏ** — nó là **chữ Hán khắc chìm vào lớp vữa cột gạch**, bên trên dán một dải **giấy bản trắng ngà `#D9C9A3`** đang bong mép và rách dọc.
+>
+> **Ba ràng buộc không được vi phạm khi vẽ:**
+> 1. **Nội dung câu đối giữ nguyên 100%** — nó là **clue C2 và C3 của `puz_khoa_bat_quai`** (vế trái *"Toạ Bắc — lưng dựa dòng nước"* → Khảm; vế phải *"Hướng Nam — mặt đón lửa trời"* → Ly). Che mất chữ = người chơi mất hai manh mối = câu đố không giải được. Giấy tang **phải** bong/rách đủ để đọc được nét khắc bên dưới.
+> 2. **Chữ khắc là chữ Hán (chữ Nho), không phải chữ Nôm.** Dòng chú thích nhỏ khắc bằng mũi dao ở **chân cột** mới là **quốc ngữ** — hai thứ chữ khác nhau, khác vị trí, không được trộn.
+> 3. **Giấy tang là `ban_paper #D9C9A3` (trắng ngà), KHÔNG phải `xo_white #F2EDE3`.** Suất trắng tinh duy nhất của khung hình A1 đã dành cho **mảnh khăn xô trên dây phơi** (§1.1). Vẽ giấy tang trắng tinh là phá luật "một điểm trắng duy nhất".
 
 ---
 
@@ -283,7 +296,7 @@ LoRA linhanthon_style_v1 : 0.75 | Clip skip 2
 ```plaintext
 2D hand-painted background plate for a point-and-click horror game — the brick veranda and carved wooden screen at the threshold of a three-bay Northern Vietnamese ancestral house at 18:10, full night outside, the last cold blue of dusk washing in from the yard on the left and a thin warm seam of light leaking under the inner door on the right.
 Style: Vietnamese folk horror, "Ao Cuoi Giay" paper-bride style, hand-painted 2D point-and-click adventure art, 1990s Northern Vietnam village, muted desaturated palette #0E0F12 #2E2A24 #55604A #8C3A2E #FFD9A0, one warm oil-lamp key light against cold twilight fill, dry-brush stroke and paper grain visible, flat orthographic front view, no perspective distortion, no lens effects.
-Details: BACKGROUND LAYER — dark three-bay timber wall, a small lacquered horizontal board so faded its characters are gone, a warm orange seam of light escaping under the closed inner door, ceiling pressed low so the frame feels vertically compressed. MIDGROUND LAYER — the hero object dead centre, a tall dark jackfruit-wood folding screen taller than a person, its surface polished black by decades of hands, carrying two Han-Nom characters worn almost flat so only a shallow groove remains, a rectangular recess exactly the depth of one sheet of do paper cut into the wooden frame at the screen's right edge, a soot-blackened American-style kerosene hurricane lamp hanging from a hook on the veranda post at far right with a dry empty fount, a closed ironwood buc ban door on the right. FOREGROUND LAYER — a smoke-stained split-bamboo blind hanging across the very top of the frame, slightly askew, its dust marks forming two clean square patches where something used to hang, a bamboo daybed on the left carrying a clay water pipe, a chewed dark quid of betel and a chipped cup, a rolled torn sedge mat with the corner of a blue-covered notebook poking out from under it, a low wooden stool on the left with a child's calligraphy practice book open on it, three stone steps at the extreme left edge going back down to the yard with slippery moss, a pair of wooden clogs set neatly on the brick floor with their toes pointing into the house and black charcoal crumbs on the soles, a small stack of thin do paper weighted by a sharpened charcoal stick at the foot of the screen. FX LAYER — thin drifting incense haze crossing horizontally, dust in the door seam light, the unlit lamp's halo painted as cold grey rather than warm.
+Details: BACKGROUND LAYER — dark three-bay timber wall, a small lacquered horizontal board so faded its characters are gone, a warm orange seam of light escaping under the closed inner door, ceiling pressed low so the frame feels vertically compressed. MIDGROUND LAYER — the hero object dead centre, a tall dark jackfruit-wood folding screen taller than a person, its surface polished black by decades of hands, carrying two Han characters worn almost flat so only a shallow groove remains, a rectangular recess exactly the depth of one sheet of do paper cut into the wooden frame at the screen's right edge, a soot-blackened American-style kerosene hurricane lamp hanging from a hook on the veranda post at far right with a dry empty fount, a closed ironwood buc ban door on the right. FOREGROUND LAYER — a smoke-stained split-bamboo blind hanging across the very top of the frame, slightly askew, its dust marks forming two clean square patches where something used to hang, a bamboo daybed on the left carrying a clay water pipe, a chewed dark quid of betel and a chipped cup, a rolled torn sedge mat with the corner of a blue-covered notebook poking out from under it, a low wooden stool on the left with a child's calligraphy practice book open on it, three stone steps at the extreme left edge going back down to the yard with slippery moss, a pair of wooden clogs set neatly on the brick floor with their toes pointing into the house and black charcoal crumbs on the soles, a small stack of thin do paper weighted by a sharpened charcoal stick at the foot of the screen. FX LAYER — thin drifting incense haze crossing horizontally, dust in the door seam light, the unlit lamp's halo painted as cold grey rather than warm.
 Format: 1920x1080, 16:9, flat orthographic front elevation, locked camera, framing 15 percent tighter than the courtyard plate, low ceiling, every interactive prop fully inside frame with an 80px safe margin top and bottom, the three floor props along the bottom edge separated by at least 60px, no characters, no people, no hands, no ghosts, no text, delivered as four separate layers BACKGROUND / MIDGROUND / FOREGROUND / FX on transparent PNG.
 ```
 
@@ -390,7 +403,7 @@ Format: 1920x1080, 16:9, flat orthographic front elevation, locked camera, verti
 NEG-CORE, long-haired ghost climbing out of the well, pale hand on the well rim, face in the water, Sadako, Ringu, wet white dress, bright kitchen, modern gas stove, tiled floor, electric light bulb, cheerful farmhouse, full moon, starry sky, people, silhouette in the doorway
 ```
 
-> **Cảnh báo riêng cho A4:** đây là prompt **dễ hỏng nhất cả bộ**. Mô hình nhìn thấy "giếng + đêm + horror" là tự động vẽ Sadako. Negative về giếng **không được rút gọn** ở bất kỳ lần sinh nào. Theo `04_horror.md` §1.5, giếng của Linh An **cố ý không có gì trèo lên** — và đó là quyết định thiết kế quan trọng nhất của tổ kinh dị.
+> **Cảnh báo riêng cho A4:** đây là prompt **dễ hỏng nhất cả bộ**. Mô hình nhìn thấy "giếng + đêm + horror" là tự động vẽ Sadako. Negative về giếng **không được rút gọn** ở bất kỳ lần sinh nào. Theo quyết định đã chốt của tổ kinh dị, giếng của Linh An **cố ý không có gì trèo lên** — xem §1.5 của chính tài liệu này (danh sách CẤM tuyệt đối, dòng đầu tiên).
 
 Aspect ratio: **16:9 — 1920 x 1080**
 
@@ -427,14 +440,14 @@ Ghi chú: xuất thêm bản "đã thắp đèn" — cùng seed, sửa prompt th
 ```plaintext
 2D hand-painted background plate for a point-and-click horror game — a low wooden loft above the ancestral altar of a Northern Vietnamese house at 19:40, too low to stand up in, packed with votive paper goods, lit only by a single oil lamp the player carries so most of the room falls away into warm dark brown rather than black.
 Style: Vietnamese folk horror, "Ao Cuoi Giay" paper-bride style, hand-painted 2D point-and-click adventure art, 1990s Northern Vietnam village, muted desaturated palette #0E0F12 #2E2A24 #55604A #8C3A2E #FFD9A0, one warm oil-lamp key light against cold twilight fill, dry-brush stroke and paper grain visible, flat orthographic front view, no perspective distortion, no lens effects.
-Details: BACKGROUND LAYER — underside of yin-yang clay roof tiles and low timber purlins pressing down on the top of the frame, heavy cobwebs, one thin blade of light coming up through a gap in the floorboards. MIDGROUND LAYER — dead centre stands a life-sized substitute effigy woven from bamboo splints and pasted over with do paper, its face drawn in ink as two dots and one stroke, standing with its back to the ladder hatch; on the right a large portrait frame turned to face the wall, its back fitted with nine sliding wooden panels in a three-by-three track with one empty slot exactly where a face should be; further right a full-sized paper wedding dress in votive red hanging on a wooden hook behind the frame, its hem still flat and uncreased, its shoulders sagging very slightly as if someone tried it on; a chest-high stack of votive paper goods in the right corner, paper horse, paper hat and robe, paper house, all brand new. FOREGROUND LAYER — a big wooden chest in the lower left with its lid open and turned up, the inside of the lid covered in dense ink writing, a brown-covered ruled register and a blue diary lying on the lid weighted by a brick, an old birth certificate in a plastic sleeve, a brand-new sedge mat laid out neatly on the floor below the effigy with a coin holding each corner, floorboards with a visible gap, a gaping ladder hatch in the far left corner dropping into darkness. FX LAYER — a soft oil-lamp halo about 520 pixels across, heavy paper dust suspended inside the halo, everything outside the halo reading as dark warm brown at ninety-four percent, faint rustle-implying motion on the votive paper.
+Details: BACKGROUND LAYER — underside of flat lotus-tip (mui hai) clay roof tiles laid in overlapping fish-scale courses, sooted battens and low timber purlins pressing down on the top of the frame, heavy cobwebs, one thin blade of light coming up through a gap in the floorboards. MIDGROUND LAYER — dead centre stands a life-sized substitute effigy woven from bamboo splints and pasted over with do paper, its face drawn in ink as two dots and one stroke, standing with its back to the ladder hatch; on the right a large portrait frame turned to face the wall, its back fitted with nine sliding wooden panels in a three-by-three track with one empty slot exactly where a face should be; further right a full-sized paper wedding dress in votive red hanging on a wooden hook behind the frame, its hem still flat and uncreased, its shoulders sagging very slightly as if someone tried it on; a chest-high stack of votive paper goods in the right corner, paper horse, paper hat and robe, paper house, all brand new. FOREGROUND LAYER — a big wooden chest in the lower left with its lid open and turned up, the inside of the lid covered in dense ink writing, a brown-covered ruled register and a blue diary lying on the lid weighted by a brick, an old birth certificate in a plastic sleeve, a brand-new sedge mat laid out neatly on the floor below the effigy with a coin holding each corner, floorboards with a visible gap, a gaping ladder hatch in the far left corner dropping into darkness. FX LAYER — a soft oil-lamp halo about 520 pixels across, heavy paper dust suspended inside the halo, everything outside the halo reading as dark warm brown at ninety-four percent, faint rustle-implying motion on the votive paper.
 Format: 1920x1080, 16:9, flat orthographic front elevation, locked low camera, frame vertically compressed to feel cramped, three readable columns left evidence / centre effigy / right ritual goods, every interactive prop fully inside frame with an 80px safe margin top and bottom, no people, no hands, no ghosts, no faces other than the ink two-dots-one-stroke on the effigy, no text, delivered as four separate layers BACKGROUND / MIDGROUND / FOREGROUND / FX on transparent PNG.
 ```
 
 **Negative prompt**
 
 ```plaintext
-NEG-CORE, creepy porcelain doll, mannequin, wax figure, realistic human face on the effigy, detailed facial features, Chinese paper offering shop, bright attic, daylight through a window, cobweb cliche with giant spider, people, ghost bride with a real face, white wedding dress, western wedding gown
+NEG-CORE, yin-yang clay roof tiles, tube-and-pan roof tiles, Chinese temple roof underside, creepy porcelain doll, mannequin, wax figure, realistic human face on the effigy, detailed facial features, Chinese paper offering shop, bright attic, daylight through a window, cobweb cliche with giant spider, people, ghost bride with a real face, white wedding dress, western wedding gown
 ```
 
 > **Ghi chú quan trọng:** hình nhân thế mạng **nằm trong bản nền** (nó là vật thể có thật, ở đó suốt phần còn lại của chương sau `scare_hinh_nhan_chan_loi`). Bản cận cảnh dùng cho cú doạ là sprite riêng — xem **C7**. Áo cưới giấy trong nền là **bản treo trên móc**; bản khoác lên hình nhân là sprite riêng — xem **C8** và **C10**.
@@ -444,7 +457,7 @@ Aspect ratio: **16:9 — 1920 x 1080**
 **Midjourney (đuôi tham số)**
 
 ```plaintext
---ar 16:9 --style raw --v 6.1 --sref {STYLE_ANCHOR} --sw 140 --seed 179616 --chaos 0 --no realistic face, porcelain doll, mannequin, people, ghost, white wedding gown, bright attic, daylight, giant spider, text, 3D render, photorealistic
+--ar 16:9 --style raw --v 6.1 --sref {STYLE_ANCHOR} --sw 140 --seed 179616 --chaos 0 --no yin yang roof tiles, tube and pan tiles, curved Chinese eaves, realistic face, porcelain doll, mannequin, people, ghost, white wedding gown, bright attic, daylight, giant spider, text, 3D render, photorealistic
 ```
 
 **Stable Diffusion**
@@ -724,10 +737,10 @@ LoRA linhanthon_style_v1 : 0.70 | Clip skip 2
 | **Nền** | `#808080` đặc, phẳng tuyệt đối | Xám trung tính không nằm trong bảng màu chương → không trùng với bất kỳ pixel nào của chủ thể, tách nền bằng ngưỡng màu là sạch. Nền trắng sẽ ăn mất giấy bản `#D9C9A3`, nền đen sẽ ăn mất bóng `#0E0F12`. |
 | **Đổ bóng** | **Không** đổ bóng lên nền | Bóng xám lên nền xám = viền bẩn không tách được. Bóng tiếp đất do engine vẽ. |
 | **Chừa mép** | ≥ 10% mỗi cạnh | Chống cụt khi scale / punch camera. |
-| **Pivot** | vật đứng = `bottom-center`; vật quét/bay = `center` | Khớp `04_horror.md` §2. |
+| **Pivot** | vật đứng = `bottom-center`; vật quét/bay = `center` | Khớp §2.4 của tài liệu này và bảng 8 jump-scare ở `docs/06_AN_TOAN_NGUOI_CHOI.md` §4.4.1. |
 | **Mặt ma** | **CẤM TUYỆT ĐỐI** | Không hốc mắt đen, không miệng hét, không mặt người thật. Chỉ được: **bóng phẳng**, **khói**, hoặc **mặt vẽ than hai chấm một vạch** trên giấy. |
 | **Phát sáng** | **Cấm** vật thể tự phát quang | Nguồn sáng duy nhất của game là đèn dầu và than hồng, đều diegetic. |
-| **Biến thể bắt buộc** | `_soft` (biên độ scale ≤ 1.04, tốc độ 60%) và `_static` (một khung kết quả, không animation) | Chế độ an toàn `gentle_mode` / `reduce_motion` / `scare_intensity = 0` (`04_horror.md` §4.7). **Không tài sản an toàn nào được đặt sau tường trả phí.** |
+| **Biến thể bắt buộc** | `_soft` (biên độ scale ≤ 1.04, tốc độ 60%) và `_static` (một khung kết quả, không animation) | Chế độ an toàn `gentle_mode` / `reduce_motion` / `scare_intensity = 0`. **Hợp đồng đặt tên và nội dung biến thể: `docs/06_AN_TOAN_NGUOI_CHOI.md` §4.3; bảng đối chiếu mặc định ↔ `gentle_mode` cho từng cú doạ: §4.4.** Thiếu một file biến thể = engine rơi về bản gốc = người chơi bật chế độ an toàn vẫn ăn nguyên cú doạ đầy đủ → **chặn build**. **Không tài sản an toàn nào được đặt sau tường trả phí** (§1 của `docs/06`). |
 
 **Dòng `Format:` dùng chung cho 13 prompt (đã nhúng sẵn trong từng prompt, ghi ở đây để đối chiếu):**
 
@@ -809,7 +822,7 @@ Sampler DPM++ 2M Karras | Steps 28 | CFG 7.0 | Seed 179632 | Size 1344x768 | Hir
 LoRA linhanthon_style_v1 : 0.65 | Clip skip 2 | Tách nền: ngưỡng #808080, tolerance 12
 ```
 
-**File xuất:** `anim_ban_tay_vang_ma_quet.png` + **`anim_ban_tay_vang_ma_quet_soft.png`** (bắt buộc: scale ≤ 1.04, tốc độ 60% — đây là biến thể `_soft` duy nhất được `04_horror.md` §4.7 gọi tên đích danh) + `_static`.
+**File xuất:** `anim_ban_tay_vang_ma_quet.png` + **`anim_ban_tay_vang_ma_quet_soft.png`** (bắt buộc: scale ≤ 1.04, tốc độ 60% — đây là biến thể `_soft` duy nhất được `docs/06_AN_TOAN_NGUOI_CHOI.md` §4.4.2 gọi tên đích danh: bàn tay quét ở **mép phải màn hình**, không quét sát mặt kính) + `_static`.
 
 ---
 
@@ -1199,7 +1212,7 @@ Bắt buộc: chạy ADetailer hand_yolov8n + inpaint tay ở mọi bản trư�
 ```plaintext
 2D hand-painted inventory icon set for a point-and-click horror game — ten 1990s Northern Vietnamese rural objects painted as separate flat inventory icons.
 Style: Vietnamese folk horror, "Ao Cuoi Giay" paper-bride style, hand-painted 2D point-and-click adventure art, 1990s Northern Vietnam village, muted desaturated palette #0E0F12 #2E2A24 #55604A #8C3A2E #FFD9A0, one warm oil-lamp key light against cold twilight fill, dry-brush stroke and paper grain visible, flat orthographic front view, no perspective distortion, no lens effects.
-Details: ten objects, each rendered alone, three-quarter tilted flat with no perspective, lit identically from the upper left so the whole set reads as one family — 1 a small verdigris-green brass key with a worn Nom character on its bow, 2 a stack of three thin do paper sheets weighted by a sharpened charcoal stick, 3 a single do paper sheet bearing two black charcoal-rubbed Han characters, 4 an unlit American-style kerosene hurricane lamp with soot-blackened glass and a dry fount, 5 a jackfruit-wood temple-block mallet with its handle polished smooth in exactly three places and a frayed cloth-wrapped head, 6 a blank ancestral tablet of pale new wood with a bare unlettered face and a cut tenon visible at its foot, 7 a strip of faded brick-red altar cloth, thick weave, one end already frayed into threads, 8 a glass bottle of kerosene half full, stoppered with a twist of dried banana leaf, 9 the same hurricane lamp now lit with a flame the size of a grain of rice, 10 an adult-sized votive-paper wedding dress in offering red with flaking gold trim, folded; every object slightly worn, nothing new, nothing shiny.
+Details: ten objects, each rendered alone, three-quarter tilted flat with no perspective, lit identically from the upper left so the whole set reads as one family — 1 a small verdigris-green brass key with a worn Han character on its bow, 2 a stack of three thin do paper sheets weighted by a sharpened charcoal stick, 3 a single do paper sheet bearing two black charcoal-rubbed Han characters, 4 an unlit American-style kerosene hurricane lamp with soot-blackened glass and a dry fount, 5 a jackfruit-wood temple-block mallet with its handle polished smooth in exactly three places and a frayed cloth-wrapped head, 6 a blank ancestral tablet of pale new wood with a bare unlettered face and a cut tenon visible at its foot, 7 a strip of faded brick-red altar cloth, thick weave, one end already frayed into threads, 8 a glass bottle of kerosene half full, stoppered with a twist of dried banana leaf, 9 the same hurricane lamp now lit with a flame the size of a grain of rice, 10 an adult-sized votive-paper wedding dress in offering red with flaking gold trim, folded; every object slightly worn, nothing new, nothing shiny.
 Format: ten separate square icons, each object centred and occupying seventy percent of its own cell, consistent scale logic and identical light direction across the whole set, readable in silhouette at 160 by 88 pixels; centred on a flat solid #808080 grey background, no cast shadow on the background, no gradient, no vignette, no ground plane, subject fully inside frame with a ten percent margin on every side, clean hard alpha edge ready for background removal, no text, no UI, no watermark, no frames, no borders.
 ```
 
@@ -1300,7 +1313,7 @@ Mỗi zoom = **`_plate` + `_parts`** → **12 file**, cộng 2 biến thể ph�
 | Icon vật phẩm (10, đóng 1 atlas) | 1 atlas | ~0.3 MB |
 | **TỔNG ĐỒ HOẠ CHƯƠNG 1** | **65** | **~20.3 MB** |
 
-> **Đối chiếu ràng buộc nền tảng:** APK engine ≤ 30MB và **toàn bộ tài sản tải qua Unity Addressables (remote bundle)** → không một file nào trong bảng này được đóng vào APK. Chi tiết nhóm bundle và luật nạp trước xem `docs/05_TICH_HOP_UNITY_ADDRESSABLES.md`. Tổ âm thanh chiếm thêm ~18.8 MB (`04_horror.md` §3.10), tổng remote Chương 1 ≈ **39 MB**.
+> **Đối chiếu ràng buộc nền tảng:** APK engine ≤ 30MB và **toàn bộ tài sản tải qua Unity Addressables (remote bundle)** → không một file nào trong bảng này được đóng vào APK. Chi tiết nhóm bundle và luật nạp trước xem `docs/05_TICH_HOP_UNITY_ADDRESSABLES.md`. Tổ âm thanh chiếm thêm ~18.8 MB (ngân sách tài sản âm thanh Chương 1 do tổ Horror/Audio bàn giao, **đã gồm 8 file stinger biến thể `_soft`** theo `docs/06_AN_TOAN_NGUOI_CHOI.md` §4.3), tổng remote Chương 1 ≈ **39 MB**.
 
 ## 6.5. Checklist QA trước khi đóng bundle
 
@@ -1330,7 +1343,10 @@ Mỗi zoom = **`_plate` + `_parts`** → **12 file**, cộng 2 biến thể ph�
 **Kỹ thuật**
 - [ ] Alpha sprite sạch ở zoom 400%, không sót viền `#808080` (soi kỹ mép giấy bản và nan tre).
 - [ ] Pivot đúng: `bottom-center` cho C7 / C11, `center` cho C2 / C10.
-- [ ] Đủ **cả hai** biến thể `_soft` và `_static` cho 8 sprite jump-scare. **Không biến thể an toàn nào được đặt sau tường trả phí** (`04_horror.md` §4.7.5).
+- [ ] Đủ **cả hai** biến thể `_soft` và `_static` cho 8 sprite jump-scare — **16 file**, tên nối hậu tố đúng `docs/06_AN_TOAN_NGUOI_CHOI.md` §4.3. Thiếu 1 file = **chặn build**.
+- [ ] Biến thể `_soft` dùng **đúng seed của bản gốc** (§1.4) — phải là **cùng một hình**, chỉ khác biên độ; `_static` là **khung trạng thái kết quả**, không phải khung đầu.
+- [ ] **Không biến thể an toàn nào được đặt sau tường trả phí, sau quảng cáo thưởng hay sau mốc tiến trình** (`docs/06_AN_TOAN_NGUOI_CHOI.md` §1, N1–N3).
+- [ ] Overlay flash chỉ dùng **3 mã hợp lệ** `#FFF2DC` / `#FFE9C4` / `#FFD9A0`, alpha toàn màn ≤ 0.35 (`docs/06_AN_TOAN_NGUOI_CHOI.md` §2.4). Không sắc đỏ, không `#FFFFFF`.
 - [ ] Atlas ≤ 2048x2048, padding 4px, không rotate.
 - [ ] Không vật thể nào tự phát quang. Mọi ánh sáng đều có nguồn trong cảnh.
 - [ ] Bản `_lo` 1280x720 đã xuất cho toàn bộ bối cảnh.
@@ -1342,10 +1358,11 @@ Mỗi zoom = **`_plate` + `_parts`** → **12 file**, cộng 2 biến thể ph�
 | Tài liệu / tổ đích | Thứ tài liệu này cung cấp |
 |---|---|
 | `docs/03_DATA_SPEC.md` | Asset id chuẩn cho `background_asset_url`, `sprite_animation`, `item_id` icon |
-| `data/areas/*.json` | 5 `background_asset_url`, 8 `sprite_animation` khớp `04_horror.md` |
+| `data/areas/*.json` | 5 `background_asset_url`, 8 `sprite_animation` khớp bảng §4.4.1 của `docs/06_AN_TOAN_NGUOI_CHOI.md` |
 | `docs/05_TICH_HOP_UNITY_ADDRESSABLES.md` | 65 file nguồn, ~20.3 MB sau nén, quy ước bundle `bg_* / zoom_* / scare_*` |
 | `tools/validate_level.py` | Luật đối chiếu tên file ↔ asset id (§2), luật bounds ↔ vị trí đồ vật (§3, §6.5) |
 | `docs/04_LIVEOPS_MONETIZATION.md` | **Ràng buộc cứng**: biến thể `_soft` / `_static` là tài sản khả dụng miễn phí, không được bán |
+| `docs/06_AN_TOAN_NGUOI_CHOI.md` | 16 file biến thể an toàn (`_soft` / `_static`) cho 8 sprite jump-scare; xác nhận bảng màu flash `#FFF2DC` / `#FFE9C4` / `#FFD9A0` nằm trong trần alpha cho phép |
 | Tổ mỹ thuật | 24 prompt đã chuẩn ngữ cảnh + bảng seed + tấm neo phong cách |
 
 ---

@@ -28,6 +28,12 @@
     {
       "id": "hs_cau_doi_trai",
       "bounds": {
+        "x": 83,
+        "y": 300,
+        "width": 120,
+        "height": 420
+      },
+      "visual_bounds": {
         "x": 88,
         "y": 300,
         "width": 110,
@@ -50,6 +56,12 @@
     {
       "id": "hs_cau_doi_phai",
       "bounds": {
+        "x": 515,
+        "y": 300,
+        "width": 120,
+        "height": 420
+      },
+      "visual_bounds": {
         "x": 520,
         "y": 300,
         "width": 110,
@@ -78,7 +90,10 @@
         "height": 520
       },
       "action_type": "CHANGE_AREA",
-      "target_area_id": "area_hien_nha"
+      "target_area_id": "area_hien_nha",
+      "required_item": "item_chia_khoa_dong",
+      "fallback_text_key": "txt_khoa_cua_vao_hien",
+      "ghi_chu_vi": "Soi gương cổng: điều kiện phản chiếu unlock_condition của area_hien_nha trong chapter_01.json (required_items: item_chia_khoa_dong)."
     },
     {
       "id": "hs_day_phoi_khan_xo",
@@ -116,6 +131,12 @@
     {
       "id": "hs_gao_dua",
       "bounds": {
+        "x": 648,
+        "y": 795,
+        "width": 130,
+        "height": 120
+      },
+      "visual_bounds": {
         "x": 648,
         "y": 800,
         "width": 130,
@@ -156,8 +177,11 @@
         3,
         8
       ],
+      "required_items": [],
       "reward_item_id": "item_chia_khoa_dong",
-      "wrong_action_jumpscare": "scare_bong_trong_chum"
+      "grants_flag": "flag_puz_khoa_bat_quai_solved",
+      "wrong_action_jumpscare": "scare_bong_trong_chum",
+      "ghi_chu_vi": "Câu đố mở màn: không cần vật phẩm công cụ, mọi manh mối đều là EXAMINE tự do trong cùng khu vực. Phần thưởng item_chia_khoa_dong được trao thẳng khi giải đúng."
     }
   ],
   "jumpscares": [
@@ -165,6 +189,7 @@
       "id": "scare_bong_trong_chum",
       "trigger_type": "ON_PUZZLE_FAIL_COUNT",
       "max_fails": 3,
+      "cooldown_sec": 90,
       "audio_asset": "sfx_scare_gao_dua_roi.ogg",
       "sprite_animation": "anim_bong_khan_xo_trong_chum",
       "screen_flash": true

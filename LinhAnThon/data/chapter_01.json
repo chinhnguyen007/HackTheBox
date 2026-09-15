@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "chapter_id": "chapter_01",
   "chapter_name": "Linh An Thôn - Chương 1",
   "chapter_title_vi": "Cúng thế mạng",
@@ -125,7 +125,13 @@
       "icon_asset": "icon_item_chia_khoa_dong.png",
       "mo_ta_vi": "Chiếc chìa khoá đồng nhỏ, thân gỉ xanh, đầu chìa khắc một chữ Nho đã mòn. Cầm lên thấy còn ấm, dù nó nằm trong ruột khoá gỗ đã lâu lắm rồi.",
       "nhat_o_area": "area_san_gach",
-      "nguon": "puz_khoa_bat_quai"
+      "nguon": "puz_khoa_bat_quai",
+      "nguon_kieu": "PUZZLE_REWARD",
+      "hotspot_trao": null,
+      "dung_cho": [
+        "chapter_01.json / area_hien_nha.unlock_condition",
+        "hs_cua_vao_hien"
+      ]
     },
     {
       "item_id": "item_giay_ban_va_than",
@@ -133,7 +139,12 @@
       "icon_asset": "icon_item_giay_ban_va_than.png",
       "mo_ta_vi": "Ba tờ giấy bản mỏng như cánh chuồn và một thỏi than củi vót nhọn đầu. Loại giấy các cụ vẫn dùng để rập lại chữ trên bia mộ.",
       "nhat_o_area": "area_hien_nha",
-      "nguon": "hs_giay_ban_va_than"
+      "nguon": "hs_giay_ban_va_than",
+      "nguon_kieu": "HOTSPOT_COLLECT",
+      "hotspot_trao": "hs_giay_ban_va_than",
+      "dung_cho": [
+        "puz_rap_chu_the_menh"
+      ]
     },
     {
       "item_id": "item_ban_rap_chu_the",
@@ -141,7 +152,12 @@
       "icon_asset": "icon_item_ban_rap_chu_the.png",
       "mo_ta_vi": "Tờ giấy bản đã hiện rõ hai chữ than đen: \"Thế Mệnh\" - thay mạng. Nét chữ nghiêng về bên phải, của một người thuận tay trái.",
       "nhat_o_area": "area_hien_nha",
-      "nguon": "puz_rap_chu_the_menh"
+      "nguon": "puz_rap_chu_the_menh",
+      "nguon_kieu": "PUZZLE_REWARD",
+      "hotspot_trao": "hs_ban_rap_tren_binh_phong",
+      "dung_cho": [
+        "hs_o_lom_binh_phong"
+      ]
     },
     {
       "item_id": "item_den_dau",
@@ -149,7 +165,12 @@
       "icon_asset": "icon_item_den_dau.png",
       "mo_ta_vi": "Cây đèn dầu Hoa Kỳ vỏ thuỷ tinh ám khói đen. Bầu cạn, tim cụt, cổ đèn rỗng - thiếu đúng ba thứ: sợi tim, một ít dầu, và một mồi lửa.",
       "nhat_o_area": "area_hien_nha",
-      "nguon": "hs_den_dau_treo"
+      "nguon": "hs_den_dau_treo",
+      "nguon_kieu": "HOTSPOT_COLLECT",
+      "hotspot_trao": "hs_den_dau_treo",
+      "dung_cho": [
+        "puz_thap_lai_den_dau"
+      ]
     },
     {
       "item_id": "item_dui_mo",
@@ -157,7 +178,12 @@
       "icon_asset": "icon_item_dui_mo.png",
       "mo_ta_vi": "Chiếc dùi gỗ mít nặng tay, cán mòn nhẵn đúng ba chỗ - chỗ ngón cái, chỗ ngón trỏ, chỗ lòng bàn tay. Ai đó đã cầm nó rất nhiều năm.",
       "nhat_o_area": "area_gian_tho",
-      "nguon": "hs_dui_mo"
+      "nguon": "hs_dui_mo",
+      "nguon_kieu": "HOTSPOT_COLLECT",
+      "hotspot_trao": "hs_dui_mo",
+      "dung_cho": [
+        "puz_ba_hoi_chin_tieng"
+      ]
     },
     {
       "item_id": "item_bai_vi_khuyet_danh",
@@ -165,7 +191,12 @@
       "icon_asset": "icon_item_bai_vi_khuyet_danh.png",
       "mo_ta_vi": "Tấm bài vị gỗ vàng tâm còn mới, mặt trước nhẵn thín không một nét chữ. Lật sau thì thấy mộng gỗ đã đẽo sẵn - như đẽo cho vừa một cái khe nào đó.",
       "nhat_o_area": "area_gian_tho",
-      "nguon": "hs_bai_vi_khuyet_danh"
+      "nguon": "puz_tuan_tu_le_cung",
+      "nguon_kieu": "PUZZLE_REWARD",
+      "hotspot_trao": "hs_bai_vi_khuyet_danh",
+      "dung_cho": [
+        "hs_khe_mong_cua_gac"
+      ]
     },
     {
       "item_id": "item_dai_vai_dieu",
@@ -173,7 +204,12 @@
       "icon_asset": "icon_item_dai_vai_dieu.png",
       "mo_ta_vi": "Dải vải điều đỏ đã bạc thành màu gạch, dệt dày. Xé dọc thì tước ra thành sợi - các cụ vẫn se loại vải này làm tim đèn.",
       "nhat_o_area": "area_gian_tho",
-      "nguon": "hs_dai_vai_dieu"
+      "nguon": "puz_ba_hoi_chin_tieng",
+      "nguon_kieu": "PUZZLE_REWARD",
+      "hotspot_trao": "hs_dai_vai_dieu",
+      "dung_cho": [
+        "puz_thap_lai_den_dau"
+      ]
     },
     {
       "item_id": "item_chai_dau_hoa",
@@ -181,7 +217,12 @@
       "icon_asset": "icon_item_chai_dau_hoa.png",
       "mo_ta_vi": "Chai thuỷ tinh còn hơn nửa dầu hoả, nút bằng lá chuối khô vê chặt. Mở nút ra là mùi hắc xộc lên tận óc, mùi của những đêm mất điện.",
       "nhat_o_area": "area_bep_gieng",
-      "nguon": "hs_chai_dau_hoa"
+      "nguon": "hs_chai_dau_hoa",
+      "nguon_kieu": "HOTSPOT_COLLECT",
+      "hotspot_trao": "hs_chai_dau_hoa",
+      "dung_cho": [
+        "puz_thap_lai_den_dau"
+      ]
     },
     {
       "item_id": "item_den_dau_sang",
@@ -189,7 +230,15 @@
       "icon_asset": "icon_item_den_dau_sang.png",
       "mo_ta_vi": "Cây đèn đã cháy, ngọn lửa cao bằng hạt thóc, quầng sáng vàng đục chỉ soi được chừng một sải tay. Ngoài cái vòng sáng ấy thì tối đặc.",
       "nhat_o_area": "area_bep_gieng",
-      "nguon": "puz_thap_lai_den_dau"
+      "nguon": "puz_thap_lai_den_dau",
+      "nguon_kieu": "PUZZLE_REWARD",
+      "hotspot_trao": null,
+      "dung_cho": [
+        "hs_gieng_khoi",
+        "puz_xep_anh_gia_pha",
+        "chapter_01.json / area_gac_xep.unlock_condition",
+        "hs_cau_thang_gac"
+      ]
     },
     {
       "item_id": "item_ao_cuoi_giay",
@@ -197,7 +246,12 @@
       "icon_asset": "icon_item_ao_cuoi_giay.png",
       "mo_ta_vi": "Bộ áo cưới bằng giấy đỏ, khổ người lớn, đường hồ dán còn mới. Gấu áo có ghi mấy con số bằng bút chì - và chúng khớp với số đo của chính bạn.",
       "nhat_o_area": "area_gac_xep",
-      "nguon": "hs_ao_cuoi_giay"
+      "nguon": "puz_xep_anh_gia_pha",
+      "nguon_kieu": "PUZZLE_REWARD",
+      "hotspot_trao": "hs_ao_cuoi_giay",
+      "dung_cho": [
+        "hs_hinh_nhan"
+      ]
     }
   ],
   "puzzle_index": [
@@ -205,79 +259,233 @@
       "puzzle_id": "puz_khoa_bat_quai",
       "area_id": "area_san_gach",
       "type": "ROTATION_LOCK",
-      "reward_item_id": "item_chia_khoa_dong"
+      "reward_item_id": "item_chia_khoa_dong",
+      "required_items": [],
+      "grants_flag": "flag_puz_khoa_bat_quai_solved"
     },
     {
       "puzzle_id": "puz_rap_chu_the_menh",
       "area_id": "area_hien_nha",
       "type": "PATTERN_TRACE",
-      "reward_item_id": "item_ban_rap_chu_the"
+      "reward_item_id": "item_ban_rap_chu_the",
+      "required_items": [
+        "item_giay_ban_va_than"
+      ],
+      "grants_flag": "flag_puz_rap_chu_the_menh_solved"
     },
     {
       "puzzle_id": "puz_tuan_tu_le_cung",
       "area_id": "area_gian_tho",
       "type": "SEQUENCE_ORDER",
-      "reward_item_id": "item_bai_vi_khuyet_danh"
+      "reward_item_id": "item_bai_vi_khuyet_danh",
+      "required_items": [],
+      "grants_flag": "flag_puz_tuan_tu_le_cung_solved"
     },
     {
       "puzzle_id": "puz_ba_hoi_chin_tieng",
       "area_id": "area_gian_tho",
       "type": "AUDIO_MATCH",
-      "reward_item_id": "item_dai_vai_dieu"
+      "reward_item_id": "item_dai_vai_dieu",
+      "required_items": [
+        "item_dui_mo"
+      ],
+      "grants_flag": "flag_puz_ba_hoi_chin_tieng_solved"
     },
     {
       "puzzle_id": "puz_thap_lai_den_dau",
       "area_id": "area_bep_gieng",
       "type": "ITEM_COMBINE",
-      "reward_item_id": "item_den_dau_sang"
+      "reward_item_id": "item_den_dau_sang",
+      "required_items": [
+        "item_den_dau",
+        "item_dai_vai_dieu",
+        "item_chai_dau_hoa"
+      ],
+      "grants_flag": "flag_puz_thap_lai_den_dau_solved"
     },
     {
       "puzzle_id": "puz_xep_anh_gia_pha",
       "area_id": "area_gac_xep",
       "type": "SLIDING_TILE",
-      "reward_item_id": "item_ao_cuoi_giay"
+      "reward_item_id": "item_ao_cuoi_giay",
+      "required_items": [
+        "item_den_dau_sang"
+      ],
+      "grants_flag": "flag_puz_xep_anh_gia_pha_solved"
     }
   ],
   "jumpscare_index": [
     {
       "scare_id": "scare_bong_trong_chum",
       "area_id": "area_san_gach",
-      "trigger_type": "ON_PUZZLE_FAIL_COUNT"
+      "trigger_type": "ON_PUZZLE_FAIL_COUNT",
+      "max_fails": 3,
+      "cooldown_sec": 90
     },
     {
       "scare_id": "scare_ban_tay_giay_sau_manh",
       "area_id": "area_hien_nha",
-      "trigger_type": "ON_COLLECT_ITEM"
+      "trigger_type": "ON_COLLECT_ITEM",
+      "trigger_item_id": "item_ban_rap_chu_the",
+      "delay_sec": 0.35,
+      "cooldown_sec": 90
     },
     {
       "scare_id": "scare_di_anh_quay_mat",
       "area_id": "area_gian_tho",
-      "trigger_type": "ON_COLLECT_ITEM"
+      "trigger_type": "ON_COLLECT_ITEM",
+      "trigger_item_id": "item_dui_mo",
+      "delay_sec": 0.25,
+      "cooldown_sec": 90
     },
     {
       "scare_id": "scare_khoi_tu_hinh_nguoi",
       "area_id": "area_gian_tho",
-      "trigger_type": "ON_PUZZLE_FAIL_COUNT"
+      "trigger_type": "ON_PUZZLE_FAIL_COUNT",
+      "max_fails": 3,
+      "cooldown_sec": 90
     },
     {
       "scare_id": "scare_mat_duoi_day_gieng",
       "area_id": "area_bep_gieng",
-      "trigger_type": "ON_PUZZLE_FAIL_COUNT"
+      "trigger_type": "ON_PUZZLE_FAIL_COUNT",
+      "max_fails": 3,
+      "cooldown_sec": 90
     },
     {
       "scare_id": "scare_hinh_nhan_chan_loi",
       "area_id": "area_gac_xep",
-      "trigger_type": "ON_ENTER_AREA"
+      "trigger_type": "ON_ENTER_AREA",
+      "delay_sec": 0.9,
+      "cooldown_sec": 90
     },
     {
       "scare_id": "scare_anh_tho_thieu_mat",
       "area_id": "area_gac_xep",
-      "trigger_type": "ON_PUZZLE_FAIL_COUNT"
+      "trigger_type": "ON_PUZZLE_FAIL_COUNT",
+      "max_fails": 3,
+      "cooldown_sec": 90
     },
     {
       "scare_id": "scare_ao_cuoi_quay_dau",
       "area_id": "area_gac_xep",
-      "trigger_type": "ON_TIMER"
+      "trigger_type": "ON_TIMER",
+      "delay_sec": 0.4,
+      "cooldown_exempt": true
     }
-  ]
+  ],
+  "exported_flags": [
+    "flag_puz_khoa_bat_quai_solved",
+    "flag_puz_thap_lai_den_dau_solved",
+    "flag_gieng_da_soi",
+    "flag_chapter_01_hoan_thanh"
+  ],
+  "ghi_chu_exported_flags_vi": "Bon co nay duoc bat trong Chuong 1 nhung KHONG mot unlock_condition / required_flags nao cua Chuong 1 doc toi - chung la co BAN GIAO, ghi vao lop luu game va doc o chuong sau. Khai bao tuong minh o day de trinh kiem phan biet duoc co ban giao voi co chet. Can cu: (1) flag_chapter_01_hoan_thanh - moc ket Chuong 1, lop luu game va man chon chuong doc; (2) flag_gieng_da_soi - nhanh lore tuy chon (soi den xuong long gieng, thay chiec guoc tre con), Chuong 2 dung de doi mot nhanh thoai, dung co che voi flag_da_doc_bay_dieu trong 01_narrative.md muc 6; (3) + (4) flag_puz_khoa_bat_quai_solved va flag_puz_thap_lai_den_dau_solved - hai phan le \"khoa huong\" va \"soi duong\" trong nam phan le cua chuong; bon phan le con lai da co noi doc ngay trong Chuong 1, rieng hai phan nay khong chan gi ca (phan thuong vat pham moi la thu chan duong), nen chung chi ton tai de Chuong 2 doc lai so le da lam. Khong co nao trong danh sach nay duoc phep dung lam dieu kien mo khoa trong Chuong 1.",
+  "flag_registry": [
+    {
+      "flag_id": "flag_puz_khoa_bat_quai_solved",
+      "nguon_kieu": "PUZZLE",
+      "nguon_id": "puz_khoa_bat_quai",
+      "area_id": "area_san_gach",
+      "mo_ta_vi": "Bật khi xoay đúng ba vòng bát quái. Chìa khoá đồng rơi ra khỏi ruột khoá gỗ.",
+      "duoc_doc_boi": [
+        "chapter_01.json / exported_flags (ban giao Chuong 2 / lop luu game)"
+      ]
+    },
+    {
+      "flag_id": "flag_puz_rap_chu_the_menh_solved",
+      "nguon_kieu": "PUZZLE",
+      "nguon_id": "puz_rap_chu_the_menh",
+      "area_id": "area_hien_nha",
+      "mo_ta_vi": "Bật khi rập xong hai chữ \"Thế Mệnh\". Mở hotspot nhặt bản rập trên bình phong.",
+      "duoc_doc_boi": [
+        "hs_ban_rap_tren_binh_phong"
+      ]
+    },
+    {
+      "flag_id": "flag_binh_phong_da_tra",
+      "nguon_kieu": "HOTSPOT",
+      "nguon_id": "hs_o_lom_binh_phong",
+      "area_id": "area_hien_nha",
+      "mo_ta_vi": "Bật khi đặt bản rập vào ô lõm bình phong - then cửa gian giữa nhả ra.",
+      "duoc_doc_boi": [
+        "hs_cua_buc_ban",
+        "chapter_01.json / area_gian_tho.unlock_condition"
+      ]
+    },
+    {
+      "flag_id": "flag_puz_tuan_tu_le_cung_solved",
+      "nguon_kieu": "PUZZLE",
+      "nguon_id": "puz_tuan_tu_le_cung",
+      "area_id": "area_gian_tho",
+      "mo_ta_vi": "Bật khi làm đúng sáu bước tuần tự lễ cúng. Hoá vàng xong, thanh gỗ chèn cửa hậu rơi và bài vị khuyết danh lộ ra dưới dải vải điều.",
+      "duoc_doc_boi": [
+        "hs_bai_vi_khuyet_danh",
+        "hs_cua_hau_xuong_bep",
+        "chapter_01.json / area_bep_gieng.unlock_condition"
+      ]
+    },
+    {
+      "flag_id": "flag_puz_ba_hoi_chin_tieng_solved",
+      "nguon_kieu": "PUZZLE",
+      "nguon_id": "puz_ba_hoi_chin_tieng",
+      "area_id": "area_gian_tho",
+      "mo_ta_vi": "Bật khi gõ đúng ba hồi chín tiếng mõ. Dải vải điều được nhấc ra khỏi bài vị.",
+      "duoc_doc_boi": [
+        "hs_dai_vai_dieu"
+      ]
+    },
+    {
+      "flag_id": "flag_then_gac_da_tra",
+      "nguon_kieu": "HOTSPOT",
+      "nguon_id": "hs_khe_mong_cua_gac",
+      "area_id": "area_gian_tho",
+      "mo_ta_vi": "Bật khi tra bài vị khuyết danh vào khe mộng làm then cửa gác xép.",
+      "duoc_doc_boi": [
+        "hs_cau_thang_gac",
+        "chapter_01.json / area_gac_xep.unlock_condition"
+      ]
+    },
+    {
+      "flag_id": "flag_puz_thap_lai_den_dau_solved",
+      "nguon_kieu": "PUZZLE",
+      "nguon_id": "puz_thap_lai_den_dau",
+      "area_id": "area_bep_gieng",
+      "mo_ta_vi": "Bật khi ghép và thắp lại đèn dầu (thân đèn + tim vải điều + dầu hoả).",
+      "duoc_doc_boi": [
+        "chapter_01.json / exported_flags (ban giao Chuong 2 / lop luu game)"
+      ]
+    },
+    {
+      "flag_id": "flag_gieng_da_soi",
+      "nguon_kieu": "HOTSPOT",
+      "nguon_id": "hs_gieng_khoi",
+      "area_id": "area_bep_gieng",
+      "mo_ta_vi": "Bật khi soi đèn đã thắp xuống lòng giếng khơi. Nhánh lore tuỳ chọn, không chặn tiến trình.",
+      "duoc_doc_boi": [
+        "chapter_01.json / exported_flags (ban giao Chuong 2 / lop luu game)"
+      ]
+    },
+    {
+      "flag_id": "flag_puz_xep_anh_gia_pha_solved",
+      "nguon_kieu": "PUZZLE",
+      "nguon_id": "puz_xep_anh_gia_pha",
+      "area_id": "area_gac_xep",
+      "mo_ta_vi": "Bật khi xếp đúng chín mảnh ảnh thờ theo ngôi thứ gia phả. Bộ áo cưới giấy lộ ra sau khung ảnh.",
+      "duoc_doc_boi": [
+        "hs_ao_cuoi_giay"
+      ]
+    },
+    {
+      "flag_id": "flag_chapter_01_hoan_thanh",
+      "nguon_kieu": "HOTSPOT",
+      "nguon_id": "hs_hinh_nhan",
+      "area_id": "area_gac_xep",
+      "mo_ta_vi": "Bật khi khoác áo cưới giấy lên hình nhân - hành động kết Chương 1, khởi động cutscene seq_ending_ch01_khoac_ao.",
+      "duoc_doc_boi": [
+        "chapter_01.json / exported_flags (ban giao Chuong 2 / lop luu game)"
+      ]
+    }
+  ],
+  "ghi_chu_tien_trinh_vi": "Mọi cờ trong flag_registry đều có đúng MỘT nguồn cấp tường minh: puzzle.grants_flag hoặc hotspot.grants_flag trong data/areas/*.json. Engine không được suy luận nguồn cấp theo tên. Các unlock_condition của khu vực được phản chiếu lại trên chính hotspot lối vào (required_item / required_flags / fallback_text_key) để logic mở khoá đọc được ngay tại điểm chạm."
 }

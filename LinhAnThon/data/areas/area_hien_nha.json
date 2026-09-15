@@ -24,7 +24,8 @@
       },
       "action_type": "COLLECT_ITEM",
       "item_id": "item_den_dau",
-      "required_item": null
+      "required_item": null,
+      "one_shot": true
     },
     {
       "id": "hs_binh_phong",
@@ -35,7 +36,8 @@
         "height": 560
       },
       "action_type": "ZOOM_PUZZLE",
-      "target_puzzle_id": "puz_rap_chu_the_menh"
+      "target_puzzle_id": "puz_rap_chu_the_menh",
+      "fallback_text_key": "txt_thieu_do_rap_chu"
     },
     {
       "id": "hs_o_lom_binh_phong",
@@ -47,7 +49,29 @@
       },
       "action_type": "USE_ITEM",
       "required_item": "item_ban_rap_chu_the",
-      "item_id": "item_ban_rap_chu_the"
+      "grants_flag": "flag_binh_phong_da_tra",
+      "fallback_text_key": "txt_thieu_do_o_lom_binh_phong",
+      "one_shot": true,
+      "ghi_chu_vi": "Đặt bản rập vào ô lõm -> then cửa gian giữa nhả. KHÔNG tiêu huỷ vật phẩm: người chơi lấy lại bản rập (còn cần cho clue C4 của puz_xep_anh_gia_pha). Hiệu ứng duy nhất là bật cờ flag_binh_phong_da_tra."
+    },
+    {
+      "id": "hs_ban_rap_tren_binh_phong",
+      "ten_vi": "Bản rập chữ còn dính trên mặt bình phong",
+      "bounds": {
+        "x": 1230,
+        "y": 300,
+        "width": 170,
+        "height": 200
+      },
+      "action_type": "COLLECT_ITEM",
+      "item_id": "item_ban_rap_chu_the",
+      "required_item": null,
+      "required_flags": [
+        "flag_puz_rap_chu_the_menh_solved"
+      ],
+      "fallback_text_key": "txt_thieu_do_ban_rap",
+      "one_shot": true,
+      "ghi_chu_vi": "Chỉ hiện sau khi giải puz_rap_chu_the_menh. Đây là hotspot THẬT SỰ trao item_ban_rap_chu_the vào túi đồ, nhờ đó jumpscare scare_ban_tay_giay_sau_manh (ON_COLLECT_ITEM) mới bắn được."
     },
     {
       "id": "hs_cua_buc_ban",
@@ -58,7 +82,12 @@
         "height": 450
       },
       "action_type": "CHANGE_AREA",
-      "target_area_id": "area_gian_tho"
+      "target_area_id": "area_gian_tho",
+      "required_flags": [
+        "flag_binh_phong_da_tra"
+      ],
+      "fallback_text_key": "txt_khoa_cua_buc_ban",
+      "ghi_chu_vi": "Cổng sang area_gian_tho: phản chiếu unlock_condition trong chapter_01.json (required_flags: flag_binh_phong_da_tra)."
     },
     {
       "id": "hs_vo_tap_viet",
@@ -97,6 +126,12 @@
       "id": "hs_nhat_ky_duoi_chieu",
       "bounds": {
         "x": 160,
+        "y": 882,
+        "width": 280,
+        "height": 120
+      },
+      "visual_bounds": {
+        "x": 160,
         "y": 890,
         "width": 280,
         "height": 105
@@ -107,6 +142,12 @@
     {
       "id": "hs_guoc_moc",
       "bounds": {
+        "x": 640,
+        "y": 882,
+        "width": 240,
+        "height": 120
+      },
+      "visual_bounds": {
         "x": 640,
         "y": 890,
         "width": 240,
@@ -119,13 +160,20 @@
       "id": "hs_giay_ban_va_than",
       "bounds": {
         "x": 940,
+        "y": 882,
+        "width": 200,
+        "height": 120
+      },
+      "visual_bounds": {
+        "x": 940,
         "y": 890,
         "width": 200,
         "height": 105
       },
       "action_type": "COLLECT_ITEM",
       "item_id": "item_giay_ban_va_than",
-      "required_item": null
+      "required_item": null,
+      "one_shot": true
     }
   ],
   "puzzles": [
@@ -142,17 +190,26 @@
         8,
         6
       ],
+      "required_items": [
+        "item_giay_ban_va_than"
+      ],
       "reward_item_id": "item_ban_rap_chu_the",
-      "wrong_action_jumpscare": null
+      "grants_flag": "flag_puz_rap_chu_the_menh_solved",
+      "wrong_action_jumpscare": null,
+      "ghi_chu_vi": "Phần thưởng item_ban_rap_chu_the được ĐẶT LÊN mặt bình phong khi giải đúng; nó chỉ vào túi đồ qua hotspot hs_ban_rap_tren_binh_phong (COLLECT_ITEM, khoá bằng flag_puz_rap_chu_the_menh_solved). Nhờ vậy scare_ban_tay_giay_sau_manh (ON_COLLECT_ITEM) mới bắn được."
     }
   ],
   "jumpscares": [
     {
       "id": "scare_ban_tay_giay_sau_manh",
       "trigger_type": "ON_COLLECT_ITEM",
+      "trigger_item_id": "item_ban_rap_chu_the",
+      "delay_sec": 0.35,
+      "cooldown_sec": 90,
       "audio_asset": "sfx_scare_manh_nua_bat.ogg",
       "sprite_animation": "anim_ban_tay_vang_ma_quet",
-      "screen_flash": true
+      "screen_flash": true,
+      "ghi_chu_vi": "S2 - impulse. Bắn 350 ms sau khi item_ban_rap_chu_the vào túi đồ qua hs_ban_rap_tren_binh_phong. Một lần duy nhất mỗi chương."
     }
   ]
 }

@@ -45,7 +45,9 @@
         "height": 300
       },
       "action_type": "ZOOM_PUZZLE",
-      "target_puzzle_id": "puz_thap_lai_den_dau"
+      "target_puzzle_id": "puz_thap_lai_den_dau",
+      "fallback_text_key": "txt_examine_ghep_den_thieu_do",
+      "ghi_chu_vi": "Khi thiếu nguyên liệu, fallback_text_key phải gọi ĐÍCH DANH thứ còn thiếu (biện pháp bảo đảm số 1 ở 02_puzzle.md muc 7.4)."
     },
     {
       "id": "hs_gau_ton",
@@ -112,7 +114,9 @@
       },
       "action_type": "USE_ITEM",
       "required_item": "item_den_dau_sang",
-      "item_id": "item_den_dau_sang"
+      "grants_flag": "flag_gieng_da_soi",
+      "fallback_text_key": "txt_thieu_do_gieng_khoi",
+      "ghi_chu_vi": "Soi đèn xuống lòng giếng. Đèn KHÔNG bị tiêu huỷ (còn cần để lên gác xép). Hiệu ứng: bật cờ flag_gieng_da_soi, mở nhánh lore mặt dưới đáy giếng."
     },
     {
       "id": "hs_kieng_ba_chan",
@@ -135,7 +139,8 @@
       },
       "action_type": "COLLECT_ITEM",
       "item_id": "item_chai_dau_hoa",
-      "required_item": null
+      "required_item": null,
+      "one_shot": true
     },
     {
       "id": "hs_len_gian_tho",
@@ -171,8 +176,15 @@
         3,
         4
       ],
+      "required_items": [
+        "item_den_dau",
+        "item_dai_vai_dieu",
+        "item_chai_dau_hoa"
+      ],
       "reward_item_id": "item_den_dau_sang",
-      "wrong_action_jumpscare": "scare_mat_duoi_day_gieng"
+      "grants_flag": "flag_puz_thap_lai_den_dau_solved",
+      "wrong_action_jumpscare": "scare_mat_duoi_day_gieng",
+      "ghi_chu_vi": "ITEM_COMBINE: thân đèn + tim vải điều + dầu hoả. Thiếu bất kỳ thứ nào thì không mở được bảng ghép - đây là câu đố duy nhất có ba nguyên liệu."
     }
   ],
   "jumpscares": [
@@ -180,6 +192,7 @@
       "id": "scare_mat_duoi_day_gieng",
       "trigger_type": "ON_PUZZLE_FAIL_COUNT",
       "max_fails": 3,
+      "cooldown_sec": 90,
       "audio_asset": "sfx_scare_mat_gieng.ogg",
       "sprite_animation": "anim_mat_trang_ngoai_cua_bep",
       "screen_flash": true

@@ -15,19 +15,30 @@ Cac lop kiem tra, theo thu tu chay:
 
   GIAI DOAN 1  Doc & phan tich JSON
   GIAI DOAN 2  Cau truc: truong bat buoc, kieu du lieu, gia tri enum
-  GIAI DOAN 3  Rang buoc co dieu kien theo action_type / trigger_type / puzzle type
-  GIAI DOAN 4  Hinh hoc: bounds trong 1920x1080, width/height > 0, nguong cham 88x88
+  GIAI DOAN 3  Rang buoc co dieu kien theo action_type / trigger_type / puzzle type,
+               hotspot USE_ITEM khong sinh hieu ung (no-op)
+  GIAI DOAN 4  Hinh hoc: bounds trong 1920x1080, width/height > 0, nguong cham
+               120 px @1920 (san cung tuyet doi 88 px), visual_bounds nam tron trong bounds
   GIAI DOAN 5  Hotspot chong lan trong cung mot khu vuc
   GIAI DOAN 6  Dinh danh duy nhat toan chuong + quy uoc tien to
-  GIAI DOAN 7  Tham chieu cheo: target_puzzle_id, wrong_action_jumpscare, item_id,
-               required_item, target_area_id deu tro toi doi tuong CO THAT
+  GIAI DOAN 7  Nguon cap co tien trinh (chi TUONG MINH) + tham chieu cheo
   GIAI DOAN 8  Do thi phu thuoc vat pham: phat hien CHU TRINH (deadlock thiet ke)
-  GIAI DOAN 9  Vat pham "chet": nhat duoc ma khong bao gio dung toi
+  GIAI DOAN 9  Vat pham "chet" + CU DOA CHET (jumpscare khong bao gio ban duoc)
   GIAI DOAN 10 KHA GIAI: mo phong nguoi choi bang thuat toan diem bat dong (fixpoint)
   GIAI DOAN 11 LiveOps: cac bat bien trong data/liveops_chapter_01.json
 
+QUY TAC VANG CUA GIAI DOAN 10 (bai hoc tu mot vong audit):
+  Mo phong kha giai CHI duoc nap nhung gi doc duoc TUONG MINH tu du lieu -
+  truong grants_flag, required_flags, required_item, required_items, unlock_condition -
+  cong dung MOT luat suy dien co dinh: giai cau do X bat co flag_<X>_solved.
+  Truoc day trinh kiem con "doan" nguon cap co bang cach so trung tu khoa giua ten co
+  va ten hotspot, roi nap chinh cai doan do vao mo phong; ket qua la no in
+  "[OK] KHA GIAI ... 5/5 khu vuc" cho mot man choi ma nguoi choi that chi di duoc 2/5.
+  Ket luan nguy con nguy hiem hon khong co ket luan. Phan suy luan do gio chi con
+  duoc in ra duoi dang [i] GOI Y CHO NGUOI THIET KE va KHONG bao gio vao mo phong.
+
 Ma thoat: 0 = sach (co the con [CANH BAO]), 1 = co it nhat mot [LOI].
-Voi --strict thi [CANH BAO] cung lam ma thoat = 1.
+Voi --strict thi MOI [CANH BAO] duoc nang thanh [LOI] (dung cho cong CI).
 
 Vi du:
     python3 tools/validate_level.py
@@ -53,7 +64,21 @@ DEFAULT_DATA_DIR = "/home/user/HackTheBox/LinhAnThon/data"
 
 DESIGN_WIDTH = 1920
 DESIGN_HEIGHT = 1080
-MIN_TOUCH_SIZE = 88          # nguong cham ngon tay, duoi muc nay chi la CANH BAO
+
+# NGUONG VUNG CHAM - hai muc, khong phai mot.
+#
+# Khung thiet ke rong 1920 px duoc thu vua be ngang man hinh dien thoai. Tren cac may
+# pho bien (5.5" den 6.7"), 1 px thiet ke rong khoang 0.024 - 0.036 pt vat ly, nen mot
+# vung cham 88 px @1920 chi con khoang 29 - 43 pt - THAP HON ca 44 pt cua Apple HIG lan
+# 48 dp cua Android Material. Muon dat 44 pt o may nho nhat trong tap muc tieu thi canh
+# vung cham phai tu 120 px @1920 tro len.
+#
+#   canh < HARD_MIN_TOUCH_SIZE (88)  -> [LOI]   khong co ngoai le
+#   canh < MIN_TOUCH_SIZE     (120)  -> [CANH BAO], TRU KHI hotspot khai bao visual_bounds
+#                                       (tuc la vung cham da duoc no rong co chu dich so
+#                                        voi vung ve, va designer da biet viec minh lam)
+MIN_TOUCH_SIZE = 120
+HARD_MIN_TOUCH_SIZE = 88
 
 ACTION_TYPES = (
     "ZOOM_PUZZLE",
@@ -126,11 +151,17 @@ class Palette:
 
 
 class Report:
-    """Gom ket qua kiem tra theo tung giai doan roi in mot lan, co mau."""
+    """
+    Gom ket qua kiem tra theo tung giai doan roi in mot lan, co mau.
 
-    def __init__(self, palette: Palette, quiet: bool = False) -> None:
+    Voi strict=True, moi [CANH BAO] duoc NANG THANH [LOI] ngay tai cho - khong chi doi
+    ma thoat o cuoi. Cong CI nhin vao ban in phai thay dung nhung gi no chan.
+    """
+
+    def __init__(self, palette: Palette, quiet: bool = False, strict: bool = False) -> None:
         self.p = palette
         self.quiet = quiet
+        self.strict = strict
         self.errors = []
         self.warnings = []
         self._sections = []          # [(ten_giai_doan, [dong_da_to_mau])]
@@ -155,11 +186,30 @@ class Report:
         self._push(line)
 
     def warn(self, where: str, message: str, fix: str = "") -> None:
+        if self.strict:
+            # --strict: canh bao KHONG con la canh bao.
+            self.errors.append((where, message))
+            line = "  %s %s\n      %s" % (
+                self.p.red("[LOI]"), self.p.bold(where),
+                message + self.p.dim("  (nang tu [CANH BAO] vi dang chay --strict)"))
+            if fix:
+                line += "\n      %s %s" % (self.p.dim("Cach sua:"), self.p.dim(fix))
+            self._push(line)
+            return
         self.warnings.append((where, message))
         line = "  %s %s\n      %s" % (self.p.yellow("[CANH BAO]"), self.p.bold(where), message)
         if fix:
             line += "\n      %s %s" % (self.p.dim("Cach sua:"), self.p.dim(fix))
         self._push(line)
+
+    def hint(self, where: str, message: str) -> None:
+        """
+        [i] GOI Y - khong phai ket luan, khong tinh vao ma thoat, khong bao gio duoc mot
+        giai doan sau nao doc lai lam du kien dau vao. Dung cho phan suy luan tu ten.
+        """
+        self._push("  %s %s\n      %s\n      %s" % (
+            self.p.cyan("[i]"), self.p.bold(where), message,
+            self.p.dim("KHONG dung de ket luan kha giai - chi la goi y cho nguoi thiet ke.")))
 
     def ok(self, message: str) -> None:
         self._push("  %s %s" % (self.p.green("[OK]"), message))
@@ -193,7 +243,9 @@ class Report:
         n_warn = len(self.warnings)
         print("")
         print(self.p.bold("=" * 78))
-        if n_err:
+        if n_err and strict:
+            verdict = self.p.red("THAT BAI (--strict: moi canh bao da duoc nang thanh loi).")
+        elif n_err:
             verdict = self.p.red("THAT BAI - du lieu KHONG dung dong bo len build.")
         elif n_warn and strict:
             verdict = self.p.red("THAT BAI (che do --strict: canh bao duoc tinh la loi).")
@@ -237,6 +289,20 @@ def is_list(v) -> bool:
 
 def is_dict(v) -> bool:
     return isinstance(v, dict)
+
+
+def str_list(container, key):
+    """
+    Lay mot truong dang mang chuoi mot cach AN TOAN.
+
+    Neu du lieu ghi nham mot CHUOI vao cho cho mang (vd "required_flags": "flag_x"), vong
+    for cua Python se duyet tung KY TU va de ra nhung "co tien trinh" ten la 'f', 'l', 'a'...
+    Loi kieu du lieu that da duoc bao o GIAI DOAN 2-3 roi; o day chi can khong bia them rac.
+    """
+    value = container.get(key)
+    if not is_list(value):
+        return []
+    return [v for v in value if is_str(v)]
 
 
 def tokens_of(identifier: str) -> set:
@@ -285,19 +351,20 @@ def load_json(path: str, rep: Report, where: str):
 # GIAI DOAN 2-3: CAU TRUC + RANG BUOC CO DIEU KIEN
 # --------------------------------------------------------------------------
 
-def check_bounds(bounds, rep: Report, where: str) -> bool:
+def check_bounds(bounds, rep: Report, where: str, has_visual_bounds: bool = False,
+                 field: str = "bounds", touch_check: bool = True) -> bool:
     """GIAI DOAN 4. Tra ve True neu bounds hop le ve kieu du lieu."""
     if not is_dict(bounds):
-        rep.error(where, "Truong 'bounds' phai la doi tuong {x, y, width, height}.")
+        rep.error(where, "Truong '%s' phai la doi tuong {x, y, width, height}." % field)
         return False
 
     ok_types = True
     for key in ("x", "y", "width", "height"):
         if key not in bounds:
-            rep.error(where, "Truong 'bounds' thieu khoa bat buoc '%s'." % key)
+            rep.error(where, "Truong '%s' thieu khoa bat buoc '%s'." % (field, key))
             ok_types = False
         elif not is_int(bounds[key]):
-            rep.error(where, "bounds.%s phai la so nguyen, dang nhan '%r'." % (key, bounds[key]))
+            rep.error(where, "%s.%s phai la so nguyen, dang nhan '%r'." % (field, key, bounds[key]))
             ok_types = False
     if not ok_types:
         return False
@@ -306,33 +373,116 @@ def check_bounds(bounds, rep: Report, where: str) -> bool:
     w, h = bounds["width"], bounds["height"]
 
     if w <= 0:
-        rep.error(where, "bounds.width = %d - phai lon hon 0." % w)
+        rep.error(where, "%s.width = %d - phai lon hon 0." % (field, w))
     if h <= 0:
-        rep.error(where, "bounds.height = %d - phai lon hon 0." % h)
+        rep.error(where, "%s.height = %d - phai lon hon 0." % (field, h))
     if x < 0 or y < 0:
-        rep.error(where, "bounds co toa do am (x=%d, y=%d). Goc (0,0) o GOC TREN-BEN TRAI." % (x, y))
+        rep.error(where, "%s co toa do am (x=%d, y=%d). Goc (0,0) o GOC TREN-BEN TRAI."
+                  % (field, x, y))
 
     if w > 0 and h > 0:
         if x + w > DESIGN_WIDTH:
             rep.error(
                 where,
-                "Vung cham tran mep phai: x + width = %d > %d." % (x + w, DESIGN_WIDTH),
+                "%s tran mep phai: x + width = %d > %d." % (field, x + w, DESIGN_WIDTH),
                 "Giam width xuong %d hoac keo x ve %d." % (DESIGN_WIDTH - x, DESIGN_WIDTH - w),
             )
         if y + h > DESIGN_HEIGHT:
             rep.error(
                 where,
-                "Vung cham tran mep duoi: y + height = %d > %d." % (y + h, DESIGN_HEIGHT),
+                "%s tran mep duoi: y + height = %d > %d." % (field, y + h, DESIGN_HEIGHT),
                 "Giam height xuong %d hoac keo y ve %d." % (DESIGN_HEIGHT - y, DESIGN_HEIGHT - h),
             )
-        if w < MIN_TOUCH_SIZE or h < MIN_TOUCH_SIZE:
-            rep.warn(
-                where,
-                "Vung cham %dx%d nho hon nguong ngon tay %dx%d - kho bam tren dien thoai."
-                % (w, h, MIN_TOUCH_SIZE, MIN_TOUCH_SIZE),
-                "No rong vung cham (bounds) ma khong can sua anh nen, hoac gop voi hotspot ben canh.",
-            )
+        if touch_check:
+            check_touch_size(w, h, rep, where, has_visual_bounds)
     return True
+
+
+def check_touch_size(w: int, h: int, rep: Report, where: str, has_visual_bounds: bool) -> None:
+    """
+    GIAI DOAN 4 - nguong vung cham hai muc.
+
+      canh < 88  px @1920 -> [LOI]       : duoi san cung, khong ngoai le
+      canh < 120 px @1920 -> [CANH BAO]  : tru khi hotspot khai bao visual_bounds
+    """
+    small_edge = min(w, h)
+
+    if small_edge < HARD_MIN_TOUCH_SIZE:
+        rep.error(
+            where,
+            "Vung cham %dx%d co canh %d px @1920 - DUOI san cung %d px. Quy doi ra may that "
+            "chi con khoang %d-%d pt, thap hon 44 pt cua Apple HIG va 48 dp cua Android; "
+            "ngon tay nguoi lon khong bam trung duoc mot cach on dinh."
+            % (w, h, small_edge, HARD_MIN_TOUCH_SIZE,
+               int(small_edge * 0.33), int(small_edge * 0.49)),
+            "No 'bounds' len it nhat %d px moi canh (nen %d px). Neu sprite thuc su nho, "
+            "cu no bounds va khai bao 'visual_bounds' bang dung vung ve - vung cham duoc "
+            "phep lon hon hinh ve."
+            % (HARD_MIN_TOUCH_SIZE, MIN_TOUCH_SIZE),
+        )
+        return
+
+    if small_edge < MIN_TOUCH_SIZE:
+        if has_visual_bounds:
+            return          # da khai bao visual_bounds = co chu dich, khong bao lai
+        rep.warn(
+            where,
+            "Vung cham %dx%d co canh %d px @1920, chua dat nguong khuyen nghi %d px "
+            "(khoang %d-%d pt tren may that, sat nguong 44 pt cua Apple HIG)."
+            % (w, h, small_edge, MIN_TOUCH_SIZE,
+               int(small_edge * 0.33), int(small_edge * 0.49)),
+            "No 'bounds' len >= %d px moi canh - vung cham khong bat buoc trung voi hinh ve. "
+            "Neu da co chu dich giu nho, them 'visual_bounds' bang dung vung ve cua sprite "
+            "de khai bao ro y do (khi do canh bao nay tat)."
+            % MIN_TOUCH_SIZE,
+        )
+
+
+def check_visual_bounds(hs, rep: Report, where: str) -> None:
+    """
+    GIAI DOAN 4 - visual_bounds (vung ve that cua sprite) phai nam TRON trong bounds
+    (vung cham mo rong). Vung ve loi ra ngoai vung cham nghia la co phan hinh nguoi choi
+    nhin thay, bam vao, ma khong co gi xay ra.
+    """
+    vb = hs.get("visual_bounds")
+    if vb is None:
+        return
+    if not check_bounds(vb, rep, where, field="visual_bounds", touch_check=False):
+        return
+
+    bounds = hs.get("bounds")
+    if not is_dict(bounds) or not all(is_int(bounds.get(k)) for k in ("x", "y", "width", "height")):
+        return          # loi bounds da duoc bao o cho khac
+
+    bx, by = bounds["x"], bounds["y"]
+    bx2, by2 = bx + bounds["width"], by + bounds["height"]
+    vx, vy = vb["x"], vb["y"]
+    vx2, vy2 = vx + vb["width"], vy + vb["height"]
+
+    over = []
+    if vx < bx:
+        over.append("trai %d px" % (bx - vx))
+    if vy < by:
+        over.append("tren %d px" % (by - vy))
+    if vx2 > bx2:
+        over.append("phai %d px" % (vx2 - bx2))
+    if vy2 > by2:
+        over.append("duoi %d px" % (vy2 - by2))
+
+    if over:
+        rep.error(
+            where,
+            "visual_bounds (%d,%d %dx%d) loi ra ngoai bounds (%d,%d %dx%d) o phia %s. "
+            "Phan hinh ve nam ngoai vung cham la phan nguoi choi nhin thay, bam vao, "
+            "va khong co gi xay ra."
+            % (vx, vy, vb["width"], vb["height"],
+               bx, by, bounds["width"], bounds["height"], ", ".join(over)),
+            "visual_bounds phai nam TRON trong bounds. Hoac no bounds bao het vung ve, "
+            "hoac thu visual_bounds lai cho dung phan sprite thuc su ve.",
+        )
+    elif vb["width"] > bounds["width"] or vb["height"] > bounds["height"]:
+        rep.error(where, "visual_bounds lon hon bounds - nguoc voi y nghia cua truong nay "
+                         "(vung ve phai nho hon hoac bang vung cham).")
 
 
 def check_hotspot(hs, rep: Report, area_id: str, index: int) -> bool:
@@ -356,7 +506,9 @@ def check_hotspot(hs, rep: Report, area_id: str, index: int) -> bool:
     if "bounds" not in hs:
         rep.error(where, "Thieu truong bat buoc 'bounds'.")
     else:
-        check_bounds(hs["bounds"], rep, where)
+        check_bounds(hs["bounds"], rep, where,
+                     has_visual_bounds=is_dict(hs.get("visual_bounds")))
+        check_visual_bounds(hs, rep, where)
 
     action = hs.get("action_type")
     if not is_str(action):
@@ -390,9 +542,10 @@ def check_hotspot(hs, rep: Report, area_id: str, index: int) -> bool:
         if not is_str(req):
             rep.error(where, "USE_ITEM bat buoc co 'required_item' KHAC null - "
                              "phai noi ro dung vat pham nao.")
-        if not is_str(hs.get("item_id")) and not is_str(hs.get("target_puzzle_id")):
-            rep.error(where, "USE_ITEM bat buoc co 'item_id' (trao vat pham moi) "
-                             "HOAC 'target_puzzle_id' (mo cau do).")
+        # Hieu ung hop le cua USE_ITEM: trao vat pham MOI, mo cau do, hoac - dang hay gap
+        # nhat o Chuong 1 - chi de lai mot co tien trinh ("dat vat pham vao cho" ma khong
+        # tieu huy vat pham, khong trao gi moi). check_use_item_noop() bao gom ca ba.
+        check_use_item_noop(hs, rep, where)
 
     elif action == "CHANGE_AREA":
         if not is_str(hs.get("target_area_id")):
@@ -420,10 +573,101 @@ def check_hotspot(hs, rep: Report, area_id: str, index: int) -> bool:
                       % (key, val, PREFIX["item"]))
 
     gf = hs.get("grants_flag")
-    if is_str(gf) and not gf.startswith(PREFIX["flag"]):
+    if gf is not None and not is_str(gf):
+        rep.error(where, "'grants_flag' phai la flag_id hoac null, dang nhan %r." % (gf,))
+    elif is_str(gf) and not gf.startswith(PREFIX["flag"]):
         rep.error(where, "grants_flag = '%s' phai bat dau bang tien to '%s'."
                   % (gf, PREFIX["flag"]))
+
+    # ---- required_flags ----------------------------------------------------
+    rf = hs.get("required_flags")
+    if rf is not None and not is_list(rf):
+        rep.error(where, "'required_flags' phai la mang flag_id (mang rong = khong dieu kien).")
+        rf = []
+    rf = [f for f in (rf or [])]
+    for flag in rf:
+        if not is_str(flag) or not flag.startswith(PREFIX["flag"]):
+            rep.error(where, "required_flags chua gia tri khong hop le: %r - phai la chuoi "
+                             "bat dau bang '%s'." % (flag, PREFIX["flag"]))
+    if len(set(f for f in rf if is_str(f))) != len([f for f in rf if is_str(f)]):
+        rep.error(where, "'required_flags' co phan tu trung nhau.")
+
+    # ---- fallback_text_key: giai thich khi nguoi choi bi chan --------------
+    fbk = hs.get("fallback_text_key")
+    if fbk is not None and not is_str(fbk):
+        rep.error(where, "'fallback_text_key' phai la text_key (chuoi).")
+    elif is_str(fbk) and not RE_TEXT_KEY.match(fbk):
+        rep.error(where, "fallback_text_key '%s' sai quy uoc - phai khop ^txt_[a-z0-9_]+$." % fbk)
+
+    gated_by_item = is_str(hs.get("required_item"))
+    gated_by_flags = bool([f for f in rf if is_str(f)])
+    if (gated_by_item or gated_by_flags) and not is_str(fbk):
+        why = []
+        if gated_by_item:
+            why.append("required_item = '%s'" % hs.get("required_item"))
+        if gated_by_flags:
+            why.append("required_flags = %s" % fmt_list([f for f in rf if is_str(f)]))
+        rep.warn(
+            where,
+            "Hotspot co dieu kien (%s) nhung khong co 'fallback_text_key'. Nguoi choi bam "
+            "trung ma chua du dieu kien se khong nhan duoc loi giai thich nao - man hinh "
+            "im lang, ho tuong hotspot hong va bo qua no." % "; ".join(why),
+            "Them \"fallback_text_key\": \"txt_...\" voi mot cau nhac huong ve thu con thieu "
+            "(vd \"Then cua nay can mot vat gi do vua khop khe mong.\").",
+        )
     return True
+
+
+def check_use_item_noop(hs, rep: Report, where: str) -> None:
+    """
+    GIAI DOAN 3 - hotspot USE_ITEM khong sinh ra hieu ung nao DOC DUOC BANG MAY.
+
+    Mot hotspot USE_ITEM chi thuc su lam gi do khi no:
+      - bat mot co tien trinh   (grants_flag), hoac
+      - mo mot cau do           (target_puzzle_id), hoac
+      - mo duong sang khu vuc   (target_area_id), hoac
+      - trao mot vat pham MOI   (item_id KHAC required_item).
+
+    Neu item_id trung dung required_item va khong co gi khac, hotspot nay chi "tra lai
+    dung cai vua lay ra": trang thai may sau khi bam y het truoc khi bam. Nguoi choi thay
+    hoat anh, nhung khong mot dieu kien nao trong chuong tien them mot buoc - va mo phong
+    kha giai se dung lai ngay o day.
+    """
+    req = hs.get("required_item")
+    item_id = hs.get("item_id")
+
+    effects = []
+    if is_str(hs.get("grants_flag")):
+        effects.append("grants_flag")
+    if is_str(hs.get("target_puzzle_id")):
+        effects.append("target_puzzle_id")
+    if is_str(hs.get("target_area_id")):
+        effects.append("target_area_id")
+    if is_str(item_id) and item_id != req:
+        effects.append("item_id moi")
+
+    if effects:
+        return
+
+    if is_str(item_id) and is_str(req) and item_id == req:
+        detail = ("item_id = required_item = '%s' (dat vat pham vao roi nhan lai dung no)"
+                  % item_id)
+    elif is_str(item_id):
+        detail = "item_id = '%s' khong phai vat pham moi" % item_id
+    else:
+        detail = "khong co 'item_id' nao duoc trao"
+
+    rep.error(
+        where,
+        "Hotspot USE_ITEM nay KHONG LAM GI CA: %s, khong 'grants_flag', khong "
+        "'target_puzzle_id', khong 'target_area_id'. Khong mot bit trang thai nao doi sau "
+        "khi nguoi choi dung vat pham, nen ca engine lan trinh kiem deu khong biet viec "
+        "dung vat pham da xay ra - moi khu vuc/hotspot doi 'da dat vat pham' se ket cung."
+        % detail,
+        "Them \"grants_flag\": \"flag_<viec_vua_lam>\" (cach dung nhat, vi unlock_condition "
+        "doc duoc no), hoac tro 'target_puzzle_id' toi cau do duoc mo ra, hoac trao mot "
+        "'item_id' KHAC voi 'required_item'.",
+    )
 
 
 def check_puzzle(pz, rep: Report, area_id: str, index: int) -> bool:
@@ -499,6 +743,16 @@ def check_puzzle(pz, rep: Report, area_id: str, index: int) -> bool:
         for item in ri:
             if not is_str(item) or not item.startswith(PREFIX["item"]):
                 rep.error(where, "required_items chua gia tri khong hop le: %r" % (item,))
+        names = [i for i in ri if is_str(i)]
+        if len(set(names)) != len(names):
+            rep.error(where, "'required_items' co vat pham lap lai.")
+
+    gf = pz.get("grants_flag")
+    if gf is not None and not is_str(gf):
+        rep.error(where, "'grants_flag' phai la flag_id hoac null, dang nhan %r." % (gf,))
+    elif is_str(gf) and not gf.startswith(PREFIX["flag"]):
+        rep.error(where, "grants_flag = '%s' phai bat dau bang tien to '%s'."
+                  % (gf, PREFIX["flag"]))
     return True
 
 
@@ -543,19 +797,82 @@ def check_jumpscare(js, rep: Report, area_id: str, index: int) -> bool:
             rep.error(where, "trigger_type '%s' KHONG duoc mang 'max_fails' - "
                              "truong nay chi thuoc ve ON_PUZZLE_FAIL_COUNT." % trig)
 
-    if trig == "ON_TIMER":
-        if "delay_sec" not in js:
-            rep.warn(where, "ON_TIMER khong khai bao 'delay_sec' - thoi diem ban cu doa "
-                            "khong xac dinh, moi may se ban mot kieu.",
-                     "Them \"delay_sec\": <so giay dung yen trong khu vuc truoc khi ban>.")
-        elif not is_num(js["delay_sec"]) or js["delay_sec"] <= 0:
-            rep.error(where, "'delay_sec' phai la so duong.")
-    elif "delay_sec" in js:
-        rep.error(where, "Chi ON_TIMER moi duoc mang 'delay_sec'.")
+    # delay_sec = do tre tu luc dieu kien kich hoat thoa man den luc cu doa ban.
+    # BAT BUOC voi ON_TIMER (o do no la chinh dinh nghia cua trigger); TUY CHON o cac
+    # trigger khac, noi no la do tre nhip (vd ban 350 ms sau khi vat pham vao tui do).
+    if "delay_sec" in js:
+        ds = js["delay_sec"]
+        if not is_num(ds):
+            rep.error(where, "'delay_sec' phai la so, dang nhan %r." % (ds,))
+        elif ds < 0:
+            rep.error(where, "'delay_sec' = %r - phai lon hon hoac bang 0." % (ds,))
+        elif ds == 0 and trig == "ON_TIMER":
+            rep.warn(where, "'delay_sec' = 0 tren ON_TIMER - cu doa ban ngay khi vua vao khu "
+                            "vuc, tuc dung y nghia cua ON_ENTER_AREA chu khong phai ON_TIMER.",
+                     "Dat delay_sec > 0, hoac doi trigger_type sang ON_ENTER_AREA cho dung ten.")
+    elif trig == "ON_TIMER":
+        rep.error(where, "ON_TIMER BAT BUOC co 'delay_sec'. Thieu no thi thoi diem ban cu doa "
+                         "khong xac dinh: moi may, moi ban build se ban mot kieu, va khong ai "
+                         "kiem thu lai duoc mot loi khieu nai.",
+                  "Them \"delay_sec\": <so giay dung yen trong khu vuc truoc khi ban>, vd 25.")
 
-    if trig not in ("ON_COLLECT_ITEM", "ON_WRONG_ITEM_USE") and "trigger_item_id" in js:
+    if trig == "ON_COLLECT_ITEM":
+        tii = js.get("trigger_item_id")
+        if not is_str(tii):
+            rep.error(where, "ON_COLLECT_ITEM BAT BUOC co 'trigger_item_id' - phai noi ro NHAT "
+                             "VAT PHAM NAO thi cu doa ban. Thieu no thi engine khong co dieu "
+                             "kien nao de kich hoat, cu doa nam chet trong du lieu.",
+                      "Them \"trigger_item_id\": \"item_...\" tro toi vat pham gay ra cu doa.")
+        elif not tii.startswith(PREFIX["item"]):
+            rep.error(where, "trigger_item_id = '%s' phai bat dau bang tien to '%s'."
+                      % (tii, PREFIX["item"]))
+    elif trig == "ON_WRONG_ITEM_USE":
+        tii = js.get("trigger_item_id")
+        if is_str(tii) and not tii.startswith(PREFIX["item"]):
+            rep.error(where, "trigger_item_id = '%s' phai bat dau bang tien to '%s'."
+                      % (tii, PREFIX["item"]))
+    elif "trigger_item_id" in js:
         rep.error(where, "Chi ON_COLLECT_ITEM / ON_WRONG_ITEM_USE moi duoc mang "
                          "'trigger_item_id'.")
+
+    if "cooldown_sec" in js:
+        cd = js["cooldown_sec"]
+        if not is_num(cd):
+            rep.error(where, "'cooldown_sec' phai la so, dang nhan %r." % (cd,))
+        elif cd < 0:
+            rep.error(where, "'cooldown_sec' = %r - phai lon hon hoac bang 0." % (cd,))
+        if js.get("cooldown_exempt") is True:
+            rep.error(where, "Khai bao dong thoi 'cooldown_sec' va \"cooldown_exempt\": true - "
+                             "mau thuan, khong biet cu doa nay co luat nghi hay khong.",
+                      "Giu mot trong hai: cooldown_sec neu co luat nghi, cooldown_exempt neu "
+                      "duoc mien tru.")
+    elif trig in ("ON_ENTER_AREA", "ON_TIMER") and js.get("cooldown_exempt") is not True:
+        rep.warn(where, "Cu doa loai '%s' co the ban lai nhieu lan nhung khong khai bao "
+                        "'cooldown_sec'. Doa lien tiep lam nguoi choi quen so va mat sach "
+                        "hieu qua." % trig,
+                 "Them \"cooldown_sec\": <so giay nghi toi thieu>, vd 90. Neu cu doa nay duoc "
+                 "MIEN TRU luat nghi mot cach co chu dich (dread scare nhe, khong transient, "
+                 "khong flash, khong haptic), dat \"cooldown_exempt\": true kem 'ghi_chu_vi' "
+                 "neu ro can cu - khai bao y do bang du lieu, dung bang ghi chu suong.")
+
+    if "cooldown_exempt" in js and not is_bool(js["cooldown_exempt"]):
+        rep.error(where, "'cooldown_exempt' phai la true hoac false.")
+
+    # SIET CHAT (khong noi long): mien tru cooldown khong duoc dung lam cua sau cho mot cu
+    # doa xung. 04_horror.md muc 2.8.2 dinh nghia luat mien tru la: impulse == false VA
+    # screen_flash == false VA camera_punch_pct == 0 VA haptic_pattern_at_0ms == null.
+    # Trong hop dong du lieu hien tai, chi 'screen_flash' la doc duoc bang may - nen day la
+    # dieu kien CAN duy nhat may kiem duoc, va no phai duoc kiem. Mot cu doa vua chop man
+    # vua tu nhan mien tru cooldown la mot impulse scare ban lai khong gioi han: dung cai
+    # ma luat cooldown sinh ra de chan.
+    if js.get("cooldown_exempt") is True and js.get("screen_flash") is True:
+        rep.error(where, "Khai bao \"cooldown_exempt\": true nhung 'screen_flash' = true - "
+                         "mien tru cooldown chi danh cho dread scare (khong transient, khong "
+                         "flash, khong punch, khong haptic o moc 0 ms) theo 04_horror.md muc "
+                         "2.8.2. Mot cu doa co chop man la impulse scare, va impulse scare "
+                         "chiu TOAN BO luat nghi 90 s.",
+                  "Hoac dat \"screen_flash\": false neu day that su la cu doa nen, hoac bo "
+                  "\"cooldown_exempt\" va khai bao \"cooldown_sec\": 90.")
 
     audio = js.get("audio_asset")
     if not is_str(audio):
@@ -636,7 +953,8 @@ class Chapter:
         self.hotspots = {}        # hs_id -> (area_id, hotspot)
         self.puzzles = {}         # puz_id -> (area_id, puzzle)
         self.jumpscares = {}      # scare_id -> (area_id, jumpscare)
-        self.flag_producers = {}  # flag_id -> list[(kind, id, area_id)]
+        self.flag_producers = {}  # flag_id -> list[(kind, id, area_id, how)]
+        self.exported_flags = []  # co ban giao sang chuong sau, khai bao o manifest
 
     def area_hotspots(self, area_id):
         area = self.areas.get(area_id) or {}
@@ -661,8 +979,8 @@ def normalize_unlock(raw, area_id: str, rep: Report):
                   "Chon NONE, ALL_OF hoac ANY_OF.")
         utype = "ALL_OF"
 
-    items = [v for v in (raw.get("required_items") or []) if is_str(v)]
-    flags = [v for v in (raw.get("required_flags") or []) if is_str(v)]
+    items = str_list(raw, "required_items")
+    flags = str_list(raw, "required_flags")
     return {
         "type": utype,
         "items": items,
@@ -764,10 +1082,16 @@ def check_cross_references(ch: Chapter, rep: Report) -> None:
                           "Moi vat pham phai duoc khai bao mot lan trong chapter_01.json / "
                           "item_catalog truoc khi duoc tham chieu.")
 
-        for flag in (hs.get("required_flags") or []):
-            if is_str(flag) and flag not in ch.flag_producers:
-                broken += 1
-                rep.error(where, "required_flags chua co '%s' khong co nguon cap nao." % flag)
+        # Co tien trinh khong co nguon cap da duoc GIAI DOAN 7a bao mot lan, kem dia chi
+        # moi noi tham chieu - khong bao lai o day de khoi nhan doi so luong loi.
+
+        fbk = hs.get("fallback_text_key")
+        if is_str(fbk) and fbk == hs.get("text_key"):
+            rep.warn(where, "fallback_text_key trung y het text_key ('%s') - nguoi choi nhan "
+                            "cung mot cau du da du dieu kien hay chua, nen khong biet minh "
+                            "con thieu gi." % fbk,
+                     "Tach hai khoa: text_key la ket qua khi lam duoc, fallback_text_key la "
+                     "loi nhac khi con thieu dieu kien.")
 
 
     # -- 7.2 puzzle -> jumpscare / item -------------------------------------
@@ -797,8 +1121,8 @@ def check_cross_references(ch: Chapter, rep: Report) -> None:
             broken += 1
             rep.error(where, "reward_item_id = '%s' khong co trong 'item_catalog'." % rid)
 
-        for item in (pz.get("required_items") or []):
-            if is_str(item) and item not in ch.items:
+        for item in str_list(pz, "required_items"):
+            if item not in ch.items:
                 broken += 1
                 rep.error(where, "required_items chua '%s' khong co trong 'item_catalog'." % item)
 
@@ -850,92 +1174,157 @@ def check_cross_references(ch: Chapter, rep: Report) -> None:
 # CO TIEN TRINH (FLAG) - xac dinh nguon cap
 # --------------------------------------------------------------------------
 
+def collect_flag_references(ch: Chapter):
+    """flag_id -> danh sach noi THAM CHIEU toi co do (de bao loi co dia chi cu the)."""
+    refs = defaultdict(list)
+    for area_id, uc in sorted(ch.unlock.items()):
+        for flag in uc["flags"]:
+            if is_str(flag):
+                refs[flag].append("chapter_01.json / %s / unlock_condition.required_flags"
+                                  % area_id)
+    for hs_id, (area_id, hs) in sorted(ch.hotspots.items()):
+        for flag in str_list(hs, "required_flags"):
+            refs[flag].append("%s / %s / required_flags" % (area_id, hs_id))
+    return refs
+
+
 def build_flag_producers(ch: Chapter, rep: Report) -> None:
     """
-    Tim nguon cap cho moi co tien trinh, theo ba muc uu tien:
+    Xac dinh nguon cap cho moi co tien trinh. CHI HAI NGUON, ca hai deu doc duoc bang may:
 
-      1. TUONG MINH  - hotspot/puzzle co truong "grants_flag".
-      2. QUY UOC     - flag_<puzzle_id>_solved duoc cap khi giai puzzle do.
-      3. SUY LUAN    - doi chieu tu khoa giua ten co va id hotspot USE_ITEM trong
-                       khu vuc nguon (from_area_id). Chi chap nhan khi ket qua
-                       duy nhat, va luon kem mot [CANH BAO].
+      1. TUONG MINH - truong "grants_flag" tren mot hotspot hoac mot puzzle.
+      2. QUY UOC CHINH TAC - giai cau do X luon bat co "flag_<X>_solved". Day la mot luat
+         suy dien CO DINH, khong phai phong doan: no khong phu thuoc vao cach dat ten cua
+         ai ca, va engine hien thuc dung luat do.
 
-    Khong tim duoc nguon nao -> [LOI], vi khu vuc doi co do se khong bao gio mo.
+    KHONG con muc "suy luan" thu ba. Truoc day trinh kiem doan nguon cap bang cach so tu
+    khoa trung giua ten co va ten hotspot, roi GIAI DOAN 10 nap chinh cai doan do vao mo
+    phong nguoi choi - nen mo phong "di duoc" bang nhung canh do chinh no bia ra, va bao
+    cao ket luan "[OK] KHA GIAI 5/5 khu vuc" cho mot ban du lieu ma nguoi choi that chi
+    di duoc 2/5. Phan suy luan nay bay gio chi con la GOI Y [i] cho nguoi thiet ke, in o
+    cuoi giai doan, va khong ham nao doc lai no.
+
+    Co duoc tham chieu (unlock_condition.required_flags / hotspot.required_flags) ma khong
+    co nguon cap nao -> [LOI]. Khong phai [CANH BAO]: khu vuc doi co do khong bao gio mo.
     """
     producers = defaultdict(list)
 
-    # muc 1 - tuong minh
-    for hs_id, (area_id, hs) in ch.hotspots.items():
+    # -- muc 1: tuong minh ---------------------------------------------------
+    for hs_id, (area_id, hs) in sorted(ch.hotspots.items()):
         gf = hs.get("grants_flag")
         if is_str(gf):
             producers[gf].append(("hotspot", hs_id, area_id, "tuong minh"))
-    for pz_id, (area_id, pz) in ch.puzzles.items():
+    for pz_id, (area_id, pz) in sorted(ch.puzzles.items()):
         gf = pz.get("grants_flag")
         if is_str(gf):
             producers[gf].append(("puzzle", pz_id, area_id, "tuong minh"))
-        # muc 2 - quy uoc
+        # -- muc 2: quy uoc chinh tac
         producers["flag_%s_solved" % pz_id].append(("puzzle", pz_id, area_id, "quy uoc"))
 
-    # muc 3 - suy luan cho cac co duoc yeu cau nhung chua co nguon
-    required_flags = set()
-    for uc in ch.unlock.values():
-        required_flags.update(uc["flags"])
-    for _, (_, hs) in ch.hotspots.items():
-        required_flags.update(f for f in (hs.get("required_flags") or []) if is_str(f))
+    ch.flag_producers = dict(producers)
 
-    for flag in sorted(required_flags):
-        if producers.get(flag):
+    # -- doi chieu voi cac co THUC SU duoc tham chieu ------------------------
+    refs = collect_flag_references(ch)
+    dangling = [flag for flag in sorted(refs) if not producers.get(flag)]
+
+    for flag in dangling:
+        rep.error(
+            "co tien trinh '%s'" % flag,
+            "KHONG co nguon cap: khong hotspot hay puzzle nao khai bao \"grants_flag\": "
+            "\"%s\", va ten co cung khong khop quy uoc flag_<puzzle_id>_solved. Co nay "
+            "khong bao gio bat len duoc, nen %d cho dang doi no se ket cung vinh vien: %s"
+            % (flag, len(refs[flag]), fmt_list(refs[flag], limit=4)),
+            "Them \"grants_flag\": \"%s\" vao dung hotspot (hoac puzzle) chiu trach nhiem bat "
+            "co nay. Trinh kiem KHONG con doan nguon cap tu ten nua - viec bat co phai nam "
+            "trong du lieu." % flag,
+        )
+
+    # -- co duoc cap nhung khong ai doi --------------------------------------
+    #
+    # Mot co khong ai doi TRONG CHUONG 1 chua chac la rac: no co the la co ban giao cho
+    # chuong sau hoac cho lop luu game (vd flag_chapter_01_hoan_thanh). Trinh kiem khong
+    # nhin thay nhung chuong do, va no tuyet doi khong duoc doan y dinh tu TEN co - do
+    # dung la thoi quen da lam hong ban truoc. Cach dung dan: manifest khai bao tuong minh
+    # danh sach 'exported_flags', va nhung co trong do khong bi nhac nua.
+    exported = set(ch.exported_flags)
+    for flag in sorted(exported):
+        if not producers.get(flag):
+            rep.error(
+                "chapter_01.json / exported_flags",
+                "Khai bao xuat co '%s' sang chuong sau, nhung KHONG cho nao trong Chuong 1 cap "
+                "co nay - chuong sau se doi mai mot co khong bao gio den." % flag,
+                "Them \"grants_flag\": \"%s\" vao hotspot/puzzle chiu trach nhiem, hoac bo ten "
+                "nay khoi 'exported_flags'." % flag,
+            )
+
+    for flag, prods in sorted(producers.items()):
+        if flag in refs or flag in exported:
             continue
+        explicit = [p for p in prods if p[3] == "tuong minh"]
+        if not explicit:
+            continue        # co quy uoc khong ai dung la binh thuong
+        rep.warn(
+            "co tien trinh '%s'" % flag,
+            "Duoc cap tuong minh boi %s nhung KHONG mot unlock_condition hay required_flags "
+            "nao trong Chuong 1 doi toi. Hoac day la loi chinh ta o noi tham chieu, hoac la "
+            "co thua, hoac la co ban giao sang chuong sau ma chua khai bao."
+            % fmt_list("%s '%s'" % (p[0], p[1]) for p in explicit),
+            "Neu la loi chinh ta: doi chieu voi cac required_flags trong chapter_01.json. "
+            "Neu co that su thua: bo grants_flag. Neu co nay danh cho chuong sau / lop luu "
+            "game: them \"%s\" vao mang \"exported_flags\" o cap cao nhat cua chapter_01.json "
+            "- khai bao y do bang du lieu thi trinh kiem thoi nhac." % flag,
+        )
 
+    n_explicit = sum(1 for prods in producers.values() for p in prods if p[3] == "tuong minh")
+    n_conv = sum(1 for prods in producers.values() for p in prods if p[3] == "quy uoc")
+    rep.info("Nguon cap co tien trinh: %d khai bao TUONG MINH (grants_flag) + %d theo QUY UOC "
+             "CHINH TAC (flag_<puzzle_id>_solved). Khong co nguon nao duoc suy luan."
+             % (n_explicit, n_conv))
+
+    if dangling:
+        suggest_flag_sources(ch, dangling, rep)
+
+
+def suggest_flag_sources(ch: Chapter, dangling, rep: Report) -> None:
+    """
+    GOI Y (chi de nguoi doc), khong phai ket luan.
+
+    Doi chieu tu khoa giua ten co va ten hotspot USE_ITEM de doan xem designer CO LE dinh
+    cho hotspot nao bat co. Ket qua chay thang ra man hinh duoi dang [i] va DUNG O DO:
+    khong ham nao nap lai, dac biet la mo phong kha giai o GIAI DOAN 10. Day chinh la cho
+    ban audit truoc bi thung - trinh kiem tu tin vao phong doan cua chinh no.
+    """
+    for flag in dangling:
         scope = None
-        for area_id, uc in ch.unlock.items():
+        for area_id, uc in sorted(ch.unlock.items()):
             if flag in uc["flags"] and is_str(uc["from"]):
                 scope = uc["from"]
                 break
 
         flag_tokens = tokens_of(flag)
         candidates = []
-        for hs_id, (area_id, hs) in ch.hotspots.items():
+        for hs_id, (area_id, hs) in sorted(ch.hotspots.items()):
             if hs.get("action_type") != "USE_ITEM":
                 continue
-            if scope is not None and area_id != scope:
-                continue
+            if is_str(hs.get("grants_flag")):
+                continue        # hotspot nay da co co rieng roi
             overlap = flag_tokens & tokens_of(hs_id)
-            if overlap:
-                candidates.append((len(overlap), hs_id, area_id, overlap))
+            if not overlap:
+                continue
+            score = len(overlap) + (1 if scope is not None and area_id == scope else 0)
+            candidates.append((score, hs_id, area_id, sorted(overlap)))
 
         if not candidates:
-            rep.error(
-                "co tien trinh '%s'" % flag,
-                "Khong tim duoc nguon cap co nay. Khu vuc doi no se khong bao gio mo duoc.",
-                "Them \"grants_flag\": \"%s\" vao hotspot (hoac puzzle) chiu trach nhiem bat co."
-                % flag,
-            )
             continue
-
         candidates.sort(reverse=True)
-        best = candidates[0][0]
-        winners = [c for c in candidates if c[0] == best]
-        if len(winners) > 1:
-            rep.error(
-                "co tien trinh '%s'" % flag,
-                "Suy luan nguon cap ra %d ung vien ngang diem: %s - khong the ket luan."
-                % (len(winners), fmt_list(w[1] for w in winners)),
-                "Khai bao tuong minh \"grants_flag\": \"%s\" tren dung mot hotspot." % flag,
-            )
-            continue
-
-        _, hs_id, area_id, overlap = winners[0]
-        producers[flag].append(("hotspot", hs_id, area_id, "suy luan"))
-        rep.warn(
-            "co tien trinh '%s'" % flag,
-            "Khong co truong 'grants_flag' nao cap co nay. Trinh kiem suy luan tu khoa chung "
-            "%s va gan tam cho hotspot '%s' (%s)." % (fmt_list(sorted(overlap)), hs_id, area_id),
-            "Them \"grants_flag\": \"%s\" vao hotspot '%s' de logic mo khoa doc duoc bang may, "
-            "khong phu thuoc vao cach dat ten." % (flag, hs_id),
+        lines = ", ".join("%s (%s; tu chung: %s)" % (hs_id, area_id, "/".join(ov))
+                          for _, hs_id, area_id, ov in candidates[:3])
+        rep.hint(
+            "goi y nguon cap cho '%s'" % flag,
+            "Doan tu ten (chi doi chieu tu khoa, KHONG phai bang chung): co the designer dinh "
+            "cho mot trong cac hotspot USE_ITEM sau bat co nay - %s. Neu dung, hay them "
+            "\"grants_flag\": \"%s\" vao dung mot trong so do." % (lines, flag),
         )
-
-    ch.flag_producers = dict(producers)
 
 
 # --------------------------------------------------------------------------
@@ -980,7 +1369,7 @@ def build_item_graph(ch: Chapter):
         rid = pz.get("reward_item_id")
         if not is_str(rid):
             continue
-        need = {i for i in (pz.get("required_items") or []) if is_str(i)}
+        need = set(str_list(pz, "required_items"))
         producers[rid].append(need | area_prereq(area_id))
 
     graph = defaultdict(set)
@@ -1075,9 +1464,8 @@ def check_dead_items(ch: Chapter, rep: Report) -> None:
         if is_str(req):
             consumers[req].append("hotspot %s (%s, %s)" % (hs_id, area_id, hs.get("action_type")))
     for pz_id, (area_id, pz) in ch.puzzles.items():
-        for item in (pz.get("required_items") or []):
-            if is_str(item):
-                consumers[item].append("puzzle %s (%s)" % (pz_id, area_id))
+        for item in str_list(pz, "required_items"):
+            consumers[item].append("puzzle %s (%s)" % (pz_id, area_id))
     for area_id, uc in ch.unlock.items():
         for item in uc["items"]:
             consumers[item].append("dieu kien mo khoa %s" % area_id)
@@ -1099,6 +1487,96 @@ def check_dead_items(ch: Chapter, rep: Report) -> None:
         rep.ok("Moi vat pham trong item_catalog deu co noi dung toi - khong co vat pham chet.")
 
 
+def check_dead_jumpscares(ch: Chapter, rep: Report) -> None:
+    """
+    GIAI DOAN 9 - CU DOA CHET: cu doa nam trong du lieu nhung khong mot luot choi nao ban
+    duoc no ra.
+
+    Truong hop nang nhat, va la truong hop de lot nhat: jumpscare ON_COLLECT_ITEM tro toi
+    mot vat pham ma nguoi choi KHONG BAO GIO "nhat" - vi du vat pham do chi la
+    reward_item_id cua mot cau do (nguoi choi nhan no qua man hinh giai do, khong qua mot
+    hotspot COLLECT_ITEM nao). Su kien ON_COLLECT_ITEM khong bao gio ban ra, va ca mot
+    canh dinh cao cua chuong im lang - khong crash, khong log, khong ai biet.
+    """
+    # Vat pham thuc su duoc NHAT qua hotspot COLLECT_ITEM, kem khu vuc nhat duoc.
+    collected_in = defaultdict(set)
+    for hs_id, (area_id, hs) in ch.hotspots.items():
+        if hs.get("action_type") == "COLLECT_ITEM" and is_str(hs.get("item_id")):
+            collected_in[hs["item_id"]].add(area_id)
+
+    # Vat pham chi den tu phan thuong cau do / hotspot USE_ITEM (KHONG phai "nhat").
+    reward_of = {}
+    for pz_id, (area_id, pz) in ch.puzzles.items():
+        if is_str(pz.get("reward_item_id")):
+            reward_of[pz["reward_item_id"]] = "phan thuong cua cau do '%s'" % pz_id
+    for hs_id, (area_id, hs) in ch.hotspots.items():
+        if hs.get("action_type") == "USE_ITEM" and is_str(hs.get("item_id")):
+            reward_of.setdefault(hs["item_id"], "san pham cua hotspot USE_ITEM '%s'" % hs_id)
+
+    dead = 0
+    for js_id, (area_id, js) in sorted(ch.jumpscares.items()):
+        where = "%s / %s" % (area_id, js_id)
+        trig = js.get("trigger_type")
+
+        if trig == "ON_COLLECT_ITEM":
+            tii = js.get("trigger_item_id")
+            if not is_str(tii):
+                continue            # thieu truong - da bao o GIAI DOAN 2-3
+            if tii not in ch.items:
+                continue            # tham chieu gay - da bao o GIAI DOAN 7b
+            if not collected_in.get(tii):
+                dead += 1
+                how = reward_of.get(tii)
+                rep.error(
+                    where,
+                    "CU DOA CHET: trigger la ON_COLLECT_ITEM tren '%s', nhung vat pham do "
+                    "KHONG BAO GIO duoc nhat qua mot hotspot COLLECT_ITEM nao - %s. Su kien "
+                    "'vua nhat duoc vat pham' khong bao gio phat ra, nen cu doa nay khong the "
+                    "ban trong bat ky luot choi nao."
+                    % (tii, ("no chi la %s" % how) if how
+                       else "khong co nguon nao trao no qua duong nhat do ca"),
+                    "Chon mot trong ba: (a) doi 'trigger_item_id' sang mot vat pham co hotspot "
+                    "COLLECT_ITEM that; (b) them mot hotspot COLLECT_ITEM trao '%s'; "
+                    "(c) doi 'trigger_type' sang ON_PUZZLE_FAIL_COUNT / ON_ENTER_AREA cho khop "
+                    "voi cach vat pham nay thuc su den tay nguoi choi." % tii,
+                )
+            elif area_id not in collected_in[tii]:
+                rep.warn(
+                    where,
+                    "Cu doa ON_COLLECT_ITEM nay thuoc khu vuc '%s', nhung '%s' chi nhat duoc o "
+                    "%s. Neu engine chi nap jumpscare cua khu vuc dang dung thi no se khong bao "
+                    "gio ban." % (area_id, tii, fmt_list(sorted(collected_in[tii]))),
+                    "Chuyen khai bao cu doa sang dung file area noi nhat duoc vat pham.",
+                )
+
+        elif trig == "ON_PUZZLE_FAIL_COUNT":
+            users = [pz_id for pz_id, (_, pz) in ch.puzzles.items()
+                     if pz.get("wrong_action_jumpscare") == js_id]
+            if not users:
+                rep.warn(
+                    where,
+                    "Cu doa ON_PUZZLE_FAIL_COUNT nay khong duoc cau do nao tro toi qua "
+                    "'wrong_action_jumpscare' - khong co bo dem sai nao dem toi no, nen no "
+                    "khong bao gio ban.",
+                    "Dat \"wrong_action_jumpscare\": \"%s\" o cau do tuong ung, hoac xoa cu "
+                    "doa neu da bo." % js_id,
+                )
+
+        elif trig == "ON_WRONG_ITEM_USE":
+            tii = js.get("trigger_item_id")
+            if is_str(tii) and tii in ch.items and not any(
+                    h.get("required_item") == tii or h.get("item_id") == tii
+                    for _, (_, h) in ch.hotspots.items()):
+                rep.warn(
+                    where,
+                    "Cu doa ON_WRONG_ITEM_USE tro toi '%s' nhung khong hotspot nao dung toi vat "
+                    "pham do - kha nang cao no khong bao gio ban." % tii,
+                )
+
+    if not dead:
+        rep.ok("Khong co cu doa chet: moi jumpscare deu co duong kich hoat co that.")
+
+
 # --------------------------------------------------------------------------
 # GIAI DOAN 10: KHA GIAI - THUAT TOAN DIEM BAT DONG
 # --------------------------------------------------------------------------
@@ -1107,14 +1585,29 @@ def simulate_player(ch: Chapter, rep: Report, trace_enabled: bool = False):
     """
     Mo phong nguoi choi bang thuat toan diem bat dong (fixpoint / least fixed point).
 
-    Bat dau tu khu vuc mo man voi tui do rong, roi lap di lap lai: moi vong quet
-    toan bo hotspot cua nhung khu vuc DA toi duoc va thu lam MOI viec lam duoc voi
-    trang thai hien tai - nhat vat pham, dung vat pham, giai cau do, doi khu vuc.
-    Vong nao khong lam trang thai thay doi nua thi dung: do la diem bat dong, tuc
-    la toan bo phan nguoi choi co the voi toi.
+    NGUON DU KIEN - va CHI nhung nguon nay:
+      * hotspot.required_item      vat pham phai co trong tui do
+      * hotspot.required_flags     co tien trinh phai bat du (AND)
+      * hotspot.grants_flag        co duoc bat khi hotspot chay xong  <- TUONG MINH
+      * puzzle.required_items      dung cu phai cam moi nhap duoc loi giai
+      * puzzle.grants_flag         co phu bat khi giai dung           <- TUONG MINH
+      * quy uoc chinh tac          giai cau do X bat co flag_<X>_solved
+      * unlock_condition           dieu kien vao khu vuc trong chapter_01.json
 
-    Sau do doi chieu diem bat dong voi muc tieu: toi duoc moi khu vuc, giai duoc moi
-    cau do, cam duoc moi vat pham, va dac biet la toi duoc KHU VUC CUOI cung.
+    Mo phong KHONG doc bang suy luan cua build_flag_producers. Ban truoc no co doc, va do
+    la ly do trinh kiem in "[OK] KHA GIAI ... 5/5 khu vuc" trong khi mot mo phong doc lap
+    chi di duoc 2/5: no tu cap cho minh nhung canh ma du lieu khong he co, roi di tren
+    chinh nhung canh do. Mot ket luan nguy nguy hiem hon mot ket luan bo trong - nguoi ta
+    dong bo len build vi tin no.
+
+    Vong lap: moi vong quet toan bo hotspot cua nhung khu vuc DA toi duoc va lam moi viec
+    lam duoc voi trang thai hien tai. Vong nao khong doi trang thai nua thi dung - do la
+    diem bat dong, tuc toan bo phan nguoi choi co the voi toi.
+
+    GIA DINH DUOC GHI RO: tui do KHONG bi tieu hao (dung vat pham xong van con giu). Day la
+    gia dinh noi long; no co the bo qua mot be tac do vat pham bi an mat, nhung khong bao
+    gio bia them duong di. Neu engine that su tieu hao vat pham, phai sua ham nay cho khop
+    chu khong duoc de hai ben lech nhau.
     """
     reached = set()
     inventory = set()
@@ -1140,20 +1633,26 @@ def simulate_player(ch: Chapter, rep: Report, trace_enabled: bool = False):
                 [f for f in uc["flags"] if f not in flags])
 
     def grant_flag(flag, source, rnd):
+        """Chi bat co khi du lieu NOI RO la co duoc bat. Khong co duong nao khac vao day."""
         if is_str(flag) and flag not in flags:
             flags.add(flag)
             trace.append((rnd, "CO", flag, source))
 
-    # Suy luan nguoc: hotspot nao duoc gan lam nguon cap co (muc 3 o build_flag_producers).
-    inferred = {}
-    for flag, prods in ch.flag_producers.items():
-        for kind, pid, area_id, how in prods:
-            if kind == "hotspot" and how in ("suy luan", "tuong minh"):
-                inferred.setdefault(pid, set()).add(flag)
+    def gate_missing(hs):
+        """Thu con thieu de hotspot nay kha dung: (vat pham, co tien trinh)."""
+        miss_items = []
+        req = hs.get("required_item")
+        if is_str(req) and req not in inventory:
+            miss_items.append(req)
+        miss_flags = [f for f in str_list(hs, "required_flags") if f not in flags]
+        return miss_items, miss_flags
 
     start = ch.start_area_id or (ch.area_order[0] if ch.area_order else None)
     if not start:
         rep.error("kha giai", "Manifest khong chi ra khu vuc mo man ('start_area_id').")
+        return None
+    if start not in ch.areas:
+        rep.error("kha giai", "Khu vuc mo man '%s' khong nap duoc - khong the mo phong." % start)
         return None
     if not unlock_ok(start):
         rep.error("kha giai", "Khu vuc mo man '%s' co dieu kien mo khoa khong the thoa man "
@@ -1173,39 +1672,41 @@ def simulate_player(ch: Chapter, rep: Report, trace_enabled: bool = False):
                 hs_id = hs["id"]
                 action = hs.get("action_type")
 
-                need_flags = [f for f in (hs.get("required_flags") or []) if is_str(f)]
-                if any(f not in flags for f in need_flags):
+                if hs.get("enabled") is False:
+                    continue
+
+                # -- cong chan chung cho MOI loai hotspot --------------------
+                miss_items, miss_flags = gate_missing(hs)
+                if miss_items or miss_flags:
                     continue
 
                 if action == "COLLECT_ITEM":
                     if hs_id in fired:
-                        continue
-                    req = hs.get("required_item")
-                    if req is not None and req not in inventory:
                         continue
                     item_id = hs.get("item_id")
                     fired.add(hs_id)
                     changed = True
                     if is_str(item_id) and item_id not in inventory:
                         inventory.add(item_id)
-                        trace.append((round_no, "VAT PHAM", item_id, "nhat tai %s / %s" % (area_id, hs_id)))
-                    for flag in inferred.get(hs_id, ()):
-                        grant_flag(flag, "%s / %s" % (area_id, hs_id), round_no)
+                        trace.append((round_no, "VAT PHAM", item_id,
+                                      "nhat tai %s / %s" % (area_id, hs_id)))
+                    grant_flag(hs.get("grants_flag"), "%s / %s" % (area_id, hs_id), round_no)
 
                 elif action == "USE_ITEM":
                     if hs_id in fired:
                         continue
                     req = hs.get("required_item")
-                    if not is_str(req) or req not in inventory:
-                        continue
+                    if not is_str(req):
+                        continue        # du lieu hong - da bao [LOI] o GIAI DOAN 2-3
                     fired.add(hs_id)
                     changed = True
                     item_id = hs.get("item_id")
                     if is_str(item_id) and item_id != req and item_id not in inventory:
                         inventory.add(item_id)
-                        trace.append((round_no, "VAT PHAM", item_id, "tao ra tai %s / %s" % (area_id, hs_id)))
-                    for flag in inferred.get(hs_id, ()):
-                        grant_flag(flag, "%s / %s (dung %s)" % (area_id, hs_id, req), round_no)
+                        trace.append((round_no, "VAT PHAM", item_id,
+                                      "tao ra tai %s / %s" % (area_id, hs_id)))
+                    grant_flag(hs.get("grants_flag"),
+                               "%s / %s (dung %s)" % (area_id, hs_id, req), round_no)
 
                 elif action == "ZOOM_PUZZLE":
                     pz_id = hs.get("target_puzzle_id")
@@ -1215,14 +1716,15 @@ def simulate_player(ch: Chapter, rep: Report, trace_enabled: bool = False):
                     if not entry or entry[0] != area_id:
                         continue
                     pz = entry[1]
-                    tools = [i for i in (pz.get("required_items") or []) if is_str(i)]
+                    tools = str_list(pz, "required_items")
                     if any(t not in inventory for t in tools):
                         continue
                     solved.add(pz_id)
                     changed = True
                     trace.append((round_no, "CAU DO", pz_id, "giai tai %s" % area_id))
-                    grant_flag("flag_%s_solved" % pz_id, "giai %s" % pz_id, round_no)
-                    grant_flag(pz.get("grants_flag"), "giai %s" % pz_id, round_no)
+                    grant_flag("flag_%s_solved" % pz_id, "giai %s (quy uoc)" % pz_id, round_no)
+                    grant_flag(pz.get("grants_flag"), "giai %s (grants_flag)" % pz_id, round_no)
+                    grant_flag(hs.get("grants_flag"), "%s / %s" % (area_id, hs_id), round_no)
                     rid = pz.get("reward_item_id")
                     if is_str(rid) and rid not in inventory:
                         inventory.add(rid)
@@ -1230,12 +1732,25 @@ def simulate_player(ch: Chapter, rep: Report, trace_enabled: bool = False):
 
                 elif action == "CHANGE_AREA":
                     target = hs.get("target_area_id")
-                    if not is_str(target) or target in reached or target not in ch.areas:
+                    if not is_str(target) or target not in ch.areas:
                         continue
-                    if unlock_ok(target):
-                        reached.add(target)
+                    if hs_id not in fired:
+                        fired.add(hs_id)
                         changed = True
-                        trace.append((round_no, "KHU VUC", target, "di tu %s / %s" % (area_id, hs_id)))
+                        grant_flag(hs.get("grants_flag"), "%s / %s" % (area_id, hs_id), round_no)
+                    if target in reached or not unlock_ok(target):
+                        continue
+                    reached.add(target)
+                    changed = True
+                    trace.append((round_no, "KHU VUC", target,
+                                  "di tu %s / %s" % (area_id, hs_id)))
+
+                else:   # EXAMINE / DIALOGUE - chi dang ke khi co bat co
+                    if hs_id in fired or not is_str(hs.get("grants_flag")):
+                        continue
+                    fired.add(hs_id)
+                    changed = True
+                    grant_flag(hs["grants_flag"], "%s / %s" % (area_id, hs_id), round_no)
 
         if not changed:
             break
@@ -1261,10 +1776,19 @@ def simulate_player(ch: Chapter, rep: Report, trace_enabled: bool = False):
             doors = [h for h, (a, hsx) in ch.hotspots.items()
                      if hsx.get("action_type") == "CHANGE_AREA"
                      and hsx.get("target_area_id") == area_id]
-            detail.append("khong co loi vao nao kha dung"
-                          if not doors
-                          else "chi co loi vao tu khu vuc chua toi duoc: %s"
-                               % fmt_list(ch.hotspots[d][0] for d in doors))
+            open_doors = [d for d in doors if ch.hotspots[d][0] in reached]
+            if not doors:
+                detail.append("khong co hotspot CHANGE_AREA nao tro toi khu vuc nay")
+            elif not open_doors:
+                detail.append("chi co loi vao tu khu vuc chua toi duoc: %s"
+                              % fmt_list("%s (o %s)" % (d, ch.hotspots[d][0]) for d in doors))
+            else:
+                blocked_doors = []
+                for d in open_doors:
+                    mi, mf = gate_missing(ch.hotspots[d][1])
+                    blocked_doors.append("%s can %s" % (d, fmt_list(mi + mf) if (mi or mf)
+                                                        else "(khong ro)"))
+                detail.append("loi vao bi chan: %s" % fmt_list(blocked_doors))
         rep.error(
             "kha giai / %s" % area_id,
             "KHONG toi duoc khu vuc nay du da vet can moi duong (%d vong lap). %s"
@@ -1284,16 +1808,24 @@ def simulate_player(ch: Chapter, rep: Report, trace_enabled: bool = False):
         if pz_id in solved:
             continue
         failed = True
-        tools = [i for i in (pz.get("required_items") or []) if is_str(i) and i not in inventory]
+        tools = [i for i in str_list(pz, "required_items") if i not in inventory]
+        openers = [h for h in ch.area_hotspots(area_id)
+                   if h.get("action_type") == "ZOOM_PUZZLE"
+                   and h.get("target_puzzle_id") == pz_id]
         if area_id not in reached:
             why = "khu vuc '%s' khong toi duoc" % area_id
+        elif not openers:
+            why = "khong co hotspot ZOOM_PUZZLE nao trong '%s' mo duoc no" % area_id
         elif tools:
             why = "thieu vat pham cong cu: %s" % fmt_list(tools)
-        elif not any(h.get("action_type") == "ZOOM_PUZZLE" and h.get("target_puzzle_id") == pz_id
-                     for h in ch.area_hotspots(area_id)):
-            why = "khong co hotspot ZOOM_PUZZLE nao mo duoc no"
         else:
-            why = "hotspot mo no bi chan boi required_flags chua bat"
+            blockers = []
+            for h in openers:
+                mi, mf = gate_missing(h)
+                if mi or mf:
+                    blockers.append("%s can %s" % (h["id"], fmt_list(mi + mf)))
+            why = ("hotspot mo no bi chan: %s" % fmt_list(blockers)) if blockers \
+                else "khong xac dinh duoc - kiem tra lai du lieu khu vuc"
         rep.error("kha giai / %s" % pz_id,
                   "Cau do khong bao gio giai duoc: %s." % why,
                   "Neu day la cau do tuy chon, hay ghi chu ro; neu bat buoc, mo duong den no.")
@@ -1302,11 +1834,24 @@ def simulate_player(ch: Chapter, rep: Report, trace_enabled: bool = False):
         if item_id in inventory:
             continue
         failed = True
+        sources = []
+        for hs_id, (area_id, hs) in sorted(ch.hotspots.items()):
+            if hs.get("item_id") == item_id:
+                mi, mf = gate_missing(hs)
+                sources.append("%s (%s)%s" % (hs_id, area_id,
+                                              "" if area_id in reached
+                                              else " - khu vuc chua toi duoc"
+                                              if not (mi or mf) else
+                                              " - can %s" % fmt_list(mi + mf)))
+        for pz_id, (area_id, pz) in sorted(ch.puzzles.items()):
+            if pz.get("reward_item_id") == item_id:
+                sources.append("phan thuong cua %s (%s)%s"
+                               % (pz_id, area_id, "" if pz_id in solved else " - chua giai duoc"))
         rep.error("kha giai / %s" % item_id,
                   "Vat pham khong bao gio cam duoc - nguoi choi hoan thanh chuong ma khong "
-                  "the so vao no.",
-                  "Kiem tra khu vuc chua no co toi duoc khong, va dieu kien 'required_item' "
-                  "cua hotspot trao no co thoa man duoc khong.")
+                  "the so vao no. Nguon duy nhat: %s" % fmt_list(sources),
+                  "Kiem tra khu vuc chua no co toi duoc khong, va dieu kien 'required_item' / "
+                  "'required_flags' cua hotspot trao no co thoa man duoc khong.")
 
     reward_items = {pz.get("reward_item_id") for _, pz in ch.puzzles.values()
                     if is_str(pz.get("reward_item_id"))}
@@ -1316,13 +1861,19 @@ def simulate_player(ch: Chapter, rep: Report, trace_enabled: bool = False):
         rep.error("kha giai / phan thuong",
                   "Khong lay duoc phan thuong cua cau do: %s." % fmt_list(missing_rewards))
 
-    if not failed:
-        rep.ok("KHA GIAI: dat diem bat dong sau %d vong lap. Nguoi choi di duoc tu '%s' toi "
-               "khu vuc ket chuong '%s'." % (round_no, start, final_area))
+    # ---- KET DUNG O DAU: in nguyen trang thai diem bat dong ----------------
+    if failed:
+        report_stop_point(ch, rep, result, gate_missing)
+    else:
+        rep.ok("KHA GIAI: dat diem bat dong sau %d vong lap, CHI dung nguon cap tuong minh. "
+               "Nguoi choi di duoc tu '%s' toi khu vuc ket chuong '%s'."
+               % (round_no, start, final_area))
         rep.plain("Toi duoc %d/%d khu vuc  |  giai %d/%d cau do  |  cam %d/%d vat pham  |  "
                   "bat %d co tien trinh."
                   % (len(reached), len(ch.area_order), len(solved), len(ch.puzzles),
                      len(inventory), len(ch.items), len(flags)))
+        rep.plain("Gia dinh cua mo phong: tui do khong bi tieu hao; khong mot co tien trinh nao "
+                  "duoc suy luan - tat ca den tu grants_flag hoac quy uoc flag_<puzzle_id>_solved.")
 
     if trace_enabled:
         rep.info("Nhat ky mo phong nguoi choi (thu tu thuc te game mo ra):")
@@ -1330,6 +1881,66 @@ def simulate_player(ch: Chapter, rep: Report, trace_enabled: bool = False):
             rep.plain("  vong %-2d  %-9s %-28s %s" % (rnd, kind, target, how))
 
     return result
+
+
+def report_stop_point(ch: Chapter, rep: Report, result, gate_missing) -> None:
+    """
+    In ro NGUOI CHOI KET DUNG O DAU va CON THIEU GI - phan quan trong nhat cua mot bao cao
+    that bai. Bao "khong kha giai" ma khong noi dung o dau thi nguoi sua phai do lai tu dau.
+    """
+    reached = result["reached"]
+    inventory = result["inventory"]
+    solved = result["solved"]
+    flags = result["flags"]
+
+    rep.plain("")
+    rep.plain("KET DUNG O DAU - trang thai cuoi cung cua mo phong (sau %d vong lap):"
+              % result["rounds"])
+    rep.plain("  Khu vuc toi duoc (%d/%d): %s"
+              % (len(reached), len(ch.area_order),
+                 fmt_list([a for a in ch.area_order if a in reached], limit=12)))
+    rep.plain("  Khu vuc KHONG toi duoc: %s"
+              % fmt_list([a for a in ch.area_order if a not in reached], limit=12))
+    rep.plain("  Vat pham cam duoc (%d/%d): %s"
+              % (len(inventory), len(ch.items), fmt_list(sorted(inventory), limit=12)))
+    rep.plain("  Vat pham CON THIEU: %s"
+              % fmt_list(sorted(i for i in ch.items if i not in inventory), limit=12))
+    rep.plain("  Cau do giai duoc (%d/%d): %s"
+              % (len(solved), len(ch.puzzles), fmt_list(sorted(solved), limit=12)))
+    rep.plain("  Cau do CON LAI: %s"
+              % fmt_list(sorted(p for p in ch.puzzles if p not in solved), limit=12))
+    rep.plain("  Co tien trinh bat duoc: %s" % fmt_list(sorted(flags), limit=12))
+
+    needed_flags = sorted(set(collect_flag_references(ch)) - flags)
+    if needed_flags:
+        rep.plain("  Co tien trinh CON THIEU (co cho doi, khong bao gio bat): %s"
+                  % fmt_list(needed_flags, limit=12))
+
+    stuck = []
+    for area_id in sorted(reached):
+        for hs in ch.area_hotspots(area_id):
+            if hs.get("enabled") is False:
+                continue
+            miss_items, miss_flags = gate_missing(hs)
+            if not (miss_items or miss_flags):
+                continue
+            need = []
+            if miss_items:
+                need.append("vat pham %s" % fmt_list(miss_items))
+            if miss_flags:
+                need.append("co %s" % fmt_list(miss_flags))
+            stuck.append("    %s / %s (%s) dang cho: %s"
+                         % (area_id, hs["id"], hs.get("action_type"), "; ".join(need)))
+    if stuck:
+        rep.plain("  Hotspot trong tam tay nhung bi chan (%d):" % len(stuck))
+        for line in stuck[:15]:
+            rep.plain(line)
+        if len(stuck) > 15:
+            rep.plain("    ... va %d hotspot khac" % (len(stuck) - 15))
+    else:
+        rep.plain("  Khong hotspot nao trong vung voi toi con bi chan - be tac nam o "
+                  "unlock_condition cua khu vuc, hoac khong con hotspot nao de lam.")
+    rep.plain("")
 
 
 # --------------------------------------------------------------------------
@@ -1575,12 +2186,37 @@ def check_liveops(cfg, ch: Chapter, rep: Report) -> None:
 
         acc = safety.get("accessibility_never_monetized")
         if is_dict(acc):
-            bad = sorted(k for k, v in acc.items() if v is not True)
-            if bad:
-                rep.error(W, "Nguyen tac N4 vo hieu: accessibility_never_monetized co khoa khong "
-                             "bang true: %s" % fmt_list(bad),
+            # CHI xet cac khoa CO GIA TRI BOOLEAN. Khoi nay chua ca ghi chu san xuat bang
+            # tieng Viet ("mo_ta_vi", "ghi_chu_vi", "validator_rule") - do la CHUOI, khong
+            # phai co an toan. Ban truoc doi MOI khoa === true nen mot dong ghi chu bi bao
+            # [LOI] oan; ma vi do la [LOI] duy nhat, no lam ca trinh kiem that bai va day
+            # nhung loi chet chuong that su xuong hang [CANH BAO] phia sau. Thu tu uu tien
+            # bi dao nguoc hoan toan: bao cao het bao dong gia, con loi that thi lot.
+            NOTE_KEYS = ("mo_ta_vi", "ghi_chu_vi", "validator_rule")
+
+            off = sorted(k for k, v in acc.items() if is_bool(v) and v is not True)
+            if off:
+                rep.error(W, "Nguyen tac N4 vo hieu: accessibility_never_monetized co co dat "
+                             "false: %s" % fmt_list(off),
                           "Moi tuy chon an toan / tro nang phai mien phi va khong khoa sau moc "
-                          "tien trinh.")
+                          "tien trinh - dat lai true.")
+
+            odd = sorted(k for k, v in acc.items()
+                         if not is_bool(v) and not (is_str(v) and k in NOTE_KEYS))
+            if odd:
+                rep.error(W, "accessibility_never_monetized co khoa khong doc duoc thanh co an "
+                             "toan: %s. Khoi nay chi chap nhan gia tri boolean, cong ba khoa "
+                             "ghi chu kieu chuoi (%s)."
+                          % (fmt_list("%s=%r" % (k, acc[k]) for k in odd), ", ".join(NOTE_KEYS)),
+                          "Doi gia tri ve true/false, hoac doi ten khoa ghi chu thanh "
+                          "'mo_ta_vi'.")
+
+            if not any(is_bool(v) for v in acc.values()):
+                rep.error(W, "accessibility_never_monetized khong co MOT co boolean nao - "
+                             "khoi nay dang rong ve mat logic, bat bien N4 khong duoc bao ve "
+                             "boi gi ca.",
+                          "Khai bao ro cac co, vd \"gentle_mode_free\": true, "
+                          "\"photosensitive_safe_free\": true.")
 
     # ---- 13: telemetry -----------------------------------------------------
     tele = cfg.get("telemetry")
@@ -1710,7 +2346,7 @@ def check_liveops(cfg, ch: Chapter, rep: Report) -> None:
 def run(args) -> int:
     use_color = sys.stdout.isatty() and not args.no_color and not os.environ.get("NO_COLOR")
     palette = Palette(use_color)
-    rep = Report(palette, quiet=args.quiet)
+    rep = Report(palette, quiet=args.quiet, strict=args.strict)
 
     data_dir = os.path.abspath(args.data_dir)
     manifest_path = args.manifest or os.path.join(data_dir, "chapter_01.json")
@@ -1734,6 +2370,20 @@ def run(args) -> int:
     ch.chapter_id = manifest.get("chapter_id")
     ch.start_area_id = manifest.get("start_area_id")
     ch.area_order = [a for a in (manifest.get("area_order") or []) if is_str(a)]
+
+    # 'exported_flags' (tuy chon): co tien trinh Chuong 1 bat len de ban giao cho chuong
+    # sau hoac cho lop luu game. Khai bao o day de trinh kiem khong coi chung la co thua.
+    raw_exported = manifest.get("exported_flags")
+    if raw_exported is not None and not is_list(raw_exported):
+        rep.error("chapter_01.json", "'exported_flags' phai la mang flag_id (co the bo trong).")
+    else:
+        for flag in (raw_exported or []):
+            if not is_str(flag) or not flag.startswith(PREFIX["flag"]):
+                rep.error("chapter_01.json / exported_flags",
+                          "Gia tri khong hop le: %r - phai la chuoi bat dau bang '%s'."
+                          % (flag, PREFIX["flag"]))
+            else:
+                ch.exported_flags.append(flag)
 
     if not is_str(ch.chapter_id):
         rep.error("chapter_01.json", "Thieu truong bat buoc 'chapter_id'.")
@@ -1855,7 +2505,7 @@ def run(args) -> int:
     check_unique_ids(ch, rep)
 
     # ---- co tien trinh -----------------------------------------------------
-    rep.section("GIAI DOAN 7a - NGUON CAP CO TIEN TRINH (FLAG)")
+    rep.section("GIAI DOAN 7a - NGUON CAP CO TIEN TRINH (CHI TUONG MINH)")
     build_flag_producers(ch, rep)
     if ch.flag_producers:
         rep.ok("Xac dinh duoc nguon cap cho %d co tien trinh." % len(ch.flag_producers))
@@ -1869,8 +2519,9 @@ def run(args) -> int:
     check_item_cycles(ch, rep)
 
     # ---- GIAI DOAN 9: vat pham chet ---------------------------------------
-    rep.section("GIAI DOAN 9 - VAT PHAM CHET")
+    rep.section("GIAI DOAN 9 - VAT PHAM CHET / CU DOA CHET")
     check_dead_items(ch, rep)
+    check_dead_jumpscares(ch, rep)
 
     # ---- GIAI DOAN 10: kha giai -------------------------------------------
     rep.section("GIAI DOAN 10 - KHA GIAI (MO PHONG DIEM BAT DONG)")
@@ -1917,7 +2568,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--skip-liveops", action="store_true",
                         help="Bo qua giai doan 11 (chi kiem du lieu man choi)")
     parser.add_argument("--strict", action="store_true",
-                        help="Coi [CANH BAO] la loi - dung cho cong CI truoc khi khoa ban")
+                        help="NANG moi [CANH BAO] thanh [LOI] ngay tren ban in va trong ma "
+                             "thoat - dung cho cong CI truoc khi khoa ban")
     parser.add_argument("--trace", action="store_true",
                         help="In nhat ky mo phong nguoi choi cua buoc chung minh kha giai")
     parser.add_argument("--no-color", action="store_true", help="Tat mau ANSI")

@@ -29,13 +29,22 @@
       "id": "hs_khe_mong_cua_gac",
       "bounds": {
         "x": 430,
+        "y": 115,
+        "width": 150,
+        "height": 120
+      },
+      "visual_bounds": {
+        "x": 430,
         "y": 120,
         "width": 150,
         "height": 110
       },
       "action_type": "USE_ITEM",
       "required_item": "item_bai_vi_khuyet_danh",
-      "item_id": "item_bai_vi_khuyet_danh"
+      "grants_flag": "flag_then_gac_da_tra",
+      "fallback_text_key": "txt_thieu_do_khe_mong_cua_gac",
+      "one_shot": true,
+      "ghi_chu_vi": "Tra bài vị vào khe mộng làm then. Bài vị ở lại vĩnh viễn (tiêu thụ khỏi túi đồ), không câu đố nào sau đó cần nó nữa. Hiệu ứng: bật cờ flag_then_gac_da_tra."
     },
     {
       "id": "hs_cau_thang_gac",
@@ -46,7 +55,13 @@
         "height": 330
       },
       "action_type": "CHANGE_AREA",
-      "target_area_id": "area_gac_xep"
+      "target_area_id": "area_gac_xep",
+      "required_item": "item_den_dau_sang",
+      "required_flags": [
+        "flag_then_gac_da_tra"
+      ],
+      "fallback_text_key": "txt_khoa_cau_thang_gac",
+      "ghi_chu_vi": "Cổng lên area_gac_xep: cần đèn đã thắp để soi bậc thang mọt VÀ then bài vị đã tra (flag_then_gac_da_tra). Phản chiếu unlock_condition trong chapter_01.json."
     },
     {
       "id": "hs_kham_tho_ba_co",
@@ -69,11 +84,23 @@
       },
       "action_type": "COLLECT_ITEM",
       "item_id": "item_bai_vi_khuyet_danh",
-      "required_item": null
+      "required_item": null,
+      "required_flags": [
+        "flag_puz_tuan_tu_le_cung_solved"
+      ],
+      "fallback_text_key": "txt_thieu_do_bai_vi",
+      "one_shot": true,
+      "ghi_chu_vi": "Chỉ hiện sau khi hoá vàng xong puz_tuan_tu_le_cung. Trước đó bài vị nằm khuất dưới vải điều - không nhặt tự do được, nếu không P3 bị bỏ qua hoàn toàn."
     },
     {
       "id": "hs_dai_vai_dieu",
       "bounds": {
+        "x": 130,
+        "y": 635,
+        "width": 250,
+        "height": 120
+      },
+      "visual_bounds": {
         "x": 130,
         "y": 640,
         "width": 250,
@@ -81,7 +108,13 @@
       },
       "action_type": "COLLECT_ITEM",
       "item_id": "item_dai_vai_dieu",
-      "required_item": null
+      "required_item": null,
+      "required_flags": [
+        "flag_puz_ba_hoi_chin_tieng_solved"
+      ],
+      "fallback_text_key": "txt_thieu_do_dai_vai_dieu",
+      "one_shot": true,
+      "ghi_chu_vi": "Chỉ hiện sau khi gõ đủ ba hồi chín tiếng (puz_ba_hoi_chin_tieng). Nếu nhặt tự do thì P4 bị bỏ qua và toàn bộ nhịp Beat 8 mất tác dụng."
     },
     {
       "id": "hs_ban_tho_ho",
@@ -147,11 +180,18 @@
         "height": 210
       },
       "action_type": "ZOOM_PUZZLE",
-      "target_puzzle_id": "puz_ba_hoi_chin_tieng"
+      "target_puzzle_id": "puz_ba_hoi_chin_tieng",
+      "fallback_text_key": "txt_thieu_do_go_mo"
     },
     {
       "id": "hs_dui_mo",
       "bounds": {
+        "x": 555,
+        "y": 780,
+        "width": 120,
+        "height": 120
+      },
+      "visual_bounds": {
         "x": 560,
         "y": 780,
         "width": 110,
@@ -159,7 +199,8 @@
       },
       "action_type": "COLLECT_ITEM",
       "item_id": "item_dui_mo",
-      "required_item": null
+      "required_item": null,
+      "one_shot": true
     },
     {
       "id": "hs_chieu_coi",
@@ -181,11 +222,22 @@
         "height": 200
       },
       "action_type": "CHANGE_AREA",
-      "target_area_id": "area_bep_gieng"
+      "target_area_id": "area_bep_gieng",
+      "required_flags": [
+        "flag_puz_tuan_tu_le_cung_solved"
+      ],
+      "fallback_text_key": "txt_khoa_cua_hau",
+      "ghi_chu_vi": "Cổng xuống area_bep_gieng: phản chiếu unlock_condition trong chapter_01.json."
     },
     {
       "id": "hs_ra_hien",
       "bounds": {
+        "x": 1300,
+        "y": 887,
+        "width": 280,
+        "height": 120
+      },
+      "visual_bounds": {
         "x": 1300,
         "y": 900,
         "width": 280,
@@ -207,8 +259,11 @@
         5,
         2
       ],
+      "required_items": [],
       "reward_item_id": "item_bai_vi_khuyet_danh",
-      "wrong_action_jumpscare": "scare_khoi_tu_hinh_nguoi"
+      "grants_flag": "flag_puz_tuan_tu_le_cung_solved",
+      "wrong_action_jumpscare": "scare_khoi_tu_hinh_nguoi",
+      "ghi_chu_vi": "Không cần vật phẩm cầm tay - chỉ cần đọc hs_van_khan cùng khu vực. Giải xong: thanh gỗ chèn cửa hậu rơi (cờ mở area_bep_gieng) và bài vị lộ ra. Phần thưởng item_bai_vi_khuyet_danh vào túi đồ qua hotspot hs_bai_vi_khuyet_danh (khoá bằng flag_puz_tuan_tu_le_cung_solved)."
     },
     {
       "id": "puz_ba_hoi_chin_tieng",
@@ -221,22 +276,32 @@
         7,
         3
       ],
+      "required_items": [
+        "item_dui_mo"
+      ],
       "reward_item_id": "item_dai_vai_dieu",
-      "wrong_action_jumpscare": "scare_khoi_tu_hinh_nguoi"
+      "grants_flag": "flag_puz_ba_hoi_chin_tieng_solved",
+      "wrong_action_jumpscare": "scare_khoi_tu_hinh_nguoi",
+      "ghi_chu_vi": "Phần thưởng item_dai_vai_dieu lộ ra tại chỗ khi giải đúng; vào túi đồ qua hotspot hs_dai_vai_dieu (khoá bằng flag_puz_ba_hoi_chin_tieng_solved)."
     }
   ],
   "jumpscares": [
     {
       "id": "scare_di_anh_quay_mat",
       "trigger_type": "ON_COLLECT_ITEM",
+      "trigger_item_id": "item_dui_mo",
+      "delay_sec": 0.25,
+      "cooldown_sec": 90,
       "audio_asset": "sfx_scare_chan_nhang_boc.ogg",
       "sprite_animation": "anim_di_anh_dong_loat_quay",
-      "screen_flash": false
+      "screen_flash": false,
+      "ghi_chu_vi": "S3 - impulse. Bắn 250 ms sau khi dùi rời khỏi mõ (nhặt item_dui_mo). Một lần duy nhất mỗi chương."
     },
     {
       "id": "scare_khoi_tu_hinh_nguoi",
       "trigger_type": "ON_PUZZLE_FAIL_COUNT",
       "max_fails": 3,
+      "cooldown_sec": 90,
       "audio_asset": "sfx_scare_khoi_tu.ogg",
       "sprite_animation": "anim_khoi_tu_dang_nguoi",
       "screen_flash": false

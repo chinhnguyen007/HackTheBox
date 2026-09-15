@@ -53,9 +53,20 @@ Bốn tài liệu nguồn viết song song nên có chỗ mâu thuẫn. Bảng d
 | X3 | Nội dung Bảy Điều Cấm Kỵ | Bản gắn chặt với cơ chế câu đố | Bản khác nội dung | **Bản gắn cơ chế** (mục 2.4.5). Mỗi điều phải ánh xạ được vào một câu đố hoặc một jumpscare |
 | X4 | Tuổi thọ bà nội trên cáo phó | 79 *(1918–1996)* | 78 | **79 tuổi** |
 | X5 | Số ngày nhà bỏ không | 10 ngày | 9 ngày | **10 ngày** (tang 25-8, chơi 28-8, tính từ hôm đưa tang) |
-| X6 | Chữ khắc lòng gáo dừa | "ĐỪNG SOI" | "ĐỪNG SOI LÂU" | **"ĐỪNG SOI"** — ngắn hơn, lạnh hơn |
+| X6 | Chữ khắc lòng gáo dừa | "ĐỪNG SOI" | "ĐỪNG SOI LÂU" | **"ĐỪNG MỞ"** — hai chữ, ngắn hơn, lạnh hơn. Xem X9: cảnh báo phải trỏ vào **hành vi thật sự làm `scare_bong_trong_chum` nổ** (cố mở ổ khoá), không trỏ vào việc soi nước |
 | X7 | Quy ước `text_key` | `txt_<area>_<doi_tuong>` | `txt_examine_* / txt_thoai_* / txt_khoa_*` | **Quy ước 03_world** cho hotspot. Khoá ngoài hotspot (lore, déjà vu, cảnh kết) giữ tên gốc |
 | X8 | Nhãn đặt hàng mã | Bà Tơ đặt, 1996 | Bà nội mua, 24-8-1996 | **Bà Tơ đặt** — đây là mũi neo "có người sống đang dọn đường lễ" |
+| **X9** | Cảnh báo gắn với `scare_bong_trong_chum` | Chữ trong gáo dừa cảnh báo **soi nước** | Trigger thật là **sai `puz_khoa_bat_quai` ba lần** | **Cảnh báo đổi thành "ĐỪNG MỞ".** Điều cấm "soi nước" (điều Hai) được ánh xạ sang chỗ thật sự có soi nước: `scare_mat_duoi_day_gieng` + Beat B11 soi giếng. Xem mục 2.3.6 và 3.1.6 |
+| **X10** | Ngôi thứ của cha người chơi | Cáo phó + khai sinh: cha là **trưởng nam Nguyễn Văn Đoan** | Mảnh ảnh thờ số 8 là **"bố — con thứ"** | **Cha người chơi là THỨ NAM: Nguyễn Văn Đoàn (1943 – 1972).** Trưởng nam là **Nguyễn Văn Đoan (1940 – )**, bác cả, **còn sống**, chính là mảnh 4. Xem cây gia phả chốt ở mục 3.5.5 |
+| **X11** | Ai đứng ở ô giữa-phải của ảnh thờ | Mảnh 3 = **"Bà Cô"** | Gia phả: út nữ hàng giữa là **Nguyễn Thị Đoài (1947 – )**, còn sống | **Mảnh 3 = cô út Nguyễn Thị Đoài.** Bà Cô là **đời thứ ba** (em gái ông nội, mục 2.2.2) và theo lệ **không được nhập từ đường** ⇒ **Bà Cô KHÔNG có mặt trong ảnh thờ họ**. Đây vừa là lời giải đúng, vừa là lore |
+| **X12** | Thứ tự hàng cháu & vị trí ô trống | Gia phả + nắp hòm: tên bị cạo đứng **đầu** hàng cháu | `solution` P6 đặt ô trống ở **cuối** hàng cháu | **Người chơi là cháu ÚT.** Hai anh chị họ sinh trước: Nguyễn Văn Thuấn (1962), Nguyễn Thị Thoa (1965); Nguyễn Thị Liên sinh 1969. Dòng bị cạo là **dòng thứ ba** của hàng cháu |
+| **X13** | Bức ảnh thờ chín mảnh | "Chụp cả nhà, **năm bảy nhăm**, trước hiên" | Ít nhất 4/8 người không thể có mặt năm 1975 | **Bỏ năm chụp.** Đây là **ảnh truyền thần ghép** — tập quán Bắc Bộ thập niên 60–80: hiệu ảnh ghép ảnh lẻ của người đã khuất vào một nền ảnh gia đình. Xem mục 3.5.4 ⑦ |
+| **X14** | Nhạc khí của `puz_ba_hoi_chin_tieng` | Mõ gõ "ba hồi chín tiếng", chuông điểm chốt | Mõ cá là pháp khí nhà chùa, không phải đồ ban thờ gia tiên | **HOÁN VAI: CHUÔNG ĐỒNG giữ "ba hồi chín tiếng"** (đúng công thức thỉnh có thật, và tiếng chuông mới hợp với việc *thỉnh* Bà Cô); **MÕ giữ vai một tiếng điểm chốt mỗi hồi**. `solution` **không đổi**. Xem mục 3.3.6 |
+| **X15** | Điều cấm bị phạm khi đáp lời qua khe ván sàn | Ghi là "điều cấm kỵ thứ Tư — chớ đáp lời ai gọi từ sau lưng" | Bảy Điều: điều Bốn là **hoá vàng trước khi khấn**; không có điều nào về "gọi từ sau lưng" | **Là ĐIỀU CẤM KỴ THỨ NHẤT** — *"Chớ gọi tên thật người thế mệnh trong nhà. Gọi tên là gọi về."* Bà nội gọi vọng qua khe ván là hành vi **GỌI**; người chơi đáp lại là **NHẬN** |
+| **X16** | Tên hiển thị & vật lý của `puz_rap_chu_the_menh` | "Rập chữ trên bình phong" | Cơ chế là **đồ/can theo từng nét có thứ tự**; rập than lên rãnh **chìm** cho ra chữ **trắng trên nền đen** | **Tên hiển thị đổi thành "Đồ chữ trên bình phong".** `puzzle_id` và `item_id` **giữ nguyên**. Mô tả vật lý sửa lại: ngón tay lần theo rãnh chìm, **kéo thỏi than đi theo**, ăn ra **nét đen trên giấy trắng** |
+| **X17** | Số mảnh của `puz_xep_anh_gia_pha` | Nhiều chỗ nói "chín mảnh" | Bàn cờ thật là **8 mảnh + 1 ô trống** | **Cả hai đều đúng, ở hai thời điểm khác nhau.** Câu đố chạy với 8 mảnh + ô trống; **một cutscene HẬU-GIẢI (`seq_p6_manh_thu_chin`) thả mảnh thứ chín** — mảnh có thân người nhưng mặt bị khoét — vào ô trống. Xem mục 3.5.5 |
+| **X18** | Ngưỡng kích thước chạm | "88 px @1920 tương đương 44 pt" | Quy đổi thật trên máy chỉ ra **29–43 pt/dp** | **Ghi chú quy đổi cũ là SAI.** Ngưỡng mới: **120 × 120 px @1920**, cộng trường mới `visual_bounds` cho sprite nhỏ hơn vùng chạm. Xem ghi chú quy đổi ở đầu Phần 3 |
+| **X19** | Vật phẩm có bị tiêu thụ ở `hs_khe_mong_cua_gac` không | "Bị giữ lại / chuyển sang mục Đã dùng" | Hotspot khai báo cả `required_item` lẫn `item_id` | **Một ngữ nghĩa duy nhất: KHÔNG TIÊU THỤ, CHỈ KHOÁ.** Bài vị ở lại trong túi đồ vĩnh viễn, gắn cờ `locked_in_use`, không kéo-thả được nữa. Xem mục 4.3 #5 |
 
 ## 0.4. Danh mục ID toàn chương
 
@@ -215,7 +226,7 @@ GATE: đã giải P3    │                    GATE: có item_den_dau_sang
 | # | Nhân vật | Trạng thái | Vai trò thiết kế | Hiện diện trên màn hình |
 |---|---|---|---|---|
 | 1 | **"Hương" / Nguyễn Thị Liên** | Sống — người chơi | Chủ thể; cũng là vật tế | Chỉ thấy **bàn tay**, **bóng đổ**, và mặt phản chiếu trong chum (luôn bị che/mờ) |
-| 2 | **"Bà Cô" / Nguyễn Thị Gái** | Vong — người nhận lễ | Áp lực nền của cả chương | **Không bao giờ hiện hình, không bao giờ nói.** Chỉ hiện qua nước, mõ, hương, hình nhân |
+| 2 | **"Bà Cô" / Nguyễn Thị Gái** | Vong — người nhận lễ | Áp lực nền của cả chương | **Không bao giờ hiện hình, không bao giờ nói.** Chỉ hiện qua nước, chuông mõ, hương, hình nhân |
 | 3 | **Bà nội / Nguyễn Thị Nhỡ** | Vong — đồng minh | Lực duy nhất đẩy người chơi ra; và bà thất bại | Chữ viết tay (`hw_ba_noi`), mảnh khăn xô ướt, giọng gọi vọng qua khe ván sàn |
 | 4 | **"cái Đĩ Nhài" & "thằng Cu Tý"** | Vong — hai đứa trẻ thế mạng đời trước | Chỉ đường, cho người chơi thấy cái giá | Vệt tay bùn, guốc trẻ con dưới giếng, hình que trên vách bồ hóng, tiếng cười hai giọng < 0,4 s |
 | 5 | **Ông từ Nguyễn Văn Đối** | Vong — thủ tục | Tác giả của toàn bộ nghi lễ | Chữ nho chân phương (`hw_ong_tu`), mùi mực tàu, văn khấn tự lật trang khi người chơi bí |
@@ -231,7 +242,7 @@ GATE: đã giải P3    │                    GATE: có item_den_dau_sang
 | Tên khai sinh gốc | **Nguyễn Thị Liên**, sinh 16-9-1969 tại thôn Linh An |
 | Tên tục (tên xấu) | **cái Đĩ Con** |
 | Nghề | **Thợ may bậc 3**, hiệu may nhỏ khu Hàng Đào, Hà Nội |
-| Gia cảnh | Cha Nguyễn Văn Đoan hy sinh 1972 · mẹ Phạm Thị Vân mất 1975 · bà nội Nguyễn Thị Nhỡ nuôi tới 1976 rồi gửi lên Hà Nội cho bà dì Trần Thị Tư, làm lại khai sinh mang họ Trần |
+| Gia cảnh | Cha **Nguyễn Văn Đoàn** *(thứ nam của cụ Trác — cụ Nhỡ)* hy sinh 1972 · mẹ Phạm Thị Vân mất 1975 · bà nội Nguyễn Thị Nhỡ nuôi tới 1976 rồi gửi lên Hà Nội cho bà dì Trần Thị Tư, làm lại khai sinh mang họ Trần |
 | Ký ức về làng | Gần như trắng. Chỉ ba mảnh: mùi dầu hỏa, tiếng gầu tôn va thành giếng, và cảm giác bị bế đi trong đêm lạnh |
 
 **Động cơ, theo thứ tự trồi lên:**
@@ -263,7 +274,7 @@ GATE: đã giải P3    │                    GATE: có item_den_dau_sang
 | Danh xưng | Không ai gọi tên. Chỉ gọi **"Bà Cô"** — theo tục thờ bà cô tổ, người con gái chết trẻ chưa có nơi có chốn, không được nhập từ đường, phải lập khám thờ riêng |
 | Vị trí thờ | Khám thờ gỗ nhỏ bịt vải điều, đặt **bên trái** bàn thờ họ, thấp hơn bát hương gia tiên một tấc |
 
-**Động cơ:** Bà Cô **không muốn giết người**. Bà Cô **muốn được hoàn tất**. Cô chết ở trạng thái dở dang tuyệt đối: cưới chưa cưới, chôn chưa chôn tử tế, thờ chưa thờ chính thức. Toàn bộ hành vi ma quái của cô trong chương đều là hành vi **đòi cho đủ thủ tục** — đòi đủ đôi đèn, đòi đủ ba hồi chín tiếng mõ, đòi đủ một cái áo.
+**Động cơ:** Bà Cô **không muốn giết người**. Bà Cô **muốn được hoàn tất**. Cô chết ở trạng thái dở dang tuyệt đối: cưới chưa cưới, chôn chưa chôn tử tế, thờ chưa thờ chính thức. Toàn bộ hành vi ma quái của cô trong chương đều là hành vi **đòi cho đủ thủ tục** — đòi đủ đôi đèn, đòi đủ ba hồi chín tiếng chuông, đòi đủ một cái áo.
 
 **Bí mật:**
 - Dân làng kể cô **trượt chân**. Nhật ký bà nội ghi cô **tự nhảy** vì bị ép gả cho người cô không muốn lấy — nghĩa là chính cái làng này đã đẩy cô xuống giếng, rồi hai mươi năm sau lại nộp trẻ con cho cô để chuộc lỗi. **Chapter 1 không xác nhận dị bản nào đúng.**
@@ -392,9 +403,9 @@ Bảng này là **xương sống cài cắm**: mỗi phần lễ tương ứng �
 | Phần | Tên phần lễ | Mục đích tâm linh | Cài vào | Area |
 |---|---|---|---|---|
 | **I** | **Khóa hướng** — khóa cổng bằng ổ khoá gỗ khắc bát quái theo thế nhà tọa Bắc hướng Nam, thêm quẻ Khôn cho phận nữ | Nhốt hồn trong phạm vi sân, không cho lẫn ra ngõ | `puz_khoa_bat_quai` (ROTATION_LOCK) | `area_san_gach` |
-| **II** | **Rập chữ Thế Mệnh** — rập chữ lên giấy bản, dán lên bình phong chắn lối | Dựng "biển báo" cho cõi âm: nhà này có người thế mạng | `puz_rap_chu_the_menh` (PATTERN_TRACE) | `area_hien_nha` |
+| **II** | **Đồ chữ Thế Mệnh** — đồ hai chữ chìm sang tờ giấy bản, dán lên bình phong chắn lối | Dựng "biển báo" cho cõi âm: nhà này có người thế mạng | `puz_rap_chu_the_menh` (PATTERN_TRACE) | `area_hien_nha` |
 | **III** | **Trình tổ** — làm trọn tuần lễ cúng sáu bước trước bàn thờ họ, xin tổ tiên cho "đổi sổ" | Xin phép gia tiên gạch một tên khỏi sổ nhà | `puz_tuan_tu_le_cung` (SEQUENCE_ORDER) | `area_gian_tho` |
-| **IV** | **Thỉnh Bà Cô** — gõ mõ ba hồi chín tiếng, xen tiếng chuông đúng chỗ | Gọi Bà Cô lên nhận người | `puz_ba_hoi_chin_tieng` (AUDIO_MATCH) | `area_gian_tho` |
+| **IV** | **Thỉnh Bà Cô** — thỉnh chuông ba hồi chín tiếng, điểm một tiếng mõ chốt mỗi hồi | Gọi Bà Cô lên nhận người | `puz_ba_hoi_chin_tieng` (AUDIO_MATCH) | `area_gian_tho` |
 | **V** | **Soi đường** — thắp đèn dầu, soi xuống lòng giếng nơi Bà Cô mất | Chỉ mặt người thế mạng cho người dưới ấy nhìn rõ | `puz_thap_lai_den_dau` (ITEM_COMBINE) | `area_bep_gieng` |
 | **VI** | **Cắt mặt cắt tên** — khoét mặt khỏi ảnh thờ, cạo tên khỏi gia phả, khắc bài vị khuyết danh | Cắt người ấy khỏi cõi sống | `puz_xep_anh_gia_pha` (SLIDING_TILE) | `area_gac_xep` |
 | **VII** | **Khoác áo** — khoác áo cưới giấy lên hình nhân thế mạng | **Giao thân và danh phận. Lễ thành** | Hành động kết chương: `USE_ITEM` `item_ao_cuoi_giay` lên `hs_hinh_nhan` | `area_gac_xep` |
@@ -410,7 +421,7 @@ Hai lý do, cả hai đều là nội dung chứ không phải tiện lợi thi�
 
 > **`txt_deja_vu_01`** — "Tay mình biết làm cái này. Mình không nhớ đã học ở đâu."
 >
-> **`txt_deja_vu_02`** — "Ba hồi, chín tiếng. Đúng chỗ tiếng chuông. Sao mình lại biết chỗ tiếng chuông?"
+> **`txt_deja_vu_02`** — "Ba hồi, chín tiếng. Đúng chỗ tiếng mõ. Sao mình lại biết chỗ tiếng mõ?"
 >
 > **`txt_deja_vu_03`** — "Mình đã đứng ở đây rồi. Thấp hơn. Ngang tầm cái chấn song này."
 
@@ -436,8 +447,8 @@ Văn bản thành phẩm, viết bằng than trên **mặt trong nắp hòm gỗ
 
 | Điều | Cài vào cơ chế | Hệ quả trong game |
 |---|---|---|
-| **Một** — gọi tên | Dòng than sau bình phong (`area_hien_nha`); khi EXAMINE sổ ghi tên ở gác xép, nhân vật **đọc thành tiếng** tên "Nguyễn Thị Liên" | Đúng **6 giây** sau khi đọc tên, hình nhân **xoay 30° về phía người chơi**. Không âm thanh, không flash. Nếu người chơi không quay lại nhìn, nó cứ thế mà đứng |
-| **Hai** — soi nước | `scare_bong_trong_chum` kích hoạt đúng khi người chơi soi chum lúc nhập nhoạng | Trả thẳng hậu quả cho việc phạm điều Hai |
+| **Một** — gọi tên | **Ba lần, tăng dần:** (1) dòng than sau bình phong `GỌI TÊN LÀ GỌI VỀ` (`area_hien_nha`); (2) khi EXAMINE sổ ghi tên ở gác xép, nhân vật **đọc thành tiếng** tên "Nguyễn Thị Liên"; (3) **`hs_khe_van_san`** — bà nội gọi vọng lên từ gian thờ, người chơi có thể **[Đáp lại]** | (2) Đúng **6 giây** sau khi đọc tên, hình nhân **xoay 30° về phía người chơi**. Không âm thanh, không flash. Nếu người chơi không quay lại nhìn, nó cứ thế mà đứng. (3) `flag_da_dap_loi_ba_noi = true`, ghi nhận cho Chapter 2 |
+| **Hai** — soi nước | **Beat B11 — soi lòng giếng bằng đèn dầu sau khi mặt trời lặn** (`hs_gieng_khoi`), và `scare_mat_duoi_day_gieng` khi ghép đèn sai ba lần | Đây là chỗ **duy nhất trong chương người chơi thật sự soi mặt nước**. Cái giá của điều Hai: dưới đáy giếng có **một quầng sáng thứ hai** mà người chơi chỉ cầm một cây đèn |
 | **Ba** — bát hương | Bát hương xoay lệch 45° ngay khi vào `area_gian_tho`; EXAMINE có cảnh báo | `scare_di_anh_quay_mat` khi nhặt `item_dui_mo`: cả bó chân nhang bốc cháy một nhịp |
 | **Bốn** — hóa vàng trước khấn | **Chính là bẫy sai của `puz_tuan_tu_le_cung`** | Hóa vàng trước bước Ngũ → nhang tắt ngấm, khói tụ thành hình người, reset câu đố |
 | **Năm** — đôi đèn | **Chính là lý do `puz_thap_lai_den_dau` tồn tại** — cây đèn thứ hai đã tắt | Bếp tối om cho tới khi người chơi phục hồi đủ đôi đèn |
@@ -449,11 +460,11 @@ Văn bản thành phẩm, viết bằng than trên **mặt trong nắp hòm gỗ
 | Vật phẩm nghi lễ | `item_id` (SPINE) | Ý nghĩa trong hủ tục | Kiêng kỵ gắn kèm |
 |---|---|---|---|
 | Ổ khóa gỗ bát quái + **chìa khóa đồng** | `item_chia_khoa_dong` | Chìa của "khóa hướng". Theo lệ, sau lễ chìa phải **thả xuống giếng**, không được giữ trong nhà | Chìa còn trong nhà = lễ chưa xong |
-| **Giấy bản và than củi** | `item_giay_ban_va_than` | Giấy dó thô dùng cho vàng mã và rập chữ. Than củi, **không dùng mực — mực là của người sống** | Rập hỏng thì phải **hóa tờ hỏng ngay**, không vứt |
-| **Bản rập chữ "Thế Mệnh"** (世命) | `item_ban_rap_chu_the` | Biển báo cõi âm, dán lên bình phong chắn lối vào nhà | Không được gấp làm tư — gấp là "gãy mệnh" |
+| **Giấy bản và than củi** | `item_giay_ban_va_than` | Giấy dó thô dùng cho vàng mã và đồ chữ. Than củi, **không dùng mực — mực là của người sống** | Đồ hỏng thì phải **hóa tờ hỏng ngay**, không vứt |
+| **Bản chữ "Thế Mệnh"** (世命) — tờ giấy bản **đồ bằng than** | `item_ban_rap_chu_the` *(id giữ nguyên)* | Biển báo cõi âm, dán lên bình phong chắn lối vào nhà | Không được gấp làm tư — gấp là "gãy mệnh" |
 | **Đèn dầu Hoa Kỳ** | `item_den_dau` / `item_den_dau_sang` | Một trong đôi đèn của bước Nhị. Đèn soi đường cho người dưới giếng nhìn lên | Thắp một cây là **lệch đèn, lệch mạng** |
 | **Dải vải điều** | `item_dai_vai_dieu` | Vải đỏ phủ khám thờ Bà Cô. Khi lễ tiến hành thì tuột xuống, nghĩa là **"Bà Cô đã mở mắt"** | Vải điều tuột rồi **không được phủ lại** giữa chừng lễ |
-| **Dùi mõ gỗ mít** | `item_dui_mo` | Gỗ mít là gỗ nhà chùa. Dùi là thứ duy nhất "gọi" được Bà Cô | Gõ sai nhịp = gọi nhầm, phải gõ lại từ hồi đầu |
+| **Dùi mõ gỗ mít** | `item_dui_mo` | Gỗ mít là gỗ nhà chùa — cái mõ cá là đồ ông từ mượn của chùa làng, **không phải đồ ban thờ gia tiên**. Chuông **thỉnh**; mõ **chốt**: một tiếng mõ khép một hồi. Không có dùi thì hồi nào cũng bỏ lửng | Gõ sai nhịp = gọi nhầm, phải thỉnh lại từ hồi đầu |
 | **Bài vị khuyết danh** | `item_bai_vi_khuyet_danh` | Bài vị của người thế mạng. **Không khắc tên** theo Luật Tên | Khắc tên lên là **trả người về**, hỏng lễ |
 | **Chai dầu hỏa nút lá chuối** | `item_chai_dau_hoa` | Dầu thắp cho đủ một đêm lễ | Dầu lễ không được dùng việc khác |
 | **Áo cưới giấy khổ người lớn** | `item_ao_cuoi_giay` | **Danh phận.** Cái áo Bà Cô chưa kịp mặc năm 1953, nay may lại cho người thế mạng | **Người thế mạng không được tự tay khoác** |
@@ -470,9 +481,9 @@ Vật phẩm bối cảnh thuộc bộ lễ nhưng không vào hành trang: **ch
 | **1961** | **Tân Sửu** | Lễ thế mạng lần 1 — Nguyễn Thị Nhài, tên tục cái Đĩ, 8 tuổi. **Lễ thành** |
 | **1968** | **Mậu Thân** | Lễ thế mạng lần 2 — Nguyễn Văn Tý, tên tục thằng Cu, 5 tuổi. **Lễ thành**. Guốc còn dưới giếng |
 | 1969 | Kỷ Dậu | Nguyễn Thị Liên (người chơi) sinh 16-9. Cùng năm, ông từ Đối viết bảng Bảy Điều |
-| 1972 | Nhâm Tý | Cha người chơi hy sinh |
-| 1975 | Ất Mão | Mẹ người chơi mất |
-| **1976** | **Bính Thìn** | Lễ thế mạng lần 3 — Nguyễn Thị Liên, 7 tuổi. **LỄ DỞ DANG.** Tên đã xoá, mặt đã khoét, bài vị đã khắc, **áo chưa khoác**. Bà nội gửi cháu lên Hà Nội, khai tử số 41/KT ngày 22-12 |
+| 1972 | Nhâm Tý | Cha người chơi — **Nguyễn Văn Đoàn, thứ nam** — hy sinh |
+| 1975 | Ất Mão | Mẹ người chơi — **Phạm Thị Vân, con dâu thứ** — mất |
+| **1976** | **Bính Thìn** | Lễ thế mạng lần 3 — Nguyễn Thị Liên, 7 tuổi. **LỄ DỞ DANG.** Tên đã xoá, mặt đã khoét, bài vị đã khắc, **áo chưa khoác**. Cũng năm này, hiệu ảnh phố huyện **ghép xong bức ảnh thờ truyền thần** của họ Nguyễn — ghép để rồi khoét. Bà nội gửi cháu lên Hà Nội, khai tử số 41/KT ngày 22-12 |
 | 1976–1996 | | Linh An liên tiếp có người chết trẻ. Làng đổ cho lễ dở |
 | 1989 | Kỷ Tỵ | Ông từ Đối mất |
 | 25-8-1996 | Bính Tý, 12 tháng Bảy | Bà nội Nguyễn Thị Nhỡ mất, thọ **79** |
@@ -490,9 +501,40 @@ Mỗi khu vực trình bày theo cùng một khung: **không khí → khung hìn
 |---|---|
 | Vùng đặt hotspot hợp lệ | `80 ≤ y` và `y + height ≤ 1000` (chừa notch trên và thanh vật phẩm dưới) |
 | Trong khung | `0 ≤ x` và `x + width ≤ 1920` |
-| Kích thước chạm tối thiểu | **88 × 88 px @1920** cho mọi hotspot, không ngoại lệ. Sprite nhỏ hơn thì dùng **vùng chạm mở rộng** (đánh dấu 🔹) |
+| Kích thước chạm tối thiểu | **120 × 120 px @1920** cho mọi hotspot, không ngoại lệ. Sprite nhỏ hơn thì **giữ nguyên hình vẽ ở trường mới `visual_bounds`** và **nới `bounds` (vùng chạm) ra cho đủ 120 px** (đánh dấu 🔹). Xem ghi chú quy đổi ngay dưới bảng |
 | Khoảng cách tối thiểu giữa hai bounds kề nhau | **20 px** |
 | Chồng lấn | **Không hotspot nào chồng lấn hotspot khác trong cùng một area.** Đã kiểm 415 cặp trên toàn chương: **0 cặp giao nhau** |
+
+> **⚠️ ĐÍNH CHÍNH GHI CHÚ QUY ĐỔI (bản trước ghi SAI).** Bản trước viết *"88 px @1920 tương đương 44 pt"*. **Không đúng.** Game trình bày theo lối **fit-width**: cạnh 1920 px thiết kế trải đúng cạnh dài màn hình, nên
+>
+> `pt_thực_tế = px_thiết_kế × (cạnh dài màn hình tính bằng pt hoặc dp) / 1920`
+>
+> | Máy tham chiếu | Cạnh dài | **88 px** cho ra | **120 px** cho ra |
+> |---|---|---|---|
+> | Android nhỏ nhất còn hỗ trợ | 640 dp | **29,3 dp** | **40,0 dp** |
+> | iPhone 6.1" *(390 × 844 pt)* | 844 pt | **38,7 pt** | **52,8 pt** |
+> | Máy lớn / máy bảng nhỏ | 940 pt | **43,1 pt** | **58,8 pt** |
+>
+> Tức là ở ngưỡng cũ, **29–43 pt/dp — không một máy nào chạm nổi 44 pt của Apple HIG hay 48 dp của Material.** Ngưỡng cũ là một lỗi số học, không phải một lựa chọn thiết kế.
+>
+> **Ngưỡng mới chốt: 120 × 120 px @1920.** Nó đưa mọi hotspot lên **40–59 pt/dp**: vượt 44 pt từ lớp máy 6.1" trở lên, và vượt 48 dp từ lớp máy có cạnh dài ≥ 768 dp. **Phần còn thiếu duy nhất** là lớp máy 640 dp (40 dp so với 48 dp của Material); khoảng thiếu ấy được bù bằng hai luật đã có sẵn và **không được phép bỏ**: (a) **khoảng đệm 20 px** giữa hai bounds kề nhau — không có mục tiêu nào sát nhau để bấm nhầm; (b) **`visual_bounds`** — sprite luôn nhỏ hơn vùng chạm và nằm giữa vùng chạm, nên tâm ngón tay rơi vào giữa chứ không rơi vào mép. **QA bắt buộc kiểm tay thật trên một máy 640 dp.**
+
+**Mười một hotspot có cạnh dưới 120 px ⇒ `bounds` PHẢI được nới ở bước dữ liệu, sprite giữ nguyên qua `visual_bounds`:**
+
+| Area | Hotspot | Bounds in trong tài liệu này *(giá trị gốc 03_world)* | Cạnh thiếu |
+|---|---|---|---|
+| `area_san_gach` | `hs_cau_doi_trai` · `hs_cau_doi_phai` | `110 × 420` | rộng 110 |
+| `area_san_gach` | `hs_gao_dua` 🔹 | `130 × 110` | cao 110 |
+| `area_hien_nha` | `hs_nhat_ky_duoi_chieu` | `280 × 105` | cao 105 |
+| `area_hien_nha` | `hs_guoc_moc` | `240 × 105` | cao 105 |
+| `area_hien_nha` | `hs_giay_ban_va_than` | `200 × 105` | cao 105 |
+| `area_gian_tho` | `hs_khe_mong_cua_gac` | `150 × 110` | cao 110 |
+| `area_gian_tho` | `hs_dui_mo` | `110 × 120` | rộng 110 |
+| `area_gian_tho` | `hs_dai_vai_dieu` | `250 × 110` | cao 110 |
+| `area_gian_tho` | `hs_ra_hien` | `280 × 95` | cao 95 |
+| `area_gac_xep` | `hs_chieu_coi_trai_san` | `440 × 88` | cao 88 |
+
+> **Cách nới, để không phá hai luật kia:** nới **đối xứng quanh tâm** cho tới 120 px; nếu đụng hotspot kề bên hoặc đụng dải `y ∈ [80, 1000]` thì nới **một phía** về hướng còn trống. Bảng bounds ở các mục 3.x.3 dưới đây **in nguyên giá trị gốc của 03_world**; **giá trị đã nới là bản trong `docs/03_DATA_SPEC.md` và `data/areas/*.json`** — hai nơi đó là nguồn sự thật của toạ độ sau khi nới. Trường hợp nới làm hai bounds áp sát dưới 20 px, **giảm đệm chứ không giảm 120 px**, và ghi chú lại ở mục tự kiểm tra bố cục của khu vực ấy.
 
 ---
 
@@ -551,11 +593,11 @@ Thao tác đầu tiên hầu như ai cũng làm: bấm vào cổng. Cổng **kh�
 | 8 | `hs_day_phoi_khan_xo` | `{x:1540, y:230, width:340, height:150}` | `EXAMINE` | `txt_examine_khan_xo` | **Mũi neo twist A2** + **clue C5 của P1** (Bà Cô là phận nữ) |
 | 9 | `hs_xe_dap_tui_vai` | `{x:60, y:760, width:240, height:230}` | `EXAMINE` | `txt_examine_xe_dap_tui_vai` | **Phiếu đo hiệu may** — mũi neo inventory-side của twist |
 | 10 | `hs_chum_nuoc_mua` | `{x:330, y:730, width:300, height:260}` | `EXAMINE` | `txt_examine_chum_nuoc` | **Clue C4 của P1** (chum kê góc Bắc) + nơi `scare_bong_trong_chum` diễn ra |
-| 11 | `hs_gao_dua` 🔹 | `{x:648, y:800, width:130, height:110}` | `EXAMINE` | `txt_examine_gao_dua` | **Cảnh báo duy nhất trước jumpscare.** Sprite thật 86×62 |
-| 12 | `hs_dong_tro_hoa_vang` | `{x:820, y:820, width:280, height:170}` | `EXAMINE` | `txt_examine_dong_tro_hoa_vang` | Giấy trắng bị hóa = dấu vết người sống đang rập chữ |
+| 11 | `hs_gao_dua` 🔹 | `{x:648, y:800, width:130, height:110}` | `EXAMINE` | `txt_examine_gao_dua` | **Cảnh báo duy nhất trước jumpscare** — chữ khắc trỏ vào **ổ khoá**, không vào chum. Sprite thật 86×62 |
+| 12 | `hs_dong_tro_hoa_vang` | `{x:820, y:820, width:280, height:170}` | `EXAMINE` | `txt_examine_dong_tro_hoa_vang` | Giấy trắng bị hóa = dấu vết người sống đang đồ chữ |
 | 13 | `hs_khe_gach_thu_tay` 🔹 | `{x:1560, y:800, width:220, height:120}` | `EXAMINE` | `txt_examine_khe_gach_thu_tay` | **Thư tay bà nội** — đặt ba điều cấm mà chương sẽ phá đủ cả ba. Sprite thật 150×40 |
 
-**Tự kiểm tra bố cục:** 13 hotspot · 78 cặp so sánh · **0 cặp giao nhau** · `y_min = 120` (> 80 ✓) · `y_max(y+h) = 990` (< 1000 ✓) · `x_max(x+w) = 1880` (≤ 1920 ✓) · nhỏ nhất 110×420 ✓ · 3 hotspot dùng vùng chạm mở rộng 🔹. Cụm tương tác chính (cổng + ổ khoá) nằm **trái-giữa**, lối đi tiếp nằm **phải-giữa** — ngón cái trái và phải đều với tới ở chế độ cầm ngang.
+**Tự kiểm tra bố cục:** 13 hotspot · 78 cặp so sánh · **0 cặp giao nhau** · `y_min = 120` (> 80 ✓) · `y_max(y+h) = 990` (< 1000 ✓) · `x_max(x+w) = 1880` (≤ 1920 ✓) · nhỏ nhất 110×420 ⚠️ *(dưới ngưỡng 120 px mới — `hs_cau_doi_trai`, `hs_cau_doi_phai` và `hs_gao_dua` được nới ở bước dữ liệu, xem bảng ở đầu Phần 3)* · 3 hotspot dùng vùng chạm mở rộng 🔹. Cụm tương tác chính (cổng + ổ khoá) nằm **trái-giữa**, lối đi tiếp nằm **phải-giữa** — ngón cái trái và phải đều với tới ở chế độ cầm ngang.
 
 ### 3.1.4. Văn bản đọc được (thành phẩm)
 
@@ -574,14 +616,17 @@ Thao tác đầu tiên hầu như ai cũng làm: bấm vào cổng. Cổng **kh�
 > An táng tại nghĩa trang đồng Sau, thôn Linh An, xã Linh Nam, huyện Thuận Thành, tỉnh Hà Bắc.
 >
 > **TANG GIA ĐỒNG BÁI TẠ**
-> Trưởng nam: Nguyễn Văn Đoan *(đã mất)* — con dâu trưởng: Phạm Thị Vân *(đã mất)*
-> Thứ nam: Nguyễn Văn Đoàn
-> Trưởng nữ: Nguyễn Thị Đoài
+> Trưởng nam: Nguyễn Văn Đoan
+> Thứ nam: Nguyễn Văn Đoàn *(đã mất)* — con dâu thứ: Phạm Thị Vân *(đã mất)*
+> Con gái út: Nguyễn Thị Đoài
 > Các cháu nội, ngoại đồng bái.
 
 > **`txt_san_gach_cao_pho_doc_thoai`**
-> "Cháu nội. Cháu ngoại. Đồng bái.
+> "Bác cả. Bố mình — mất hai mươi tư năm rồi mà vẫn được viết ra, có cả tên mẹ bên cạnh. Cô út.
+> Cháu nội. Cháu ngoại. Đồng bái.
 > Không ai viết tên mình ra. Kể cả ở chỗ người ta viết tên tất cả mọi người."
+
+`[[ CÔNG BẰNG CHO P6: đây là lần thứ nhất trong ba lần người chơi được đọc ngôi thứ hàng giữa (trưởng — thứ — út) và biết bố mình là CON THỨ. Hai lần sau: trang gia phả ở gian thờ (Khu 3) và giấy khai sinh gốc ở gác xép (Khu 5). Ba nguồn độc lập, khớp nhau tuyệt đối. ]]`
 
 **② ĐÔI CÂU ĐỐI TRÊN HAI CỘT CỔNG** — giấy điều bợt, chữ nho viết tay mực tàu. Tách làm hai hotspot, mỗi cột một vế.
 
@@ -630,9 +675,10 @@ Thao tác đầu tiên hầu như ai cũng làm: bấm vào cổng. Cổng **kh�
 
 > **`txt_examine_gao_dua`**
 > "Cái gáo dừa cán tre nằm lăn cách miệng chum một bước chân, như vừa có ai buông tay.
-> Trong lòng gáo khắc ba chữ nhỏ, nét dao cùn: **ĐỪNG SOI**."
+> Trong lòng gáo khắc hai chữ, nét dao cùn — và mũi dao còn hất thêm một vệt dài, chỉ thẳng ra phía cánh cổng: **ĐỪNG MỞ**.
+> Người khắc cái này ngồi đúng chỗ mình đang đứng, quay mặt ra cổng."
 
-`[[ Cảnh báo duy nhất trước jumpscare. Người chơi nào đọc gáo trước khi soi chum sẽ được thưởng một khoảnh khắc "biết trước mà vẫn bấm". ]]`
+`[[ Cảnh báo duy nhất trước jumpscare, và nó phải trỏ đúng vào hành vi làm scare_bong_trong_chum nổ: CỐ MỞ Ổ KHOÁ. Người chơi nào đọc gáo rồi vẫn ấn then lần thứ ba được thưởng đúng khoảnh khắc "biết trước mà vẫn bấm". Chữ khắc KHÔNG được nhắc tới việc soi nước — điều cấm "soi nước" nằm ở Khu 4 (mục 2.3.6, điều Hai). ]]`
 
 **⑥ MẢNH KHĂN XÔ TRÊN DÂY PHƠI**
 
@@ -645,7 +691,11 @@ Thao tác đầu tiên hầu như ai cũng làm: bấm vào cổng. Cổng **kh�
 
 > **`txt_examine_chum_nuoc`**
 > "Chum sành kê đúng góc Bắc của sân, theo lối các cụ: *nước ở lưng nhà thì phúc không chảy đi*.
-> Nước mưa đầy tới miệng, đen và phẳng lì. Cúi xuống soi thử..."
+> Nước mưa đầy tới miệng, đen và phẳng lì.
+> Cúi xuống thì chỉ thấy trời chiều và cái mặt mình, méo đi một chút vì mặt nước không thật phẳng.
+> **Nước ở lưng nhà.** Lưng nhà là hướng Bắc. Bà mình vẫn kê chum ở đấy, đúng lối các cụ."
+
+`[[ ĐỌC KỸ: đoạn này KHÔNG dẫn tới jumpscare và KHÔNG được viết như thể sắp có jumpscare. scare_bong_trong_chum nổ theo sai puz_khoa_bat_quai ba lần, không theo hành vi soi chum (X9). Vai trò duy nhất của khối chữ này là clue C4 của P1: xác nhận chéo rằng chum kê góc Bắc, tức lưng nhà tựa Bắc, tức vòng ngoài ổ khoá là quẻ Khảm. Bản trước bỏ lửng câu bằng dấu ba chấm "Cúi xuống soi thử..." — một lời hứa mà hệ thống không bao giờ thanh toán, và là đúng thứ mục 6.8 gọi là fake-out. Cắt. ]]`
 
 **⑧ XE ĐẠP VÀ TÚI VẢI**
 
@@ -664,7 +714,7 @@ Thao tác đầu tiên hầu như ai cũng làm: bấm vào cổng. Cổng **kh�
 > Ai lại đi hóa giấy trắng?"
 
 > **`txt_san_gach_dong_tro_hint`** *(chỉ bật khi người chơi rập hỏng lần đầu ở Khu 2 rồi quay lại)*
-> "À. Là những tờ rập hỏng. Người ta rập hỏng thì hóa ngay, không vứt."
+> "À. Là những tờ đồ hỏng. Người ta đồ hỏng thì hóa ngay, không vứt."
 
 **⑩ LOA PHÁT THANH XÃ** — nguồn âm off-screen, giọng nam trung niên đọc lè nhè, tín hiệu nhiễu, băng hẹp 300 Hz–3.4 kHz.
 
@@ -713,7 +763,7 @@ Thao tác đầu tiên hầu như ai cũng làm: bấm vào cổng. Cổng **kh�
 | Lần sai | Phản hồi |
 |---|---|
 | 1 | Ba vòng **tự trả về vị trí cũ** theo chiều ngược, kèm **tiếng gỗ nghiến** 1,2 s (`fol_cua_go_nghien`). Then không nhúc nhích |
-| 2 | Như trên, cộng: **gáo dừa trên miệng chum khẽ xoay một vòng** ở hậu cảnh (`fol_gao_dua_lach_cach`, rất nhỏ, camera không cắt) — gợi ý môi trường đẩy người chơi đi soi chum |
+| 2 | Như trên, cộng: **gáo dừa trên miệng chum khẽ xoay một vòng** ở hậu cảnh (`fol_gao_dua_lach_cach`, rất nhỏ, camera không cắt) — gợi ý môi trường đẩy người chơi **đi đọc chữ khắc trong lòng gáo** *(và đọc luôn cái chum bên cạnh: clue C4)*. **Cái gáo tự chỉ vào chính nó trước khi nó làm người chơi giật mình** |
 | 3 | **JUMPSCARE `scare_bong_trong_chum`**, sau đó `fail_count` reset về 0, ba vòng **giữ nguyên vị trí người chơi vừa đặt** (không phạt thêm) |
 
 **Ba mức gợi ý** (nút "Thắp nhang xin keo", `{x:1700, y:930, width:150, height:110}`):
@@ -733,15 +783,18 @@ Thao tác đầu tiên hầu như ai cũng làm: bấm vào cổng. Cổng **kh�
 | `trigger_type` | `ON_PUZZLE_FAIL_COUNT` · `max_fails: 3` trên `puz_khoa_bat_quai` |
 | Loại | **Impulse scare** · `screen_flash: true` · envelope **1200 ms** |
 | `audio_asset` | `sfx_scare_gao_dua_roi.ogg` · `sprite_animation`: `anim_bong_khan_xo_trong_chum` |
-| Delay | 1400 ms sau khi ba vòng trả về vị trí cũ |
+| Delay | **1400 ms** sau khi ba vòng trả về vị trí cũ (lần sai thứ ba) thì camera bắt đầu lùi khỏi khung zoom ổ khoá; **transient rơi ở `t = 0`**, tức 7 800 ms sau khi vòng trả về. Toàn bộ 6 400 ms ở giữa là **tell** |
 
 **Mô tả (SPINE):** người chơi cúi soi vào chum nước mưa; mặt nước phản chiếu **một người đội khăn xô đứng ngay sau lưng**, rồi cái gáo dừa rơi đánh "cạch" làm mặt nước vỡ tan — quay lại thì sân vắng.
+
+> **Hoà giải mô tả ↔ trigger *(bắt buộc đọc trước khi dựng cảnh)*.** Trigger thật là **sai `puz_khoa_bat_quai` ba lần**, không phải một hành vi "soi chum". Hai thứ này khớp nhau bằng **bố cục sân**, đúng như ánh xạ đã chốt ở mục 0.5: người chơi **cúi xuống vặn ổ khoá ở cổng**, **lưng quay về chum nước mưa kê góc Bắc**. Khi ba vòng trả về lần thứ ba, **camera lùi khỏi khung zoom** và trả lại khung sân — và mặt chum, thứ ở sau lưng người chơi suốt từ đầu, lọt vào khung. Người chơi **không chủ động soi**; mặt nước **tự đưa cái bóng ra**. Nguyên văn SPINE giữ 100 %: có cúi, có mặt nước, có bóng người đội khăn xô sau lưng, có tiếng gáo dừa. Cảnh báo mà người chơi đã bỏ qua là **"ĐỪNG MỞ"** trong lòng gáo dừa — cảnh báo về việc **cố mở**, và họ vừa cố mở lần thứ ba.
 
 **Diễn biến theo khung hình:**
 
 | Mốc | Sprite | Camera | Ánh sáng | Âm thanh | Haptic |
 |---|---|---|---|---|---|
-| **−6000 ms** | Mặt nước bắt đầu **gợn rất nhẹ** (1,1 Hz, biên độ 3 px) dù không có gió | Tĩnh | — | `tell_nuoc_gon_trong_chum.ogg` fade-in tới −34 dBFS, pan 0.4 trái | — |
+| **−6400 ms** | Ba vòng ổ khoá vừa trả về vị trí cũ; then không nhúc nhích | **THOÁT KHUNG ZOOM.** Camera lùi từ khung ổ khoá `{x:560, y:140, width:800, height:800}` về khung sân toàn cảnh trong **400 ms**, ease-out — **chum nước mưa trôi vào một phần ba trái khung, đúng chỗ sau lưng người chơi vừa cúi** | Giữ nguyên | Nền nhả khỏi mức duck −6 dB của chế độ giải đố, về −30 dBFS trong 400 ms | — |
+| **−6000 ms** | Mặt nước bắt đầu **gợn rất nhẹ** (1,1 Hz, biên độ 3 px) dù không có gió | Tĩnh ở khung sân | — | `tell_nuoc_gon_trong_chum.ogg` fade-in tới −34 dBFS, pan 0.4 trái | — |
 | **−2000 → −1 ms** | Gợn nước **dừng phẳng lì** | Tĩnh | — | **IM LẶNG TUYỆT ĐỐI.** Mọi bus về −∞, kể cả ve, kể cả chó sủa | — |
 | **0 ms** | `spr_bong_khan_xo` fade-in **trong mặt nước** (alpha 0 → 0.85 trong 60 ms). **Không có thực thể nào trên sân** | Punch-in **+6 %** trong 80 ms, tâm = tâm chum `(380, 750)` | — | Transient `sfx_scare_gao_dua_roi`, đỉnh **−5 dBTP** | `hap_thump_single` 40 ms, 0.80 |
 | **80 ms** | Bóng người **đứng yên**, không lại gần. Gáo dừa rơi khỏi miệng chum | Punch đỉnh, shake **8 px** ngang, 9 Hz | **FLASH** `#FFF2DC`, alpha 0 → **0.30** trong 40 ms, một xung, toàn màn | Đỉnh stinger; dải 2–5 kHz giới hạn ≤ −10 dBFS | — |
@@ -751,7 +804,7 @@ Thao tác đầu tiên hầu như ai cũng làm: bấm vào cổng. Cổng **kh�
 
 > **Ghi chú đạo diễn:** bóng người **không bao giờ chuyển động về phía camera**. Nó chỉ đứng. Cảm giác giật đến từ **gáo dừa** (âm thanh + flash); cảm giác lạnh ở lại đến từ việc **có người đứng sau lưng suốt lúc đó mà ta không biết**. Đây là mô hình dùng chung cho cả tám cú dọa: **giật bằng vật vô tri, lạnh bằng sự hiện diện.**
 
-**Vì sao đặt ở đây:** (a) đây là cú dọa **duy nhất của khu hướng dẫn** và nó gắn với **thất bại** — người chơi giỏi sẽ không bao giờ thấy nó; cú dọa mở màn không được là thuế bắt buộc. (b) Cú dọa **chỉ thẳng vào cái chum** — vốn là clue C4 của chính câu đố người chơi đang bí; nó **trả lại thông tin**, không chỉ lấy đi nhịp tim. (c) Đặt ở phút 3–5 để **thiết lập ngôn ngữ**: game này dọa bằng đồ vật đời thường, không bằng quái vật.
+**Vì sao đặt ở đây:** (a) đây là cú dọa **duy nhất của khu hướng dẫn** và nó gắn với **thất bại** — người chơi giỏi sẽ không bao giờ thấy nó; cú dọa mở màn không được là thuế bắt buộc. (b) Cú dọa **chỉ thẳng vào cái chum** — vốn là clue C4 của chính câu đố người chơi đang bí; nó **trả lại thông tin**, không chỉ lấy đi nhịp tim. (c) Đặt ở phút 3–5 để **thiết lập ngôn ngữ**: game này dọa bằng đồ vật đời thường, không bằng quái vật. (d) Cảnh báo **"ĐỪNG MỞ"** khắc trong lòng gáo dừa trỏ đúng vào hành vi kích hoạt, nên cú dọa **thoả Đ7 theo cả hai chiều**: người chơi đọc trước thì nhận được khoảnh khắc *"biết trước mà vẫn bấm"*; người chơi không đọc thì sau cú dọa quay lại đọc và **hiểu ra rằng cái gáo đã nói trước rồi**. (e) Cái gáo dừa vừa là **vật cảnh báo**, vừa là **vật gây giật** — một đồ vật, hai vai, không phát sinh asset nào.
 
 ### 3.1.7. Mục tiêu người chơi
 
@@ -822,7 +875,7 @@ Bên trái: **chõng tre** trải nửa chiếc chiếu cói cuộn dở, trên 
 | 10 | `hs_guoc_moc` | `{x:640, y:890, width:240, height:105}` | `EXAMINE` | `txt_examine_guoc_moc` | **Mô-típ "vừa chân"** — thân thể người chơi khớp chỗ trống người khác |
 | 11 | `hs_giay_ban_va_than` | `{x:940, y:890, width:200, height:105}` | `COLLECT_ITEM` | `item_id: item_giay_ban_va_than` · `required_item: null` | **Điều kiện mở khoá P2** |
 
-**Tự kiểm tra bố cục:** 11 hotspot · 55 cặp · **0 giao nhau** · `y_min = 96` ✓ · `y_max = 995` ✓ · nhỏ nhất cao 105 px ✓. Cặp sát nhau nhất: `hs_binh_phong` (kết thúc x = 1060) và `hs_o_lom_binh_phong` (bắt đầu x = 1080) — **cách đúng 20 px**, **cố ý tách rời** vì một cái là `ZOOM_PUZZLE`, một cái là `USE_ITEM`; nếu chồng nhau người chơi sẽ tra bản rập nhầm vào ô chữ.
+**Tự kiểm tra bố cục:** 11 hotspot · 55 cặp · **0 giao nhau** · `y_min = 96` ✓ · `y_max = 995` ✓ · nhỏ nhất cao 105 px ⚠️ *(ba hotspot đáy — `hs_nhat_ky_duoi_chieu`, `hs_guoc_moc`, `hs_giay_ban_va_than` — được nới lên 120 px ở bước dữ liệu, xem bảng ở đầu Phần 3)*. Cặp sát nhau nhất: `hs_binh_phong` (kết thúc x = 1060) và `hs_o_lom_binh_phong` (bắt đầu x = 1080) — **cách đúng 20 px**, **cố ý tách rời** vì một cái là `ZOOM_PUZZLE`, một cái là `USE_ITEM`; nếu chồng nhau người chơi sẽ tra bản rập nhầm vào ô chữ.
 
 ### 3.2.4. Văn bản đọc được (thành phẩm)
 
@@ -895,7 +948,8 @@ Bên trái: **chõng tre** trải nửa chiếc chiếu cói cuộn dở, trên 
 **⑧ BÌNH PHONG KHI CHƯA CÓ GIẤY** — fallback của `ZOOM_PUZZLE`.
 
 > **`txt_khoa_binh_phong_thieu_giay`**
-> "Hai chữ Hán bị bào gần phẳng. Ngón tay lần theo thì vẫn thấy rãnh chìm — phải có giấy bản và một thỏi than mới ăn được nét."
+> "Hai chữ Hán bị bào gần phẳng, chỉ còn **rãnh chìm** rất nông. Ngón tay lần theo thì vẫn đọc ra được từng nét.
+> Phải có một tờ giấy bản đủ mỏng để rãnh hằn lên, và một thỏi than để **kéo theo rãnh** — có thế nét mới ăn ra được."
 
 **⑨ ĐỘC THOẠI KHI CHỮ HIỆN RA** — kết thúc `puz_rap_chu_the_menh`, ngay trước `scare_ban_tay_giay_sau_manh`.
 
@@ -909,14 +963,16 @@ Bên trái: **chõng tre** trải nửa chiếc chiếu cói cuộn dở, trên 
 
 | Trường | Giá trị |
 |---|---|
-| Type | `PATTERN_TRACE` · Tên hiển thị: **"Rập chữ trên bình phong"** |
+| Type | `PATTERN_TRACE` · Tên hiển thị: **"Đồ chữ trên bình phong"** *(`puzzle_id` giữ nguyên `puz_rap_chu_the_menh`; xem X16)* |
 | `solution` | **`[2, 1, 4, 3, 7, 5, 8, 6]`** |
 | `reward_item_id` | `item_ban_rap_chu_the` |
 | `wrong_action_jumpscare` | **`null`** — jumpscare của khu vực bắn khi **giải đúng** |
 | Độ khó / thời gian kỳ vọng | **3/5** · 150 giây (P25 = 95 s, P75 = 240 s) |
 | Điều kiện mở khoá | **Bắt buộc có `item_giay_ban_va_than`** (nhặt tự do tại `hs_giay_ban_va_than`, cùng khu vực) |
 
-**Cơ chế:** zoom vào mặt bình phong, cutscene 2 s phủ tờ giấy bản lên gỗ, thỏi than nằm sẵn ở mép dưới. Khung rập chia **hai ô dọc**: ô trên = chữ **Thế 世**, ô dưới = chữ **Mệnh 命**, mỗi chữ vẽ theo **lối chân giản lược 4 nét**. Trên giấy chỉ hiện **8 vệt mờ** (bóng nét gỗ hằn qua giấy). Người chơi **đặt ngón lên đầu một nét và miết dọc theo nét đó**; miết đủ **85 %** chiều dài thì nét "ăn than", hiện đen đậm.
+**Cơ chế:** zoom vào mặt bình phong, cutscene 2 s phủ tờ giấy bản lên gỗ, thỏi than nằm sẵn ở mép dưới. Khung chia **hai ô dọc**: ô trên = chữ **Thế 世**, ô dưới = chữ **Mệnh 命**, mỗi chữ vẽ theo **lối chân giản lược 4 nét**. Người chơi **đặt ngón lên đầu một nét và miết dọc theo nét đó, kéo thỏi than đi theo**; miết đủ **85 %** chiều dài thì nét **ăn than, hiện thành vệt ĐEN ĐẬM trên nền giấy trắng**.
+
+> **⚠️ SỬA MÔ TẢ VẬT LÝ (bản trước sai — xem X16).** Hai chữ trên bình phong là **rãnh khắc CHÌM**. Nếu phủ giấy lên rồi **rập** (miết ngang thỏi than khắp mặt giấy) thì than **không xuống được đáy rãnh**: kết quả là **chữ trắng nổi trên nền đen** — ngược hẳn hình ảnh đã thiết kế, và cũng không còn "thứ tự nét" nào để tính điểm. Thao tác đúng, và cũng là thao tác mà cơ chế `PATTERN_TRACE` mô tả, là **ĐỒ (can) chữ**: đầu ngón tay **lần thấy rãnh chìm qua lớp giấy mỏng** — giấy bản mỏng như cánh chuồn nên rãnh hằn lên thành **8 vệt mờ** — rồi **kéo thỏi than chạy dọc theo đúng vệt ấy**. Than chỉ ăn vào **đường mình kéo qua**, nên mỗi nét là một **vệt đen liền trên nền trắng**, và **thứ tự kéo là thứ tự có thật, quan sát được, chấm điểm được**. Từ "rập" chỉ còn được dùng ở ba chỗ: trong `item_id` và `puzzle_id` (bất biến), trong **nguyên văn beat B04 của SPINE** (bất biến), và trong lời bà nội kể ở nhật ký 1976 (nhân vật nói theo lối dân gian, không phải mô tả kỹ thuật). **Mọi chuỗi hiển thị cho người chơi dùng "đồ chữ" / "can chữ".**
 
 **Hướng miết có tính điểm:** nét ngang miết **trái → phải**, nét sổ miết **trên → xuống**, nét mái miết **từ phía phẩy (trái) sang phía mác (phải)**. Miết ngược chiều = sai. Không có nút xác nhận — nét thứ 8 đúng là tự hoàn tất. Có **nút "Bóc tờ giấy"** để tự nguyện làm lại (không tính là lần sai).
 
@@ -974,7 +1030,7 @@ Bên trái: **chõng tre** trải nửa chiếc chiếu cói cuộn dở, trên 
 | Tier | Nội dung |
 |---|---|
 | 1 | *"Đừng vẽ theo cái mình thấy, hãy vẽ theo cái người ta dạy. Trên đôn gỗ có cuốn vở tập viết chữ Nho của một đứa trẻ — trang đầu chép đủ bốn phép viết chữ, lại có ba chữ mẫu đánh số sẵn từng nét."* |
-| 2 | *"Bốn phép: ngang trước sổ sau; trái trước phải sau; trên trước dưới sau; và phẩy-mác thì luôn để sau cùng, phép này trùm lên ba phép kia. Rập chữ trên (Thế) trọn vẹn rồi mới xuống chữ dưới (Mệnh). Chữ Thế: một nét ngang rồi ba nét sổ từ trái sang phải. Chữ Mệnh: nét ngang trước, rồi bộ bên trái, rồi bộ bên phải, và cái mái nhà ở trên đầu — vì nó là phẩy với mác — miết sau rốt."* |
+| 2 | *"Bốn phép: ngang trước sổ sau; trái trước phải sau; trên trước dưới sau; và phẩy-mác thì luôn để sau cùng, phép này trùm lên ba phép kia. Đồ xong chữ trên (Thế) trọn vẹn rồi mới xuống chữ dưới (Mệnh). Chữ Thế: một nét ngang rồi ba nét sổ từ trái sang phải. Chữ Mệnh: nét ngang trước, rồi bộ bên trái, rồi bộ bên phải, và cái mái nhà ở trên đầu — vì nó là phẩy với mác — miết sau rốt."* |
 | 3 — **đáp án** | *"Miết tám nét theo thứ tự: (1) ngang dài chữ trên, trái sang phải. (2) sổ trái chữ trên, trên xuống. (3) sổ giữa chữ trên. (4) sổ-gập bên phải chữ trên. (5) ngang chữ dưới. (6) ô vuông bên trái chữ dưới. (7) nét móc bên phải chữ dưới. (8) sau cùng là nét mái nhà trên đầu chữ dưới. Theo số hiệu nét: **2 – 1 – 4 – 3 – 7 – 5 – 8 – 6**."* |
 
 ### 3.2.6. Jumpscare — `scare_ban_tay_giay_sau_manh`
@@ -1019,7 +1075,7 @@ Bên trái: **chõng tre** trải nửa chiếc chiếu cói cuộn dở, trên 
 2. **Giới thiệu giọng bà nội.** Trang nhật ký 1976 là lần đầu người chơi nghe một người trong nhà *thú nhận*. Quan trọng: nó thú nhận về **thủ tục**, không về tội. Bà kể chuyện rập giấy như kể chuyện gói bánh chưng. **Sự bình thường hóa đó đáng sợ hơn mọi lời kể tội.**
 3. **Cài đứa trẻ.** *"Con bé ngồi ở chõng ăn khoai lang"*.
 4. **Cài bà Tơ.** Nhãn hàng mã cho biết có người đang đặt hàng cho lễ này **năm 1996**, không phải 1976.
-5. **Người chơi tự tay làm phần lễ thứ hai.** Rập chữ và dán lên bình phong chính là nghi thức dựng "biển báo cõi âm". Người chơi tưởng mình mở khóa; thực ra người chơi vừa treo biển lên cửa nhà mình.
+5. **Người chơi tự tay làm phần lễ thứ hai.** Đồ chữ và dán lên bình phong chính là nghi thức dựng "biển báo cõi âm". Người chơi tưởng mình mở khóa; thực ra người chơi vừa treo biển lên cửa nhà mình.
 
 ---
 
@@ -1041,7 +1097,7 @@ Bên trái: **chõng tre** trải nửa chiếc chiếu cói cuộn dở, trên 
 
 **Mùi:** **nhang lạnh** — mùi nhang đã tắt, khác hẳn nhang đang cháy; cộng mùi mực tàu và mùi gỗ mít.
 
-**Âm thanh `amb_gian_tho_tinh`** (−34 dBFS, **ambience tĩnh nhất chương**, loop 120 s để không ai phát hiện ra nó lặp trong 6 phút đọc): gần như chỉ là tiếng phòng + `fol_huong_vong_lach_tach` rất khẽ. Và — đúng **25 giây** sau khi vào khu vực — **tiếng mõ vọng ra từ sau vách buồng bên phải**: ba hồi, thưa rồi mau, rồi lặng. Lặp lại theo chu kỳ 25 giây khi người chơi chưa giải P4.
+**Âm thanh `amb_gian_tho_tinh`** (−34 dBFS, **ambience tĩnh nhất chương**, loop 120 s để không ai phát hiện ra nó lặp trong 6 phút đọc): gần như chỉ là tiếng phòng + `fol_huong_vong_lach_tach` rất khẽ. Và — đúng **25 giây** sau khi vào khu vực — **tiếng chuông đồng vọng ra từ sau vách buồng bên phải**: ba hồi, thưa rồi mau, rồi lặng, **mỗi hồi chốt lại bằng một tiếng mõ cụt lủn**. Lặp lại theo chu kỳ 25 giây khi người chơi chưa giải P4.
 
 > **Nguyên tắc dàn cảnh:** đây là *trung tâm thông tin* của chương. **Mật độ chữ cao nhất, mật độ dọa thấp nhất.** Người chơi cần được yên để đọc — vì thế khoá L1 (khoá đọc) phải hoạt động tuyệt đối ở đây.
 
@@ -1049,7 +1105,7 @@ Bên trái: **chõng tre** trải nửa chiếc chiếu cói cuộn dở, trên 
 |---|---|
 | BACKGROUND | Vách gỗ ba gian ám khói đen, hoành phi sơn son thếp vàng đã tróc, xà ngang treo vòng hương, cửa buồng tối om bên phải |
 | MIDGROUND | Bàn thờ họ chính giữa, khám thờ Bà Cô bịt vải điều sát vách trái, cầu thang gỗ mọt lên gác xép + khe mộng cửa gác phía trên, trang gia phả mở trên tủ chè bên phải |
-| FOREGROUND | Chiếu cói trải giữa nhà (có vết lõm hình người rất nhỏ), mõ cá trên đôn gỗ thấp bên trái, dùi mõ nằm cạnh, chậu hoá vàng, cửa hậu thấp góc trái |
+| FOREGROUND | Chiếu cói trải giữa nhà (có vết lõm hình người rất nhỏ), **bộ pháp khí trên đôn gỗ thấp bên trái: chuông đồng nhỏ treo trên giá gỗ, mõ cá gỗ mít đặt cạnh, dùi gác trên mõ**, chậu hoá vàng, cửa hậu thấp góc trái |
 | FX | Khói ba nén nhang bốc thẳng rồi **bẻ ngang giữa chừng**, bụi lơ lửng trong vệt sáng, ánh nến vàng đục dao động 0,5 Hz, vignette nặng nhất chương (trừ gác xép) |
 
 ### 3.3.2. Khung hình mở
@@ -1060,7 +1116,9 @@ Trên cao là hoành phi sơn son thếp vàng đã bong, ba chữ **德流光**
 
 Và thứ mắt người chơi Việt sẽ dính vào ngay: **bát hương xoay lệch chừng bốn mươi lăm độ so với hoành phi**, cả bó chân nhang nghiêng theo.
 
-Bên trái bàn thờ, thấp hơn một tấc, là **khám thờ gỗ nhỏ bịt vải điều** — không ảnh, không tên, không bát hương riêng. Bên trái nữa, dưới chân tường, là **mõ cá gỗ mít**, và gác trên mõ là một cái **dùi**.
+Bên trái bàn thờ, thấp hơn một tấc, là **khám thờ gỗ nhỏ bịt vải điều** — không ảnh, không tên, không bát hương riêng. Bên trái nữa, dưới chân tường, trên một cái đôn gỗ thấp, là **bộ pháp khí**: một **chuông đồng nhỏ treo trên giá gỗ chữ U**, vành chuông xỉn xanh, và cạnh nó là **mõ cá gỗ mít** miệng há đen ngòm. Gác ngang trên lưng mõ là một cái **dùi**.
+
+`[[ LƯU Ý LORE — vì sao mõ cá lại có mặt ở ban thờ gia tiên: nó KHÔNG phải đồ của nhà này. Mõ cá là pháp khí nhà chùa; cái mõ này là ông từ Đối mượn của chùa làng và để luôn lại đây từ những năm 60. Trong lễ thế mệnh, CHUÔNG là thứ thỉnh — ba hồi chín tiếng, đúng công thức thỉnh có thật; MÕ chỉ giữ đúng một vai: điểm một tiếng chốt cho mỗi hồi. Ai nhìn cái đôn ấy cũng thấy ngay hai thứ không cùng một nhà, và đó chính là điểm. ]]`
 
 ### 3.3.3. Bảng hotspot (17 hotspot — đông nhất chương)
 
@@ -1078,15 +1136,15 @@ Bên trái bàn thờ, thấp hơn một tấc, là **khám thờ gỗ nhỏ b�
 | 10 | `hs_bat_huong` | `{x:1330, y:520, width:150, height:150}` | `EXAMINE` | `txt_examine_bat_huong` | Điều cấm kỵ thứ Ba đã bị phạm |
 | 11 | `hs_vach_buong` | `{x:1620, y:690, width:240, height:290}` | `DIALOGUE` | `txt_thoai_vach_buong` | **Clue C1 của P4** — nghe lại vô hạn |
 | 12 | `hs_van_khan` | `{x:1330, y:740, width:230, height:140}` | `EXAMINE` | `txt_examine_van_khan` | **Văn bản quan trọng nhất chương** — clue C1 của P3 **và** clue C3 của P4 |
-| 13 | `hs_mo_ca` | `{x:300, y:780, width:240, height:210}` | `ZOOM_PUZZLE` | `target_puzzle_id: puz_ba_hoi_chin_tieng` · fallback `txt_khoa_mo_ca_thieu_dui` | **Câu đố P4** |
+| 13 | `hs_mo_ca` | `{x:300, y:780, width:240, height:210}` | `ZOOM_PUZZLE` | `target_puzzle_id: puz_ba_hoi_chin_tieng` · fallback `txt_khoa_mo_ca_thieu_dui` | **Câu đố P4** — hotspot phủ trọn **cả cái đôn**: chuông đồng + mõ cá *(id giữ nguyên)* |
 | 14 | `hs_dui_mo` | `{x:560, y:780, width:110, height:120}` | `COLLECT_ITEM` | `item_id: item_dui_mo` · `required_item: null` | Mở khoá P4 · **kích hoạt `scare_di_anh_quay_mat`** |
 | 15 | `hs_chieu_coi` | `{x:700, y:800, width:520, height:190}` | `EXAMINE` | `txt_examine_chieu_coi` | Vết quỳ của một đứa bé lên bảy |
 | 16 | `hs_cua_hau_xuong_bep` | `{x:60, y:790, width:200, height:200}` | `CHANGE_AREA` | `target_area_id: area_bep_gieng` · gate: **đã giải P3** · `txt_khoa_cua_hau` | Xuống Khu 4 |
 | 17 | `hs_ra_hien` | `{x:1300, y:900, width:280, height:95}` | `CHANGE_AREA` | `target_area_id: area_hien_nha` · **không gate** | Đường lùi, luôn mở |
 
-**Tự kiểm tra bố cục:** 17 hotspot · 136 cặp · **0 giao nhau** · `y_min = 96` ✓ · `y_max = 995` ✓ · nhỏ nhất `hs_dui_mo` 110×120 ✓ và `hs_ra_hien` 280×95 ✓. Ba cặp sát nhau nhất cách 20–50 px theo x.
+**Tự kiểm tra bố cục:** 17 hotspot · 136 cặp · **0 giao nhau** · `y_min = 96` ✓ · `y_max = 995` ✓ · nhỏ nhất `hs_dui_mo` 110×120 ⚠️ và `hs_ra_hien` 280×95 ⚠️ *(cùng `hs_khe_mong_cua_gac` và `hs_dai_vai_dieu` — bốn hotspot này được nới lên 120 px ở bước dữ liệu, xem bảng ở đầu Phần 3)*. Ba cặp sát nhau nhất cách 20–50 px theo x.
 
-**Nguyên tắc đọc cảnh:** **cột trái là "trục Bà Cô"** (khám → bài vị → vải điều → mõ) xếp dọc từ trên xuống, đọc như một câu chuyện; **cột phải là "trục tài liệu"** (gia phả → bát hương → văn khấn → vách buồng). Bàn thờ giữ trọn tâm màn hình. Ba hotspot `CHANGE_AREA` đặt ở **ba mép khác nhau** (trái-dưới xuống bếp, giữa-trên lên gác, phải-dưới ra hiên) — người chơi không bao giờ nhầm lối.
+**Nguyên tắc đọc cảnh:** **cột trái là "trục Bà Cô"** (khám → bài vị → vải điều → chuông mõ) xếp dọc từ trên xuống, đọc như một câu chuyện; **cột phải là "trục tài liệu"** (gia phả → bát hương → văn khấn → vách buồng). Bàn thờ giữ trọn tâm màn hình. Ba hotspot `CHANGE_AREA` đặt ở **ba mép khác nhau** (trái-dưới xuống bếp, giữa-trên lên gác, phải-dưới ra hiên) — người chơi không bao giờ nhầm lối.
 
 > **Lưu ý dữ liệu:** phần thưởng của hai câu đố **không rơi thẳng vào túi đồ** mà **spawn hotspot** `hs_bai_vi_khuyet_danh` / `hs_dai_vai_dieu`. Người chơi phải tự tay nhặt — giữ nhịp nghi lễ và cho jumpscare một khoảng thở. `reward_item_id` trong JSON vẫn giữ nguyên để engine biết puzzle nào mở hotspot nào.
 
@@ -1136,8 +1194,9 @@ Bên trái bàn thờ, thấp hơn một tấc, là **khám thờ gỗ nhỏ b�
 
 > **`txt_examine_van_khan`** *(trang 4 — dòng cuối, mực khác, là clue C3 của P4)*
 >
-> *"Lễ Bà Cô thì gọi bằng mõ: **ba hồi chín tiếng**. Mỗi hồi gõ dồn rồi **chốt ba tiếng rời**, **điểm một tiếng chuông** thì hồi ấy mới trọn.*
-> *Gõ đủ ba hồi chín tiếng là mời. Gõ thiếu là gọi suông, người ta không lên. **Gõ thừa là giục. Chớ giục.**"*
+> *"Lễ Bà Cô thì thỉnh bằng **chuông**: **ba hồi chín tiếng**. Mỗi hồi thỉnh dồn rồi **chốt ba tiếng rời**, xong **điểm một tiếng mõ** thì hồi ấy mới trọn.*
+> *Chuông là để gọi, mõ là để chốt. Gọi mà không chốt thì tiếng gọi ấy cứ treo lơ lửng, người ta không biết đường lên.*
+> *Thỉnh đủ ba hồi chín tiếng là mời. Thỉnh thiếu là gọi suông. **Thỉnh thừa là giục. Chớ giục.**"*
 
 **② TRANG GIA PHẢ BỊ CẠO** — sổ gia phả họ Nguyễn, giấy dó đóng chỉ.
 
@@ -1148,21 +1207,24 @@ Bên trái bàn thờ, thấp hơn một tấc, là **khám thờ gỗ nhỏ b�
 > **Hàng trên — ông bà:** Nguyễn Văn Trác *(1912 – 1968)* — phối: Nguyễn Thị Nhỡ *(1918 – …)*
 >
 > **Hàng giữa — các con, theo ngôi thứ trưởng · thứ · út:**
-> 1. Trưởng nam: **Nguyễn Văn Đoan** *(1940 – 1972)*
-> 2. Thứ nam: **Nguyễn Văn Đoàn** *(1943 – )*
+> 1. Trưởng nam: **Nguyễn Văn Đoan** *(1940 – )*
+> 2. Thứ nam: **Nguyễn Văn Đoàn** *(1943 – 1972)* — phối: Phạm Thị Vân *(1945 – 1975)*
 > 3. Út nữ: **Nguyễn Thị Đoài** *(1947 – )*
 >
-> **Hàng dưới — các cháu:**
-> 1. *(dòng này bị cạo bằng dao, lớp giấy mỏng hẳn đi, chỉ còn thấy chân chữ "N", một nét sổ, và chữ đệm "Thị")*
-> 2. Nguyễn Văn Thuấn *(1974 – )*
-> 3. Nguyễn Thị Thoa *(1979 – )*
+> **Hàng dưới — các cháu, kể theo tuổi từ lớn xuống bé:**
+> 1. Nguyễn Văn Thuấn *(1962 – )* — con trưởng nam
+> 2. Nguyễn Thị Thoa *(1965 – )* — con trưởng nam
+> 3. *(dòng này bị cạo bằng dao, lớp giấy mỏng hẳn đi, chỉ còn thấy chân chữ "N", một nét sổ, và chữ đệm "Thị")* — con thứ nam
 
 > **`txt_gian_tho_gia_pha_doc_thoai`**
-> "Cạo. Không phải gạch, không phải bôi — **cạo**, bằng dao, cho hết hẳn nét.
+> "Hàng cháu có ba dòng. Dòng cuối cùng — đứa bé nhất — bị cạo.
+> Cạo. Không phải gạch, không phải bôi — **cạo**, bằng dao, cho hết hẳn nét.
 > Giấy chỗ ấy mỏng đến mức soi lên thấy sáng.
 > Người ta không muốn xóa một cái tên. Người ta muốn cái tên ấy **chưa từng được viết**."
 
-`[[ Ngôi thứ trong trang gia phả này chính là LỜI GIẢI của puz_xep_anh_gia_pha ở area_gac_xep: hàng trên ông bà, hàng giữa trưởng-thứ-út, hàng dưới cháu theo thứ tự. Người chơi đọc kỹ ở đây thì giải nhanh ở đó. Đây là cách thưởng cho người đọc. ]]`
+`[[ Ngôi thứ trong trang gia phả này chính là LỜI GIẢI của puz_xep_anh_gia_pha ở area_gac_xep: hàng trên ông bà, hàng giữa trưởng-thứ-út, hàng dưới cháu theo tuổi lớn xuống bé. Người chơi đọc kỹ ở đây thì giải nhanh ở đó. Đây là cách thưởng cho người đọc. ]]`
+
+`[[ HAI CON SỐ PHẢI ĐÚNG, KHÔNG ĐƯỢC SỬA RIÊNG LẺ (X10, X12): (1) cha người chơi là THỨ NAM Nguyễn Văn Đoàn, không phải trưởng nam — khớp với cáo phó ở Khu 1, với giấy khai sinh ở Khu 5 và với mảnh ván số 8 "bố, con thứ"; (2) dòng bị cạo là dòng THỨ BA, tức cháu BÉ NHẤT — khớp với ô trống nằm ở cuối hàng dưới trong solution của P6. Hai anh chị họ sinh 1962 và 1965, người chơi sinh 1969. Đổi bất kỳ con số nào trong ba văn bản này thì phải đổi cả ba, nếu không P6 lại mâu thuẫn với chính manh mối của nó. ]]`
 
 **③ BÁT HƯƠNG**
 
@@ -1189,7 +1251,7 @@ Bên trái bàn thờ, thấp hơn một tấc, là **khám thờ gỗ nhỏ b�
 > Trong nhà này ai cũng có tên, kể cả người chết. Trừ người này."
 
 > **`txt_gian_tho_bai_vi_doi_chieu`** *(chỉ bật nếu người chơi đang có `item_ban_rap_chu_the` — nhánh thưởng cho người chơi chủ động)*
-> "Mình giơ bản rập lên cạnh cái bài vị.
+> "Mình giơ tờ chữ lên cạnh cái bài vị.
 > Nét gỗ trên bài vị, chỗ định khắc, có sẵn một khung dấu chì mờ — rộng đúng bằng **hai chữ**.
 > Hai chữ, không phải ba, không phải bốn. Tên người ta thì ít nhất cũng ba chữ.
 > Hai chữ. Vừa đúng **Thế Mệnh**.
@@ -1215,10 +1277,10 @@ Bên trái bàn thờ, thấp hơn một tấc, là **khám thờ gỗ nhỏ b�
 
 > **`txt_thoai_vach_buong`**
 > *(Áp tai vào khe ván.)*
-> Bên kia vách có tiếng mõ: **ba hồi**, mỗi hồi gõ dồn từ thưa đến mau rồi lặng, chốt lại bằng **ba tiếng rời** và **một tiếng chuông**.
+> Bên kia vách có tiếng chuông đồng: **ba hồi**, mỗi hồi thỉnh dồn từ thưa đến mau rồi lặng, chốt lại bằng **ba tiếng chuông rời** — rồi **một tiếng mõ** cụt lủn, khô khốc, khép hồi ấy lại.
 > Xen giữa là giọng một bà lão lẩm nhẩm: *"...con lạy Bà, năm nay nhà con có người về rồi. Người ta tự về, Bà ạ. Con không phải đi tìm nữa..."*
 >
-> *(Chọn: **[Gõ lại vào vách]** / **[Nghe tiếp]** / **[Lùi ra]**. Gõ vào vách thì bên kia im bặt đúng ba giây, rồi tiếng mõ bắt đầu lại **từ đầu bài**.)*
+> *(Chọn: **[Gõ lại vào vách]** / **[Nghe tiếp]** / **[Lùi ra]**. Gõ vào vách thì bên kia im bặt đúng ba giây, rồi tiếng chuông bắt đầu lại **từ đầu bài**.)*
 
 `[[ dialogue_choices lưu lựa chọn, bàn giao sang Chapter 2. ]]`
 
@@ -1229,11 +1291,13 @@ Bên trái bàn thờ, thấp hơn một tấc, là **khám thờ gỗ nhỏ b�
 > Chữ 光 — chữ *Quang*, chữ *sáng* — bong nhiều nhất, gần như mất hẳn.
 > Bên dưới có dán một tờ lịch cũ, mặt sau ghi tay: *'Giỗ Bà Cô — đèn trước, nhang sau, vàng sau rốt.'*"
 
-**⑩ MÕ CÁ KHI CHƯA CÓ DÙI** — fallback của `ZOOM_PUZZLE`. **Bảo hiểm cho người chơi tắt tiếng / khiếm thính.**
+**⑩ BỘ PHÁP KHÍ KHI CHƯA CÓ DÙI** — fallback của `ZOOM_PUZZLE`. **Bảo hiểm cho người chơi tắt tiếng / khiếm thính.**
 
-> **`txt_khoa_mo_ca_thieu_dui`**
-> "Mõ cá gỗ mít, miệng há đen ngòm. Trên tang mõ khắc chìm ba chữ số Hán: **三 五 七**.
-> Gõ bằng đốt ngón tay thì mõ chỉ kêu đục một tiếng — phải có dùi mới ra tiếng."
+> **`txt_khoa_mo_ca_thieu_dui`** *(khoá `text_key` giữ nguyên)*
+> "Một cái chuông đồng nhỏ treo trên giá gỗ, vành xỉn xanh. Trên vành chuông khắc chìm ba chữ số Hán, mỗi chữ cách nhau một khoảng: **三 五 七**.
+> Cạnh chuông là cái mõ cá gỗ mít, miệng há đen ngòm — đồ nhà chùa, chẳng hiểu sao lại nằm ở ban thờ nhà mình.
+> Búng móng tay vào vành chuông thì nó ngân được, nhưng cái mõ gõ bằng đốt ngón tay chỉ kêu đục một tiếng.
+> **Gọi thì gọi được. Chốt thì không.** Phải có cái dùi."
 
 **⑪ KHE MỘNG CỬA GÁC** — fallback của `USE_ITEM`.
 
@@ -1319,48 +1383,70 @@ Bên trái bàn thờ, thấp hơn một tấc, là **khám thờ gỗ nhỏ b�
 | Điều kiện mở khoá | **Bắt buộc có `item_dui_mo`** (nhặt tự do tại `hs_dui_mo`, cùng khu vực) |
 | Quan hệ với P3 | **Hoàn toàn độc lập.** Giải theo thứ tự nào cũng được |
 
-**Cơ chế:** zoom vào mõ cá gỗ mít treo cạnh bàn thờ, sau lưng là vách buồng trống. Màn hình puzzle có **đúng hai nút gõ**:
+> **⚠️ HOÁN VAI NHẠC KHÍ — đã chốt, xem X14.** Bản trước giao phần "ba hồi chín tiếng" cho **mõ** và để **chuông** điểm chốt. Sai cả hai đầu. **Nhạc khí:** mõ cá là **pháp khí nhà chùa**, dùng để giữ nhịp tụng niệm; nó không phải đồ ban thờ gia tiên Bắc Bộ, và nó **không "thỉnh" ai cả**. **Ngữ pháp nghi lễ:** công thức "ba hồi chín tiếng" ngoài đời là công thức **thỉnh chuông** (và trống) ở chùa, đình — thứ dùng để **gọi**. Việc `puz_ba_hoi_chin_tieng` là phần lễ **"Thỉnh Bà Cô"** (mục 2.3.4, phần IV) khoá chặt điều này: phải là **chuông**.
+>
+> **Cách sửa, không đụng một con số nào của `solution`:** **CHUÔNG ĐỒNG** nhận trọn phần "ba hồi chín tiếng" — tức cả sáu cụm mã hoá trong mảng. **MÕ** giữ đúng một vai, và là vai vốn hợp với nó: **điểm một tiếng chốt khép mỗi hồi**. `solution` **`[3, 3, 5, 3, 7, 3]` giữ nguyên tuyệt đối**, vì mảng vốn chỉ mã hoá các cụm — chỉ có tên nhạc khí đọc ra ở mỗi cụm là đổi.
+
+**Cơ chế:** zoom vào **bộ pháp khí trên đôn gỗ thấp** bên trái bàn thờ, sau lưng là vách buồng trống. Màn hình puzzle có **đúng hai nút gõ**, cả hai đều đánh bằng cây dùi gỗ mít — **một đầu dùi quấn vải điều để đánh chuông, đầu kia để trần gõ mõ**:
 
 | Nút | Vùng chạm | Kết quả |
 |---|---|---|
-| **Mặt mõ cá** | `{x:520, y:420, width:520, height:420}` | Mỗi tap = 1 tiếng mõ "cốc" |
-| **Chuông đồng nhỏ** (treo bên phải) | `{x:1240, y:380, width:260, height:260}` | Mỗi tap = 1 tiếng chuông "keng" |
+| **Chuông đồng nhỏ** (treo trên giá gỗ, chiếm phần lớn khung) | `{x:520, y:420, width:520, height:420}` | Mỗi tap = 1 tiếng chuông "keng" — **nhạc khí chính, mang trọn ba hồi chín tiếng** |
+| **Mặt mõ cá** (trên đôn, bên phải) | `{x:1240, y:380, width:260, height:260}` | Mỗi tap = 1 tiếng mõ "cốc" — **chỉ dùng đúng ba lần trong cả bài**, mỗi lần chốt một hồi |
 
-**Thanh nhịp** chạy ngang phía trên `{x:360, y:180, width:1200, height:90}`: hiển thị **số tiếng đã gõ trong cụm hiện tại** bằng các chấm sáng, và **tự chốt cụm** khi người chơi ngừng tay quá **1,2 giây** (khoảng lặng = dấu ngắt cụm). Đây là cách người chơi "phân cụm" mà không cần nút phụ.
+**Thanh nhịp** chạy ngang phía trên `{x:360, y:180, width:1200, height:90}`: hiển thị **số tiếng đã gõ trong cụm hiện tại** bằng các chấm sáng — **chấm tròn = tiếng chuông, chấm vuông = tiếng mõ** — và **tự chốt cụm** khi (a) người chơi ngừng tay quá **1,2 giây**, hoặc (b) người chơi **điểm một tiếng mõ** (tiếng mõ tự nó đóng cụm chuông đang mở). Đây là cách người chơi "phân cụm" mà không cần nút phụ.
 
-**Nút "Áp tai vào vách"** `{x:1620, y:180, width:220, height:120}`: phát lại **toàn bộ đoạn mõ mẫu** bên kia vách. **Không giới hạn số lần nghe, không tốn tài nguyên, không tính là lần sai.**
+**Nút "Áp tai vào vách"** `{x:1620, y:180, width:220, height:120}`: phát lại **toàn bộ bài chuông-mõ mẫu** bên kia vách. **Không giới hạn số lần nghe, không tốn tài nguyên, không tính là lần sai.**
 
-**Tiết tấu "dồn":** trong một hồi, các tiếng mõ phải **thưa dần → mau dần**; engine chỉ kiểm **số tiếng** và **xu hướng khoảng cách giảm dần** (dung sai ±35 %), **không** đòi khớp mili-giây — tránh phạt oan trên thiết bị yếu.
+**Tiết tấu — TRÌNH DIỄN, TUYỆT ĐỐI KHÔNG CHẤM ĐIỂM.** *(Chốt dứt khoát, xem cuối mục này.)* Trong một hồi, phần dồn **nên** thưa rồi mau dần và phần rời **nên** tách bạch — engine **phát mẫu đúng như thế**, và haptic/hoạt ảnh diễn đúng như thế. Nhưng **engine không đưa tiết tấu vào điều kiện sai dưới bất kỳ hình thức nào**: không kiểm mili-giây, không kiểm "xu hướng khoảng cách giảm dần", không dung sai phần trăm. Người chơi gõ đều tăm tắp, gõ chậm dần, hay gõ loạn nhịp — **đều đúng**, miễn là hai điều kiện dưới đây khớp.
 
-**Quy ước mã hoá mảng lời giải:** mảng gồm **ba cặp**, mỗi cặp ứng với **một hồi** — `[dồn_hồi1, rời_hồi1, dồn_hồi2, rời_hồi2, dồn_hồi3, rời_hồi3]`. Sau **mỗi cặp** người chơi bắt buộc gõ **đúng 1 tiếng chuông** — con số này **cố định, không mã hoá trong mảng** (luôn = 1, ba lần).
+**Engine chỉ kiểm ĐÚNG HAI THỨ:**
+
+| # | Điều kiện được kiểm | Chi tiết |
+|---|---|---|
+| **1** | **Số tiếng của mỗi cụm, theo thứ tự** | Sáu cụm liên tiếp phải là **3 – 3 – 5 – 3 – 7 – 3** |
+| **2** | **Đúng nhạc khí ở đúng chỗ** | Cả sáu cụm đều là **chuông**; **sau cụm thứ 2, thứ 4 và thứ 6** phải là **đúng một tiếng mõ** — không hơn, không kém |
+
+> **Vì sao chốt như vậy — và vì sao hồi 1 không còn nhập nhằng.** Hồi 1 có phần dồn 3 tiếng và phần rời cũng 3 tiếng. Nếu tiết tấu được tính vào điều kiện sai thì engine buộc phải phân biệt "3 tiếng dồn" với "3 tiếng rời" bằng khoảng cách giữa các tiếng — mà khoảng cách thì **người khiếm thính không nghe được, người chơi tay chậm không tái tạo được, và máy yếu thì đo sai**. Lời hứa *"khiếm thính giải được 100 %"* sẽ vỡ ngay tại đây. Với cách chốt trên, hai cụm ấy chỉ đơn giản là **hai cụm 3 tiếng liên tiếp, ngăn nhau bằng một khoảng lặng > 1,2 giây** — và khoảng lặng ấy **hiện thành một vạch ngắt trên thanh nhịp**, tức là **nhìn được**. Không còn chỗ nào bắt người chơi nghe.
+
+**Quy ước mã hoá mảng lời giải:** mảng gồm **ba cặp**, mỗi cặp ứng với **một hồi** — `[dồn_hồi1, rời_hồi1, dồn_hồi2, rời_hồi2, dồn_hồi3, rời_hồi3]`, **cả sáu số đều là số tiếng CHUÔNG**. Sau **mỗi cặp** người chơi bắt buộc điểm **đúng 1 tiếng mõ** — con số này **cố định, không mã hoá trong mảng** (luôn = 1, ba lần).
 
 | Vị trí | Giá trị | Nghĩa |
 |---|---|---|
-| 1 | `3` | **Hồi 1 — phần dồn**: 3 tiếng mõ, gõ thưa rồi mau dần |
-| 2 | `3` | **Hồi 1 — phần rời**: 3 tiếng mõ rời, đều nhau, cách rõ ràng. Sau đó: **1 tiếng chuông** |
-| 3 | `5` | **Hồi 2 — phần dồn**: 5 tiếng mõ dồn |
-| 4 | `3` | **Hồi 2 — phần rời**: 3 tiếng mõ rời. Sau đó: **1 tiếng chuông** |
-| 5 | `7` | **Hồi 3 — phần dồn**: 7 tiếng mõ dồn |
-| 6 | `3` | **Hồi 3 — phần rời**: 3 tiếng mõ rời. Sau đó: **1 tiếng chuông** (tiếng chuông thứ ba khép bài) |
+| 1 | `3` | **Hồi 1 — phần dồn**: 3 tiếng **chuông**, thỉnh thưa rồi mau dần *(tiết tấu không chấm điểm)* |
+| 2 | `3` | **Hồi 1 — phần rời**: 3 tiếng **chuông** rời, tách bạch. Sau đó: **1 tiếng mõ** chốt hồi |
+| 3 | `5` | **Hồi 2 — phần dồn**: 5 tiếng **chuông** dồn |
+| 4 | `3` | **Hồi 2 — phần rời**: 3 tiếng **chuông** rời. Sau đó: **1 tiếng mõ** chốt hồi |
+| 5 | `7` | **Hồi 3 — phần dồn**: 7 tiếng **chuông** dồn |
+| 6 | `3` | **Hồi 3 — phần rời**: 3 tiếng **chuông** rời. Sau đó: **1 tiếng mõ** (tiếng mõ thứ ba khép cả bài) |
 
-> **Kiểm chứng tên gọi:** "**ba hồi**" = 3 cặp dồn/rời. "**chín tiếng**" = 3 + 3 + 3 = **9 tiếng mõ rời**. Phần dồn 3-5-7 là số lẻ tăng dần (lối gõ "thưa đến mau" của nhà chùa). Tổng tap = (3+3) + (5+3) + (7+3) + 3 chuông = **33 tap**.
+> **Kiểm chứng tên gọi:** "**ba hồi**" = 3 cặp dồn/rời của chuông. "**chín tiếng**" = 3 + 3 + 3 = **9 tiếng chuông rời** — đúng công thức thỉnh chuông ngoài đời. Phần dồn 3-5-7 là số lẻ tăng dần. Tổng tap = (3+3) + (5+3) + (7+3) + **3 tiếng mõ** = **33 tap** *(không đổi so với bản trước)*.
 
 **Manh mối — hai đường độc lập:**
 
 | # | Clue | Hotspot | Đường | Suy ra |
 |---|---|---|---|---|
-| C1 | **Tiếng mõ bên kia vách** *(clue CHÍNH)* | `hs_vach_buong` + nút "Áp tai vào vách" trong puzzle | **Thính giác** | **Toàn bộ lời giải nghe được bằng tai**, nghe lại vô hạn |
-| C2 | **Chữ khắc trên tang mõ: 三 五 七** | `hs_mo_ca` (fallback `txt_khoa_mo_ca_thieu_dui`) | **Văn bản** | **Ba con số của phần dồn: 3 – 5 – 7** |
-| C3 | Dòng cuối cuốn văn khấn | `hs_van_khan` | **Văn bản** | **Cấu trúc**: mỗi hồi = dồn + 3 tiếng rời + 1 chuông; "chín tiếng" = ba lần ba |
-| C4 | Cán dùi mõ **mòn nhẵn đúng ba chỗ tay cầm** | `hs_dui_mo` | Mô-típ | Tô đậm mô-típ "ba"; đồng thời là **điều kiện mở khoá** |
+| C1 | **Tiếng chuông bên kia vách** *(clue CHÍNH)* | `hs_vach_buong` + nút "Áp tai vào vách" trong puzzle | **Thính giác** | **Toàn bộ lời giải nghe được bằng tai**, nghe lại vô hạn |
+| C2 | **Chữ khắc trên vành chuông: 三 五 七** | `hs_mo_ca` (fallback `txt_khoa_mo_ca_thieu_dui`) | **Văn bản** | **Ba con số của phần dồn: 3 – 5 – 7**. Khắc trên **chuông** vì chuông mới là thứ mang ba con số ấy |
+| C3 | Dòng cuối cuốn văn khấn | `hs_van_khan` | **Văn bản** | **Cấu trúc**: mỗi hồi = chuông dồn + 3 tiếng chuông rời + **1 tiếng mõ chốt**; "chín tiếng" = ba lần ba; và câu *"chuông là để gọi, mõ là để chốt"* nói thẳng vai của hai nhạc khí |
+| C4 | Cây dùi: **cán mòn nhẵn đúng ba chỗ tay cầm**, **một đầu quấn vải điều, một đầu để trần** | `hs_dui_mo` | Mô-típ + cơ chế | Tô đậm mô-típ "ba"; **đầu quấn vải = đánh chuông, đầu trần = gõ mõ**; đồng thời là **điều kiện mở khoá** |
 
-> **Tự kiểm tra công bằng & khả tiếp cận:** người chơi **tắt tiếng hoặc khiếm thính vẫn giải được 100 %** bằng C2 + C3, và thanh nhịp hiển thị **trực quan bằng chấm sáng** thay cho âm thanh. Mỗi tiếng mõ còn kèm **một nhịp haptic** — có thể giải hoàn toàn bằng xúc giác. Tier 2 hiện thẳng con số. **Ràng buộc bắt buộc triển khai, không phải tuỳ chọn.**
+> **Tự kiểm tra công bằng & khả tiếp cận:** người chơi **tắt tiếng hoặc khiếm thính vẫn giải được 100 %** bằng C2 + C3. Lời hứa ấy đứng được là nhờ ba thứ, cả ba **bắt buộc triển khai, không phải tuỳ chọn**:
+>
+> 1. **Tiết tấu không tính vào điều kiện sai** — nên không có thông tin nào chỉ tồn tại dưới dạng khoảng cách thời gian.
+> 2. **Thanh nhịp mã hoá cả số lượng lẫn nhạc khí bằng hình:** chấm **tròn** = chuông, chấm **vuông** = mõ, và mỗi lần cụm tự chốt thì hiện **một vạch ngắt dọc**. Người chơi nhìn thấy đúng thứ engine đang kiểm, không hơn không kém.
+> 3. **Hai mẫu haptic phân biệt được bằng tay:** chuông = xung **12 ms, biên độ 0,35**, sắc và ngắn; mõ = xung **30 ms, biên độ 0,70**, nặng và đục. Người chơi vừa điếc vừa tắt màn hình vẫn đếm được bằng ngón tay.
+>
+> Tier 2 hiện thẳng con số.
 
-**Hành vi khi sai** (sai = kết thúc một cụm với số tiếng không khớp, gõ nhầm chuông/mõ, hoặc kết bài khi chưa đủ ba hồi):
+**Hành vi khi sai.** Định nghĩa sai **đóng kín, chỉ gồm bốn trường hợp**:
+> (a) một cụm chốt lại với **số tiếng không khớp** dãy 3 – 3 – 5 – 3 – 7 – 3; (b) **điểm tiếng mõ sai chỗ** — tức khi chưa chốt đủ một cặp cụm chuông, hoặc điểm quá một tiếng; (c) **đánh chuông khi đang đến lượt tiếng mõ chốt hồi**; (d) **kết bài khi chưa đủ ba hồi**.
+>
+> **Tiết tấu nhanh, chậm, đều hay không đều KHÔNG BAO GIỜ là sai.** Không có trường hợp thứ năm.
 
 | Lần sai | Phản hồi |
 |---|---|
-| 1 | Tiếng mõ bên kia vách **trả lời chậm hơn nửa nhịp**, như đang **nhại lại** đúng chuỗi người chơi vừa gõ sai. Thanh nhịp xoá trắng, làm lại từ hồi 1 |
+| 1 | Tiếng chuông bên kia vách **trả lời chậm hơn nửa nhịp**, như đang **nhại lại** đúng chuỗi người chơi vừa gõ sai — kể cả tiếng mõ đặt nhầm chỗ, bên kia cũng nhại luôn. Thanh nhịp xoá trắng, làm lại từ hồi 1 |
 | 2 | Bên kia vách nhại lại **to hơn và gần hơn** (pre-delay giảm từ 120 ms → 35 ms, pan dịch từ giữa sang sát tai phải — nghe như **đang tiến lại gần**). Trên thanh nhịp **hiện mờ số tiếng đúng của hồi 1** trong 2 giây rồi tắt. **Tier 1 tự mở miễn phí ở đây** thay vì ở lần sai thứ nhất |
 | 3 | **JUMPSCARE `scare_khoi_tu_hinh_nguoi`** (dùng chung với P3). Sau đó `fail_count` reset |
 
@@ -1368,9 +1454,9 @@ Bên trái bàn thờ, thấp hơn một tấc, là **khám thờ gỗ nhỏ b�
 
 | Tier | Nội dung |
 |---|---|
-| 1 | *"Đừng gõ bừa. Áp tai vào vách nghe lại — nghe bao nhiêu lần cũng được, bên ấy không mệt. Mà nếu không nghe rõ thì nhìn: trên tang mõ có khắc ba chữ số, và cuốn văn khấn trên bàn thờ có một dòng nói riêng về cách gọi Bà Cô bằng mõ."* |
-| 2 | *"Ba hồi. Mỗi hồi hai phần: phần dồn gõ thưa rồi mau dần, phần rời gõ đúng ba tiếng tách bạch — ba lần ba là chín tiếng, đúng như tên gọi. Hết mỗi hồi thì điểm một tiếng chuông rồi mới sang hồi sau. Ba chữ khắc trên tang mõ — tam, ngũ, thất — chính là số tiếng của ba phần dồn."* |
-| 3 — **đáp án** | *"Hồi một: 3 tiếng mõ dồn, ngừng, 3 tiếng mõ rời, rồi 1 tiếng chuông. Hồi hai: 5 tiếng mõ dồn, ngừng, 3 tiếng mõ rời, rồi 1 tiếng chuông. Hồi ba: 7 tiếng mõ dồn, ngừng, 3 tiếng mõ rời, rồi 1 tiếng chuông. Theo dãy số: **3 – 3 – 5 – 3 – 7 – 3**, xen một tiếng chuông sau mỗi cặp. Nhớ ngừng tay hơn một giây để chốt mỗi cụm."* |
+| 1 | *"Đừng gõ bừa. Áp tai vào vách nghe lại — nghe bao nhiêu lần cũng được, bên ấy không mệt. Mà nếu không nghe rõ thì nhìn: trên vành chuông có khắc ba chữ số, và cuốn văn khấn trên bàn thờ có một dòng nói riêng về cách thỉnh Bà Cô — trong đó có câu chuông là để gọi, mõ là để chốt."* |
+| 2 | *"Chuông gánh cả bài, mõ chỉ điểm ba lần. Ba hồi, mỗi hồi hai phần chuông: phần dồn, rồi phần rời đúng ba tiếng — ba lần ba là chín tiếng, đúng như tên gọi. Hết mỗi hồi thì điểm một tiếng mõ rồi mới sang hồi sau. Ba chữ khắc trên vành chuông — tam, ngũ, thất — chính là số tiếng của ba phần dồn. Gõ nhanh hay chậm không quan trọng, đủ số là được."* |
+| 3 — **đáp án** | *"Hồi một: 3 tiếng chuông, ngừng tay, 3 tiếng chuông nữa, rồi 1 tiếng mõ. Hồi hai: 5 tiếng chuông, ngừng tay, 3 tiếng chuông, rồi 1 tiếng mõ. Hồi ba: 7 tiếng chuông, ngừng tay, 3 tiếng chuông, rồi 1 tiếng mõ. Theo dãy số tiếng chuông: **3 – 3 – 5 – 3 – 7 – 3**, điểm một tiếng mõ sau mỗi cặp. Nhớ ngừng tay hơn một giây để chốt mỗi cụm — hoặc cứ điểm tiếng mõ, nó cũng chốt."* |
 
 **Giải xong thì gì mở ra:** dải vải điều phủ trong khám thờ **tuột xuống** → spawn `hs_dai_vai_dieu`. Theo lore: **"Bà Cô đã mở mắt"**, và vải điều tuột rồi **không được phủ lại** giữa chừng lễ.
 
@@ -1500,7 +1586,7 @@ Qua cửa liếp là mảnh sân sau lát gạch vỡ, và **giếng khơi** xâ
 | 13 | `hs_len_gian_tho` | `{x:1000, y:700, width:150, height:290}` | `CHANGE_AREA` | `target_area_id: area_gian_tho` · **không gate** | Đường lùi, luôn mở |
 | 14 | `hs_dong_tro_than` | `{x:300, y:780, width:340, height:210}` | `EXAMINE` | `txt_examine_dong_tro_than` | **Clue C5 của P5** — nguồn lửa duy nhất |
 
-**Tự kiểm tra bố cục:** 14 hotspot · 91 cặp · **0 giao nhau** · `y_min = 96` ✓ · `y_max = 990` ✓ · nhỏ nhất `hs_chai_dau_hoa` 120×180 ✓.
+**Tự kiểm tra bố cục:** 14 hotspot · 91 cặp · **0 giao nhau** · `y_min = 96` ✓ · `y_max = 990` ✓ · nhỏ nhất `hs_chai_dau_hoa` 120×180 ✓ — **khu vực duy nhất đã đạt trọn ngưỡng 120 px mà không cần nới**.
 
 **Ranh giới hai nửa:** mọi hotspot "trong bếp" đều có `x + width ≤ 1150`; mọi hotspot "ngoài sân sau" đều có `x ≥ 1200`. Dải cửa liếp (x 1150–1200) là **dải trung tính, không có hotspot** — người chơi đọc được ranh giới không gian chỉ bằng mắt.
 
@@ -1586,7 +1672,11 @@ Qua cửa liếp là mảnh sân sau lát gạch vỡ, và **giếng khơi** xâ
 
 > **`txt_examine_vach_bep_chu_than`**
 > "Mấy dòng chữ than to tướng trên vách, nét người lớn dạy trẻ con:
-> *'**Tim ngấm dầu hẵng châm lửa**, kẻo cháy cụt tim. **Vặn tim cao quá thì khói đen bám bóng** — vặn xong mới châm.'*"
+> *'**Tim ngấm dầu hẵng châm lửa**, kẻo cháy cụt tim.*
+> ***Chắt dầu cho ngập rồi hẵng vặn** — vặn lúc tim còn khô thì tim tướp, cháy cụt ngay.*
+> ***Vặn tim cao quá thì khói đen bám bóng** — vặn xong mới châm.'*"
+
+`[[ Ba dòng, ba ràng buộc thứ tự. Dòng giữa là ràng buộc THỨ NĂM mới bổ sung (dầu trước vặn) và nó là thứ duy nhất khoá được thứ tự về một đường — xem phần chứng minh ở mục 3.4.5. Nó cũng đúng thực tế đèn Hoa Kỳ: sợi tim bông khô mà kéo qua khe cổ đèn thì xơ bung ra, đầu tim tướp và cháy cụt ngay lần châm đầu; tim đã ngấm dầu thì mềm, se lại, kéo lên trơn. Đây là kiểu hiểu biết mà người quen bếp dầu nào cũng có, và vì vậy nó nằm trên vách bếp chứ không nằm trong một cuốn sách. ]]`
 
 **⑥ GÁC BẾP** — clue C1 của P5.
 
@@ -1685,7 +1775,7 @@ Qua cửa liếp là mảnh sân sau lát gạch vỡ, và **giếng khơi** xâ
 | 1 | `2` | **Xé & se dải vải điều thành tim đèn** | Chưa có tim thì không có gì để luồn, để ngấm, để châm. **Gốc của cả chuỗi** |
 | 2 | `5` | **Luồn tim qua cổ đèn** | Tim phải nằm trong ống cổ đèn **trước khi đổ dầu**; đổ dầu rồi mới luồn thì dầu tràn ra tay và cổ đèn trơn, không xỏ được |
 | 3 | `1` | **Chắt dầu hoả vào bầu đèn** | Có tim trong cổ rồi thì đầu dưới của tim ngập trong bầu, dầu thấm ngược lên theo mao dẫn |
-| 4 | `3` | **Vặn núm cho tim nhô vừa một hạt gạo** | Chỉnh **trước khi châm**: nhô cao thì khói đen bám bóng, thụt quá thì lửa không bén. Phải chỉnh lúc chưa có lửa |
+| 4 | `3` | **Vặn núm cho tim nhô vừa một hạt gạo** | **Sau khi dầu đã ngập** — vặn lúc tim còn khô thì sợi bông tướp ra, cháy cụt ngay *(chữ than trên vách, dòng giữa)*. Và **trước khi châm**: nhô cao thì khói đen bám bóng, thụt quá thì lửa không bén |
 | 5 | `4` | **Rút đóm, mồi vào than hồng, châm vào tim** | Bước cuối. Tim đã ngấm dầu, đã chỉnh độ cao → lửa bén và giữ |
 
 **Manh mối:**
@@ -1693,12 +1783,52 @@ Qua cửa liếp là mảnh sân sau lát gạch vỡ, và **giếng khơi** xâ
 | # | Clue | Khu vực | Hotspot | Suy ra |
 |---|---|---|---|---|
 | C1 | **Cây đèn hỏng bỏ trên gác bếp** | Khu 4 | `hs_gac_bep_bo_dom` | **Mẫu tham chiếu tháo rời**: tim đi **xuyên qua cổ đèn** (bước 2), bầu dầu là bộ phận riêng. Cũng chỉ ra **bó đóm** ở đâu |
-| C2 | **Chữ than trên vách bếp** | Khu 4 | `hs_vach_bep_chu_than` | **Hai ràng buộc thứ tự quyết định**: dầu **trước** lửa (3 < 5); vặn núm **trước** lửa (4 < 5) |
+| C2 | **Chữ than trên vách bếp** | Khu 4 | `hs_vach_bep_chu_than` | **Ba ràng buộc thứ tự quyết định**, mỗi dòng một ràng buộc: dầu **trước** lửa · **dầu trước vặn núm** · vặn núm **trước** lửa |
 | C3 | **Đèn dầu ở hiên, lượt EXAMINE khi nhặt** | Khu 2 | `hs_den_dau_treo` | **Danh sách nguyên liệu** phải đi gom — dựng mục tiêu ngay từ khu vực 2 |
 | C4 | **Dải vải điều, lượt EXAMINE trong túi đồ** | Khu 3 | `hs_dai_vai_dieu` | **Vải điều = tim đèn**, và phải **se** trước khi dùng (bước 1) |
 | C5 | **Đống tro còn than hồng** | Khu 4 | `hs_dong_tro_than` | **Nguồn lửa duy nhất** — đóng đinh bước 5 |
 
-> **Tự kiểm tra công bằng:** bốn ràng buộc rút ra được — *tim trước cổ đèn* (C1), *tim + cổ trước dầu* (C1, cấu tạo bầu/cổ), *dầu trước lửa* (C2), *vặn trước lửa* (C2). Ghép lại chỉ còn **đúng một thứ tự hợp lệ**: 2 → 5 → 1 → 3 → 4. Mọi clue đều `EXAMINE` không tốn tài nguyên và đọc lại được.
+#### Tự kiểm tra công bằng — NĂM ràng buộc, và chứng minh chúng thu về ĐÚNG MỘT thứ tự
+
+> **⚠️ LỖI ĐÃ SỬA.** Bản trước chỉ có **bốn** ràng buộc, và bốn ràng buộc ấy **không** thu về một thứ tự duy nhất: dãy **2 – 5 – 3 – 1 – 4** (se tim → luồn cổ đèn → **vặn núm** → chắt dầu → châm lửa) hợp lệ y hệt dãy đích, nhưng engine vẫn tính là sai. Người chơi suy luận đúng bị phạt — không chấp nhận được. Ràng buộc **R5** dưới đây được thêm vào `txt_examine_vach_bep_chu_than` để đóng lỗ hổng ấy. **`solution` `[2, 5, 1, 3, 4]` giữ nguyên.**
+
+Đánh số phần tử theo bảng ánh xạ ID: `1` = chai dầu hoả · `2` = dải vải điều · `3` = núm vặn tim · `4` = que đóm + than hồng · `5` = cổ đèn. Viết `a ≺ b` nghĩa là "a phải làm trước b".
+
+| # | Ràng buộc | Quan hệ | Rút ra từ đâu |
+|---|---|---|---|
+| **R1** | Phải se được sợi tim thì mới có cái để luồn | `2 ≺ 5` | **C1** — cây đèn hỏng trên gác bếp: tim **xuyên qua** cổ đèn; **C4** — vải điều xé dọc tước ra thành sợi |
+| **R2** | Tim phải nằm trong cổ đèn **trước khi** đổ dầu | `5 ≺ 1` | **C1** — cấu tạo tháo rời: bầu là bộ phận riêng, cổ đèn cắm vào bầu; đổ dầu rồi thì cổ trơn, không xỏ nổi |
+| **R3** | Tim phải **ngấm dầu** rồi mới châm lửa | `1 ≺ 4` | **C2**, dòng 1: *"Tim ngấm dầu hẵng châm lửa, kẻo cháy cụt tim"* |
+| **R4** | **Vặn** tim cho vừa rồi mới châm lửa | `3 ≺ 4` | **C2**, dòng 3: *"Vặn tim cao quá thì khói đen bám bóng — vặn xong mới châm"* |
+| **R5** *(mới)* | Dầu phải ngập rồi **mới được vặn** | `1 ≺ 3` | **C2**, dòng 2: *"Chắt dầu cho ngập rồi hẵng vặn — vặn lúc tim còn khô thì tim tướp, cháy cụt ngay"* |
+
+**Chứng minh 1 — bằng dây chuyền (ngắn).** Ghép R1, R2, R5, R4 theo bắc cầu:
+
+`2 ≺ 5 ≺ 1 ≺ 3 ≺ 4`
+
+Đây là một **chuỗi toàn phần** trên cả năm phần tử: mọi cặp đều đã được so sánh. Một tập có thứ tự toàn phần thì **chỉ có đúng một cách sắp xếp tuyến tính**. Vậy lời giải duy nhất là **2 – 5 – 1 – 3 – 4**. *(R3 `1 ≺ 4` trở thành hệ quả của `1 ≺ 3 ≺ 4`, nên nó dư — nhưng vẫn giữ trong game vì nó là dòng chữ dạy người chơi trực tiếp nhất.)* ∎
+
+**Chứng minh 2 — bằng liệt kê (kiểm chéo, để QA chạy lại được).** Duyệt cả `5! = 120` hoán vị, lọc dần:
+
+| Bước lọc | Ràng buộc áp vào | Số hoán vị còn lại |
+|---|---|---|
+| — | *(chưa lọc)* | **120** |
+| 1 | R1 `2 ≺ 5` | **60** |
+| 2 | R2 `5 ≺ 1` | **20** |
+| 3 | R3 `1 ≺ 4` | **5** |
+| 4 | R4 `3 ≺ 4` | **4** |
+| 5 | **R5 `1 ≺ 3`** | **1** |
+
+**Bốn hoán vị sống sót sau R1–R4 — tức bốn dãy mà bản cũ KHÔNG phân biệt được — và ràng buộc nào loại chúng:**
+
+| # | Hoán vị | Đọc ra thành thao tác | Bị loại bởi | Vì sao |
+|---|---|---|---|---|
+| 1 | `3 – 2 – 5 – 1 – 4` | vặn núm → se tim → luồn cổ đèn → chắt dầu → châm | **R5** *(và cả lẽ thường: R1 mở rộng)* | Vặn núm khi **chưa có tim** trong đèn: núm quay lỏng, chẳng có gì nhô lên. Vi phạm `1 ≺ 3` |
+| 2 | `2 – 3 – 5 – 1 – 4` | se tim → vặn núm → luồn cổ đèn → chắt dầu → châm | **R5** | Tim còn cầm trên tay, chưa luồn, chưa ngấm dầu mà đã vặn. Vi phạm `1 ≺ 3` |
+| 3 | `2 – 5 – 3 – 1 – 4` | se tim → luồn cổ đèn → **vặn núm** → chắt dầu → châm | **R5** | **Đây chính là dãy mà bản cũ tính sai oan.** Tim đã ở trong cổ nhưng **còn khô**; kéo lên là tướp. Vi phạm `1 ≺ 3` |
+| 4 | **`2 – 5 – 1 – 3 – 4`** | se tim → luồn cổ đèn → chắt dầu → vặn núm → châm | **không bị loại** | Thoả cả R1–R5. **Lời giải.** |
+
+> **Kết luận:** sau khi thêm R5, **năm ràng buộc thu về đúng một thứ tự**, và thứ tự đó **là** `solution` đã chốt. Mọi clue đều `EXAMINE` không tốn tài nguyên, nằm cùng khu vực (trừ C3/C4 là neo sớm ở Khu 2/Khu 3), và đọc lại không giới hạn. **Không có dãy hợp lệ nào bị engine tính là sai nữa.**
 
 **Hành vi khi sai** (sai = thực hiện bước không đúng phần tử kế tiếp):
 
@@ -1715,7 +1845,7 @@ Qua cửa liếp là mảnh sân sau lát gạch vỡ, và **giếng khơi** xâ
 | Tier | Nội dung |
 |---|---|
 | 1 | *"Cây đèn này không cần phép thuật, chỉ cần làm đúng như người quê vẫn làm. Trên gác bếp còn một cây đèn hỏng đã tháo rời — nhìn nó thì biết bộ phận nào lắp vào bộ phận nào. Và trên vách bếp có mấy chữ viết bằng than, ai đó dặn rất rõ thứ gì phải làm trước lửa."* |
-| 2 | *"Bắt đầu từ sợi tim: vải điều xé dọc, se lại thành sợi. Tim phải luồn qua cổ đèn trước — đổ dầu rồi mới xỏ thì trơn tuột, không xỏ nổi. Có tim trong cổ rồi mới chắt dầu vào bầu cho tim ngấm. Chữ trên vách dặn hai điều: tim phải ngấm dầu hẵng châm lửa, và vặn tim cho vừa rồi mới châm — nên cái núm vặn phải xoay trước khi có lửa. Que đóm mồi vào than hồng là việc sau rốt."* |
+| 2 | *"Bắt đầu từ sợi tim: vải điều xé dọc, se lại thành sợi. Tim phải luồn qua cổ đèn trước — đổ dầu rồi mới xỏ thì trơn tuột, không xỏ nổi. Có tim trong cổ rồi mới chắt dầu vào bầu cho tim ngấm. Chữ trên vách dặn ba điều: tim phải ngấm dầu hẵng châm lửa; **chắt dầu cho ngập rồi hẵng vặn, vặn lúc tim khô là tim tướp**; và vặn tim cho vừa rồi mới châm. Ghép ba điều ấy lại thì cái núm vặn nằm **sau chai dầu và trước que đóm**. Que đóm mồi vào than hồng là việc sau rốt."* |
 | 3 — **đáp án** | *"Năm bước theo thứ tự: (1) kéo dải vải điều vào, miết hai ngón se thành tim. (2) luồn tim qua cổ đèn. (3) kéo chai dầu hoả, giữ cho tới khi dầu tới vạch trên bầu. (4) xoay núm vặn tim cho đầu tim nhô lên bằng một hạt gạo — vào vùng xanh trên thước. (5) kéo que đóm vào đống than hồng cho bén lửa rồi châm vào đầu tim. Theo số hiệu: **2 – 5 – 1 – 3 – 4**."* |
 
 `[[ Que đóm và than hồng KHÔNG phải vật phẩm túi đồ — chúng là phần tử nội bộ trong khung zoom, đúng với danh sách item của SPINE, không phát sinh item_id mới. ]]`
@@ -1804,7 +1934,7 @@ Nóng và ngột. Bụi giấy lơ lửng, thấy rõ trong luồng sáng đèn 
 | Lớp | Nội dung |
 |---|---|
 | BACKGROUND | Mái ngói âm dương nhìn từ dưới lên, xà gồ gỗ thấp tè, mạng nhện dày, một khe sáng mảnh hắt lên từ sàn |
-| MIDGROUND | **Hình nhân thế mạng** bằng nan tre dán giấy đứng chính giữa (cao gần bằng người thật), khung ảnh thờ chín mảnh bên phải, bộ áo cưới giấy treo trên móc sát vách phải, chồng vàng mã góc phải |
+| MIDGROUND | **Hình nhân thế mạng** bằng nan tre dán giấy đứng chính giữa (cao gần bằng người thật), khung ảnh thờ ghép ván bên phải *(tám mảnh trong khung, một ô trống ở góc dưới-phải)*, bộ áo cưới giấy treo trên móc sát vách phải, chồng vàng mã góc phải |
 | FOREGROUND | Hòm gỗ nắp mở (trái-dưới), cuốn sổ ghi tên và tập nhật ký trên nắp hòm, **chiếu cói mới tinh** trải sát mép dưới khung hình, ván sàn hở khe |
 | FX | Bụi bay dày trong quầng sáng; giấy vàng mã sột soạt khi camera nhích |
 
@@ -1837,9 +1967,18 @@ Sau khi tim người chơi đập lại bình thường, quầng đèn quét đ�
 | 10 | `hs_giay_khai_sinh` | `{x:1200, y:790, width:280, height:150}` | `EXAMINE` | `txt_examine_giay_khai_sinh` | Khai sinh gốc + dấu **ĐÃ KHAI TỬ** |
 | 11 | `hs_chieu_coi_trai_san` | `{x:730, y:910, width:440, height:88}` | `EXAMINE` | `txt_examine_chieu_moi` | Chiếu trải sẵn cho hình nhân — mà hình nhân cao bằng người chơi |
 
-**Tự kiểm tra bố cục:** 11 hotspot · 55 cặp · **0 giao nhau** · `y_min = 120` ✓ · `y_max = 998` ✓ · nhỏ nhất `hs_chieu_coi_trai_san` 440×**88** — **đúng bằng ngưỡng tối thiểu, không được rút thêm**.
+**Tự kiểm tra bố cục:** 11 hotspot · 55 cặp · **0 giao nhau** · `y_min = 120` ✓ · `y_max = 998` ✓ · nhỏ nhất `hs_chieu_coi_trai_san` 440×**88** ⚠️ — **thấp nhất toàn chương và là hotspot phải nới nhiều nhất** (88 → 120 px). Nới **lên trên**, vì mép dưới đã sát trần `y + height ≤ 1000`; việc ấy làm nó chạm `hs_hinh_nhan` nên xem ghi chú ⚠️ ngay dưới đây.
 
-⚠️ Cặp sát nhau nhất: `hs_hinh_nhan` (kết thúc y = 900) và `hs_chieu_coi_trai_san` (bắt đầu y = 910) — **cách 10 px theo trục y**, dưới ngưỡng đệm 20 px. **Chấp nhận** vì chiếu nằm dưới chân hình nhân là bố cục bắt buộc về mặt kể chuyện, và hai hotspot có phản hồi hoàn toàn khác nhau (một cái là hành động kết chương có xác nhận 2 bước, một cái chỉ đọc chữ). *Quy tắc kỹ thuật "không overlap" vẫn đạt.*
+⚠️ Cặp sát nhau nhất: `hs_hinh_nhan` (kết thúc y = 900) và `hs_chieu_coi_trai_san` (bắt đầu y = 910) — **cách 10 px theo trục y**, dưới ngưỡng đệm 20 px. Ở giá trị gốc thì chấp nhận được, vì chiếu nằm dưới chân hình nhân là bố cục bắt buộc về mặt kể chuyện và hai hotspot có phản hồi hoàn toàn khác nhau (một cái là hành động kết chương có xác nhận 2 bước, một cái chỉ đọc chữ).
+
+**Nhưng sau khi nới lên ngưỡng 120 px thì cặp này va nhau, và phải xử lý cả hai cùng lúc.** Chiếu chỉ nới lên trên được (mép dưới đã ở y + height = 998, sát trần 1000), mà nới lên là đụng chân hình nhân. Đề xuất — **chốt con số ở bước dữ liệu, `docs/03_DATA_SPEC.md` là nguồn sự thật**:
+
+| Hotspot | Bounds gốc | Bounds đề xuất | Ghi chú |
+|---|---|---|---|
+| `hs_hinh_nhan` | `{x:820, y:280, width:290, height:620}` | `{x:820, y:280, width:290, height:570}` *(kết thúc y = 850)* | Rút **50 px ở đáy**. Hình nhân cao 570 px vẫn chiếm 57 % chiều cao khung — thừa sức cho cú dọa S6 và cho thao tác kết chương. **Sprite giữ nguyên chiều cao cũ qua `visual_bounds`** |
+| `hs_chieu_coi_trai_san` | `{x:730, y:910, width:440, height:88}` | `{x:730, y:870, width:440, height:128}` *(kết thúc y = 998)* | Nới **40 px lên trên**, cao 128 px ≥ 120 ✓ |
+
+Kết quả: khoảng đệm giữa hai hotspot **từ 10 px lên đúng 20 px**, cả hai cùng đạt ngưỡng 120 px, và **không hotspot nào đổi ý nghĩa kịch bản**. *Quy tắc kỹ thuật "không overlap" vẫn đạt.*
 
 **Nguyên tắc đọc cảnh:** **cột trái = bằng chứng giấy tờ** (sổ, nhật ký, hòm, gia phả) · **cột giữa = hình nhân** (chỗ hành động) · **cột phải = đồ nghi lễ** (khung ảnh, áo cưới, vàng mã). Quầng đèn dầu bắt người chơi **quét màn hình từ trái sang phải — đúng thứ tự mà cú twist cần được đọc**.
 
@@ -1881,7 +2020,7 @@ Sau khi tim người chơi đập lại bình thường, quầng đèn quét đ�
 
 `[[ HẬU QUẢ PHẠM ĐIỀU MỘT: ngay sau dòng độc thoại này, đúng 6 giây, hình nhân thế mạng XOAY 30 ĐỘ về phía người chơi. Không âm thanh. Không flash. Nếu người chơi không quay lại nhìn, nó cứ thế mà đứng. Âm thanh: hạ toàn bộ nền xuống −42 dBFS và giữ im 4 giây sau câu cuối. ]]`
 
-`[[ flag_da_doc_so_ghi_ten = true → mở nhánh độc thoại đối chiếu nét chữ với item_ban_rap_chu_the: "Nét chữ này... giống hệt nét chữ trên bản rập chữ 'Thế Mệnh' đang cầm trong tay." Đây là clue C4 của P6. ]]`
+`[[ flag_da_doc_so_ghi_ten = true → mở nhánh độc thoại đối chiếu nét chữ với item_ban_rap_chu_the: "Nét chữ này... giống hệt nét chữ trên tờ chữ 'Thế Mệnh' đang cầm trong tay." Đây là clue C4 của P6. ]]`
 
 **② MẶT TRONG NẮP HÒM — TRANG 1: SƠ ĐỒ NGÔI THỨ** *(lời giải của `puz_xep_anh_gia_pha`)*
 
@@ -1890,8 +2029,11 @@ Sau khi tim người chơi đập lại bình thường, quầng đèn quét đ�
 > **ẢNH THỜ — XẾP THEO NGÔI THỨ, CHỚ ĐẢO**
 >
 > *Hàng trên:* **cụ tổ ở giữa, ông bên tả, bà bên hữu.**
-> *Hàng giữa* — các con: **cả (trưởng), thứ, rồi út**; út là em gái, mất năm mười bảy tuổi.
-> *Hàng dưới* — các cháu, **kể theo tuổi từ lớn xuống bé**: ~~[một tên đã bị gạch nát, chỉ còn đọc được chữ đệm "Thị"]~~ …
+> *Hàng giữa* — các con của ông bà, kể từ **tả sang hữu**: **cả (trưởng nam), thứ (thứ nam), rồi út**; út là em gái hai anh, con gái một của nhà.
+> *Hàng dưới* — các cháu, **kể theo tuổi từ lớn xuống bé**: cháu trai lớn trước, rồi cháu gái, rồi ~~[một tên đã bị gạch nát, chỉ còn đọc được chữ đệm "Thị"]~~ — tên này ở **cuối**, vì nó bé nhất.
+>
+> *(Chua thêm ở mép ván, nét nhỏ hơn, cùng mực:)*
+> **Bà Cô không vào ảnh này.** Bà Cô là em gái út của cụ tổ sinh ra, tức em ruột ông nhà; chết trẻ chưa có nơi có chốn thì không nhập từ đường, không vào ảnh thờ họ. Bà Cô có khám riêng dưới nhà, bịt vải điều. **Chớ thấy trống chỗ mà đưa Bà Cô lên.**
 >
 > Ảnh xếp sai ngôi thứ thì người trong ảnh **không ngồi yên**.
 
@@ -1962,7 +2104,7 @@ Xem văn bản thành phẩm đầy đủ ở **mục 2.3.6**, `text_key` = `txt
 > Họ và tên: **NGUYỄN THỊ LIÊN**
 > Sinh ngày 16 tháng 9 năm 1969
 > Nơi sinh: thôn Linh An, xã Linh Nam, huyện Thuận Thành
-> Cha: Nguyễn Văn Đoan · Mẹ: Phạm Thị Vân
+> Cha: **Nguyễn Văn Đoàn** *(thứ nam)* · Mẹ: **Phạm Thị Vân**
 >
 > *(Đóng chéo lên toàn bộ tờ giấy, mực đỏ đã bợt:)*
 > **ĐÃ KHAI TỬ — SỐ 41/KT — NGÀY 22.12.1976**
@@ -1974,20 +2116,32 @@ Xem văn bản thành phẩm đầy đủ ở **mục 2.3.6**, `text_key` = `txt
 
 **⑦ BỨC ẢNH SAU KHI XẾP XONG** — độc thoại tự động khi hoàn thành P6. **Beat B13.**
 
-> **`txt_gac_xep_anh_hoan_chinh`**
-> "Chín mảnh khớp vào nhau. Bức ảnh thờ chụp cả nhà, năm bảy nhăm, trước hiên, đứng theo đúng ngôi thứ.
+> **`txt_gac_xep_anh_hoan_chinh`** *(bật sau cutscene `seq_p6_manh_thu_chin`, xem mục 3.5.5)*
+> "Chín mảnh khớp vào nhau. Bức ảnh thờ chụp cả nhà trước hiên, đứng theo đúng ngôi thứ.
 >
 > Hàng trên: ông, cụ tổ, bà.
 > Hàng giữa: bác cả, bố, cô út.
-> Hàng dưới: ba đứa cháu.
+> Hàng dưới: anh Thuấn, chị Thoa, và đứa đứng cuối.
 >
-> Đứa đứng cuối hàng dưới **không có mặt**.
+> Mà bức ảnh này thì **không chụp một lần nào cả**.
+> Ông nội mất năm sáu tám. Bố mất năm bảy hai. Cụ tổ thì mình chưa thấy mặt bao giờ.
+> Vậy mà tất cả đứng cạnh nhau, dưới cùng một cái hiên, cùng một thứ nắng.
+>
+> **Ảnh ghép.** Hiệu ảnh ngoài phố huyện vẫn làm thế: mỗi người một tấm ảnh lẻ, cắt rời ra, ghép lên một cái nền hiên nhà rồi thợ truyền thần ngồi tô lại cho liền nét. Người chết mấy chục năm vẫn về đứng chung ảnh thờ được. Nhà nào chẳng có một bức như vậy.
+>
+> Người trong ảnh mỗi người một tuổi. Bố trẻ măng. Bà thì đã già hơn cả lúc mình nhớ.
+>
+> Nghĩa là bức ảnh này do **người sống dựng ra**. Từng người một. Ai đứng đâu là có người quyết.
+>
+> Và đứa đứng cuối hàng dưới **không có mặt**.
 >
 > Không phải mờ, không phải mất nét. Có người lấy dao nhỏ **khoét đúng khuôn mặt ấy ra khỏi tấm ảnh**, khoét sát, đến tận chân tóc, để lại một lỗ hình bầu dục.
 >
 > Thân người thì vẫn còn. **Áo bông vá vai. Chân đi guốc.**
 >
 > Mình nhìn cái áo bông ấy lâu hơn mình muốn."
+
+`[[ ĐÍNH CHÍNH ĐÃ CHỐT (X13): bản trước ghi bức ảnh "chụp năm bảy nhăm". Không thể: ông nội mất 1968, bố mất 1972, cụ tổ mất từ lâu, và cô út thì trong ảnh là thiếu nữ. Ít nhất bốn trên chín người không thể đứng chung một khung năm 1975. Bức ảnh là ẢNH TRUYỀN THẦN GHÉP — tập quán có thật ở Bắc Bộ suốt thập niên 60–80: hiệu ảnh ghép ảnh lẻ của người đã khuất vào một nền ảnh gia đình rồi thợ truyền thần tô lại. KHÔNG GHI NĂM CHỤP ở bất kỳ chỗ nào. Ghi chú cho tổ đồ hoạ: chín mảnh ván cố ý KHÔNG khớp nhau về tuổi, về chất ảnh và về hướng sáng — mỗi mảnh nên có một sắc ố khác nhau, mép ghép còn thấy vệt tô. Sự lệch ấy là chi tiết kể chuyện, không phải lỗi vẽ. ]]`
 
 **⑧ MẶT SAU KHUNG ẢNH** — hiện cùng lúc với `item_ao_cuoi_giay`. **Beat B13a.**
 
@@ -2052,7 +2206,7 @@ Xem văn bản thành phẩm đầy đủ ở **mục 2.3.6**, `text_key` = `txt
 >
 > *(Chọn: **[Đáp lại]** → "Bà ơi, con tìm ra rồi." / **[Không đáp, quay đi]**. Dù chọn gì, nhìn xuống lần nữa thì gian thờ **tối om** — mà đèn dầu trong tay vẫn cháy.)*
 
-`[[ Chọn [Đáp lại] → flag_da_dap_loi_ba_noi = true → VI PHẠM ĐIỀU CẤM KỴ THỨ TƯ (chớ đáp lời ai gọi từ sau lưng). Không phạt ở Chương 1; ghi nhận cho Chapter 2. ]]`
+`[[ Chọn [Đáp lại] → flag_da_dap_loi_ba_noi = true → VI PHẠM ĐIỀU CẤM KỴ THỨ NHẤT: "Chớ gọi tên thật người thế mệnh trong nhà. Gọi tên là gọi về." Tiếng bà nội vọng qua khe ván là một hành vi GỌI; người chơi đáp lại là NHẬN — và theo Luật Tên (mục 2.3.2), cõi âm nhận người bằng lời nhận, không bằng mặt. Thư bà nội ở Khu 1 đã dặn đủ hai vế: "đừng gọi tên ai, cũng đừng để ai gọi tên cháu". Không phạt ở Chương 1; ghi nhận cho Chapter 2. ]]`
 
 **⑭ GÁC XÉP KHI CHƯA CÓ ĐÈN / CỬA GÁC ĐÃ SẬP** — fallback.
 
@@ -2066,14 +2220,23 @@ Xem văn bản thành phẩm đầy đủ ở **mục 2.3.6**, `text_key` = `txt
 
 | Trường | Giá trị |
 |---|---|
-| Type | `SLIDING_TILE` · Tên hiển thị: **"Bức ảnh thờ chín mảnh"** |
+| Type | `SLIDING_TILE` · Tên hiển thị: **"Bức ảnh thờ chín mảnh"** — *tên đúng, nhưng bàn cờ chỉ chạy **8 mảnh + 1 ô trống**; mảnh thứ chín về chỗ trong **cutscene hậu-giải**, xem X17 và cuối mục này* |
 | `solution` | **`[2, 5, 7, 4, 8, 3, 6, 1, 0]`** — đọc **row-major** (hàng ngang, trái→phải, trên→dưới). `0` = **ô trống** |
 | `reward_item_id` | `item_ao_cuoi_giay` |
 | `wrong_action_jumpscare` | `scare_anh_tho_thieu_mat` *(phái sinh — nếu Lead không duyệt thì `null`)* |
 | Độ khó / thời gian kỳ vọng | **4/5** · 240 giây (P25 = 160 s, P75 = 420 s) — **câu đố dài nhất chương** |
 | Điều kiện mở khoá | **Bắt buộc có `item_den_dau_sang`** (gác xép tối hoàn toàn) |
 
-**Cơ chế:** chạm `hs_khung_anh_tho` → lật mặt sau khung ảnh, lộ **khung gỗ 3×3**, khung zoom `{x:660, y:120, width:840, height:840}`; mỗi ô **280×280 px** (thoải mái cho ngón tay). **8 mảnh ván + 1 ô trống.** Thao tác: **chạm vào mảnh nằm cạnh ô trống** để nó trượt vào, **hoặc vuốt mảnh về phía ô trống**; hỗ trợ **trượt cả hàng/cột** (vuốt mạnh thì 2–3 mảnh cùng dồn).
+**Cơ chế:** chạm `hs_khung_anh_tho` → lật mặt sau khung ảnh, lộ **khung gỗ 3×3**, khung zoom `{x:660, y:120, width:840, height:840}`; mỗi ô **280×280 px** (thoải mái cho ngón tay). **Bàn cờ chạy với 8 mảnh ván + 1 ô trống** — đúng chuẩn 8-puzzle. Thao tác: **chạm vào mảnh nằm cạnh ô trống** để nó trượt vào, **hoặc vuốt mảnh về phía ô trống**; hỗ trợ **trượt cả hàng/cột** (vuốt mạnh thì 2–3 mảnh cùng dồn).
+
+> **"Chín mảnh" hay "tám mảnh"? — chốt dứt khoát (X17).** Cả hai con số đều đúng, ở hai thời điểm khác nhau, và tài liệu này từ đây phân biệt chúng tuyệt đối:
+>
+> | Thời điểm | Số mảnh trên khung | Người chơi làm gì |
+> |---|---|---|
+> | **Trong câu đố** | **8 mảnh + 1 ô trống** | Trượt mảnh. Ô trống là **khoảng trống thao tác** của 8-puzzle, và cũng là chỗ của đứa cháu út |
+> | **Sau khi ấn đúng "Áp ảnh vào khung"** | **9 mảnh** | Không làm gì. Cutscene `seq_p6_manh_thu_chin` **thả mảnh thứ chín vào ô trống** |
+>
+> Mảnh thứ chín **không bao giờ nằm trên bàn cờ**, **không có ID trong bảng ánh xạ**, **không xuất hiện trong `solution`**. Nó không phải một nước đi; nó là **một sự kiện kể chuyện**. Vì thế `solution` `[2, 5, 7, 4, 8, 3, 6, 1, 0]` với `0` = ô trống là **đúng và đủ**, và mọi chỗ trong tài liệu nói "chín mảnh" đều là nói về **bức ảnh sau cùng**, không phải về bàn cờ.
 
 Nút **"Áp ảnh vào khung"** `{x:1560, y:860, width:280, height:140}`: người chơi tự xác nhận khi cho là đã xếp xong. Đây cũng là **cơ chế đếm lần sai**.
 
@@ -2081,45 +2244,97 @@ Nút **"Lật mảnh"**: lật xem mặt sau một mảnh, **không tốn lượ
 
 > **⚠️ RÀNG BUỘC KỸ THUẬT BẮT BUỘC (gửi Data Architect & Dev):** trạng thái xáo trộn ban đầu **PHẢI** được sinh bằng cách **áp 60–80 nước đi hợp lệ ngẫu nhiên từ trạng thái đã giải**, tuyệt đối **không** hoán vị ngẫu nhiên tự do — nếu không sẽ có **50 % khả năng rơi vào cấu hình không giải được** (bất biến chẵn-lẻ của bài toán 15-puzzle). Thêm ràng buộc: trạng thái sinh ra phải cách đích **≥ 18 nước** để không quá dễ.
 
-**Bảng ánh xạ ID phần tử** *(cố định theo thứ tự chín mảnh ván nằm chồng trong hòm gỗ lúc người chơi mở ra)*:
+**Bảng ánh xạ ID phần tử** *(cố định theo thứ tự tám mảnh ván nằm chồng trong hòm gỗ lúc người chơi mở ra)*:
 
-| ID mảnh | Nội dung trên mảnh ván |
-|---|---|
-| 1 | Người chị họ, tóc tết, áo hoa nhí |
-| 2 | Ông nội, khăn xếp, tay chống gối |
-| 3 | **Bà Cô** — thiếu nữ áo dài trắng, đứng nép ngoài cùng |
-| 4 | Bác cả, áo đại cán, đứng thẳng |
-| 5 | Di ảnh cụ tổ đặt trên đôn, giữa khung |
-| 6 | Người anh họ, quần đùi, cầm cành cau |
-| 7 | Bà nội, áo the nâu, ôm cơi trầu |
-| 8 | Bố (con thứ), áo sơ mi trắng bỏ trong quần |
+| ID mảnh | Nhân vật | Nội dung trên mảnh ván |
+|---|---|---|
+| 1 | **Chị họ — Nguyễn Thị Thoa** *(1965 – )*, con bác cả | Thiếu nữ tóc tết, áo hoa nhí |
+| 2 | **Ông nội — Nguyễn Văn Trác** *(1912 – 1968)* | Khăn xếp, tay chống gối |
+| 3 | **Cô út — Nguyễn Thị Đoài** *(1947 – )*, con gái một của ông bà | Thiếu nữ áo dài trắng, đứng ngoài cùng bên hữu |
+| 4 | **Bác cả — Nguyễn Văn Đoan** *(1940 – )*, trưởng nam, **còn sống** | Áo đại cán, đứng thẳng |
+| 5 | **Cụ tổ** *(trưởng họ đời trên, cha của ông nội và của Bà Cô)* | Di ảnh đặt trên đôn, giữa khung |
+| 6 | **Anh họ — Nguyễn Văn Thuấn** *(1962 – )*, con bác cả | Thiếu niên, quần đùi, cầm cành cau |
+| 7 | **Bà nội — Nguyễn Thị Nhỡ** *(1918 – 1996)* | Áo the nâu, ôm cơi trầu |
+| 8 | **Bố — Nguyễn Văn Đoàn** *(1943 – 1972)*, **thứ nam** | Áo sơ mi trắng bỏ trong quần |
+
+**Mảnh thứ chín — KHÔNG có trên bàn cờ, KHÔNG có ID, chỉ về chỗ trong cutscene hậu-giải:**
+
+| ID mảnh | Nhân vật | Nội dung trên mảnh ván |
+|---|---|---|
+| *(không có)* | **Cháu út — Nguyễn Thị Liên** *(1969 – )*, con thứ nam = **người chơi** | Đứa bé bảy tuổi, **áo bông vá vai, chân đi guốc**, và **phần mặt đã bị khoét thủng thành một lỗ hình bầu dục** |
+
+> **Vì sao Bà Cô KHÔNG có mặt trong chín mảnh này.** Bà Cô — Nguyễn Thị Gái *(1936 – 1953)* — là **em gái út của ông nội**, tức con út của cụ tổ (mục 2.2.2). Theo lệ đã chép ở mục 2.3.1, **con gái chết trẻ chưa có nơi có chốn thì không được đưa vào từ đường, không được ghi vào gia phả theo ngôi thứ** — nên cô **cũng không vào ảnh thờ họ**. Cô có khám riêng bịt vải điều ở gian thờ dưới nhà. Bản trước đặt Bà Cô vào ô giữa-phải; làm thế thì cô chiếm chỗ của **cô út Nguyễn Thị Đoài** *(1947 – , còn sống, có tên trong gia phả và trong cáo phó)*, và mâu thuẫn trực tiếp với hai văn bản mà chính người chơi đọc được. Nay: **ô giữa-phải là cô út Đoài**, và **sự vắng mặt của Bà Cô là một chi tiết kể chuyện có chủ đích** — người bị cắt khỏi ảnh (người chơi) và người chưa từng được vào ảnh (Bà Cô) là hai đầu của cùng một hủ tục.
 
 **Giải thích từng phần tử của mảng:**
 
-| Ô | Giá trị | Là ai | Vì sao ở đây (theo gia phả chép ở nắp hòm) |
+| Ô | Giá trị | Là ai | Vì sao ở đây (theo sơ đồ ngôi thứ chép ở nắp hòm) |
 |---|---|---|---|
-| 1 (trên-trái) | `2` | **Ông nội** | Hàng trên là hàng ông bà. **Nam tả nữ hữu**: ông bên trái |
+| 1 (trên-trái) | `2` | **Ông nội Nguyễn Văn Trác** | Hàng trên là hàng ông bà. **Nam tả nữ hữu**: ông bên tả = bên trái |
 | 2 (trên-giữa) | `5` | **Di ảnh cụ tổ** | Bậc cao nhất, luôn đặt chính giữa và cao nhất trong ảnh thờ |
-| 3 (trên-phải) | `7` | **Bà nội** | Nữ bên phải, đối xứng với ông nội |
-| 4 (giữa-trái) | `4` | **Bác cả** | Hàng giữa là hàng các con, xếp **trưởng – thứ – út** từ trái sang |
-| 5 (giữa-giữa) | `8` | **Bố (con thứ)** | Con thứ hai, đứng giữa |
-| 6 (giữa-phải) | `3` | **Bà Cô** | Con út, gái, chết trẻ — đứng ngoài cùng bên phải, hơi lùi khỏi khung |
-| 7 (dưới-trái) | `6` | **Anh họ** | Hàng dưới là hàng cháu, xếp theo tuổi từ lớn tới bé |
-| 8 (dưới-giữa) | `1` | **Chị họ** | Cháu thứ hai |
-| 9 (dưới-phải) | `0` | **Ô TRỐNG** | **Cháu út — chính là người chơi.** Khuôn mặt đã bị khoét khỏi bức ảnh. Bức ảnh xếp xong **vẫn khuyết đúng một khuôn mặt**: cú twist của chương |
+| 3 (trên-phải) | `7` | **Bà nội Nguyễn Thị Nhỡ** | Nữ bên hữu = bên phải, đối xứng với ông nội |
+| 4 (giữa-trái) | `4` | **Bác cả Nguyễn Văn Đoan** *(trưởng nam)* | Hàng giữa là hàng các con, xếp **trưởng – thứ – út** từ tả sang hữu. Trưởng nam đứng đầu |
+| 5 (giữa-giữa) | `8` | **Bố — Nguyễn Văn Đoàn** *(thứ nam)* | Con thứ, đứng giữa. **Giấy khai sinh gốc ở ngay khu vực này ghi "Cha: Nguyễn Văn Đoàn", và gia phả ở Khu 3 xếp Đoàn ở ngôi thứ hai** |
+| 6 (giữa-phải) | `3` | **Cô út Nguyễn Thị Đoài** | Con út của ông bà, con gái một — đứng ngoài cùng bên hữu. *(Không phải Bà Cô: Bà Cô thuộc đời trên và không vào ảnh thờ họ — xem ghi chú ở bảng ánh xạ)* |
+| 7 (dưới-trái) | `6` | **Anh họ Nguyễn Văn Thuấn** *(1962)* | Hàng dưới là hàng cháu, xếp **theo tuổi từ lớn xuống bé**. Thuấn là cháu lớn nhất |
+| 8 (dưới-giữa) | `1` | **Chị họ Nguyễn Thị Thoa** *(1965)* | Cháu thứ hai |
+| 9 (dưới-phải) | `0` | **Ô TRỐNG** | **Cháu út — chính là người chơi**, Nguyễn Thị Liên *(1969)*. Cháu bé nhất nên đứng cuối; và tên ở đúng chỗ ấy **đã bị cạo khỏi gia phả**, nên chỗ ấy trong ảnh cũng trống. Đây là ô mà **mảnh thứ chín** sẽ về, trong cutscene hậu-giải |
 
-`[[ LƯU Ý IMPLEMENT — điểm khác biệt quan trọng so với một SLIDING_TILE thông thường: ô trống của trò trượt được lấp bằng mảnh cuối ở nước đi cuối cùng. Giải xong, ảnh đầy đủ chín mảnh trong khung, MÀ VẪN khuyết một khuôn mặt — vì mảnh ở vị trí cháu út là mảnh CÓ THẬT, có thân người, nhưng phần mặt đã bị khoét thủng. ]]`
+**Cutscene hậu-giải `seq_p6_manh_thu_chin` — 6 giây, không bấm bỏ qua được, không phải một phần của câu đố:**
+
+| Nhịp | Nội dung | Camera | Âm thanh |
+|---|---|---|---|
+| **0,0 s** | Người chơi ấn **"Áp ảnh vào khung"** với bố cục khớp `solution`. Tám mảnh **khoá cứng**, viền ván ăn khít vào nhau, không còn khe. **Ô dưới-phải vẫn đen** | Giữ khung zoom `{x:660, y:120, width:840, height:840}` | Tiếng ván ép vào nhau, rồi **tắt hết** |
+| **0,8 s** | **IM LẶNG TUYỆT ĐỐI.** Người chơi tưởng câu đố đã xong và ảnh thì thiếu một mảnh | Tĩnh | −∞ |
+| **2,2 s** | Từ **mép phải khung ảnh**, một mảnh ván **trượt vào ô trống** — chậm, đều, đúng tốc độ mà chính người chơi vừa đẩy các mảnh kia. **Không có tay ai đẩy nó.** Không có sprite thứ hai trong khung | Tĩnh tuyệt đối — **không punch, không shake, không flash**. *(Đây không phải jumpscare)* | Một tiếng gỗ trượt duy nhất, `fol_gach_van_lat` ở −26 dBFS, **cùng mẫu âm với nước đi của người chơi** |
+| **3,4 s** | Mảnh khớp. **Bức ảnh đủ chín mảnh.** Quầng đèn dầu mở rộng một nhịp cho người chơi nhìn rõ | Đẩy nhẹ vào 4 % trong 900 ms rồi giữ | Đèn dầu lách tách trở lại |
+| **4,0 → 6,0 s** | Giữ khung. Trên mảnh thứ chín: **có thân người — áo bông vá vai, chân đi guốc — và một lỗ hình bầu dục ở chỗ khuôn mặt**, mép giấy xơ, nhìn thấu qua tận nền ván | Tĩnh | Im |
+| **6,0 s** | Cutscene kết. Bật `txt_gac_xep_anh_hoan_chinh` | Nhả về 100 % | Nền trở lại |
+
+`[[ LƯU Ý IMPLEMENT — đây là điểm khác biệt quan trọng nhất so với một SLIDING_TILE thông thường, và là chỗ hoà giải "tám mảnh" với "chín mảnh": mảnh thứ chín KHÔNG nằm trong tập mảnh của bàn cờ, KHÔNG có ID, KHÔNG có trong solution, và KHÔNG di chuyển được. Nó là một sprite riêng, spawn bởi cutscene. Vì vậy 8-puzzle vẫn là 8-puzzle đúng chuẩn (Bổ đề 4 giữ nguyên), mà bức ảnh sau cùng vẫn đủ chín mảnh như mọi chỗ khác trong tài liệu đã nói. ]]`
+
+`[[ LÝ DO KỂ CHUYỆN — vì sao mảnh thứ chín phải tự về chứ không nằm sẵn trên bàn cờ: nếu nó nằm trên bàn cờ thì người chơi TỰ TAY đặt khuôn mặt bị khoét của mình vào ảnh thờ, và khoảnh khắc ấy trở thành một nước đi trong số hai mươi nước đi khác — nó chìm. Để nó tự trượt vào thì người chơi phải NGỒI NHÌN. Đây cũng là lần duy nhất trong chương ngôi nhà tự hoàn tất một việc thay người chơi — và nó xảy ra đúng ở chỗ nói rằng: chỗ này đã dành sẵn cho cô từ hai mươi năm trước, cô không cần phải tự xếp. ]]`
+
+`[[ ÂM THANH: tiếng ván trượt của mảnh thứ chín PHẢI dùng đúng asset fol_gach_van_lat mà người chơi đã nghe hai ba chục lần khi tự trượt mảnh. Không xử lý, không hạ tông, không reverb. Sự quen thuộc của tiếng động ấy là thứ làm nó lạnh. ]]`
 
 **Manh mối:**
 
 | # | Clue | Hotspot | Suy ra |
 |---|---|---|---|
-| C1 | **Gia phả chép trong nắp hòm** *(clue CHÍNH)* | `hs_hom_go_nap` trang 1 | **Toàn bộ quy tắc xếp**: 3 hàng, nam tả nữ hữu, trưởng-thứ-út, cháu theo tuổi. Và **ô trống nằm ở cuối hàng dưới** vì cái tên ở đó đã bị xoá |
-| C2 | **Mặt sau mỗi mảnh ván** — chữ Nho ghi vai vế: 祖 (tổ) · 祖父 (ông) · 祖母 (bà) · 伯 (bác) · 父 (bố) · 姑 (cô) · 孫 (cháu trai) · 孫女 (cháu gái), kèm chú thích quốc ngữ bút chì | nút "Lật mảnh" trong khung zoom | **Xác định danh tính từng mảnh** mà không cần đoán qua trang phục — lưới an toàn cho người chơi không đọc được nét vẽ |
-| C3 | **Trang gia phả ở gian thờ** | `hs_gia_pha` (Khu 3) | Ngôi thứ hàng giữa và hàng dưới — **thưởng cho người đọc kỹ từ khu vực trước** |
-| C4 | **Bản rập chữ "Thế Mệnh"** đối chiếu nét chữ với sổ ghi tên | `item_ban_rap_chu_the` trong túi + `hs_so_ghi_ten` | **Cùng một người viết** → nối bình phong ngoài hiên với cuốn sổ trên gác: hủ tục là việc của cả nhà, có chủ đích |
+| C1 | **Sơ đồ ngôi thứ chép trong nắp hòm** *(clue CHÍNH)* | `hs_hom_go_nap` trang 1 | **Toàn bộ quy tắc xếp**: 3 hàng · cụ tổ giữa, nam tả nữ hữu · hàng giữa trưởng–thứ–út từ tả sang hữu · hàng dưới cháu theo tuổi lớn xuống bé · **tên bị gạch nát nằm CUỐI hàng cháu** ⇒ **ô trống ở cuối hàng dưới**. Và dòng chua ở mép ván: **Bà Cô không vào ảnh này** |
+| C2 | **Mặt sau mỗi mảnh ván** — chữ Nho ghi vai vế: 祖 (tổ) · 祖父 (ông) · 祖母 (bà) · 伯 (bác) · 父 (bố) · 姑 (cô) · 孫 (cháu trai) · 孫女 (cháu gái), kèm chú thích quốc ngữ bút chì | nút "Lật mảnh" trong khung zoom | **Xác định danh tính từng mảnh** mà không cần đoán qua trang phục — lưới an toàn cho người chơi không đọc được nét vẽ. Tám nhãn, tám mảnh, **song ánh, không nhãn nào lặp** |
+| C3 | **Trang gia phả ở gian thờ** | `hs_gia_pha` (Khu 3) | **Tên và năm sinh** để buộc nhãn Hán tự vào người thật: Đoan (trưởng) – Đoàn (thứ) – Đoài (út) · Thuấn 1962 – Thoa 1965 – *(dòng bị cạo)*. **Thưởng cho người đọc kỹ từ khu vực trước** |
+| C5 | **Cáo phó ở Khu 1 và giấy khai sinh gốc ở ngay Khu 5** | `hs_cao_pho` (Khu 1) · `hs_giay_khai_sinh` (Khu 5) | **Chốt ngôi thứ của bố người chơi**: cáo phó xếp "Trưởng nam: Nguyễn Văn Đoan · Thứ nam: Nguyễn Văn Đoàn *(đã mất)*"; khai sinh ghi "Cha: Nguyễn Văn Đoàn". ⇒ **bố là con THỨ, đứng ô giữa-giữa; bác cả đứng ô giữa-trái** |
+| C4 | **Tờ chữ "Thế Mệnh"** *(`item_ban_rap_chu_the`)* đối chiếu nét chữ với sổ ghi tên | `item_ban_rap_chu_the` trong túi + `hs_so_ghi_ten` | **Cùng một người viết** → nối bình phong ngoài hiên với cuốn sổ trên gác: hủ tục là việc của cả nhà, có chủ đích |
 
-> **Tự kiểm tra công bằng:** C1 cho đủ quy tắc ngôi thứ; C2 cho đủ danh tính từng mảnh; hai thứ ghép lại xác định **duy nhất** một bố cục. Tất cả nằm trong cùng khu vực, `EXAMINE` không cần vật phẩm, đọc lại không giới hạn. Người chơi **không cần** biết trước tập tục thờ tự ngoài đời.
+#### Tự kiểm tra công bằng — phép suy luận của người chơi, từng bước một
+
+> **⚠️ LỖI ĐÃ SỬA (X10 · X11 · X12).** Bản trước **mâu thuẫn trực tiếp** với chính manh mối của nó ở ba chỗ, và cả ba đều dẫn người chơi suy luận **đúng** tới một đáp án mà engine **từ chối**:
+>
+> | # | Manh mối trong game nói gì | Bản trước xếp thế nào | Người chơi suy đúng sẽ ra |
+> |---|---|---|---|
+> | 1 | Cáo phó + khai sinh: cha người chơi là **trưởng nam Nguyễn Văn Đoan** | Mảnh 8 là **"bố, con thứ"**, đứng ô giữa-**giữa** | Đưa bố sang ô giữa-**trái** ⇒ hoán vị ô 4 ↔ ô 5 |
+> | 2 | Gia phả: út nữ hàng giữa là **Nguyễn Thị Đoài, còn sống** | Mảnh 3 là **"Bà Cô"** *(mất 1953, đời trên)* | Không biết đặt Bà Cô vào đâu, hoặc loại cô út khỏi ảnh |
+> | 3 | Gia phả + nắp hòm: tên bị cạo đứng **ĐẦU** hàng cháu | Ô trống đặt ở **CUỐI** hàng cháu | Đặt ô trống ở ô 7 ⇒ `[2,5,7,4,8,3,0,6,1]`, **khác hẳn `solution`** |
+>
+> Cả ba đã được sửa **ở phía văn bản**, theo đúng nguyên tắc: `solution` là bất biến, văn bản phải chạy theo. **Cây gia phả nay đã chốt một lần** (bảng ánh xạ ID ở trên) và **ba văn bản — cáo phó, gia phả, nắp hòm — đã được đồng bộ ngược từ nó**.
+
+**Phép suy luận của người chơi — bảy bước, mỗi bước chỉ dùng thứ đã đọc được trong game:**
+
+| Bước | Người chơi đọc | Người chơi kết luận | Ô đã chốt |
+|---|---|---|---|
+| **1** | **C1**, nắp hòm: *"Hàng trên: cụ tổ ở giữa, ông bên tả, bà bên hữu."* | Khung 3×3 chia ba hàng theo đời. Hàng trên = ông bà + cụ tổ; cụ tổ ở **giữa**, ông **trái**, bà **phải** | — |
+| **2** | **C2**, lật ba mảnh: mặt sau ghi 祖父 *(ông)* trên **mảnh 2**, 祖 *(tổ)* trên **mảnh 5**, 祖母 *(bà)* trên **mảnh 7** | Hàng trên = **2 – 5 – 7** | **ô 1, 2, 3** |
+| **3** | **C1**: *"Hàng giữa — các con của ông bà, kể từ tả sang hữu: cả, thứ, rồi út; út là em gái hai anh."* · và dòng chua: *"**Bà Cô không vào ảnh này.**"* | Hàng giữa có đúng ba người: trưởng nam, thứ nam, út nữ. **Bà Cô bị loại khỏi bài toán ngay tại đây** — không phải đoán | — |
+| **4** | **C2**: 伯 *(bác)* trên **mảnh 4**, 父 *(bố)* trên **mảnh 8**, 姑 *(cô)* trên **mảnh 3** · **C3** gia phả Khu 3: Đoan *(trưởng)* – Đoàn *(thứ)* – Đoài *(út nữ)* · **C5** khai sinh gốc: *"Cha: **Nguyễn Văn Đoàn** (thứ nam)"* và cáo phó: *"Trưởng nam: Nguyễn Văn **Đoan**"* | Bác cả = trưởng ⇒ **trái**. Bố = **con thứ** ⇒ **giữa**. Cô út ⇒ **phải**. Hàng giữa = **4 – 8 – 3** | **ô 4, 5, 6** |
+| **5** | **C1**: *"Hàng dưới — các cháu, kể theo tuổi từ lớn xuống bé: cháu trai lớn trước, rồi cháu gái, rồi [tên bị gạch nát] — tên này ở **cuối**, vì nó bé nhất."* | Hàng dưới xếp theo tuổi giảm dần, và **chỗ của cái tên bị xoá là ô cuối cùng bên phải** | — |
+| **6** | **C2**: 孫 *(cháu trai)* trên **mảnh 6**, 孫女 *(cháu gái)* trên **mảnh 1** · **C3**: Thuấn *(1962)* – Thoa *(1965)* – *(dòng cạo)* | Cháu lớn nhất là cháu trai ⇒ **mảnh 6** ở ô 7; cháu thứ hai là cháu gái ⇒ **mảnh 1** ở ô 8 | **ô 7, 8** |
+| **7** | Đếm: **8 mảnh cho 9 ô** | Ô còn lại — **ô 9, dưới-phải** — là **ô trống**. Nó là chỗ của cái tên đã bị cạo. *(Và người chơi vừa đọc sổ ghi tên ở ngay khu vực này: cái tên ấy là của chính cô.)* | **ô 9 = `0`** |
+
+**Ghép lại, đọc row-major:**
+
+`[2, 5, 7]` · `[4, 8, 3]` · `[6, 1, 0]` ⇒ **`[2, 5, 7, 4, 8, 3, 6, 1, 0]`** — **đúng bằng `solution` đã chốt.** ∎
+
+> **Vì sao chuỗi này khép kín:** bước 1–2 chỉ cần C1 + C2. Bước 3 loại Bà Cô bằng **một câu viết thẳng trong game**, không bằng kiến thức ngoài đời. Bước 4 có **ba nguồn độc lập cùng nói một điều** (C2, C3, C5) — người chơi bỏ lỡ một nguồn vẫn còn hai. Bước 5–6 chỉ cần C1 + C2, C3 là bonus. Bước 7 là phép trừ. **Không bước nào đòi biết tập tục thờ tự ngoài đời, không bước nào đòi đọc được chữ Nho** (mỗi nhãn Hán tự đều có chú thích quốc ngữ bút chì bên cạnh), và **không bước nào đòi người chơi phải nhớ Khu 1 — C5 có bản sao ngay trong Khu 5 là tờ khai sinh gốc**.
 
 **Hành vi khi sai.** `SLIDING_TILE` không có "nước đi sai" theo nghĩa thông thường — mọi nước trượt đều hợp lệ. Vì vậy:
 
@@ -2136,12 +2351,12 @@ Nút **"Lật mảnh"**: lật xem mặt sau một mảnh, **không tốn lượ
 | Tier | Nội dung |
 |---|---|
 | 1 | *"Đây không phải trò xếp hình cho khớp màu, mà là xếp cho đúng ngôi thứ trong nhà. Nắp cái hòm gỗ bên cạnh có chép gia phả bằng mực tàu — đọc nó trước. Còn muốn biết mảnh nào là ai thì lật mặt sau mảnh ván, có chữ ghi vai vế."* |
-| 2 | *"Ba hàng. Hàng trên là ông bà: cụ tổ ở giữa, ông bên trái, bà bên phải — nam tả nữ hữu. Hàng giữa là các con, kể từ trái sang: bác cả trước, đến bố, rồi Bà Cô — em gái út. Hàng dưới là các cháu, lớn trước bé sau. Và cái tên ở cuối hàng cháu đã bị gạch nát trong gia phả — nên chỗ ấy trong ảnh cũng trống."* |
-| 3 — **đáp án** | *"Hàng trên: ông nội (mảnh 2) – di ảnh cụ tổ (mảnh 5) – bà nội (mảnh 7). Hàng giữa: bác cả (mảnh 4) – bố (mảnh 8) – Bà Cô áo dài trắng (mảnh 3). Hàng dưới: anh họ (mảnh 6) – chị họ (mảnh 1) – và để trống ô cuối cùng bên phải. Theo số hiệu, đọc từng hàng từ trái sang phải: **2 – 5 – 7 / 4 – 8 – 3 / 6 – 1 – trống**. Xếp xong thì ấn Áp ảnh vào khung."* |
+| 2 | *"Ba hàng. Hàng trên là ông bà: cụ tổ ở giữa, ông bên trái, bà bên phải — nam tả nữ hữu. Hàng giữa là các con, kể từ trái sang: bác cả trước, đến bố — mà bố là con thứ, nên bố đứng giữa — rồi cô út ngoài cùng. Bà Cô không có trong bức ảnh này, nắp hòm đã chua rõ. Hàng dưới là các cháu, lớn trước bé sau: anh họ, chị họ, rồi đứa bé nhất. Cái tên của đứa bé nhất đã bị cạo khỏi gia phả — nên chỗ ấy trong ảnh cũng trống, và nó nằm ở cuối."* |
+| 3 — **đáp án** | *"Hàng trên: ông nội (mảnh 2) – di ảnh cụ tổ (mảnh 5) – bà nội (mảnh 7). Hàng giữa: bác cả (mảnh 4) – bố (mảnh 8) – cô út áo dài trắng (mảnh 3). Hàng dưới: anh họ (mảnh 6) – chị họ (mảnh 1) – và để trống ô cuối cùng bên phải. Theo số hiệu, đọc từng hàng từ trái sang phải: **2 – 5 – 7 / 4 – 8 – 3 / 6 – 1 – trống**. Xếp xong thì ấn Áp ảnh vào khung."* |
 
 **Chuỗi sau khi giải (không phải câu đố):**
 
-1. Bức ảnh hoàn chỉnh lộ ra, **vẫn khuyết đúng một khuôn mặt** → `txt_gac_xep_anh_hoan_chinh`.
+1. **Cutscene `seq_p6_manh_thu_chin`** (6 giây, bảng ở trên): mảnh thứ chín tự trượt vào ô trống. Bức ảnh đủ chín mảnh, **vẫn khuyết đúng một khuôn mặt** → `txt_gac_xep_anh_hoan_chinh`.
 2. Sau lưng khung ảnh treo **bộ áo cưới giấy khổ người lớn** → spawn `hs_ao_cuoi_giay` (`COLLECT_ITEM`, `required_item: null`).
 3. Đồng thời lộ ra **mặt sau khung ảnh** với địa chỉ Hà Nội và dòng *"Đã gửi giấy báo. 14.8.1996."*
 4. Nhặt áo cưới → `flag_ao_cuoi_da_nhat = true` → **cửa gác kêu rắc một tiếng và sập xuống, `hs_xuong_gian_tho` khoá vĩnh viễn**. **Điểm không-quay-lại.**
@@ -2180,14 +2395,14 @@ Nút **"Lật mảnh"**: lật xem mặt sau một mảnh, **không tốn lượ
 
 | Mốc | Sprite | Camera | Ánh sáng | Âm thanh | Haptic |
 |---|---|---|---|---|---|
-| **−5000 ms** | Chín mảnh ván **kêu rất khẽ** khi trượt, như đang ép vào nhau | Tĩnh | Đèn ổn định | `tell_van_go_ep_nhau.ogg`, −33 dBFS | — |
+| **−5000 ms** | **Tám mảnh ván** trên bàn cờ **kêu rất khẽ** khi trượt, như đang ép vào nhau | Tĩnh | Đèn ổn định | `tell_van_go_ep_nhau.ogg`, −33 dBFS | — |
 | **−2000 → −1 ms** | Người chơi ấn nút *Áp ảnh vào khung* | Tĩnh | Đèn ổn định | **IM LẶNG TUYỆT ĐỐI** (kể cả tiếng ván trượt) | — |
-| **0 ms** | **Chín mảnh ván đồng loạt lật úp** — rotation 0° → 180° trong 140 ms, **cùng pha tuyệt đối** *(sự đồng bộ hoàn hảo là thứ không tự nhiên, và đó là điểm)* | Punch-in **+10 %**, tâm khung ảnh `(900, 520)` | **FLASH** `#FFD9A0` alpha 0 → **0.32**, ramp 45 ms, một xung. Diegetic: **đèn dầu chao vì luồng khí chín tấm ván** | Chín tiếng gỗ đập **lệch nhau 6–14 ms** (tạo cảm giác "dày"), đỉnh −4 dBTP | `hap_double_knock` |
+| **0 ms** | **Chín mảnh ván đồng loạt lật úp** — rotation 0° → 180° trong 140 ms, **cùng pha tuyệt đối** *(sự đồng bộ hoàn hảo là thứ không tự nhiên, và đó là điểm)*. **Tám mảnh trên bàn cờ — cộng một mảnh thứ chín vừa hiện ra trong ô trống đúng lúc lật, không ai thấy nó đến** | Punch-in **+10 %**, tâm khung ảnh `(900, 520)` | **FLASH** `#FFD9A0` alpha 0 → **0.32**, ramp 45 ms, một xung. Diegetic: **đèn dầu chao vì luồng khí chín tấm ván** | Chín tiếng gỗ đập **lệch nhau 6–14 ms** (tạo cảm giác "dày"), đỉnh −4 dBTP | `hap_double_knock` |
 | **200 ms** | Ván đã úp. Mặt sau ván hiện ra: **mỗi mảnh đều mang đúng một khuôn mặt bị khoét thủng** — chín lỗ thủng hình đầu người, mép giấy xơ | Shake 6 px | Flash 0.32 → 0.07 | `fol_van_go_keo_kot` kéo dài | `hap_tap_light` |
 | **600 ms** | Chín lỗ thủng **giữ nguyên, bất động**. **Không có gì nhìn qua lỗ** — đằng sau chỉ là nền ván tối | Nhả về 102 % | Đèn về bình thường, thấp hơn 8 % | Đuôi gỗ | — |
-| **1200 ms** | **Envelope kết thúc.** Chín mảnh **tự lật trở lại** mặt trước trong 400 ms tiếp theo (ngoài envelope, không âm thanh giật) — **bố cục người chơi đang xếp được giữ nguyên 100 %** | Tĩnh | — | Recovery 20 s | — |
+| **1200 ms** | **Envelope kết thúc.** Chín mảnh **tự lật trở lại** mặt trước trong 400 ms tiếp theo (ngoài envelope, không âm thanh giật) — **bố cục người chơi đang xếp được giữ nguyên 100 %**. Và khi lật xong thì **chỉ còn tám mảnh: mảnh thứ chín không có ở đó nữa**, ô dưới-phải lại đen trơn như cũ | Tĩnh | — | Recovery 20 s | — |
 
-**Vì sao đặt ở đây:** (a) cuối chương người chơi đã ở mức căng nền 7–8; nếu P6 (câu đố dài nhất) không có phản hồi thất bại nào, đường cong **võng xuống đúng trước cú kết**. (b) Nội dung cú dọa **chính là lời giải sai được hiện thực hoá**: người chơi đang cố ghép lại một khuôn mặt bị khoét; cú dọa trả lời bằng cách cho **mọi** khuôn mặt đều bị khoét. Nó là một **câu trả lời có nghĩa**, không phải tiếng động ngẫu nhiên.
+**Vì sao đặt ở đây:** (a) cuối chương người chơi đã ở mức căng nền 7–8; nếu P6 (câu đố dài nhất) không có phản hồi thất bại nào, đường cong **võng xuống đúng trước cú kết**. (b) Nội dung cú dọa **chính là lời giải sai được hiện thực hoá**: người chơi đang cố ghép lại một khuôn mặt bị khoét; cú dọa trả lời bằng cách cho **mọi** khuôn mặt đều bị khoét. Nó là một **câu trả lời có nghĩa**, không phải tiếng động ngẫu nhiên. (c) **Nó cài trước mảnh thứ chín.** Trong 1 200 ms ấy, và chỉ trong 1 200 ms ấy, ô trống **có một mảnh** — rồi ván lật lại và mảnh ấy biến mất. Người chơi không kịp gọi tên thứ mình vừa thấy. Khi cutscene hậu-giải thả mảnh thứ chín vào đúng ô đó, **người chơi nhận ra mình đã thấy nó một lần rồi** — và bộ đếm 9 lỗ khoét ở lần sai thứ ba hoá ra là một lời cảnh báo chứ không phải một con số ngẫu nhiên.
 
 **Luật hoãn bắt buộc (cặp rủi ro S6 → S7):** nếu người chơi vào gác (S6 bắn) rồi lao ngay vào P6 và sai 3 lần trong 80 giây, S7 **chuyển sang biến thể câm**: chín mảnh ván vẫn lật úp và lộ chín lỗ khoét, nhưng **không flash, không stinger** (chỉ `fol_van_go_keo_kot` ở −22 dBFS), **không haptic, không punch**. Sau đó S7 **tự nạp lại**; bản đầy đủ có thể bắn ở lần sai thứ 3 tiếp theo nếu đã qua 90 s.
 
@@ -2206,7 +2421,7 @@ Xem chi tiết ở **Phần 8 — Kết chương** (nhịp 4 của `seq_ending_c
 ### 3.5.8. Khu vực này đẩy cốt truyện tiến lên thế nào
 
 1. **Đóng toàn bộ mạch thông tin.** Năm tài liệu (sổ ghi tên, hai trang nhật ký, khai sinh, chữ sau khung ảnh) trả lời gọn năm câu hỏi đã đặt từ Khu 1: *tên tôi đâu / ai để tang / ai đặt hàng mã / ai gửi giấy báo tang / vì sao bà dặn đừng về.*
-2. **Đảo ngược ý nghĩa của mọi thứ đã làm.** Người chơi nhìn lại: khóa hướng, rập chữ, tuần lễ cúng, ba hồi chín tiếng, thắp đèn soi giếng — **năm việc đã làm không phải là năm câu đố. Là năm phần lễ.** Chỉ còn phần thứ bảy.
+2. **Đảo ngược ý nghĩa của mọi thứ đã làm.** Người chơi nhìn lại: khóa hướng, đồ chữ, tuần lễ cúng, ba hồi chín tiếng, thắp đèn soi giếng — **năm việc đã làm không phải là năm câu đố. Là năm phần lễ.** Chỉ còn phần thứ bảy.
 3. **Đưa quyền quyết định cho người chơi — rồi lấy nó đi.** Bảy Điều nằm ngay trên nắp hòm. Người chơi *có thể* đã đọc. Nhưng game không cho lựa chọn nào khác để tiến: `USE_ITEM` áo cưới lên hình nhân là **hành động duy nhất khả dụng**. Cảm giác "bị dồn" này chính là cảm giác của một đứa trẻ bảy tuổi năm 1976.
 4. **Trả lại cho bà nội một chiến thắng nhỏ và một thất bại lớn.** Bà cứu được cháu năm 1976. Bà thua năm 1996, vì chính lòng thương của bà (ghi địa chỉ sau ảnh thờ để khỏi quên) là thứ dẫn bà Tơ tìm ra người chơi.
 5. **Mở chương sau bằng âm thanh, không bằng chữ.** Tiếng mõ nổi rền khắp làng. Chương 1 đóng lại ở quy mô **một ngôi nhà**; tiếng mõ nói rằng Chương 2 có quy mô **một cái làng**.
@@ -2223,9 +2438,9 @@ Xem chi tiết ở **Phần 8 — Kết chương** (nhịp 4 của `seq_ending_c
 |---|---|---|---|---|---|
 | 1 | `item_chia_khoa_dong` | **Chìa khóa đồng gỉ** | `area_san_gach` · **phần thưởng `puz_khoa_bat_quai`** (rơi ra từ ruột ổ khoá) | `area_san_gach` · **gate của `hs_cua_vao_hien`** → mở `area_hien_nha` | Chiếc chìa khoá đồng nhỏ, thân gỉ xanh, đầu chìa khắc một chữ Nho đã mòn. Cầm lên thấy **còn ấm**, dù nó nằm trong ruột khoá gỗ đã lâu lắm rồi |
 | 2 | `item_giay_ban_va_than` | **Xấp giấy bản và thỏi than củi** | `area_hien_nha` · `hs_giay_ban_va_than` *(`required_item: null`)* | `area_hien_nha` · `hs_binh_phong` → **mở khoá `puz_rap_chu_the_menh`** | Ba tờ giấy bản mỏng như cánh chuồn và một thỏi than củi vót nhọn đầu. Loại giấy các cụ vẫn dùng để rập lại chữ trên bia mộ |
-| 3 | `item_ban_rap_chu_the` | **Bản rập chữ "Thế Mệnh"** | `area_hien_nha` · **phần thưởng `puz_rap_chu_the_menh`** | `area_hien_nha` · `hs_o_lom_binh_phong` (**mở `area_gian_tho`**) · `area_gian_tho` đối chiếu với bài vị · `area_gac_xep` đối chiếu nét chữ với `hs_so_ghi_ten` (**clue C4 của P6**) | Tờ giấy bản đã hiện rõ hai chữ than đen: "Thế Mệnh" — thay mạng. Nét chữ nghiêng về bên phải, của một người thuận tay trái |
+| 3 | `item_ban_rap_chu_the` | **Bản chữ "Thế Mệnh"** *(đồ bằng than)* | `area_hien_nha` · **phần thưởng `puz_rap_chu_the_menh`** | `area_hien_nha` · `hs_o_lom_binh_phong` (**mở `area_gian_tho`**) · `area_gian_tho` đối chiếu với bài vị · `area_gac_xep` đối chiếu nét chữ với `hs_so_ghi_ten` (**clue C4 của P6**) | Tờ giấy bản đã hiện rõ hai chữ than **đen trên nền trắng**: "Thế Mệnh" — thay mạng. Nét chữ nghiêng về bên phải, của một người thuận tay trái |
 | 4 | `item_den_dau` | **Đèn dầu Hoa Kỳ vỏ ám khói** | `area_hien_nha` · `hs_den_dau_treo` *(`required_item: null`)* | `area_bep_gieng` · `hs_den_dau_ghep` → **nguyên liệu `puz_thap_lai_den_dau`** | Vỏ thuỷ tinh ám khói đen. **Bầu cạn, tim cụt, cổ đèn rỗng** — thiếu đúng ba thứ: sợi tim, một ít dầu, và một mồi lửa |
-| 5 | `item_dui_mo` | **Dùi mõ gỗ mít** | `area_gian_tho` · `hs_dui_mo` *(`required_item: null`)* — **kích hoạt `scare_di_anh_quay_mat`** | `area_gian_tho` · `hs_mo_ca` → **mở khoá `puz_ba_hoi_chin_tieng`** | Chiếc dùi gỗ mít nặng tay, cán mòn nhẵn **đúng ba chỗ** — chỗ ngón cái, chỗ ngón trỏ, chỗ lòng bàn tay. Ai đó đã cầm nó rất nhiều năm |
+| 5 | `item_dui_mo` | **Dùi mõ gỗ mít** | `area_gian_tho` · `hs_dui_mo` *(`required_item: null`)* — **kích hoạt `scare_di_anh_quay_mat`** | `area_gian_tho` · `hs_mo_ca` → **mở khoá `puz_ba_hoi_chin_tieng`** (đánh chuông **và** điểm mõ) | Chiếc dùi gỗ mít nặng tay, cán mòn nhẵn **đúng ba chỗ** — chỗ ngón cái, chỗ ngón trỏ, chỗ lòng bàn tay. **Một đầu quấn một lớp vải điều đã bạc — đầu ấy để đánh chuông; đầu kia để trần, để gõ mõ.** Ai đó đã cầm nó rất nhiều năm |
 | 6 | `item_bai_vi_khuyet_danh` | **Bài vị khuyết danh** | `area_gian_tho` · `hs_bai_vi_khuyet_danh` *(hotspot chỉ spawn sau khi giải `puz_tuan_tu_le_cung`)* | `area_gian_tho` · `hs_khe_mong_cua_gac` — **làm then, một nửa gate lên `area_gac_xep`** | Tấm bài vị gỗ vàng tâm còn mới, mặt trước nhẵn thín **không một nét chữ**. Lật sau thì thấy mộng gỗ đã đẽo sẵn — như đẽo cho vừa một cái khe nào đó |
 | 7 | `item_dai_vai_dieu` | **Dải vải điều phủ bài vị** | `area_gian_tho` · `hs_dai_vai_dieu` *(hotspot chỉ spawn sau khi giải `puz_ba_hoi_chin_tieng`)* | `area_bep_gieng` · `puz_thap_lai_den_dau` — **se làm tim đèn (bước 1)** | Dải vải điều đỏ đã bạc thành màu gạch, dệt dày. **Xé dọc thì tước ra thành sợi** — các cụ vẫn se loại vải này làm tim đèn |
 | 8 | `item_chai_dau_hoa` | **Chai dầu hoả nút lá chuối** | `area_bep_gieng` · `hs_chai_dau_hoa` *(`required_item: null`)* | `area_bep_gieng` · `puz_thap_lai_den_dau` — **chắt vào bầu đèn (bước 3)** | Chai thuỷ tinh còn hơn nửa dầu hoả, nút bằng lá chuối khô vê chặt. Mở nút ra là mùi hắc xộc lên tận óc, mùi của những đêm mất điện |
@@ -2247,9 +2462,33 @@ Xem chi tiết ở **Phần 8 — Kết chương** (nhịp 4 của `seq_ending_c
 | 2 | `item_den_dau` **biến mất** khi `puz_thap_lai_den_dau` giải xong | Được thay bằng `item_den_dau_sang`. **Biến đổi hợp lệ, không phải mất mát** |
 | 3 | `item_giay_ban_va_than` **ở lại trong túi** sau khi giải P2 | Xấp giấy vẫn còn tờ — dùng làm neo hồi tưởng cho Chapter 2 |
 | 4 | `item_ban_rap_chu_the` **KHÔNG bị tiêu thụ** khi tra vào ô lõm bình phong | Người chơi **rút lại được**, vì nó còn phải dùng để đối chiếu nét chữ trên gác xép (clue C4 của P6). **Ghi rõ cho Data Architect: `hs_o_lom_binh_phong` không xoá item khỏi túi đồ** |
-| 5 | `item_bai_vi_khuyet_danh` **bị giữ lại** tại `hs_khe_mong_cua_gac` | Nó làm then cửa vĩnh viễn. Sau khi dùng, vật phẩm **chuyển sang mục "Đã dùng"** trong túi đồ chứ **không xoá** — để cú twist cuối chương còn chỗ quay lại nhắc. **Không câu đố nào sau đó cần tới nó** |
+| 5 | `item_bai_vi_khuyet_danh` **KHÔNG bị tiêu thụ** tại `hs_khe_mong_cua_gac` — nó bị **KHOÁ TẠI CHỖ DÙNG** | Xem bảng ngữ nghĩa ngay dưới. Bài vị **ở lại trong túi đồ vĩnh viễn**, gắn cờ `locked_in_use = true`: biểu tượng xám lại, **không kéo-thả được nữa**, nhưng **vẫn EXAMINE được** — để cú twist cuối chương còn chỗ quay lại nhắc. **Không câu đố nào sau bước này cần tới nó** |
 | 6 | `item_ao_cuoi_giay` **mất vĩnh viễn** sau khi dùng | Đây là vật phẩm duy nhất bị tiêu thụ hẳn, và nó là hành động cuối chương |
 | 7 | **Sức chứa túi đồ: tối đa 6 vật phẩm cùng lúc** trong Chương 1 | Đỉnh là lúc cầm: đèn + vải điều + dầu + bản rập + giấy than + bài vị. Thanh inventory 6 ô ở dải `y ∈ [1000, 1080]`, mỗi ô **160 × 80 px**, vùng chạm mở rộng lên **160 × 88** |
+
+### 4.3.1. Ngữ nghĩa `USE_ITEM` — MỘT quy ước duy nhất cho cả bốn hotspot
+
+> **⚠️ MÂU THUẪN ĐÃ CHỐT (X19).** Bốn hotspot `USE_ITEM` của chương đều khai báo **cả `required_item` lẫn `item_id`, và hai trường mang cùng một giá trị**. Bản trước dùng lẫn lộn ba cách nói khác nhau cho cùng một hành vi ở `hs_khe_mong_cua_gac` — *"bị giữ lại"*, *"chuyển sang mục Đã dùng"*, *"không xoá"* — nên tổ dữ liệu không biết engine phải xoá item hay không. **Từ đây chỉ có một quy ước.**
+
+**Quy ước:**
+
+| Trường | Nghĩa duy nhất |
+|---|---|
+| `required_item` | Vật phẩm **phải đang có trong túi** thì hotspot mới phản hồi. Nếu thiếu → trả `fallback text_key` |
+| `item_id` | **Vật phẩm mà hành động này gắn vào** — dùng để engine biết kéo-thả cái gì lên cái gì. Với `USE_ITEM`, `item_id` **luôn bằng** `required_item`. **Bản thân nó KHÔNG hàm ý tiêu thụ.** |
+| `consumes_item` *(trường mới, bắt buộc khai báo cho mọi `USE_ITEM`)* | `true` = xoá hẳn khỏi túi. `false` = giữ lại |
+| `locks_item` *(trường mới, chỉ có nghĩa khi `consumes_item: false`)* | `true` = vật phẩm **ở lại trong túi nhưng bị khoá**: xám, không kéo-thả được nữa, vẫn EXAMINE được. `false` = dùng lại tự do |
+
+**Áp cho cả bốn hotspot `USE_ITEM` của Chương 1:**
+
+| Hotspot | Area | `required_item` = `item_id` | `consumes_item` | `locks_item` | Sau khi dùng, người chơi… |
+|---|---|---|---|---|---|
+| `hs_o_lom_binh_phong` | `area_hien_nha` | `item_ban_rap_chu_the` | **`false`** | **`false`** | …**rút lại được**, còn phải dùng đối chiếu nét chữ trên gác (clue C4 của P6) |
+| `hs_khe_mong_cua_gac` | `area_gian_tho` | `item_bai_vi_khuyet_danh` | **`false`** | **`true`** | …**không rút lại được** — nó đang làm then cửa. Nhưng **biểu tượng vẫn nằm trong túi**, xám lại, EXAMINE vẫn ra `txt_gian_tho_bai_vi`. Đây là điều kiện để cú twist cuối chương còn chỗ nhắc lại: *cái then giữ cửa gác là bài vị của chính mình* |
+| `hs_gieng_khoi` | `area_bep_gieng` | `item_den_dau_sang` | **`false`** | **`false`** | …**giữ nguyên đèn** — còn phải cầm đèn lên gác và mở khoá P6 |
+| `hs_hinh_nhan` | `area_gac_xep` | `item_ao_cuoi_giay` | **`true`** | — | …**mất hẳn áo**. Vật phẩm duy nhất của chương bị tiêu thụ thật, và đó là hành động kết chương |
+
+> **Kiểm được bằng máy:** `consumes_item: true` **chỉ được phép xuất hiện đúng một lần trong cả chương**, ở `hs_hinh_nhan`. Thêm luật này vào `tools/validate_level.py`.
 
 ## 4.4. Bảng cổng khu vực (`CHANGE_AREA`) — 8 cạnh
 
@@ -2292,9 +2531,9 @@ Xem chi tiết ở **Phần 8 — Kết chương** (nhịp 4 của `seq_ending_c
 | **P1** `puz_khoa_bat_quai`<br>`ROTATION_LOCK` | `[6, 3, 8]` đọc **ngoài → trong**<br>• `6` = **Khảm ☵** (nước, Bắc) — nhà *tọa* Bắc, lưng nhà tựa Bắc → vòng ngoài<br>• `3` = **Ly ☲** (lửa, Nam) — nhà *hướng* Nam → vòng giữa<br>• `8` = **Khôn ☷** (đất, thuần âm, tượng người nữ) — "người ở trong nhà" = Bà Cô → vòng trong<br>*Không gian tìm kiếm 8³ = 512* | **C1** `hs_guong_bat_quai` — từ điển quẻ ↔ số ↔ ngũ hành ↔ tượng người<br>**C2** `hs_cau_doi_trai` — *"Tọa Bắc — lưng dựa dòng nước"*<br>**C3** `hs_cau_doi_phai` — *"Hướng Nam — mặt đón lửa trời"*<br>**C4** `hs_chum_nuoc_mua` — chum kê đúng góc Bắc (xác nhận chéo C2)<br>**C5** `hs_day_phoi_khan_xo` — *"Bà Cô — gái út — mất năm mười bảy tuổi"*<br>**C6** trục then khắc **"Tọa — Hướng — Người"** — thứ tự đọc mảng | 1: ba vòng trả về vị trí cũ + tiếng gỗ nghiến 1,2 s<br>2: + gáo dừa xoay một vòng ở hậu cảnh (gợi ý môi trường)<br>3: **`scare_bong_trong_chum`**, reset đếm, **giữ nguyên vị trí vòng** | `item_chia_khoa_dong` → mở `hs_cua_vao_hien` → `area_hien_nha` |
 | **P2** `puz_rap_chu_the_menh`<br>`PATTERN_TRACE` | `[2, 1, 4, 3, 7, 5, 8, 6]` — thứ tự miết 8 nét theo **bốn phép bút thuận**<br>Chữ **Thế 世**: ngang dài (2) → sổ trái (1) → sổ giữa (4) → sổ-gập phải (3)<br>Chữ **Mệnh 命**: ngang (7) → bộ Khẩu 口 (5) → bộ Tiết 卩 (8) → **nét mái 人 (6) sau cùng**<br>*Hướng miết có tính điểm: ngang trái→phải, sổ trên→xuống*<br>*8! = 40 320 hoán vị → clue thu về duy nhất một* | **C1** `hs_vo_tap_viet` — **bốn phép** + ba chữ mẫu đã đánh số nét (三 · 川 · 大)<br>**C2** `hs_manh_nua` — bụi in khuôn hai chữ, chữ trên viết trước<br>**C3** `hs_guoc_moc` — đế dính vụn than → than là thứ dùng ở đây<br>**C4** `hs_binh_phong` fallback — dạy điều kiện mở khoá | 1: nét lem, hỏng tờ, *"Còn 2 tờ"*<br>2: *"Còn 1 tờ"* + mành nứa đung đưa không gió<br>3: **xấp giấy tự nạp lại đầy 3 tờ** + mở Hint Tier 1 miễn phí. **Không mất vật phẩm** | `item_ban_rap_chu_the` → tra `hs_o_lom_binh_phong` → mở `area_gian_tho`; đồng thời `scare_ban_tay_giay_sau_manh` bắn |
 | **P3** `puz_tuan_tu_le_cung`<br>`SEQUENCE_ORDER` | `[3, 6, 4, 1, 5, 2]` — sáu bước tuần lễ cúng Bắc Bộ<br>① `3` lau bài vị & bày mâm — *"trước hết phải sạch"*<br>② `6` thắp đôi đèn — *"đèn sáng thì hồn mới thấy đường"*<br>③ `4` thắp ba nén nhang — có lửa đèn mới châm được<br>④ `1` rót sơ tuần rượu — *"dâng khi hương đã bén"*<br>⑤ `5` đọc văn khấn, vái ba vái<br>⑥ `2` **hóa vàng** — *"hóa vàng là tiễn, tiễn thì phải sau rốt"*<br>*6! = 720 hoán vị* | **C1** `hs_van_khan` *(clue CHÍNH)* — **toàn bộ 6 bước và quan hệ trước-sau**, viết bằng văn xuôi, không đánh số<br>**C2** `hs_hoanh_phi` — tờ lịch cũ: *"đèn trước, nhang sau, vàng sau rốt"*<br>**C3** sáp nến chảy dày hơn phần chân nhang → đèn châm trước nhang<br>**C4** chậu hoá vàng kê sát lối ra → hoá vàng là bước cuối | 1: ba nén nhang tắt ngấm, 6 icon bay trả về bàn<br>2: + một ngọn đèn phụt tắt, sáng −20 %<br>3: **`scare_khoi_tu_hinh_nguoi`** (dread, người chơi phải chạm màn hình để khói tan)<br>*Bẫy cố ý: vàng mã đặt ngay tầm tay, sáng hơn — dụ hóa vàng sớm = phạm điều cấm kỵ thứ Tư* | `item_bai_vi_khuyet_danh` (spawn `hs_bai_vi_khuyet_danh`) **+ mở cửa hậu** `hs_cua_hau_xuong_bep` → `area_bep_gieng` |
-| **P4** `puz_ba_hoi_chin_tieng`<br>`AUDIO_MATCH` | `[3, 3, 5, 3, 7, 3]` = **3 cặp `[dồn, rời]`**, sau mỗi cặp gõ **1 tiếng chuông** (cố định, không mã hoá trong mảng)<br>Hồi 1: 3 dồn + 3 rời + chuông<br>Hồi 2: 5 dồn + 3 rời + chuông<br>Hồi 3: 7 dồn + 3 rời + chuông<br>*"Ba hồi" = 3 cặp · "chín tiếng" = 3+3+3 tiếng rời · phần dồn 3-5-7 số lẻ tăng dần · tổng **33 tap*** | **C1** `hs_vach_buong` + nút *"Áp tai vào vách"* — **nghe lại lời giải vô hạn**, không tính lần sai<br>**C2** tang mõ khắc **三 五 七** (đọc được cả khi chưa có dùi)<br>**C3** dòng cuối `hs_van_khan` — cấu trúc dồn / 3 rời / 1 chuông<br>**C4** `hs_dui_mo` — cán mòn đúng ba chỗ (mô-típ "ba")<br>**→ Hai đường độc lập: thính giác (C1) và văn bản (C2+C3)** | 1: mõ bên kia vách **nhại lại chậm nửa nhịp**<br>2: nhại **to hơn, gần hơn** (pre-delay 120→35 ms, pan sang phải) + hiện mờ số tiếng hồi 1 trong 2 s. **Tier 1 tự mở ở đây**<br>3: **`scare_khoi_tu_hinh_nguoi`** | `item_dai_vai_dieu` (spawn `hs_dai_vai_dieu` — vải điều tuột khỏi khám thờ: *"Bà Cô đã mở mắt"*) |
-| **P5** `puz_thap_lai_den_dau`<br>`ITEM_COMBINE` | `[2, 5, 1, 3, 4]` — năm bước thắp đèn đúng lối nhà quê 1990<br>① `2` xé & se **vải điều** thành tim — gốc của cả chuỗi<br>② `5` luồn tim qua **cổ đèn** — đổ dầu rồi mới xỏ thì trơn, không xỏ nổi<br>③ `1` chắt **dầu hoả** vào bầu — tim ngấm theo mao dẫn<br>④ `3` vặn **núm** cho tim nhô bằng hạt gạo — phải chỉnh lúc chưa có lửa<br>⑤ `4` rút **que đóm**, mồi vào than hồng, châm vào tim<br>*5! = 120 hoán vị → 4 ràng buộc thu về duy nhất một* | **C1** `hs_gac_bep_bo_dom` — **cây đèn hỏng tháo rời** làm mẫu tham chiếu (tim xuyên qua cổ đèn; bầu là bộ phận riêng)<br>**C2** `hs_vach_bep_chu_than` — *"tim ngấm dầu hẵng châm lửa"* + *"vặn xong mới châm"* → **hai ràng buộc thứ tự quyết định**<br>**C3** `hs_den_dau_treo` (Khu 2) — danh sách ba thứ còn thiếu<br>**C4** `hs_dai_vai_dieu` (Khu 3) — vải điều = tim đèn, phải **se** trước<br>**C5** `hs_dong_tro_than` — nguồn lửa duy nhất | 1: phản hồi **theo ngữ cảnh, có tính dạy** (lửa loé rồi tắt / dầu tràn ra bàn / núm quay lỏng lẻo). **Các bước đúng trước đó được giữ nguyên**<br>2: + than lụi một nhịp, bếp tối thêm, tiếng nước dội dưới giếng<br>3: **`scare_mat_duoi_day_gieng`**, reset đếm, **giữ tiến độ** | `item_den_dau_sang` → soi `hs_gieng_khoi` (**Beat B11**) + **gate lên `area_gac_xep`** + mở khoá P6 |
-| **P6** `puz_xep_anh_gia_pha`<br>`SLIDING_TILE` | `[2, 5, 7, 4, 8, 3, 6, 1, 0]` — row-major 3×3, `0` = ô trống<br>**Hàng trên:** ông nội (2) – cụ tổ (5) – bà nội (7) → *nam tả nữ hữu, cụ tổ giữa*<br>**Hàng giữa:** bác cả (4) – bố (8) – Bà Cô (3) → *trưởng – thứ – út*<br>**Hàng dưới:** anh họ (6) – chị họ (1) – **trống (0)**<br>*Ô trống = cháu út = **chính người chơi**, khuôn mặt đã bị khoét* | **C1** `hs_hom_go_nap` trang 1 *(clue CHÍNH)* — **toàn bộ quy tắc ngôi thứ**, dòng cháu út **bị gạch nát**<br>**C2** nút *"Lật mảnh"* — mặt sau mỗi mảnh khắc chữ Nho vai vế (祖/祖父/祖母/伯/父/姑/孫/孫女)<br>**C3** `hs_gia_pha` (Khu 3) — ngôi thứ đã chép sẵn, **thưởng cho người đọc kỹ**<br>**C4** `item_ban_rap_chu_the` đối chiếu nét chữ `hs_so_ghi_ten` — cùng một người viết | *Định nghĩa sai: một lần ấn **"Áp ảnh vào khung"** khi bố cục chưa khớp*<br>1: khung không khít, một mảnh bật ra rồi rơi lại<br>2: + đèn chao một nhịp; **hai mảnh đúng vị trí phát sáng viền vàng 2 s** (gợi ý động)<br>3: **`scare_anh_tho_thieu_mat`**. **TUYỆT ĐỐI KHÔNG xáo lại bàn cờ** | `item_ao_cuoi_giay` (spawn `hs_ao_cuoi_giay`) + lộ mặt sau khung ảnh + **`flag_ao_cuoi_da_nhat` → point of no return** → `USE_ITEM` lên `hs_hinh_nhan` = **KẾT CHƯƠNG** |
+| **P4** `puz_ba_hoi_chin_tieng`<br>`AUDIO_MATCH` | `[3, 3, 5, 3, 7, 3]` = **3 cặp `[dồn, rời]`, cả sáu số đều là tiếng CHUÔNG**; sau mỗi cặp điểm **1 tiếng MÕ** (cố định, không mã hoá trong mảng)<br>Hồi 1: 3 chuông dồn + 3 chuông rời + **1 mõ chốt**<br>Hồi 2: 5 + 3 + **1 mõ**<br>Hồi 3: 7 + 3 + **1 mõ**<br>*"Ba hồi" = 3 cặp · "chín tiếng" = 3+3+3 tiếng chuông rời · phần dồn 3-5-7 số lẻ tăng dần · tổng **33 tap***<br>**Tiết tấu KHÔNG tính vào điều kiện sai** — engine chỉ kiểm **số tiếng mỗi cụm** và **thứ tự chuông/mõ** | **C1** `hs_vach_buong` + nút *"Áp tai vào vách"* — **nghe lại lời giải vô hạn**, không tính lần sai<br>**C2** **vành chuông** khắc **三 五 七** (đọc được cả khi chưa có dùi)<br>**C3** dòng cuối `hs_van_khan` — cấu trúc chuông dồn / 3 chuông rời / **1 mõ chốt**, kèm câu *"chuông là để gọi, mõ là để chốt"*<br>**C4** `hs_dui_mo` — cán mòn đúng ba chỗ (mô-típ "ba"); **một đầu quấn vải để đánh chuông, đầu kia để trần gõ mõ**<br>**→ Hai đường độc lập: thính giác (C1) và văn bản (C2+C3)** | 1: chuông bên kia vách **nhại lại chậm nửa nhịp**<br>2: nhại **to hơn, gần hơn** (pre-delay 120→35 ms, pan sang phải) + hiện mờ số tiếng hồi 1 trong 2 s. **Tier 1 tự mở ở đây**<br>3: **`scare_khoi_tu_hinh_nguoi`** | `item_dai_vai_dieu` (spawn `hs_dai_vai_dieu` — vải điều tuột khỏi khám thờ: *"Bà Cô đã mở mắt"*) |
+| **P5** `puz_thap_lai_den_dau`<br>`ITEM_COMBINE` | `[2, 5, 1, 3, 4]` — năm bước thắp đèn đúng lối nhà quê 1990<br>① `2` xé & se **vải điều** thành tim — gốc của cả chuỗi<br>② `5` luồn tim qua **cổ đèn** — đổ dầu rồi mới xỏ thì trơn, không xỏ nổi<br>③ `1` chắt **dầu hoả** vào bầu — tim ngấm theo mao dẫn<br>④ `3` vặn **núm** cho tim nhô bằng hạt gạo — **sau khi dầu đã ngập** (tim khô mà vặn thì tướp) và trước khi có lửa<br>⑤ `4` rút **que đóm**, mồi vào than hồng, châm vào tim<br>*5! = 120 hoán vị → **5 ràng buộc** thu về duy nhất một; chứng minh bằng dây chuyền và bằng liệt kê ở mục 3.4.5* | **C1** `hs_gac_bep_bo_dom` — **cây đèn hỏng tháo rời** làm mẫu tham chiếu (tim xuyên qua cổ đèn; bầu là bộ phận riêng)<br>**C2** `hs_vach_bep_chu_than` — ba dòng, ba ràng buộc: *"tim ngấm dầu hẵng châm lửa"* + *"**chắt dầu cho ngập rồi hẵng vặn**"* + *"vặn xong mới châm"*<br>**C3** `hs_den_dau_treo` (Khu 2) — danh sách ba thứ còn thiếu<br>**C4** `hs_dai_vai_dieu` (Khu 3) — vải điều = tim đèn, phải **se** trước<br>**C5** `hs_dong_tro_than` — nguồn lửa duy nhất | 1: phản hồi **theo ngữ cảnh, có tính dạy** (lửa loé rồi tắt / dầu tràn ra bàn / núm quay lỏng lẻo). **Các bước đúng trước đó được giữ nguyên**<br>2: + than lụi một nhịp, bếp tối thêm, tiếng nước dội dưới giếng<br>3: **`scare_mat_duoi_day_gieng`**, reset đếm, **giữ tiến độ** | `item_den_dau_sang` → soi `hs_gieng_khoi` (**Beat B11**) + **gate lên `area_gac_xep`** + mở khoá P6 |
+| **P6** `puz_xep_anh_gia_pha`<br>`SLIDING_TILE` | `[2, 5, 7, 4, 8, 3, 6, 1, 0]` — row-major 3×3, `0` = ô trống<br>**Hàng trên:** ông nội (2) – cụ tổ (5) – bà nội (7) → *nam tả nữ hữu, cụ tổ giữa*<br>**Hàng giữa:** bác cả Đoan (4) – bố Đoàn, **con thứ** (8) – cô út Đoài (3) → *trưởng – thứ – út*<br>**Hàng dưới:** anh họ Thuấn 1962 (6) – chị họ Thoa 1965 (1) – **trống (0)**<br>*Ô trống = **cháu bé nhất** = chính người chơi, Nguyễn Thị Liên 1969, khuôn mặt đã bị khoét*<br>*Bà Cô **không** có trong ảnh: cô thuộc đời trên và không được nhập từ đường*<br>*Bàn cờ chạy **8 mảnh + ô trống**; mảnh thứ chín về chỗ trong cutscene hậu-giải `seq_p6_manh_thu_chin`* | **C1** `hs_hom_go_nap` trang 1 *(clue CHÍNH)* — **toàn bộ quy tắc ngôi thứ**, dòng cháu bé nhất **bị gạch nát và nằm CUỐI**, cộng dòng chua *"**Bà Cô không vào ảnh này**"*<br>**C2** nút *"Lật mảnh"* — mặt sau mỗi mảnh khắc chữ Nho vai vế (祖/祖父/祖母/伯/父/姑/孫/孫女) kèm chú thích quốc ngữ<br>**C3** `hs_gia_pha` (Khu 3) — tên và **năm sinh** của từng người, **thưởng cho người đọc kỹ**<br>**C4** `item_ban_rap_chu_the` đối chiếu nét chữ `hs_so_ghi_ten` — cùng một người viết<br>**C5** `hs_cao_pho` (Khu 1) + `hs_giay_khai_sinh` (Khu 5) — **bố là THỨ NAM Nguyễn Văn Đoàn**, nên bố đứng ô giữa | *Định nghĩa sai: một lần ấn **"Áp ảnh vào khung"** khi bố cục chưa khớp*<br>1: khung không khít, một mảnh bật ra rồi rơi lại<br>2: + đèn chao một nhịp; **hai mảnh đúng vị trí phát sáng viền vàng 2 s** (gợi ý động)<br>3: **`scare_anh_tho_thieu_mat`**. **TUYỆT ĐỐI KHÔNG xáo lại bàn cờ** | `item_ao_cuoi_giay` (spawn `hs_ao_cuoi_giay`) + lộ mặt sau khung ảnh + **`flag_ao_cuoi_da_nhat` → point of no return** → `USE_ITEM` lên `hs_hinh_nhan` = **KẾT CHƯƠNG** |
 
 ## 5.3. Quy ước chung cho cả sáu câu đố
 
@@ -2373,7 +2612,9 @@ item_bai_vi_khuyet_danh ──────────────────�
 | Tổng số hotspot toàn chương | **66** (13 + 11 + 17 + 14 + 11) |
 | Mọi bounds là **số nguyên** | ✅ ĐẠT |
 | Mọi bounds nằm trọn trong 1920 × 1080 | ✅ ĐẠT (`x+w` lớn nhất = 1880) |
-| Mọi bounds ≥ 88 × 88 px | ✅ ĐẠT (nhỏ nhất: cao 88 px ở `hs_chieu_coi_trai_san`; rộng 110 px ở `hs_dui_mo`) |
+| Mọi bounds ≥ **120 × 120 px** *(ngưỡng mới, X18)* | ⚠️ **11 hotspot chưa đạt ở giá trị gốc** — danh sách và cách nới ở đầu Phần 3. **Giá trị đã nới nằm trong `docs/03_DATA_SPEC.md` và `data/areas/*.json`; validator phải kiểm trên hai nguồn ấy, không kiểm trên tài liệu này** |
+| Mọi hotspot có sprite nhỏ hơn `bounds` đều khai `visual_bounds` | ⚠️ Trường mới — bắt buộc cho 11 hotspot nói trên và cho mọi hotspot đánh dấu 🔹 |
+| Ghi chú quy đổi px → pt/dp | ✅ ĐÃ SỬA. Bản trước ghi *"88 px ≈ 44 pt"* — **sai**. Quy đổi đúng: 88 px cho ra **29–43 pt/dp**; 120 px cho ra **40–59 pt/dp** |
 | Không hotspot nào có `y < 80` | ✅ ĐẠT (`y` nhỏ nhất = 96) |
 | Không hotspot nào có `y + height > 1000` | ✅ ĐẠT (`y+h` lớn nhất = 998) |
 | **Không cặp hotspot nào chồng lấn trong cùng area** | ✅ **415 cặp so sánh toàn chương — 0 cặp giao nhau** |
@@ -2438,7 +2679,7 @@ item_bai_vi_khuyet_danh ──────────────────�
 | **B06 ★** 😮‍💨 | `area_gian_tho` | Đọc cuốn văn khấn chép tay, sắp lại đúng **sáu bước tuần lễ cúng** và hóa vàng để chốt khám thờ Bà Cô bật mở | **3** | 5 | Vùng đọc. **Khoá L1 bật mỗi lần mở văn khấn.** Mix rút xuống còn 2 lớp. Đây là **nhịp nghỉ dài nhất chương (~6 phút)** — cố ý, để dồn cho B07→B08 |
 | **B07 ★** | `area_gian_tho` | Trong khám thờ chỉ có **một tấm bài vị khuyết danh** — gỗ mới, chữ chưa từng được khắc tên người | **4** | **8** | **Đỉnh dread không có jumpscare.** Nhạc **rút sạch**. Chỉ còn drone + `vox_hoi_tho_gan` (−30 dBFS, mono, không reverb). **Sợ vì hiểu ra, không vì bị dọa** |
 | B07a 🔔 | `area_gian_tho` | Lúc nhặt dùi mõ, cả bó chân nhang bốc cháy một nhịp và **toàn bộ di ảnh đồng loạt quay mặt vào vách** — `scare_di_anh_quay_mat` | **5** | **9** | Bắn đúng lúc người chơi **lấy một thứ khỏi bàn thờ** — hành vi phạm thượng. Xem mục 3.3.7A |
-| **B08 ★** | `area_gian_tho` | **Ba hồi chín tiếng** mõ vọng ra từ sau vách buồng trống, buộc người chơi cầm dùi gõ lại đúng nhịp cho tới khi dải vải điều tuột xuống | **4** | **8** | **Câu đố chính là cao trào âm thanh.** `fol_mo_*` ở tiền cảnh; bên kia vách trả lời với pan dịch dần sang phải và pre-delay giảm **120 ms → 35 ms** (nghe như **đang tiến lại gần**). **Không jumpscare — câu đố tự nó đủ căng** |
+| **B08 ★** | `area_gian_tho` | **Ba hồi chín tiếng** mõ vọng ra từ sau vách buồng trống, buộc người chơi cầm dùi gõ lại đúng nhịp cho tới khi dải vải điều tuột xuống | **4** | **8** | **Câu đố chính là cao trào âm thanh.** `fol_chuong_*` (sáu cụm) và `fol_mo_chot` (ba tiếng) ở tiền cảnh; bên kia vách trả lời với pan dịch dần sang phải và pre-delay giảm **120 ms → 35 ms** (nghe như **đang tiến lại gần**). **Không jumpscare — câu đố tự nó đủ căng** |
 | **B09 ★** 😮‍💨 | `area_gian_tho` → `area_bep_gieng` | Cửa hậu hết bị chèn, người chơi lần xuống gian bếp tro tối om nơi kiềng ba chân còn ấm dù nhà đã bỏ không nhiều ngày | **3** | 5 | Chuyển area = relief. Ambience đổi hẳn màu: từ "cao, khô, vang gỗ" sang "thấp, ẩm, chết tiếng" (**RT60 1,4 s → 0,35 s**) |
 | B09a | `area_bep_gieng` | Cột bếp có **năm vạch dao** (1953/1961/1968/1976), **vạch thứ năm để trống**. Hình que trẻ con trên vách bồ hóng | **4** | **7** | `fol_than_no_lep_bep` là lớp duy nhất có sự sống. `fol_nuoc_tom_gieng` đều đặn 9–11 s/lần từ ngoài sân sau, pan cố định 0.7 phải |
 | B09b | `area_bep_gieng` | Sổ chợ ghi số đo áo cưới giấy; người chơi rút phiếu đo hiệu may ra đối chiếu — **trùng khít từng con số** | **4** | **8** | **Cắt phẳng toàn bộ nền về −50 dBFS trong 3 giây** ngay khi hai con số khớp. **Không thêm âm thanh nào.** Cú dread mạnh thứ hai chương |
@@ -2449,11 +2690,20 @@ item_bai_vi_khuyet_danh ──────────────────�
 | B12a 🔔 | `area_gac_xep` | Vừa nhô đầu lên sàn gác, đèn tắt phụt vì gió lùa; đèn cháy lại thì **hình nhân nan tre đã đứng chắn trước mặt** — `scare_hinh_nhan_chan_loi` | **5** | **10** | **Cú dọa duy nhất không thể tránh của chương.** 520 ms đen hoàn toàn ở giữa envelope. Xem mục 3.5.6A |
 | B12b | `area_gac_xep` | Đọc sổ ghi tên: bốn đời người thế mạng, dòng thứ tư ghi **Nguyễn Thị Liên — cái Đĩ Con — 7 tuổi — LỄ CHƯA THÀNH**. Người chơi đọc cái tên **thành tiếng** | **4** | **8** | **Không dọa.** Hệ thống hạ toàn bộ nền xuống −42 dBFS và **giữ im 4 giây sau câu cuối**. 6 giây sau, hình nhân **xoay 30°** — hậu quả phạm điều Một |
 | B12c 😮‍💨 | `area_gac_xep` | Đọc hai trang nhật ký (1976 và 1996) và giấy khai sinh gốc đóng chéo dấu đỏ **ĐÃ KHAI TỬ — SỐ 41/KT — 22.12.1976** | **4** | 7 | Relief tương đối bằng khối lượng đọc. **Khoá L1 bật liên tục** |
-| **B13 ★** | `area_gac_xep` | Chín mảnh ván ảnh thờ được xếp lại thành bức ảnh gia phả hoàn chỉnh **nhưng vẫn khuyết đúng một khuôn mặt bị khoét** | **4** | 7 | `fol_gach_van_lat` mỗi nước trượt. Khi còn đúng **một nước** là xong: drone **ngưng thở** (rút về 0 trong 400 ms) và giữ im cho tới khi người chơi trượt nốt |
+| **B13 ★** | `area_gac_xep` | Chín mảnh ván ảnh thờ được xếp lại thành bức ảnh gia phả hoàn chỉnh **nhưng vẫn khuyết đúng một khuôn mặt bị khoét** | **4** | 7 | `fol_gach_van_lat` mỗi nước trượt. Khi còn đúng **một nước** là xong: drone **ngưng thở** (rút về 0 trong 400 ms) và giữ im cho tới khi người chơi trượt nốt. **Bàn cờ chạy 8 mảnh + ô trống; mảnh thứ chín tự trượt vào trong cutscene hậu-giải `seq_p6_manh_thu_chin` (6 s) — không punch, không flash, không stinger** |
 | B13b 🔔 | `area_gac_xep` | *(Nhánh thất bại — sai 3 lần)* Chín mảnh ván đồng loạt lật úp; lật lại thì **mảnh nào cũng mang một khuôn mặt bị khoét thủng** — `scare_anh_tho_thieu_mat` | **5** | **9** | Xem mục 3.5.6B. Có **luật hoãn** nếu S6 vừa bắn |
 | B13a | `area_gac_xep` | Mặt sau khung ảnh: địa chỉ người chơi ở Hà Nội do bà nội ghi năm 1979, và một nét chữ mới viết đè lên — **"Đã gửi giấy báo. 14.8.1996."** | **4** | **8** | **Không dọa.** Một nốt `drn_gac_xep_ep` **lên nửa cung** — thay đổi cao độ **duy nhất trong cả chương** |
 | **B14 ★** 🔔 | `area_gac_xep` | Bộ áo cưới giấy khổ người lớn được may **vừa in số đo người chơi**, và khi chiếc áo được khoác lên, **tiếng mõ nổi rền khắp làng** — `scare_ao_cuoi_quay_dau` | **5** | **10** | **DREAD scare**, không impulse. Cái đầu nan tre quay ngược 180° rất chậm, giữ 2,5 giây. Xem Phần 8 |
 | B14a | `area_gac_xep` | Đóng chương: đèn dầu lụi hẳn, dưới sân gạch hiện ánh đuốc và đèn pin của người làng kéo vào, **một bóng người lưng còng đứng sẵn ở ngõ tre** | **5** | **10** | `fol_mo_ca_lang_lop` mở từ mono trung tâm ra full stereo, **+9 dB trong 6 giây**. Đây là cú swell **duy nhất được phép vượt −10 dBFS RMS** trong cả chương |
+
+`[[ VỀ NGUYÊN VĂN SPINE TRONG BẢNG NÀY: hai mươi bốn beat trên đây có sáu chỗ dùng chữ của SPINE mà nội dung đã được tài liệu này làm rõ hoặc sửa ở nơi khác — và theo luật ở mục 0.2, CHỮ CỦA SPINE KHÔNG ĐƯỢC SỬA. Đọc như sau:
+ · B04 "rập than theo đúng bút thuận" → cơ chế thật là ĐỒ (can) chữ: kéo thỏi than dọc theo rãnh chìm, ăn ra nét đen trên giấy trắng (X16, mục 3.2.5).
+ · B08 "Ba hồi chín tiếng MÕ vọng ra từ sau vách" → nhạc khí thật là CHUÔNG cho ba hồi chín tiếng, MÕ điểm một tiếng chốt mỗi hồi (X14, mục 3.3.6). Đọc "mõ" ở đây là đọc gọn "bộ chuông-mõ".
+ · B02 "chum nước phản chiếu một bóng người đứng sau lưng" → trigger thật là sai puz_khoa_bat_quai ba lần, không phải hành vi soi chum (X9, mục 3.1.6).
+ · B13 "Chín mảnh ván ảnh thờ được xếp lại" → bàn cờ chạy tám mảnh + ô trống; mảnh thứ chín về chỗ trong cutscene hậu-giải (X17, mục 3.5.5).
+ · B14 / B14a "tiếng mõ nổi rền khắp làng" → đúng nguyên văn và đúng nghĩa mới: mõ là tiếng CHỐT, cả làng cùng chốt sổ (mục 8.1, nhịp 5).
+ · Logline ở mục 1.1 "tiếng mõ vọng trong đêm" → giữ nguyên, vì tiếng mõ vẫn là nhịp điệu nhận dạng của game.
+Tổ art, audio và data lấy nghĩa ở các mục 3.x, KHÔNG lấy nghĩa ở cột "Sự kiện" của bảng beats. ]]`
 
 **Dãy mức (thang 1–10):**
 `2 → 4 → 9 → 4 → 3 → 5 → 9 → 5 → 4 → 6 → 5 → 8 → 9 → 8 → 5 → 7 → 8 → 5 → (9) → 9 → 7 → 10 → 8 → 7 → 7 → (9) → 8 → 10 → 10`
@@ -2515,6 +2765,7 @@ Một scare ở trạng thái `ARMED` sẽ **bắn ở khoảnh khắc đủ đi
 
 | Cặp rủi ro | Kịch bản | Xử lý |
 |---|---|---|
+| **S1 → S2** (`area_san_gach` → `area_hien_nha`) | Sai `puz_khoa_bat_quai` ba lần (**S1 bắn**), rồi giải xong P1, sang hiên, nhặt giấy bản và **giải xong P2 trong vòng 90 giây**. Đường này có thật: người chơi lại lần hai, người chơi đã xem walkthrough, và cả người chơi vừa được Hint Tier 3 đọc thẳng đáp án cho cả hai câu | **S2 là scare "1 lần duy nhất".** Nếu để cooldown nuốt nó thì **cú dọa đắt nhất chương biến mất vĩnh viễn** khỏi lượt chơi ấy — và mất luôn điểm nhấn chủ đề *"được thưởng và bị phạt bằng cùng một hành động"*. Vì vậy S2 **không bao giờ bị huỷ**; nó chuyển sang **biến thể dread dự phòng**:<br>• Mành nứa **không bật tung**. Không transient, **không flash, không haptic, không punch, không shake**.<br>• Khi khung zoom nhả ra, người chơi thấy **mành nứa đã bị hất ngược lên vắt qua xà từ lúc nào** — và **trên nền gạch hiên có mấy mẩu vàng mã rách hình đầu ngón tay**, thứ lúc bước vào chưa hề có.<br>• Âm thanh duy nhất: `fol_giay_ban_sot_soat` **một lần, −26 dBFS, pan 0.0 — ngay sau lưng**.<br>• Lớp `fol_manh_nua_dap` **vẫn ngừng vĩnh viễn** đúng như bản đầy đủ.<br>*Cú dread trả góp được giữ nguyên 100 %: người chơi vẫn ở lại khu vực thêm hai phút trong một sự im lặng mới, và vẫn không hiểu vì sao mình thấy khó ở.* |
 | **S4 → S3** (`area_gian_tho`) | Sai P3 ba lần (S4 bắn), rồi 40 giây sau nhặt `item_dui_mo` | S3 chuyển sang **biến thể hậu quả im lặng**: nhặt dùi bình thường, **không có gì xảy ra**; nhưng lần kế tiếp camera quét qua bàn thờ, **bảy di ảnh đã quay mặt vào vách rồi**. *Đây là biến thể đáng sợ hơn bản gốc* |
 | **S6 → S7** (`area_gac_xep`) | Vào gác (S6 bắn), lao ngay vào P6 và sai 3 lần trong 80 giây | S7 chuyển sang **biến thể câm**: ván vẫn lật úp và lộ chín lỗ khoét, nhưng không flash, không stinger, không haptic, không punch. Sau đó S7 **tự nạp lại** |
 | **S7 → S8** (`area_gac_xep`) | Sai P6 lần cuối rồi giải ngay và vào cảnh kết trong 60 giây | **Không xử lý gì** — S8 được **miễn trừ cooldown** vì nó không tạo xung. Nhưng `pre_silence_ms` của S8 tự động nâng **4 000 → 5 500 ms** |
@@ -2546,7 +2797,7 @@ Một scare ở trạng thái `ARMED` sẽ **bắn ở khoảnh khắc đủ đi
 | Scare | Đ1 xây dựng | Đ2 tell | Đ3 im lặng | Đ4 vật đời thường | Đ5 tự bấm | Đ6 cooldown | Đ7 thông tin trả lại |
 |---|---|---|---|---|---|---|---|
 | **S1** | ✅ ~3 phút, ≥ 5 hotspot | ✅ nước gợn | ✅ 2000 | ✅ gáo dừa | ✅ ấn then lần 3 | ✅ đầu tiên | ✅ **chỉ vào cái chum** = clue C4 của chính câu đố đang bí |
-| **S2** | ✅ ~4 phút ở hiên | ✅ silence tell | ✅ 2000 | ✅ bàn tay **vàng mã** | ✅ hoàn tất nét than cuối | ✅ ≥ 180 s | ✅ vàng mã **đã ở sau bình phong từ đầu** |
+| **S2** | ✅ ~4 phút ở hiên | ✅ silence tell | ✅ 2000 | ✅ bàn tay **vàng mã** | ✅ hoàn tất nét than cuối | ⚠️ có luật hoãn *(cặp S1 → S2)* | ✅ vàng mã **đã ở sau bình phong từ đầu** |
 | **S3** | ✅ ~6 phút đọc | ✅ chân nhang cọ | ✅ 2000 | ✅ bó chân nhang + di ảnh | ✅ nhặt dùi mõ | ⚠️ có luật hoãn | ✅ **thay đổi vĩnh viễn**: 7 di ảnh úp mặt suốt phần còn lại chương |
 | **S4** | ✅ sau ≥ 3 lần sai = ≥ 2 phút | ✅ khói hút ngược | ✅ 2000 | ✅ khói nhang | ✅ ấn "Vái" lần 3 | ✅ | ✅ dạy rằng **cúng sai còn tệ hơn không cúng** — kiến thức dùng lại ở Chapter 2 |
 | **S5** | ✅ ~3 phút trong bếp tối | ✅ tiếng tõm lại gần | ✅ 2000 | ✅ khuôn mặt **ngoài cửa bếp** (người, không phải quái) | ✅ mồi lửa sai | ✅ ≥ 240 s | ✅ xác nhận **có người ngoài kia** trước khi người chơi ra sân sau |
@@ -2554,7 +2805,7 @@ Một scare ở trạng thái `ARMED` sẽ **bắn ở khoảnh khắc đủ đi
 | **S7** | ✅ ≥ 3 phút đọc trên gác | ✅ ván ép nhau | ✅ 2000 | ✅ chín mảnh ván gỗ | ✅ ấn "Áp ảnh vào khung" lần 3 | ⚠️ có luật hoãn | ✅ **trả lời sai lầm bằng nghĩa**: mọi khuôn mặt đều bị khoét |
 | **S8** | ✅ toàn bộ 43 phút chương | ✅ giấy chạm vải | ✅ **4000** | ✅ đầu nan tre | ✅ **tự tay khoác áo** | ✅ miễn trừ hợp lệ | ✅ **xác nhận nghi lễ đã thành** — là chính cú twist |
 
-**Kết quả: 8/8 đạt.** Hai ⚠️ là **luật hoãn đã được thiết kế**, không phải lỗ hổng. Một ❌ là **ngoại lệ có chủ đích duy nhất**, đúng chỉ tiêu 7/8.
+**Kết quả: 8/8 đạt.** Ba ⚠️ là **luật hoãn đã được thiết kế** (ba cặp rủi ro ở mục 6.6), không phải lỗ hổng. Một ❌ là **ngoại lệ có chủ đích duy nhất**, đúng chỉ tiêu 7/8.
 
 ## 6.8. Danh sách CẤM (áp cho art, audio, code, marketing)
 
@@ -2566,7 +2817,7 @@ Một scare ở trạng thái `ARMED` sẽ **bắn ở khoảnh khắc đủ đi
 | Mặt ma cận cảnh hốc mắt đen + tiếng hét kim loại | Jumpscare rẻ tiền. Tám cú dọa của ta đều dựa vào **vật thể đời thường lệch vị trí** |
 | Máu, nội tạng, xác phân hủy | Sai tông. Đây là *folk horror*, không phải *body horror* |
 | Ouija, nến ngũ giác, pentagram, phù thủy | Sai văn hoá |
-| Stinger violin/dây cao vút kiểu Hollywood | Thay bằng: **mõ, gỗ, giấy, tre, nước, và im lặng** |
+| Stinger violin/dây cao vút kiểu Hollywood | Thay bằng: **chuông, mõ, gỗ, giấy, tre, nước, và im lặng** |
 | Nhân vật chính nói to *"Ai đó?"* / *"Có ai ở đây không?"* | Nhân vật của ta nói ít, nói thầm, và chủ yếu **quan sát bằng nghề nghiệp** — cô là thợ may, cô nhìn số đo, đường chỉ, nếp gấp |
 | Cú dọa bắn **ngay khi vào area** (trừ S6 đã có lý do cấu trúc) | Người chơi chưa có gì để mất, chưa có gì để tin, chưa có gì để bị phản bội |
 | Cú dọa **lặp lại nguyên xi** lần thứ hai | Lần 2 phải là biến thể rút gọn hoặc biến thể câm. **Cú dọa được nhận ra là cú dọa đã chết** |
@@ -2585,7 +2836,9 @@ Một scare ở trạng thái `ARMED` sẽ **bắn ở khoảnh khắc đủ đi
 | **Bát hương bị động** | Khu 3 | Điềm nặng nhất trong tín ngưỡng thờ cúng Bắc Bộ, **không cần một chữ giải thích** |
 | **Giấy bản** | Khu 1 (giấy trắng bị hóa trong tro) · Khu 2 (rập chữ) · Khu 5 (hình nhân, áo cưới) | Vật liệu xuyên suốt của cả hủ tục |
 | **Áo cưới giấy hàng mã** | Khu 5 | **Vật phẩm nhan đề**, cú chốt của twist |
-| **Tiếng mõ** (ba hồi chín tiếng) | Khu 3 (câu đố) · cảnh kết (cả làng) | **Nhịp điệu nhận dạng của game; cũng là "giọng" của Bà Cô** |
+| **Tiếng chuông** (ba hồi chín tiếng) | Khu 3 (câu đố P4) · sau vách buồng | **Chuông là thứ GỌI.** Công thức "ba hồi chín tiếng" là công thức thỉnh chuông có thật; đây là "giọng" mời của Bà Cô |
+| **Tiếng mõ** (một tiếng chốt mỗi hồi) | Khu 3 (câu đố P4) · cảnh kết (cả làng) | **Mõ là thứ CHỐT.** Một tiếng khép một hồi; ở cảnh kết, cả làng cùng điểm mõ nghĩa là cả làng cùng xác nhận lễ đã trọn. **Nhịp điệu nhận dạng của game** |
+| **Mõ cá là đồ nhà chùa** | Khu 3 (trên đôn gỗ, cạnh chuông) | Chi tiết cố ý gây gợn: pháp khí nhà chùa **không thuộc về** ban thờ gia tiên. Ông từ mượn của chùa làng rồi để lại đây — dấu vết của một hủ tục **đi vay mượn hình thức** từ chỗ khác |
 | **Giếng khơi** | Khu 4 | Nơi Bà Cô chết; nơi guốc trẻ con còn mắc |
 | **Cây gạo** | Khu 4 (ngoài bờ ao) | *Thần cây đa, ma cây gạo* — ranh giới của vùng hồn bị nhốt |
 | **Tên tục "cái Đĩ" / "thằng Cu"** | Sổ ghi tên · câu thoại cuối của bà Tơ | Tục đặt tên xấu tránh ma — **bị hủ tục lật ngược thành công cụ xoá danh tính** |
@@ -2621,9 +2874,9 @@ Chứng minh bằng **kiến thiết** — đưa ra một lộ trình cụ thể
 | **10** | `ZOOM_PUZZLE` `hs_ban_tho_ho`, giải **P3** với `[3, 6, 4, 1, 5, 2]` *(Beat B06)* | P3 cần **∅** vật phẩm | ✅ Bước 9 đã cấp đủ thông tin | không đổi |
 | **11** | `COLLECT_ITEM` `hs_bai_vi_khuyet_danh` *(hotspot spawn nhờ P3)* → nhận bài vị *(Beat B07)* | Khám thờ mở nhờ P3 | ✅ | `+{bai_vi_khuyet_danh}` |
 | **12** | `COLLECT_ITEM` `hs_dui_mo` → kích hoạt `scare_di_anh_quay_mat` *(Beat B07a)* | `required_item: null` | ✅ | `+{dui_mo}` |
-| **13** | `DIALOGUE` `hs_vach_buong`; `ZOOM_PUZZLE` `hs_mo_ca`, giải **P4** với `[3, 3, 5, 3, 7, 3]` *(Beat B08)* | Cần `item_dui_mo` | ✅ Có từ bước 12 | không đổi |
+| **13** | `DIALOGUE` `hs_vach_buong`; `ZOOM_PUZZLE` `hs_mo_ca`, giải **P4** với `[3, 3, 5, 3, 7, 3]` — ba hồi **chuông**, mỗi hồi chốt bằng **một tiếng mõ** *(Beat B08)* | Cần `item_dui_mo` | ✅ Có từ bước 12 | không đổi |
 | **14** | `COLLECT_ITEM` `hs_dai_vai_dieu` *(vải tuột xuống sau P4)* | P4 đã giải | ✅ | `+{dai_vai_dieu}` |
-| **15** | `USE_ITEM` `hs_khe_mong_cua_gac` với `item_bai_vi_khuyet_danh` làm then → `flag_then_gac_da_tra = true` | Cần `bai_vi_khuyet_danh` | ✅ Có từ bước 11 | bài vị chuyển sang mục **"Đã dùng"** |
+| **15** | `USE_ITEM` `hs_khe_mong_cua_gac` với `item_bai_vi_khuyet_danh` làm then → `flag_then_gac_da_tra = true` | Cần `bai_vi_khuyet_danh` | ✅ Có từ bước 11 | bài vị **vẫn nằm trong túi**, gắn cờ `locked_in_use = true` — xám lại, không kéo-thả được nữa, vẫn EXAMINE được *(mục 4.3.1)* |
 | **16** | `CHANGE_AREA` `hs_cua_hau_xuong_bep` → `area_bep_gieng` *(Beat B09)* | **Đã giải P3** | ✅ Từ bước 10 | không đổi |
 | **17** | `COLLECT_ITEM` `hs_chai_dau_hoa`; `EXAMINE` `hs_gac_bep_bo_dom`, `hs_vach_bep_chu_than`, `hs_dong_tro_than`, `hs_cot_bep_vach_dao`, `hs_so_cho_ba_noi` *(Beat B09a–B09b)* | Đều `null` | ✅ | `+{chai_dau_hoa}` |
 | **18** | `ZOOM_PUZZLE` `hs_den_dau_ghep`, giải **P5** với `[2, 5, 1, 3, 4]` *(Beat B10)* | Cần `den_dau` (b.5) + `dai_vai_dieu` (b.14) + `chai_dau_hoa` (b.17) | ✅ **Cả ba đều có** | `−{den_dau, dai_vai_dieu, chai_dau_hoa}` `+{den_dau_sang}` |
@@ -2631,7 +2884,7 @@ Chứng minh bằng **kiến thiết** — đưa ra một lộ trình cụ thể
 | **20** | `CHANGE_AREA` `hs_len_gian_tho` → `area_gian_tho` | **Không gate** — luôn mở | ✅ | không đổi |
 | **21** | `CHANGE_AREA` `hs_cau_thang_gac` → `area_gac_xep`; vào khu vực → `scare_hinh_nhan_chan_loi` *(Beat B12, B12a)* | Cần `den_dau_sang` (b.18) **VÀ** `flag_then_gac_da_tra` (b.15) | ✅ **Cả hai đều có** | không đổi |
 | **22** | `EXAMINE` `hs_hom_go_nap` (2 trang), `hs_so_ghi_ten`, `hs_nhat_ky_trang_cuoi`, `hs_giay_khai_sinh`; dùng nút **"Lật mảnh"** xem mặt sau các mảnh ván *(Beat B12b–B12c)* | Đều `null` | ✅ | không đổi |
-| **23** | `ZOOM_PUZZLE` `hs_khung_anh_tho`, giải **P6** với `[2, 5, 7, 4, 8, 3, 6, 1, 0]` *(Beat B13)* | Cần `item_den_dau_sang` | ✅ Có từ bước 18 | không đổi |
+| **23** | `ZOOM_PUZZLE` `hs_khung_anh_tho`, giải **P6** với `[2, 5, 7, 4, 8, 3, 6, 1, 0]` → cutscene `seq_p6_manh_thu_chin` thả **mảnh thứ chín** vào ô trống *(Beat B13)* | Cần `item_den_dau_sang` | ✅ Có từ bước 18 | không đổi — **cutscene không lấy và không cho vật phẩm nào** |
 | **24** | `COLLECT_ITEM` `hs_ao_cuoi_giay` *(hotspot spawn sau P6)*; đọc mặt sau khung ảnh *(Beat B13a)* → `flag_ao_cuoi_da_nhat = true` → **`hs_xuong_gian_tho` khoá vĩnh viễn** | P6 đã giải | ✅ | `+{ao_cuoi_giay}` |
 | **25** | `USE_ITEM` `hs_hinh_nhan` với `item_ao_cuoi_giay` → cutscene `seq_ending_ch01_khoac_ao` + `scare_ao_cuoi_quay_dau` *(Beat B14 → B14a)* | Cần `item_ao_cuoi_giay` | ✅ Có từ bước 24 | **KẾT CHƯƠNG 1** |
 
@@ -2644,7 +2897,7 @@ Chỉ có **hai** vật phẩm bị "đặt xuống":
 | Vật phẩm | Bước | Số phận | Có phá tiền đề sau không? |
 |---|---|---|---|
 | `item_ban_rap_chu_the` | 8 | **Lấy lại được** sau khi then nhả — ràng buộc đã ghi ở mục 4.3 #4 | **Không** — vẫn còn trong túi cho clue C4 của P6 |
-| `item_bai_vi_khuyet_danh` | 15 | **Ở lại vĩnh viễn** làm then, chuyển sang mục "Đã dùng" | **Không** — không câu đố nào sau bước 15 cần tới nó (P6 chỉ cần đèn sáng) |
+| `item_bai_vi_khuyet_danh` | 15 | **KHÔNG bị tiêu thụ.** Ở lại trong túi vĩnh viễn với `consumes_item: false` · `locks_item: true` (mục 4.3.1) | **Không** — không câu đố nào sau bước 15 cần tới nó (P6 chỉ cần đèn sáng) |
 
 Ba nguyên liệu của P5 (`den_dau`, `dai_vai_dieu`, `chai_dau_hoa`) bị tiêu ở bước 18, nhưng chúng **không xuất hiện trong bất kỳ tiền đề nào sau bước 18**.
 
@@ -2687,10 +2940,20 @@ Bài toán 8-puzzle chia không gian trạng thái thành **hai lớp tương đ
 | P2 | 8! = **40 320** | Bốn phép trong C1 xác định **duy nhất** một thứ tự | ✅ |
 | P3 | 6! = **720** | Văn khấn C1 cho **chuỗi quan hệ trước-sau đầy đủ** | ✅ |
 | P4 | tổ hợp nhịp | **Hai đường độc lập**: nghe lại vô hạn (C1) **hoặc** đọc 三五七 + cấu trúc (C2+C3) | ✅ |
-| P5 | 5! = **120** | Bốn ràng buộc thứ tự từ C1+C2 rút về **duy nhất** một chuỗi | ✅ |
-| P6 | 9!/2 = **181 440** | C1 (ngôi thứ) + C2 (danh tính từng mảnh) xác định **duy nhất** một bố cục | ✅ |
+| P4 *(phân cụm)* | dãy cụm tuỳ ý | **Hai đường độc lập** + **tiết tấu không bị chấm điểm**, nên mọi thông tin cần thiết đều **đếm được bằng mắt** trên thanh nhịp | ✅ |
+| P5 | 5! = **120** | **Năm** ràng buộc thứ tự từ C1+C2 rút về **duy nhất** một chuỗi — lọc dần 120 → 60 → 20 → 5 → 4 → **1** *(chứng minh đầy đủ ở mục 3.4.5)* | ✅ |
+| P6 | 9!/2 = **181 440** | C1 (quy tắc ngôi thứ + vị trí dòng bị cạo + "Bà Cô không vào ảnh này") + C2 (danh tính từng mảnh) + C3/C5 (ngôi thứ của bố) xác định **duy nhất** một bố cục — *phép suy luận bảy bước ở mục 3.5.5* | ✅ |
 
 ⇒ **Không câu đố nào bắt người chơi thử mò.** Và không câu đố nào đòi kiến thức ngoài đời (phong thuỷ, Hán tự, lễ nghi) — **mọi quy tắc cần thiết đều nằm trong game và nhất quán với nhau**. ∎
+
+> **Bổ đề 5 mạnh hơn nó trông.** Nó không chỉ đòi *"có đủ manh mối"*, nó đòi **manh mối phải dẫn tới đúng cái `solution` mà engine chấp nhận**. Hai chỗ trước đây **không** thoả điều đó và đã được sửa ở phía văn bản:
+>
+> | Câu đố | Bệnh cũ | Thuốc |
+> |---|---|---|
+> | **P5** | Bốn ràng buộc để lọt **bốn** dãy hợp lệ; ba trong bốn dãy ấy bị engine tính là sai. Người chơi suy luận đúng vẫn bị phạt | **Thêm ràng buộc thứ năm** vào `txt_examine_vach_bep_chu_than`: *"Chắt dầu cho ngập rồi hẵng vặn"* |
+> | **P6** | Ba văn bản clue (cáo phó · gia phả · nắp hòm) mâu thuẫn với `solution`; người chơi suy luận đúng ra `[2,5,7,4,8,3,**0,6,1**]` | **Chốt cây gia phả một lần** rồi **đồng bộ ngược** ra cả ba văn bản: cha là thứ nam, ô giữa-phải là cô út, dòng bị cạo nằm cuối hàng cháu |
+>
+> **Không một mảng `solution` nào bị đụng tới.** Đây là quy tắc bất di bất dịch của dự án: **khi câu đố và manh mối lệch nhau, manh mối sai.**
 
 ## 7.4. Điểm rủi ro duy nhất của chương và biện pháp bảo đảm
 
@@ -2787,6 +3050,8 @@ Toàn bộ âm nền **cắt phẳng về 0**, kể cả `fol_den_dau_chay` (ti�
 
 **NHỊP 5 — Tiếng mõ.**
 Một tiếng mõ. Rồi tiếng thứ hai từ hướng khác. Rồi ba, bốn, mười — **từ khắp làng**, chồng lớp lên nhau, lệch nhịp nhau, **không còn ra tiết tấu ba hồi chín tiếng nữa**, chỉ còn là một khối tiếng gỗ dày đặc.
+
+`[[ VÌ SAO LÀ MÕ CHỨ KHÔNG PHẢI CHUÔNG — và đây là chỗ cú hoán vai nhạc khí (X14) trả cổ tức: suốt cả chương, CHUÔNG là thứ GỌI và MÕ là thứ CHỐT. Một tiếng mõ nghĩa là "xong một hồi". Cả làng cùng điểm mõ, không nhà nào thỉnh chuông nữa, nghĩa là KHÔNG CÒN AI PHẢI GỌI — người ta đã về rồi. Cả làng đang cùng chốt sổ. Người chơi không cần hiểu ra điều đó ngay; tai họ đã học luật ấy trong mười lăm phút gõ mõ ở Khu 3, nên họ CẢM được trước khi họ HIỂU. ]]`
 Mix: `fol_mo_ca_lang_lop` mở từ **mono trung tâm ra full stereo, +9 dB trong 6 giây** — cú swell **duy nhất được phép vượt −10 dBFS RMS** trong cả chương.
 
 > **`txt_ending_doc_thoai_02`**
@@ -2857,7 +3122,7 @@ Cắt đen. Hết.
 |---|---|
 | Vị trí | `area_gac_xep`, gác xép **bị khóa lại từ dưới** |
 | Hành trang giữ lại | `item_den_dau_sang` *(đã tắt)* · `item_ban_rap_chu_the` · `item_giay_ban_va_than` |
-| Hành trang mục "Đã dùng" | `item_bai_vi_khuyet_danh` *(ở lại làm then cửa gác)* |
+| Hành trang — bị khoá tại chỗ dùng | `item_bai_vi_khuyet_danh` *(`consumes_item: false` · `locks_item: true` — vẫn nằm trong túi, xám lại, đang làm then cửa gác; xem mục 4.3.1)* |
 | Hành trang mất vĩnh viễn | `item_ao_cuoi_giay` *(đã dùng)* |
 | Cờ trạng thái | `flag_chapter_01_completed = true` · `flag_le_da_thanh = true` · `flag_biet_ten_that = true` · `flag_da_doc_bay_dieu_cam_ky` *(true/false tuỳ người chơi)* · `flag_da_dap_loi_ba_noi` *(true/false)* · `flag_da_doc_phieu_do` *(true/false)* · `dialogue_choices` |
 | **Điều người chơi ĐÃ biết** | Tên thật (Nguyễn Thị Liên) · việc bị khai tử số 41/KT · bốn đời người thế mạng · sự tồn tại của bà Tơ · toàn bộ bảy phần của lễ thế mệnh |
@@ -2865,7 +3130,7 @@ Cắt đen. Hết.
 
 `[[ flag_da_doc_bay_dieu_cam_ky KHÔNG đổi kết cục Chapter 1, nhưng Chapter 2 dùng nó để đổi một nhánh thoại với bà Tơ: nếu người chơi ĐÃ đọc Bảy Điều, bà Tơ nói "vậy là cháu biết rồi mà cháu vẫn khoác" — nặng hơn nhiều so với nhánh còn lại. ]]`
 
-`[[ flag_da_dap_loi_ba_noi = true nghĩa là người chơi đã VI PHẠM ĐIỀU CẤM KỴ THỨ TƯ (chớ đáp lời ai gọi từ sau lưng). Không phạt ở Chương 1; Chapter 2 tính sổ. ]]`
+`[[ flag_da_dap_loi_ba_noi = true nghĩa là người chơi đã VI PHẠM ĐIỀU CẤM KỴ THỨ NHẤT: "Chớ gọi tên thật người thế mệnh trong nhà. Gọi tên là gọi về." Tiếng bà nội vọng qua khe ván sàn là hành vi GỌI; người chơi đáp lại là NHẬN. Không phạt ở Chương 1; Chapter 2 tính sổ. — Rà soát toàn tài liệu đã xong: hai chỗ duy nhất trích sai số thứ tự Bảy Điều đều nằm ở cặp flag này và đã sửa cả hai. Mọi chỗ còn lại nhắc "điều cấm kỵ thứ Tư" đều là nói về HÓA VÀNG TRƯỚC KHI KHẤN (bẫy của puz_tuan_tu_le_cung) và trích ĐÚNG. ]]`
 
 ## 8.3. Hook sang Chapter 2
 

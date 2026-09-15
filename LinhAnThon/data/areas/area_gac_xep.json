@@ -46,7 +46,13 @@
       },
       "action_type": "COLLECT_ITEM",
       "item_id": "item_ao_cuoi_giay",
-      "required_item": null
+      "required_item": null,
+      "required_flags": [
+        "flag_puz_xep_anh_gia_pha_solved"
+      ],
+      "fallback_text_key": "txt_thieu_do_ao_cuoi_giay",
+      "one_shot": true,
+      "ghi_chu_vi": "Bộ áo cưới giấy chỉ lộ ra SAU LƯNG khung ảnh khi puz_xep_anh_gia_pha đã giải. Nhặt tự do thì câu đố cuối chương bị bỏ qua hoàn toàn."
     },
     {
       "id": "hs_hinh_nhan",
@@ -58,7 +64,10 @@
       },
       "action_type": "USE_ITEM",
       "required_item": "item_ao_cuoi_giay",
-      "item_id": "item_ao_cuoi_giay"
+      "grants_flag": "flag_chapter_01_hoan_thanh",
+      "fallback_text_key": "txt_thieu_do_hinh_nhan",
+      "one_shot": true,
+      "ghi_chu_vi": "HÀNH ĐỘNG KẾT CHƯƠNG: khoác áo cưới giấy lên hình nhân -> khởi động cutscene seq_ending_ch01_khoac_ao, scare_ao_cuoi_quay_dau bắn theo ON_TIMER. Hiệu ứng máy đọc được: bật cờ flag_chapter_01_hoan_thanh."
     },
     {
       "id": "hs_so_ghi_ten",
@@ -80,7 +89,8 @@
         "height": 400
       },
       "action_type": "ZOOM_PUZZLE",
-      "target_puzzle_id": "puz_xep_anh_gia_pha"
+      "target_puzzle_id": "puz_xep_anh_gia_pha",
+      "fallback_text_key": "txt_thieu_do_xep_anh"
     },
     {
       "id": "hs_hom_go_nap",
@@ -119,12 +129,19 @@
       "id": "hs_chieu_coi_trai_san",
       "bounds": {
         "x": 730,
+        "y": 901,
+        "width": 440,
+        "height": 120
+      },
+      "visual_bounds": {
+        "x": 730,
         "y": 910,
         "width": 440,
         "height": 88
       },
       "action_type": "EXAMINE",
-      "text_key": "txt_examine_chieu_moi"
+      "text_key": "txt_examine_chieu_moi",
+      "ghi_chu_vi": "Nới rộng bất đối xứng xuống dưới (tâm dịch 3 px) vì mép dưới hs_hinh_nhan nằm đúng y=900; nới đều hai phía sẽ chồng lấn."
     }
   ],
   "puzzles": [
@@ -142,22 +159,31 @@
         1,
         0
       ],
+      "required_items": [
+        "item_den_dau_sang"
+      ],
       "reward_item_id": "item_ao_cuoi_giay",
-      "wrong_action_jumpscare": "scare_anh_tho_thieu_mat"
+      "grants_flag": "flag_puz_xep_anh_gia_pha_solved",
+      "wrong_action_jumpscare": "scare_anh_tho_thieu_mat",
+      "ghi_chu_vi": "Cần đèn đã thắp để soi mặt sau các mảnh ván. Bài vị KHÔNG nằm trong required_items vì nó đã bị tiêu thụ làm then ở hs_khe_mong_cua_gac. Phần thưởng item_ao_cuoi_giay vào túi đồ qua hotspot hs_ao_cuoi_giay (khoá bằng flag_puz_xep_anh_gia_pha_solved)."
     }
   ],
   "jumpscares": [
     {
       "id": "scare_hinh_nhan_chan_loi",
       "trigger_type": "ON_ENTER_AREA",
+      "delay_sec": 0.9,
+      "cooldown_sec": 90,
       "audio_asset": "sfx_scare_hinh_nhan.ogg",
       "sprite_animation": "anim_hinh_nhan_hien_gan",
-      "screen_flash": false
+      "screen_flash": false,
+      "ghi_chu_vi": "S6 - chỉ bắn ở lần vào area_gac_xep ĐẦU TIÊN, 900 ms sau khi fade-in xong."
     },
     {
       "id": "scare_anh_tho_thieu_mat",
       "trigger_type": "ON_PUZZLE_FAIL_COUNT",
       "max_fails": 3,
+      "cooldown_sec": 90,
       "audio_asset": "sfx_scare_van_anh_lat.ogg",
       "sprite_animation": "anim_chin_manh_van_lat_up",
       "screen_flash": true
@@ -165,9 +191,12 @@
     {
       "id": "scare_ao_cuoi_quay_dau",
       "trigger_type": "ON_TIMER",
+      "delay_sec": 0.4,
       "audio_asset": "sfx_scare_dau_nan_quay.ogg",
       "sprite_animation": "anim_dau_nan_tre_quay_180",
-      "screen_flash": false
+      "screen_flash": false,
+      "cooldown_exempt": true,
+      "ghi_chu_vi": "S8 - dread scare, CỐ Ý không khai báo cooldown_sec: được miễn trừ luật 90 s theo 04_horror.md muc 2.8.2 (không transient, không flash, không punch, không haptic ở mốc 0 ms). Delay 0.4 s tính từ đầu nhịp 4 của cutscene kết chương."
     }
   ]
 }

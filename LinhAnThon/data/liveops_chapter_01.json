@@ -32,7 +32,8 @@
     "hint_button": {
       "button_id": "btn_thap_nhang_xin_keo",
       "ten_vi": "Thắp nhang xin keo",
-      "bounds": { "x": 1700, "y": 930, "width": 150, "height": 110 },
+      "bounds": { "x": 1700, "y": 920, "width": 150, "height": 130 },
+      "ghi_chu_vi": "Hình vẽ nút giữ nguyên 150x110 như 02_puzzle.md §0.3; riêng VÙNG CHẠM nới ra 150x130 quanh cùng một tâm (1775, 985) để đạt ngưỡng 120 px @1920 (~44 pt Apple HIG). Vùng chạm không bắt buộc trùng hình vẽ.",
       "visible_when": "PUZZLE_OPEN",
       "blocked_during": ["CUTSCENE", "JUMPSCARE_ENVELOPE", "SAFETY_WARNING_SCREEN", "AREA_TRANSITION"]
     },

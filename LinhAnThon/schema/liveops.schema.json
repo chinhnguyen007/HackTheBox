@@ -111,7 +111,8 @@
             "ten_vi": { "type": "string", "maxLength": 120 },
             "bounds": { "$ref": "#/$defs/bounds" },
             "visible_when": { "type": "string", "enum": ["ALWAYS", "PUZZLE_OPEN", "AFTER_FIRST_FAIL"] },
-            "blocked_during": { "type": "array", "items": { "$ref": "#/$defs/ui_state" }, "uniqueItems": true }
+            "blocked_during": { "type": "array", "items": { "$ref": "#/$defs/ui_state" }, "uniqueItems": true },
+            "ghi_chu_vi": { "type": "string", "maxLength": 500, "description": "TUY CHON. Ghi chu tieng Viet cho nguoi doc: vi sao nut dat o day, vi sao vung cham lech voi hinh ve. Khong phai du lieu chay." }
           }
         },
         "tiers": {
@@ -541,9 +542,15 @@
         "ads_placement_safety": { "type": "object", "additionalProperties": true },
         "accessibility_never_monetized": {
           "type": "object",
-          "additionalProperties": { "const": true },
           "minProperties": 1,
-          "description": "Nguyen tac N4 - MOI gia tri trong khoi nay bat buoc bang true. Khong tuy chon an toan nao nam sau tuong tra phi, quang cao hay moc tien trinh."
+          "properties": {
+            "mo_ta_vi": { "type": "string", "maxLength": 500 },
+            "ghi_chu_vi": { "type": "string", "maxLength": 500 },
+            "validator_rule": { "type": "string", "maxLength": 500 }
+          },
+          "additionalProperties": { "const": true },
+          "description": "Nguyen tac N4 - MOI CO (khoa co gia tri boolean) trong khoi nay bat buoc bang true: khong tuy chon an toan nao nam sau tuong tra phi, quang cao hay moc tien trinh. Ba khoa ghi chu 'mo_ta_vi' / 'ghi_chu_vi' / 'validator_rule' la CHUOI tieng Viet, khong phai co, va khong duoc tinh vao bat bien nay.",
+          "$comment": "Truoc day khoi nay khai bao additionalProperties = {const: true} cho MOI khoa, nen ghi chu 'mo_ta_vi' (mot chuoi) bi bao sai la vi pham N4. Trinh kiem tools/validate_level.py nay chi xet cac khoa co gia tri boolean; khoa kieu chuoi duoc bo qua, khoa kieu khac (so, mang, doi tuong) van la [LOI] vi khong doc duoc thanh co an toan."
         },
         "data_privacy": { "type": "object", "additionalProperties": true },
         "spending_protection": { "type": "object", "additionalProperties": true }
