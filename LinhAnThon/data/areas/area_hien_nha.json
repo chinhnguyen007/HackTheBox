@@ -1,0 +1,256 @@
+{
+  "chapter_id": "chapter_01",
+  "area_id": "area_hien_nha",
+  "background_asset_url": "https://cdn.linhanthon.game/assets/bg_hien_nha.bundle",
+  "hotspots": [
+    {
+      "id": "hs_manh_nua",
+      "bounds": {
+        "x": 360,
+        "y": 96,
+        "width": 1000,
+        "height": 130
+      },
+      "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
+      "text_key": "txt_examine_manh_nua"
+    },
+    {
+      "id": "hs_den_dau_treo",
+      "bounds": {
+        "x": 1500,
+        "y": 180,
+        "width": 160,
+        "height": 250
+      },
+      "action_type": "COLLECT_ITEM",
+      "item_id": "item_den_dau",
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
+      "one_shot": true
+    },
+    {
+      "id": "hs_binh_phong",
+      "bounds": {
+        "x": 640,
+        "y": 300,
+        "width": 420,
+        "height": 560
+      },
+      "action_type": "ZOOM_PUZZLE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": "puz_rap_chu_the_menh",
+      "target_area_id": null,
+      "fallback_text_key": "txt_thieu_do_rap_chu"
+    },
+    {
+      "id": "hs_o_lom_binh_phong",
+      "bounds": {
+        "x": 1080,
+        "y": 470,
+        "width": 130,
+        "height": 180
+      },
+      "action_type": "USE_ITEM",
+      "item_id": "item_ban_rap_chu_the",
+      "required_item": "item_ban_rap_chu_the",
+      "target_puzzle_id": null,
+      "target_area_id": null,
+      "consumes_item": false,
+      "locks_item": false,
+      "grants_flag": "flag_binh_phong_da_tra",
+      "fallback_text_key": "txt_thieu_do_o_lom_binh_phong",
+      "one_shot": true,
+      "ghi_chu_vi": "Đặt bản rập vào ô lõm -> then cửa gian giữa nhả. consumes_item = false, locks_item = false: người chơi RÚT LẠI được bản rập, vì nó còn là clue C4 của puz_xep_anh_gia_pha (đối chiếu nét chữ với hs_so_ghi_ten). Hiệu ứng máy đọc được: bật cờ flag_binh_phong_da_tra. Căn cứ: docs/01_KICH_BAN_CHAPTER_01.md mục 4.3."
+    },
+    {
+      "id": "hs_ban_rap_tren_binh_phong",
+      "ten_vi": "Bản rập chữ còn dính trên mặt bình phong",
+      "bounds": {
+        "x": 1230,
+        "y": 300,
+        "width": 170,
+        "height": 200
+      },
+      "action_type": "COLLECT_ITEM",
+      "item_id": "item_ban_rap_chu_the",
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
+      "required_flags": [
+        "flag_puz_rap_chu_the_menh_solved"
+      ],
+      "fallback_text_key": "txt_thieu_do_ban_rap",
+      "one_shot": true,
+      "ghi_chu_vi": "Chỉ hiện sau khi giải puz_rap_chu_the_menh. Đây là hotspot THẬT SỰ trao item_ban_rap_chu_the vào túi đồ, nhờ đó jumpscare scare_ban_tay_giay_sau_manh (ON_COLLECT_ITEM) mới bắn được."
+    },
+    {
+      "id": "hs_cua_buc_ban",
+      "bounds": {
+        "x": 1420,
+        "y": 470,
+        "width": 280,
+        "height": 450
+      },
+      "action_type": "CHANGE_AREA",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": "area_gian_tho",
+      "required_flags": [
+        "flag_binh_phong_da_tra"
+      ],
+      "fallback_text_key": "txt_khoa_cua_buc_ban",
+      "ghi_chu_vi": "Cổng sang area_gian_tho: phản chiếu unlock_condition trong chapter_01.json (required_flags: flag_binh_phong_da_tra)."
+    },
+    {
+      "id": "hs_vo_tap_viet",
+      "bounds": {
+        "x": 170,
+        "y": 430,
+        "width": 220,
+        "height": 140
+      },
+      "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
+      "text_key": "txt_examine_vo_tap_viet"
+    },
+    {
+      "id": "hs_xuong_san_gach",
+      "bounds": {
+        "x": 30,
+        "y": 600,
+        "width": 120,
+        "height": 270
+      },
+      "action_type": "CHANGE_AREA",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": "area_san_gach"
+    },
+    {
+      "id": "hs_chong_tre",
+      "bounds": {
+        "x": 170,
+        "y": 600,
+        "width": 390,
+        "height": 270
+      },
+      "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
+      "text_key": "txt_examine_chong_tre"
+    },
+    {
+      "id": "hs_nhat_ky_duoi_chieu",
+      "bounds": {
+        "x": 160,
+        "y": 882,
+        "width": 280,
+        "height": 120
+      },
+      "visual_bounds": {
+        "x": 160,
+        "y": 890,
+        "width": 280,
+        "height": 105
+      },
+      "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
+      "text_key": "txt_examine_nhat_ky_1976"
+    },
+    {
+      "id": "hs_guoc_moc",
+      "bounds": {
+        "x": 640,
+        "y": 882,
+        "width": 240,
+        "height": 120
+      },
+      "visual_bounds": {
+        "x": 640,
+        "y": 890,
+        "width": 240,
+        "height": 105
+      },
+      "action_type": "EXAMINE",
+      "item_id": null,
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
+      "text_key": "txt_examine_guoc_moc"
+    },
+    {
+      "id": "hs_giay_ban_va_than",
+      "bounds": {
+        "x": 940,
+        "y": 882,
+        "width": 200,
+        "height": 120
+      },
+      "visual_bounds": {
+        "x": 940,
+        "y": 890,
+        "width": 200,
+        "height": 105
+      },
+      "action_type": "COLLECT_ITEM",
+      "item_id": "item_giay_ban_va_than",
+      "required_item": null,
+      "target_puzzle_id": null,
+      "target_area_id": null,
+      "one_shot": true
+    }
+  ],
+  "puzzles": [
+    {
+      "id": "puz_rap_chu_the_menh",
+      "type": "PATTERN_TRACE",
+      "solution": [
+        2,
+        1,
+        4,
+        3,
+        7,
+        5,
+        8,
+        6
+      ],
+      "required_items": [
+        "item_giay_ban_va_than"
+      ],
+      "reward_item_id": "item_ban_rap_chu_the",
+      "grants_flag": "flag_puz_rap_chu_the_menh_solved",
+      "wrong_action_jumpscare": null,
+      "ghi_chu_vi": "Phần thưởng item_ban_rap_chu_the được ĐẶT LÊN mặt bình phong khi giải đúng; nó chỉ vào túi đồ qua hotspot hs_ban_rap_tren_binh_phong (COLLECT_ITEM, khoá bằng flag_puz_rap_chu_the_menh_solved). Nhờ vậy scare_ban_tay_giay_sau_manh (ON_COLLECT_ITEM) mới bắn được."
+    }
+  ],
+  "jumpscares": [
+    {
+      "id": "scare_ban_tay_giay_sau_manh",
+      "trigger_type": "ON_COLLECT_ITEM",
+      "trigger_item_id": "item_ban_rap_chu_the",
+      "max_fails": null,
+      "delay_sec": 0.35,
+      "cooldown_sec": 90,
+      "audio_asset": "sfx_scare_manh_nua_bat.ogg",
+      "sprite_animation": "anim_ban_tay_vang_ma_quet",
+      "screen_flash": true,
+      "ghi_chu_vi": "S2 - impulse. Bắn 350 ms sau khi item_ban_rap_chu_the vào túi đồ qua hs_ban_rap_tren_binh_phong. Một lần duy nhất mỗi chương."
+    }
+  ]
+}
