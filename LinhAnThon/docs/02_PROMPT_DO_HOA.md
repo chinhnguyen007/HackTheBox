@@ -190,22 +190,30 @@ art/bg/bg_gian_tho_l1_mid.png         4096 x 2304, PNG-32 (alpha)
 art/bg/bg_gian_tho_l2_fore.png        4096 x 2304, PNG-32 (alpha)
 art/bg/bg_gian_tho_l3_fx.png          4096 x 2304, PNG-32 (alpha)
 art/bg/bg_gian_tho_flat.png           1920 x 1080, chỉ để duyệt
-  -> Addressables bundle: bg_gian_tho.bundle
+  -> Addressables bundle: remote_area_gian_tho       (nhóm khu vực, docs/05 §2.1)
+  -> Addressables key:    bg_gian_tho                (basename không đuôi, docs/05 §5.2.1)
   -> JSON: "background_asset_url": "https://cdn.linhanthon.game/assets/bg_gian_tho.bundle"
 
 art/zoom/zoom_puz_tuan_tu_le_cung_plate.png    1920 x 1080
 art/zoom/zoom_puz_tuan_tu_le_cung_parts.png    2048 x 2048 atlas
-  -> Addressables bundle: zoom_puz_tuan_tu_le_cung.bundle
+  -> Addressables bundle: remote_area_gian_tho       (KHÔNG phải bundle riêng)
 
 art/spr/spr_chan_nhang_chay_f00.png ... _f07.png    1024 x 1024
 art/spr/anim_di_anh_dong_loat_quay.png             2048 x 2048 sheet
 art/spr/anim_di_anh_dong_loat_quay_soft.png
 art/spr/anim_di_anh_dong_loat_quay_static.png
-  -> Addressables bundle: scare_di_anh_quay_mat.bundle
+  -> Addressables bundle: remote_area_gian_tho       (cả ba file sheet ĐI CÙNG MỘT BUNDLE)
   -> JSON: "sprite_animation": "anim_di_anh_dong_loat_quay"
 
-art/icon/icon_item_dui_mo.png         320 x 320 -> đóng atlas 160 x 160 @1x
+art/icon/icon_item_dui_mo.png         320 x 320 -> atlas 160 x 160 @1x
+  -> Addressables bundle: remote_item_icons          (atlas dùng chung toàn chương)
 ```
+
+> **Vì sao không có `zoom_*.bundle` và `scare_*.bundle` riêng — sửa ở vòng này.** Bản trước của mục này tách `zoom_puz_tuan_tu_le_cung.bundle` và `scare_di_anh_quay_mat.bundle` thành hai bundle độc lập. Cách nhóm ấy **mâu thuẫn trực tiếp** với `docs/05_TICH_HOP_UNITY_ADDRESSABLES.md` §2.1, nơi `zoom_<puzzle_id>_plate` / `_parts` và **mỗi cú doạ đúng ba file** (sheet gốc + `_soft` + `_static`) đều nằm trong `remote_area_<area_id>`.
+>
+> **`docs/05` thắng, vì đây không phải chuyện gu kỹ thuật mà là ràng buộc an toàn.** `_soft` và `_static` là tài sản của **tuỳ chọn trợ năng** (`gentle_mode`, `reduce_motion`, `scare_intensity = 0`). Nguyên tắc **N3** của `docs/06_AN_TOAN_NGUOI_CHOI.md` §1.1 — *"không tuỳ chọn an toàn nào được đặt sau bất kỳ cổng nào"* — tính **cổng mạng** là một cổng. Một nhãn tải riêng **là** một cổng mạng: người chơi bật chế độ nhẹ giữa lúc mất sóng mà biến thể nhẹ chưa có trong cache thì hoặc bị ném vào bản gốc (vi phạm an toàn), hoặc cú doạ không bắn (vỡ kịch bản). Vì vậy **ba file đi cùng một bundle, tải cùng một lúc**.
+>
+> **Quy tắc rút gọn cho tổ đồ hoạ:** tên bundle của một tài sản Chương 1 chỉ có thể là một trong **`remote_area_<area_id>`** · **`remote_ambience_<area_id>`** · **`remote_item_icons`** · **`remote_shared_ui`** · **`remote_ending`** · **`remote_event_<event_id>`** · **`remote_catalog_data`** · **`local_boot`**. Không có bundle nào đặt tên theo `puz_` hay `scare_`. Bảng nhóm đầy đủ: `docs/05` §2.1 — **khi tài liệu này lệch với `docs/05` về nhóm bundle, `docs/05` thắng**.
 
 ### 2.4. Ràng buộc kỹ thuật xuất file (APK ≤ 30MB, tất cả qua remote bundle)
 
@@ -1308,18 +1316,37 @@ Mỗi zoom = **`_plate` + `_parts`** → **12 file**, cộng 2 biến thể ph�
 
 **Biến thể an toàn bắt buộc:** 8 sprite jump-scare (C1–C3, C5–C7, C9, C10) x 2 biến thể (`_soft`, `_static`) = **16 file bổ sung**.
 
-## 6.4. Tổng tài sản Chương 1
+## 6.4. Tổng tài sản Chương 1 — **con trỏ tới bảng chính tắc, không phải bảng riêng**
 
-| Nhóm | Số file nguồn | Ước lượng sau nén (ASTC 6x6) |
-|---|---|---|
-| Bối cảnh (5 area x 4 lớp + phụ) | 22 | ~11.5 MB |
-| Zoom câu đố (6 x `_plate` + `_parts` + phụ) | 14 | ~4.2 MB |
-| Sprite jump-scare + biến thể an toàn | 24 sheet | ~3.6 MB |
-| Sprite nhân vật / bàn tay / hàng đuốc | 4 | ~0.7 MB |
-| Icon vật phẩm (10, đóng 1 atlas) | 1 atlas | ~0.3 MB |
-| **TỔNG ĐỒ HOẠ CHƯƠNG 1** | **65** | **~20.3 MB** |
+> **⚠️ ĐÍNH CHÍNH — BẢNG NGÂN SÁCH CŨ CỦA MỤC NÀY ĐÃ BỊ GỠ.**
+> Bản trước của mục này tự khai một bảng ngân sách và kết ở **"~20,3 MB sau nén"** cùng ghi chú **"tổng remote Chương 1 ≈ 39 MB"**. **Cả hai con số đều sai**, và `docs/05_TICH_HOP_UNITY_ADDRESSABLES.md` §1.6.2 gọi thẳng tên chúng trong bảng "bốn con số cũ đều sai": đồ hoạ thật là **58,97 MB** sau LZMA, tổng nội dung remote chưa cắt là **77,77 MB**. Lý do lệch: bảng cũ **tự khai** mức nén thay vì áp công thức bpp cho từng file — sai nặng nhất ở dòng sprite doạ, nơi **24 sheet 2048² ASTC 8×8 là 24,0 MB chứ không phải 3,6 MB**.
+> **Không dựng lại bảng ấy ở đây.** Ngân sách là đại lượng của tổ kỹ thuật tích hợp, và giữ hai bảng ở hai tài liệu chính là cách bốn vòng trước sinh ra mâu thuẫn.
 
-> **Đối chiếu ràng buộc nền tảng:** APK engine ≤ 30MB và **toàn bộ tài sản tải qua Unity Addressables (remote bundle)** → không một file nào trong bảng này được đóng vào APK. Chi tiết nhóm bundle và luật nạp trước xem `docs/05_TICH_HOP_UNITY_ADDRESSABLES.md`. Tổ âm thanh chiếm thêm ~18.8 MB (ngân sách tài sản âm thanh Chương 1 do tổ Horror/Audio bàn giao, **đã gồm 8 file stinger biến thể `_soft`** theo `docs/06_AN_TOAN_NGUOI_CHOI.md` §4.3), tổng remote Chương 1 ≈ **39 MB**.
+**Bảng chính tắc duy nhất:** `docs/05_TICH_HOP_UNITY_ADDRESSABLES.md`
+
+| Cần biết | Đọc ở đâu |
+|---|---|
+| Công thức bpp — mọi ô đều tính lại được | §1.6.1 |
+| Manifest gốc: chi phí nếu dựng **đúng như tài liệu này hôm nay** — **65 file, 64,097 MB GPU, 58,97 MB sau LZMA** | §1.6.2 |
+| Ba trần T1 / T2 / T3 và các nhát cắt để thoả chúng | §1.6.3 |
+| **Bảng tính sau cắt** — con số có hiệu lực để lập kế hoạch sản xuất | §1.6.4 |
+| Ngân sách theo từng bundle | §1.6.5 |
+| Âm thanh (**18,80 MB**, đã gồm 8 stinger `_soft` theo `docs/06_AN_TOAN_NGUOI_CHOI.md` §4.3) | §1.6.6 |
+
+**Đại lượng duy nhất mục này còn sở hữu là SỐ FILE NGUỒN** — vì đó là thứ tổ đồ hoạ thực sự xuất ra:
+
+| Nhóm | Số file nguồn |
+|---|---|
+| Bối cảnh (5 area × 4 lớp + phụ) | 22 |
+| Zoom câu đố (6 × `_plate` + `_parts` + phụ) | 14 |
+| Sprite jump-scare + biến thể an toàn (8 × 3) | 24 sheet |
+| Sprite nhân vật / bàn tay / hàng đuốc | 4 |
+| Icon vật phẩm (10, đóng 1 atlas) | 1 atlas |
+| **TỔNG SỐ FILE NGUỒN ĐỒ HOẠ CHƯƠNG 1** | **65** |
+
+> **65 khớp với dòng "65 file" ở `docs/05` §1.6.2** — đó là điểm neo giữa hai tài liệu. Nếu số file ở đây đổi, **phải chạy lại §1.6.2 → §1.6.5 của `docs/05`** trước khi bất kỳ ai trích ngân sách.
+
+> **Đối chiếu ràng buộc nền tảng:** APK engine ≤ 30 MB và **toàn bộ tài sản tải qua Unity Addressables (remote bundle)** → không một file nào trong bảng này được đóng vào APK. Nhóm bundle và luật nạp trước: `docs/05_TICH_HOP_UNITY_ADDRESSABLES.md` §2 và §4.
 
 ## 6.5. Checklist QA trước khi đóng bundle
 
@@ -1365,7 +1392,7 @@ Mỗi zoom = **`_plate` + `_parts`** → **12 file**, cộng 2 biến thể ph�
 |---|---|
 | `docs/03_DATA_SPEC.md` | Asset id chuẩn cho `background_asset_url`, `sprite_animation`, `item_id` icon |
 | `data/areas/*.json` | 5 `background_asset_url`, 8 `sprite_animation` khớp bảng §4.4.1 của `docs/06_AN_TOAN_NGUOI_CHOI.md` |
-| `docs/05_TICH_HOP_UNITY_ADDRESSABLES.md` | 65 file nguồn, ~20.3 MB sau nén, quy ước bundle `bg_* / zoom_* / scare_*` |
+| `docs/05_TICH_HOP_UNITY_ADDRESSABLES.md` | **65 file nguồn** (§1.6.2) · **64,097 MB byte GPU → 58,97 MB sau LZMA** — **KHÔNG phải ~20,3 MB**, xem đính chính §6.4 · nhóm bundle là `remote_area_<area_id>` / `remote_item_icons` / `remote_shared_ui` / `remote_ending`, **không** có bundle đặt tên theo `zoom_*` hay `scare_*` (§2.1 của tài liệu ấy, và §2.3 của tài liệu này) |
 | `tools/validate_level.py` | Luật đối chiếu tên file ↔ asset id (§2), luật bounds ↔ vị trí đồ vật (§3, §6.5) |
 | `docs/04_LIVEOPS_MONETIZATION.md` | **Ràng buộc cứng**: biến thể `_soft` / `_static` là tài sản khả dụng miễn phí, không được bán |
 | `docs/06_AN_TOAN_NGUOI_CHOI.md` | 16 file biến thể an toàn (`_soft` / `_static`) cho 8 sprite jump-scare; xác nhận bảng màu flash `#FFF2DC` / `#FFE9C4` / `#FFD9A0` nằm trong trần alpha cho phép |

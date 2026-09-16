@@ -179,7 +179,7 @@ Ba quy ước nữa, dùng nhất quán trong mọi bảng dưới đây:
 | | **Cộng âm thanh** (ngân sách tổ âm thanh — §1.6.6) | | | | | | **+18,80** |
 | | **TỔNG NỘI DUNG REMOTE — chưa cắt** | | | | | | **77,77** |
 
-**Ba con số cũ đều sai, và sai theo hướng có thể giải thích được:**
+**Bốn con số cũ đều sai, và sai theo hướng có thể giải thích được** (bảng dưới có **4 dòng**; bản trước viết "ba" vì dòng *"Một nền = 0,88 MB"* được thêm sau mà câu dẫn không được đếm lại):
 
 | Con số cũ | Ở đâu | Thực tế | Vì sao lệch |
 |---|---|---|---|
@@ -898,7 +898,7 @@ Bốn quy tắc này là hệ quả trực tiếp của nguyên tắc **A3** và
 - [ ] **Mỗi cú doạ có đủ ba file sprite trong CÙNG bundle khu vực**: sheet gốc + `_soft` + `_static`. Không file nào trong ba file đó nằm ở nhóm khác, nhãn khác, hay bundle tải sau. Quy tắc nối hậu tố và yêu cầu nội dung của từng biến thể: **`docs/06_AN_TOAN_NGUOI_CHOI.md` §4.3** — **8 cú doạ × 2 = 16 file sprite**
 - [ ] **Mỗi cú doạ có đủ hai file stinger trong CÙNG bundle khu vực**: `<tên>.ogg` + `<tên>_soft.ogg` — **8 file `_soft`**, cũng theo `docs/06` §4.3. Thiếu một file = engine rơi về bản gốc = người bật chế độ an toàn vẫn ăn nguyên cú doạ đầy đủ. **Chặn phát hành**
 - [ ] **Không tài sản an toàn nào nằm sau một cổng mạng.** Một nhãn Addressables tải riêng **là** một cổng (`docs/06` §1.1, N3). Kiểm bằng cách liệt kê nhãn của cả 24 file biến thể và xác nhận chúng trùng nhãn với bản gốc
-- [ ] Mỗi khu vực có `ambience_address` trỏ tới `remote_ambience_<area_id>` tồn tại trong catalog
+- [ ] Mỗi khu vực có `ambience_address` trỏ tới `remote_ambience_<area_id>` tồn tại trong catalog — **ô này CHƯA kiểm được**: `ambience_address` vẫn là **đề nghị bổ sung schema** (`docs/03_DATA_SPEC.md` §2.1.2), hiện **0/5 khu vực** có trường này trong `data/areas/*.json` và `schema/level.schema.json` chưa nhận nó. Cho tới khi schema được sửa, engine suy tên bằng quy ước chuỗi `"remote_ambience_" + area_id` và ô này chỉ kiểm được **bundle có tồn tại trong catalog**, không kiểm được dữ liệu trỏ đúng
 - [ ] Mọi `icon_item_*` có trong `remote_item_icons`
 - [ ] `override_bg` của mọi sự kiện nằm trong `addressables.bundles` của chính sự kiện đó
 - [ ] Không texture nào còn ở định dạng không nén hoặc RGBA32

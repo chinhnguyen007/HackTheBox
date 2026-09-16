@@ -76,7 +76,7 @@ Kế thừa nguyên vẹn thiết kế ở `02_puzzle.md` §0.3: **Tier 1 và Ti
                       └─ TIÊU NÉN HƯƠNG ──────► hint_cost_gems = 5 gem / đơn vị
 ```
 
-`[[ Nút gợi ý có id btn_thap_nhang_xin_keo, bounds {x:1700, y:930, width:150, height:110} — đúng vị trí đã chốt ở 02_puzzle.md §0.3. ]]`
+`[[ Nút gợi ý có id btn_thap_nhang_xin_keo. VÙNG CHẠM (bounds) = {x:1700, y:920, width:150, height:130} — nguyên văn hint_system.hint_button.bounds trong data/liveops_chapter_01.json. HÌNH VẼ vẫn là 150 x 110 quanh cùng một tâm (1775, 985); vùng chạm nới ra 150 x 130 để đạt sàn chạm 120 x 120 của dự án (mục 2.6 ngay dưới, docs/03_DATA_SPEC.md mục 2.2 mức G3). Vùng chạm không bắt buộc trùng hình vẽ — đừng lấy 110 làm chiều cao vùng chạm. ]]`
 
 ## 2.2. Giá tăng dần
 
@@ -402,7 +402,7 @@ Ba thông báo bắt buộc: `txt_iap_khoi_phuc_thanh_cong`, `txt_iap_khong_tim_
 | `src_rewarded_ad` | Xem quảng cáo thưởng, chọn nhận gem | **2** | 6 lượt/ngày | Quảng cáo |
 | `src_iap_gem_pack` | Mua túi nén hương | 60 / 220 | Không giới hạn | IAP |
 
-`[[ src_read_all_text_in_area là nguồn thu cố ý nhất trong bảng: nó trả tiền cho hành vi ĐỌC. Toàn bộ 53 khoá localization của chương đều là cài cắm twist — người đọc hết sẽ hiểu cú twist sâu hơn, và game thưởng cho điều đó. ]]`
+`[[ src_read_all_text_in_area là nguồn thu cố ý nhất trong bảng: nó trả tiền cho hành vi ĐỌC. Toàn bộ 57 khoá localization phân biệt của chương (đếm từ data/areas/*.json: 39 txt_examine_ + 11 txt_thieu_do_ + 4 txt_khoa_ + 3 txt_thoai_ = 57) đều là cài cắm twist — người đọc hết sẽ hiểu cú twist sâu hơn, và game thưởng cho điều đó. Lưu ý phạm vi của chính nguồn thu này: nó chỉ đếm hotspot EXAMINE và DIALOGUE trong một khu vực, tức nhánh 39 + 3; nhóm txt_thieu_do_ và txt_khoa_ chỉ hiện khi người chơi bấm vào chỗ chưa đủ điều kiện, không tính vào mốc đọc hết. ]]`
 
 ## 5.2. Nguồn chi (sinks)
 
@@ -561,7 +561,7 @@ Ba phép đo, đối chiếu chéo với **`docs/06_AN_TOAN_NGUOI_CHOI.md`** (§
 
 # PHẦN 7 — REMOTE CONFIG
 
-## 7.1. Bảng khoá (32 khoá)
+## 7.1. Bảng khoá (**32 khoá** — đếm từ `data/liveops_chapter_01.json`: `len(remote_config_keys) = 32`)
 
 | Khoá | Kiểu | Mặc định | Biên | Cần khởi động lại | Chủ sở hữu |
 |---|---|---|---|---|---|
@@ -586,7 +586,7 @@ Ba phép đo, đối chiếu chéo với **`docs/06_AN_TOAN_NGUOI_CHOI.md`** (§
 | `event_active_id` | string | `""` | — | Không | LiveOps |
 | `event_theme_enabled` | bool | `true` | — | Không | LiveOps |
 | `addressables_catalog_url` | string | `https://cdn.linhanthon.game/addressables/catalog_chapter_01.json` | — | **Có** | Tech |
-| `bundle_download_timeout_sec` | int | 8 | 3–60 | Không | Tech |
+| `bundle_download_timeout_sec` | int | **60** ⚠️ | 3–60 *(biên trên đĩa)* | Không | **Tech — `docs/05` §7.2.2 là chủ sở hữu** |
 | `bundle_retry_count` | int | 2 | 0–5 | Không | Tech |
 | `bundle_wifi_only_default` | bool | `true` | — | Không | Tech |
 | `telemetry_sampling_rate` | float | 1.0 | 0.0–1.0 | Không | Data |
@@ -597,6 +597,19 @@ Ba phép đo, đối chiếu chéo với **`docs/06_AN_TOAN_NGUOI_CHOI.md`** (§
 | `ab_slot_hint_pricing` | string | `control` | — | Không | Data |
 | `ab_slot_paywall_timing` | string | `control` | — | Không | Data |
 | `ab_slot_mercy_threshold` | string | `control` | — | Không | Design |
+
+> **⚠️ `bundle_download_timeout_sec` — VÌ SAO Ô "MẶC ĐỊNH" KHÔNG CHÉP LẠI GIÁ TRỊ TRÊN ĐĨA.**
+> Đây là ô duy nhất trong bảng trên **cố ý lệch** với `data/liveops_chapter_01.json`, và lệch có khai báo:
+>
+> | | Giá trị |
+> |---|---|
+> | Trên đĩa hôm nay (`remote_config_keys[*]`) | `"default": 8`, `"min": 3`, `"max": 60` |
+> | `docs/05_TICH_HOP_UNITY_ADDRESSABLES.md` §7.2.2 đòi | **90** *(chấp nhận 60 – 120)*, và **không bao giờ dưới `T2 / 0,35 × 2 = 44 s`* |
+> | **Giá trị LiveOps phải đẩy ngay hôm nay** | **60** — mức cao nhất mà biên `max: 60` trên đĩa còn cho phép, đồng thời là **sàn** mà `docs/05` chấp nhận |
+>
+> **Vì sao 8 là con số hỏng:** `AssetBundleRequestOptions.Timeout` là hết giờ **toàn bộ request**, không phải hết giờ kết nối. Bundle khu vực lớn nhất là **7,73 MB**; ở thông lượng 3G Việt Nam tệ nhất **0,35 MB/s** nó cần **22 giây**. Đặt 8 giây nghĩa là **client tự huỷ mọi lượt tải 3G trước khi chúng kịp xong** — người chơi thấy "lỗi mạng" trên một đường mạng hoàn toàn bình thường. Đồng hồ 8 giây vẫn có chỗ dùng, nhưng là của một khoá **khác**: `bundle_connect_timeout_sec` (theo dõi tiến độ `DownloadHandler`), một trong **4 khoá bổ sung** mà `docs/05` §5.3.1 đòi thêm ngoài 32 khoá của bảng trên.
+>
+> **Việc còn nợ, ghi ra để không ai quên:** vòng sửa **dữ liệu** kế tiếp phải nâng `bundle_download_timeout_sec` trong `data/liveops_chapter_01.json` lên `"default": 90, "max": 120` và bổ sung 4 khoá của `docs/05` §5.3.1 — **cho tới lúc đó, 60 là giá trị an toàn duy nhất đặt được trong biên hiện có.** Vòng này chỉ sửa tài liệu, không đụng `data/`.
 
 ## 7.2. Ba luật của remote config
 
@@ -736,15 +749,18 @@ Ba phép đo, đối chiếu chéo với **`docs/06_AN_TOAN_NGUOI_CHOI.md`** (§
 | `kill_switch_iap` | Ẩn cửa hàng và paywall | Không mất gì trong Chương 1 |
 | `kill_switch_event_theme` | Trả về giao diện gốc toàn bộ | Chỉ mất lớp sơn sự kiện |
 | `kill_switch_paid_hints` | Gợi ý **chỉ còn đường miễn phí** | Không mất gì — chỉ phải chờ đủ giờ |
+| `kill_switch_telemetry` | **Tắt toàn bộ đường ống đo đạc** | Không mất gì trong game — mất số liệu vận hành của phiên đó |
 
-> Bốn kill-switch được thiết kế sao cho **bật cả bốn cùng lúc thì game vẫn chơi trọn vẹn Chương 1**. Đó là phép thử cuối cùng của nguyên tắc N1.
+> **Năm kill-switch** được thiết kế sao cho **bật cả năm cùng lúc thì game vẫn chơi trọn vẹn Chương 1**. Đó là phép thử cuối cùng của nguyên tắc N1.
+>
+> **⚠️ Bốn trong năm bật được từ xa, cái thứ năm thì chưa.** Đếm từ `data/liveops_chapter_01.json`: `rollout.kill_switches` có **5** khoá; `remote_config_keys` mới có **4** khoá `kill_switch_*` — **thiếu đúng `kill_switch_telemetry`** (bảng §7.1). Một công tắc chỉ nằm trong `rollout` là công tắc **nằm trong bundle dữ liệu**: muốn bật phải dựng lại bundle, đẩy catalog, chờ triển khai — hàng chục phút, không phải công tắc khẩn cấp. Mà telemetry lại đúng là cái phải tắt được nhanh nhất khi có sự cố riêng tư. Việc còn nợ ở vòng sửa **dữ liệu**: bổ sung `kill_switch_telemetry` vào `remote_config_keys`. Chủ sở hữu phân tích: `docs/05_TICH_HOP_UNITY_ADDRESSABLES.md` §5.3.1.
 
 ## 10.3. Danh sách kiểm tra QA trước khi bàn giao
 
 | # | Hạng mục kiểm tra | Kết quả phải đạt |
 |---|---|---|
 | 1 | Chơi hết Chương 1 không tiêu một gem, không xem một quảng cáo | Hoàn thành được, không kẹt |
-| 2 | Bật cả 4 kill-switch rồi chơi lại | Hoàn thành được |
+| 2 | Bật cả **5** kill-switch rồi chơi lại (4 từ remote config, `kill_switch_telemetry` từ `rollout`) | Hoàn thành được |
 | 3 | Chờ đủ 300 giây ở cả 6 câu đố | Tier 3 mở miễn phí ở cả 6 |
 | 4 | Sai 7 lần liên tiếp ở mỗi câu đố | Nhận đủ 3 nấc gợi ý thương xót, **không thấy quảng cáo, không thấy paywall** |
 | 5 | Mua `com.game.chapter02`, gỡ app, cài lại, bấm Khôi phục | Nhận lại quyền, không mất tiền lần hai |
@@ -773,14 +789,16 @@ Ba phép đo, đối chiếu chéo với **`docs/06_AN_TOAN_NGUOI_CHOI.md`** (§
 
 | File | Quan hệ |
 |---|---|
-| `schema/liveops.schema.json` | Phải kiểm được 16 bất biến liệt kê ở `validation.invariants` của file JSON |
+| `schema/liveops.schema.json` | Phải kiểm được **17 bất biến** liệt kê ở `validation.invariants` của file JSON (đếm từ `data/liveops_chapter_01.json`: `len(validation.invariants) = 17`) |
 | `tools/validate_level.py` | Cần thêm cờ `--liveops` để kiểm file này |
 | `docs/03_DATA_SPEC.md` | Mô tả `hint_tier_unlocked`, `hint_timer_accumulated` trong save state — phải khớp §2.5 tài liệu này |
 | `docs/05_TICH_HOP_UNITY_ADDRESSABLES.md` | Nhãn bundle sự kiện (`evt_halloween_2026`) và luật fallback §4.4 |
 | `data/areas/*.json` | Nguồn `background_asset_url` cho fallback khi `override_bg` tải hỏng |
 | **`docs/06_AN_TOAN_NGUOI_CHOI.md`** | **Chủ sở hữu mọi ràng buộc an toàn mà tài liệu này phải tuân theo** — N1–N4 (§1.1), danh sách không-bao-giờ-override (§1.2), màn hình cảnh báo (§3.1), luật nghỉ 90 giây và điều kiện miễn trừ (§6.3), bảng truy vết tuỳ chọn an toàn ↔ `data/liveops_chapter_01.json` (§10). **Khi tài liệu này lệch với docs/06 ở bất kỳ điểm an toàn nào, docs/06 thắng.** |
 
-## 11.3. Mười sáu bất biến validator phải kiểm
+## 11.3. Mười bảy bất biến validator phải kiểm
+
+> Danh sách dưới đây là **bản chép một-đối-một** của `validation.invariants` trong `data/liveops_chapter_01.json` — **17 phần tử**, không nhiều hơn, không ít hơn. Bản trước dừng ở 16 vì bất biến 17 được thêm sau khi mục này được viết; xem §3.6.1.
 
 1. `hint_system.tiers[*].gem_cost` tăng dần theo tier.
 2. `hint_system.tiers[*].unlock_free_after_sec` tăng dần theo tier.
@@ -798,6 +816,7 @@ Ba phép đo, đối chiếu chéo với **`docs/06_AN_TOAN_NGUOI_CHOI.md`** (§
 14. `ab_tests.slots[*].variants[*].allocation_pct` cộng lại đúng 100 cho mỗi ô.
 15. `remote_config_keys[*].key` duy nhất; mọi khoá dùng trong `ab_tests` overrides phải tồn tại trong `remote_config_keys`.
 16. `gem_economy.balance_targets.expected_free_earn_chapter_01 ≥ expected_spend_p90_player`.
+17. **`iap.products[*].requires.flag` phải có nguồn cấp thật** — hoặc là cờ Chương 1 khai trong `chapter_complete_flag` / `exported_flags` của `data/chapter_01.json`, hoặc do chính một `iap.products[*].unlock.grants_flags` trong file này cấp. Cờ không có nguồn cấp ⇒ **[LỖI]**, vì nó khoá vĩnh viễn cổng bán. Đặc tả đầy đủ ở **§3.6.1**; validator: `tools/validate_level.py` giai đoạn 11.
 
 ---
 

@@ -42,8 +42,19 @@ Bốn tài liệu nguồn viết song song nên có chỗ mâu thuẫn. Bảng d
 | Lore, niên biểu, tên nhân vật, nội dung văn bản đọc được, độc thoại | **01_narrative** | Chủ sở hữu tường thuật |
 | `bounds`, id hotspot, `action_type`, tham số hotspot, quy ước `text_key` | **03_world** → nay đã kết tinh thành **`docs/03_DATA_SPEC.md` + `data/areas/*.json`** | Chủ sở hữu toạ độ; đã hợp nhất bí danh ở mục 0.4. **Khi 03_world lệch với `data/`, `data/` thắng** |
 | `solution`, manh mối, hành vi khi sai, bậc gợi ý, đồ thị phụ thuộc | **02_puzzle** | Chủ sở hữu logic câu đố |
-| Thông số jumpscare (envelope, flash, haptic, cooldown), thiết kế âm thanh | **04_horror** *(file nháp thượng nguồn)* | Chủ sở hữu nhịp kinh dị. **Chỉ còn giữ phần thông số doạ thuần tuý** — mọi ràng buộc **an toàn** đã tách sang `docs/06_AN_TOAN_NGUOI_CHOI.md` ở hàng dưới; không trích dẫn an toàn về file nháp này nữa |
-| **An toàn người chơi, trợ năng, nhạy sáng, `gentle_mode`, biến thể `_soft` / `_static`, luật nghỉ 90 giây** | **`docs/06_AN_TOAN_NGUOI_CHOI.md`** — **deliverable chính thức, không phải phụ lục** | Tách ra khỏi 04_horror ở vòng 3. Mọi ràng buộc an toàn trích dẫn về đây, **không** trích về file nháp `04_horror.md` nữa |
+| Thông số jumpscare (envelope, flash, haptic, cooldown), thiết kế âm thanh | **`docs/06_AN_TOAN_NGUOI_CHOI.md`** §4.4.1 *(giá trị trên đĩa)* + **`data/areas/*.json`** *(nguồn sự thật)* | **⚠️ Quyền sở hữu đã chuyển ở vòng này.** Hàng này trước đây giao quyền cho `04_horror.md` — **file ấy không tồn tại trong repo và không có con trỏ chuyển tiếp nào**, nên mọi tham chiếu tới nó là tham chiếu gãy. Bảng đầy đủ tám cú doạ với `trigger_type`, `max_fails`, `screen_flash`, `audio_asset`, `sprite_animation`, envelope, camera và haptic nay nằm ở `docs/06` §4.4.1; **khi `docs/06` lệch với `data/areas/*.json`, `data/` thắng** |
+| **An toàn người chơi, trợ năng, nhạy sáng, `gentle_mode`, biến thể `_soft` / `_static`, luật nghỉ 90 giây** | **`docs/06_AN_TOAN_NGUOI_CHOI.md`** — **deliverable chính thức, không phải phụ lục** | Tách ra khỏi file nháp `04_horror.md` ở vòng 3. **Không tài liệu nào được trích dẫn về `04_horror.md` nữa — file ấy không có trong repo.** Mọi ràng buộc an toàn trích về đây |
+
+> **Bốn tên `01_narrative` · `02_puzzle` · `03_world` · `04_horror` là FILE NHÁP THƯỢNG NGUỒN, KHÔNG có trong repo.** Chúng chưa bao giờ được commit; giữ tên ở cột "Tài liệu nắm quyền" chỉ để ghi lại **ai đã quyết định điều gì**, không phải để ai đó đi mở file. Bảng chuyển tiếp — dùng nó mỗi khi gặp một trong bốn tên ấy ở bất kỳ tài liệu nào:
+>
+> | Tên nháp | Đọc ở đâu trong repo hôm nay |
+> |---|---|
+> | `01_narrative.md` | **Chính tài liệu này** (`docs/01_KICH_BAN_CHAPTER_01.md`) — Phần 2 (lore, niên biểu) và Phần 4 |
+> | `02_puzzle.md` | **Chính tài liệu này** Phần 4 (sáu câu đố, `solution`, đồ thị phụ thuộc) + `data/areas/*.json` mảng `puzzles[]` + `docs/04_LIVEOPS_MONETIZATION.md` §2 (ba bậc gợi ý) |
+> | `03_world.md` | **`docs/03_DATA_SPEC.md` + `data/areas/*.json`** — đã kết tinh, xem mục 0.4 |
+> | `04_horror.md` | **`docs/06_AN_TOAN_NGUOI_CHOI.md`** §4.4.1 (thông số doạ) và §1–§6 (an toàn) + `data/areas/*.json` mảng `jumpscares[]` |
+>
+> **Quy tắc một câu: không có file nháp nào là nguồn sự thật. `data/` thắng mọi tài liệu; trong số tài liệu, bản trong `docs/` thắng bản nháp.**
 
 ## 0.3. Bảng xử lý xung đột đã phát hiện (đã chốt trong tài liệu này)
 
@@ -520,9 +531,11 @@ Mỗi khu vực trình bày theo cùng một khung: **không khí → khung hìn
 >
 > **Ngưỡng mới chốt: 120 × 120 px @1920.** Nó đưa mọi hotspot lên **40–59 pt/dp**: vượt 44 pt từ lớp máy 6.1" trở lên, và vượt 48 dp từ lớp máy có cạnh dài ≥ 768 dp. **Phần còn thiếu duy nhất** là lớp máy 640 dp (40 dp so với 48 dp của Material); khoảng thiếu ấy được bù bằng hai luật đã có sẵn và **không được phép bỏ**: (a) **khoảng đệm 20 px** giữa hai bounds kề nhau — không có mục tiêu nào sát nhau để bấm nhầm; (b) **`visual_bounds`** — sprite luôn nhỏ hơn vùng chạm và nằm giữa vùng chạm, nên tâm ngón tay rơi vào giữa chứ không rơi vào mép. **QA bắt buộc kiểm tay thật trên một máy 640 dp.**
 
-**Mười một hotspot có cạnh dưới 120 px ⇒ `bounds` đã được nới ở bước dữ liệu, sprite giữ nguyên qua `visual_bounds`. VIỆC NỚI ĐÃ XONG — bảng dưới đây là bảng đối chiếu chốt, in cả giá trị gốc lẫn giá trị thật đang nằm trong `data/areas/*.json`:**
+**Mười một hotspot** *(đếm từ `data/areas/*.json`: đúng 11 hotspot khai `visual_bounds`)* **có cạnh vẽ dưới 120 px ⇒ `bounds` đã được nới ở bước dữ liệu, sprite giữ nguyên qua `visual_bounds`. VIỆC NỚI ĐÃ XONG — bảng dưới đây là bảng đối chiếu chốt, in cả giá trị gốc lẫn giá trị thật đang nằm trong `data/areas/*.json`:*
 
-| Area | Hotspot | Bounds gốc *(03_world — cũng là giá trị in ở các mục 3.x.3 dưới đây)* | **Vùng chạm đã nới — giá trị THẬT trong `data/areas/`** | `visual_bounds` *(= bounds gốc)* |
+> **⚠️ SỬA Ở VÒNG NÀY — các bảng §3.x.3 nay in `bounds` THẬT.** Bản trước của tài liệu này in **giá trị gốc (chưa nới)** vào cột tên là `bounds` ở cả 11 dòng của các bảng §3.1.3 – §3.5.3, trong khi `data/areas/*.json` đã mang giá trị đã nới. Ai chép từ bảng ấy sang dữ liệu là đẩy một `bounds` **dưới sàn 120**, và mức **G3** của `docs/03_DATA_SPEC.md` §2.2 sẽ chặn build. Nay các bảng §3.x.3 in **giá trị thật trong `data/`**, kèm giá trị vẽ trong ngoặc. Bảng ngay dưới đây vẫn giữ cả hai cột để tra ngược.*
+
+| Area | Hotspot | Bounds gốc *(03_world — giá trị TRƯỚC khi nới)* | **Vùng chạm đã nới — giá trị THẬT trong `data/areas/`** | `visual_bounds` *(= bounds gốc)* |
 |---|---|---|---|---|
 | `area_san_gach` | `hs_cau_doi_trai` | `{88,300,110,420}` | **`{83,300,120,420}`** | `{88,300,110,420}` |
 | `area_san_gach` | `hs_cau_doi_phai` | `{520,300,110,420}` | **`{515,300,120,420}`** | `{520,300,110,420}` |
@@ -583,19 +596,19 @@ Thao tác đầu tiên hầu như ai cũng làm: bấm vào cổng. Cổng **kh�
 
 ### 3.1.3. Bảng hotspot (13 hotspot)
 
-| # | id | bounds {x, y, w, h} | action_type | Tham số | Vai trò kịch bản |
+| # | id | **`bounds` THẬT trong `data/areas/*.json`** {x, y, w, h} | action_type | Tham số | Vai trò kịch bản |
 |---|---|---|---|---|---|
 | 1 | `hs_guong_bat_quai` 🔹 | `{x:296, y:150, width:130, height:130}` | `EXAMINE` | `txt_examine_guong_bat_quai` | **Từ điển của câu đố P1** — bảng tra quẻ ↔ số ↔ ngũ hành ↔ tượng người. Sprite thật 96×96 |
 | 2 | `hs_loa_phat_thanh` 🔹 | `{x:700, y:120, width:200, height:150}` | `DIALOGUE` | `txt_thoai_loa_phat_thanh` | Neo bối cảnh 1996 + thông tin "nhờ bà con trông hộ cái nhà". Sprite thật 150×84 |
-| 3 | `hs_cau_doi_trai` | `{x:88, y:300, width:110, height:420}` | `EXAMINE` | `txt_examine_cau_doi_trai` | **Clue C2 của P1**: lưng nhà = Bắc = nước = Khảm |
+| 3 | `hs_cau_doi_trai` | **`{x:83, y:300, width:120, height:420}`** *(vẽ: `{88,300,110,420}` → `visual_bounds`)* | `EXAMINE` | `txt_examine_cau_doi_trai` | **Clue C2 của P1**: lưng nhà = Bắc = nước = Khảm |
 | 4 | `hs_o_khoa_cong` | `{x:280, y:430, width:180, height:180}` | `ZOOM_PUZZLE` | `target_puzzle_id: puz_khoa_bat_quai` | **Câu đố mở màn** — ổ khoá gỗ ba vòng đồng tâm |
-| 5 | `hs_cau_doi_phai` | `{x:520, y:300, width:110, height:420}` | `EXAMINE` | `txt_examine_cau_doi_phai` | **Clue C3 của P1**: mặt nhà = Nam = lửa = Ly |
+| 5 | `hs_cau_doi_phai` | **`{x:515, y:300, width:120, height:420}`** *(vẽ: `{520,300,110,420}` → `visual_bounds`)* | `EXAMINE` | `txt_examine_cau_doi_phai` | **Clue C3 của P1**: mặt nhà = Nam = lửa = Ly |
 | 6 | `hs_cao_pho` | `{x:1000, y:330, width:150, height:210}` | `EXAMINE` | `txt_examine_cao_pho` | **Mũi neo twist A1** — cáo phó không có tên người chơi |
 | 7 | `hs_cua_vao_hien` | `{x:1180, y:380, width:300, height:520}` | `CHANGE_AREA` | `target_area_id: area_hien_nha` · gate: có `item_chia_khoa_dong` · `txt_khoa_cua_vao_hien` | Lối đi tiếp |
 | 8 | `hs_day_phoi_khan_xo` | `{x:1540, y:230, width:340, height:150}` | `EXAMINE` | `txt_examine_khan_xo` | **Mũi neo twist A2** + **clue C5 của P1** (Bà Cô là phận nữ) |
 | 9 | `hs_xe_dap_tui_vai` | `{x:60, y:760, width:240, height:230}` | `EXAMINE` | `txt_examine_xe_dap_tui_vai` | **Phiếu đo hiệu may** — mũi neo inventory-side của twist |
 | 10 | `hs_chum_nuoc_mua` | `{x:330, y:730, width:300, height:260}` | `EXAMINE` | `txt_examine_chum_nuoc` | **Clue C4 của P1** (chum kê góc Bắc) + nơi `scare_bong_trong_chum` diễn ra |
-| 11 | `hs_gao_dua` 🔹 | `{x:648, y:800, width:130, height:110}` | `EXAMINE` | `txt_examine_gao_dua` | **Cảnh báo duy nhất trước jumpscare** — chữ khắc trỏ vào **ổ khoá**, không vào chum. Sprite thật 86×62 |
+| 11 | `hs_gao_dua` 🔹 | **`{x:648, y:795, width:130, height:120}`** *(vẽ: `{648,800,130,110}` → `visual_bounds`)* | `EXAMINE` | `txt_examine_gao_dua` | **Cảnh báo duy nhất trước jumpscare** — chữ khắc trỏ vào **ổ khoá**, không vào chum. Sprite thật 86×62 |
 | 12 | `hs_dong_tro_hoa_vang` | `{x:820, y:820, width:280, height:170}` | `EXAMINE` | `txt_examine_dong_tro_hoa_vang` | Giấy trắng bị hóa = dấu vết người sống đang đồ chữ |
 | 13 | `hs_khe_gach_thu_tay` 🔹 | `{x:1560, y:800, width:220, height:120}` | `EXAMINE` | `txt_examine_khe_gach_thu_tay` | **Thư tay bà nội** — đặt ba điều cấm mà chương sẽ phá đủ cả ba. Sprite thật 150×40 |
 
@@ -768,7 +781,7 @@ Thao tác đầu tiên hầu như ai cũng làm: bấm vào cổng. Cổng **kh�
 | 2 | Như trên, cộng: **gáo dừa trên miệng chum khẽ xoay một vòng** ở hậu cảnh (`fol_gao_dua_lach_cach`, rất nhỏ, camera không cắt) — gợi ý môi trường đẩy người chơi **đi đọc chữ khắc trong lòng gáo** *(và đọc luôn cái chum bên cạnh: clue C4)*. **Cái gáo tự chỉ vào chính nó trước khi nó làm người chơi giật mình** |
 | 3 | **JUMPSCARE `scare_bong_trong_chum`**, sau đó `fail_count` reset về 0, ba vòng **giữ nguyên vị trí người chơi vừa đặt** (không phạt thêm) |
 
-**Ba mức gợi ý** (nút "Thắp nhang xin keo", `{x:1700, y:930, width:150, height:110}`):
+**Ba mức gợi ý** (nút "Thắp nhang xin keo" — **vùng chạm `{x:1700, y:920, width:150, height:130}`**, nguyên văn `hint_system.hint_button.bounds` trong `data/liveops_chapter_01.json`; hình vẽ vẫn `150 × 110` quanh tâm `(1775, 985)`):
 
 | Tier | Mở sau | Nội dung |
 |---|---|---|
@@ -863,7 +876,7 @@ Bên trái: **chõng tre** trải nửa chiếc chiếu cói cuộn dở, trên 
 
 ### 3.2.3. Bảng hotspot (12 hotspot)
 
-| # | id | bounds {x, y, w, h} | action_type | Tham số | Vai trò kịch bản |
+| # | id | **`bounds` THẬT trong `data/areas/*.json`** {x, y, w, h} | action_type | Tham số | Vai trò kịch bản |
 |---|---|---|---|---|---|
 | 1 | `hs_manh_nua` | `{x:360, y:96, width:1000, height:130}` | `EXAMINE` | `txt_examine_manh_nua` | **Clue C2 của P2** (bố cục hai chữ) + tiền đề `scare_ban_tay_giay_sau_manh` |
 | 2 | `hs_den_dau_treo` | `{x:1500, y:180, width:160, height:250}` | `COLLECT_ITEM` | `item_id: item_den_dau` · `required_item: null` | **Clue C3 của P5** — danh sách ba thứ còn thiếu, dựng mục tiêu từ khu vực 2 |
@@ -874,9 +887,9 @@ Bên trái: **chõng tre** trải nửa chiếc chiếu cói cuộn dở, trên 
 | 6 | `hs_vo_tap_viet` | `{x:170, y:430, width:220, height:140}` | `EXAMINE` | `txt_examine_vo_tap_viet` | **Clue C1 của P2** — toàn bộ bốn phép viết chữ + ba chữ mẫu đã giải sẵn |
 | 7 | `hs_xuong_san_gach` | `{x:30, y:600, width:120, height:270}` | `CHANGE_AREA` | `target_area_id: area_san_gach` · **không gate** | Đường lùi, luôn mở |
 | 8 | `hs_chong_tre` | `{x:170, y:600, width:390, height:270}` | `EXAMINE` | `txt_examine_chong_tre` | Dấu vết ông từ + dấu vết người sống mới rót chè |
-| 9 | `hs_nhat_ky_duoi_chieu` | `{x:160, y:890, width:280, height:105}` | `EXAMINE` | `txt_examine_nhat_ky_1976` | **Lần đầu người chơi nghe một người trong nhà thú nhận** |
-| 10 | `hs_guoc_moc` | `{x:640, y:890, width:240, height:105}` | `EXAMINE` | `txt_examine_guoc_moc` | **Mô-típ "vừa chân"** — thân thể người chơi khớp chỗ trống người khác |
-| 11 | `hs_giay_ban_va_than` | `{x:940, y:890, width:200, height:105}` | `COLLECT_ITEM` | `item_id: item_giay_ban_va_than` · `required_item: null` | **Điều kiện mở khoá P2** |
+| 9 | `hs_nhat_ky_duoi_chieu` | **`{x:160, y:882, width:280, height:120}`** *(vẽ: `{160,890,280,105}` → `visual_bounds`)* | `EXAMINE` | `txt_examine_nhat_ky_1976` | **Lần đầu người chơi nghe một người trong nhà thú nhận** |
+| 10 | `hs_guoc_moc` | **`{x:640, y:882, width:240, height:120}`** *(vẽ: `{640,890,240,105}` → `visual_bounds`)* | `EXAMINE` | `txt_examine_guoc_moc` | **Mô-típ "vừa chân"** — thân thể người chơi khớp chỗ trống người khác |
+| 11 | `hs_giay_ban_va_than` | **`{x:940, y:882, width:200, height:120}`** *(vẽ: `{940,890,200,105}` → `visual_bounds`)* | `COLLECT_ITEM` | `item_id: item_giay_ban_va_than` · `required_item: null` | **Điều kiện mở khoá P2** |
 
 **Tự kiểm tra bố cục:** **12 hotspot · 66 cặp** · **0 giao nhau** · `y_min = 96` ✓ · `y_max` nét vẽ = 995 ✓ · nhỏ nhất cao 105 px ⚠️ *(ba hotspot đáy — `hs_nhat_ky_duoi_chieu`, `hs_guoc_moc`, `hs_giay_ban_va_than` — đã được nới lên 120 px ở bước dữ liệu, xem bảng đối chiếu ở đầu Phần 3)*. Cặp sát nhau nhất: `hs_binh_phong` (kết thúc x = 1060) và `hs_o_lom_binh_phong` (bắt đầu x = 1080) — **cách đúng 20 px**, **cố ý tách rời** vì một cái là `ZOOM_PUZZLE`, một cái là `USE_ITEM`; nếu chồng nhau người chơi sẽ tra bản rập nhầm vào ô chữ.
 
@@ -1070,7 +1083,7 @@ Bên trái: **chõng tre** trải nửa chiếc chiếu cói cuộn dở, trên 
 
 **Dạy cơ chế:** khu vực này dạy `USE_ITEM` (kéo item từ hành trang thả lên hotspot). Bản rập là item đầu tiên phải **dùng** chứ không chỉ nhặt.
 
-`[[ CẢNH BÁO SẢN XUẤT: item_den_dau nhặt ở đây nhưng chỉ dùng ở Khu 4. Nếu người chơi bỏ sót nó, P5 sẽ tắc. Biện pháp: hs_den_dau_treo đặt ở cột hiên ngang tầm mắt, và txt_examine_den_dau lúc nhặt nêu đủ ba thứ còn thiếu — dựng mục tiêu ngay từ đây. ]]`
+`[[ CẢNH BÁO SẢN XUẤT: item_den_dau nhặt ở đây nhưng chỉ dùng ở Khu 4. Nếu người chơi bỏ sót nó, P5 sẽ tắc. Biện pháp: hs_den_dau_treo đặt ở cột hiên ngang tầm mắt, kích thước 160 x 250 — rộng rãi so với sàn chạm 120 x 120. LƯU Ý KHOÁ VĂN BẢN: hs_den_dau_treo là COLLECT_ITEM nên nó KHÔNG có text_key, và khoá txt_examine_den_dau KHÔNG tồn tại ở đâu trong dữ liệu — đừng đi tìm. Toàn bộ 57 khoá localization của chương nằm ở data/areas/*.json; nhóm txt_examine_ chỉ gắn với hotspot EXAMINE. Vậy chỗ nêu ba thứ còn thiếu là văn bản nhặt-đồ của lớp giao diện túi đồ, không phải một khoá trong dữ liệu màn chơi. ]]`
 
 ### 3.2.8. Khu vực này đẩy cốt truyện tiến lên thế nào
 
@@ -1125,25 +1138,25 @@ Bên trái bàn thờ, thấp hơn một tấc, là **khám thờ gỗ nhỏ b�
 
 ### 3.3.3. Bảng hotspot (17 hotspot — đông nhất chương)
 
-| # | id | bounds {x, y, w, h} | action_type | Tham số | Vai trò kịch bản |
+| # | id | **`bounds` THẬT trong `data/areas/*.json`** {x, y, w, h} | action_type | Tham số | Vai trò kịch bản |
 |---|---|---|---|---|---|
 | 1 | `hs_hoanh_phi` | `{x:640, y:96, width:700, height:140}` | `EXAMINE` | `txt_examine_hoanh_phi` | **Clue C2 của P3** — "đèn trước, nhang sau, vàng sau rốt" |
 | 2 | `hs_huong_vong` | `{x:1420, y:110, width:260, height:170}` | `EXAMINE` | `txt_examine_huong_vong` | Đồng hồ cõi âm: một vòng = một ngày đêm, mà nhà bỏ không mười ngày |
-| 3 | `hs_khe_mong_cua_gac` | `{x:430, y:120, width:150, height:110}` | `USE_ITEM` | `required_item: item_bai_vi_khuyet_danh` · `item_id: item_bai_vi_khuyet_danh` · fallback `txt_thieu_do_khe_mong_cua_gac` | **Tra bài vị làm then** — một nửa gate lên gác xép |
+| 3 | `hs_khe_mong_cua_gac` | **`{x:430, y:115, width:150, height:120}`** *(vẽ: `{430,120,150,110}` → `visual_bounds`)* | `USE_ITEM` | `required_item: item_bai_vi_khuyet_danh` · `item_id: item_bai_vi_khuyet_danh` · fallback `txt_thieu_do_khe_mong_cua_gac` | **Tra bài vị làm then** — một nửa gate lên gác xép |
 | 4 | `hs_cau_thang_gac` | `{x:430, y:250, width:150, height:330}` | `CHANGE_AREA` | `target_area_id: area_gac_xep` · gate: có `item_den_dau_sang` **VÀ** `flag_then_gac_da_tra` · `txt_khoa_cau_thang_gac` | Lối lên Khu 5 |
 | 5 | `hs_kham_tho_ba_co` | `{x:110, y:240, width:290, height:240}` | `EXAMINE` | `txt_examine_kham_tho` | **Vệt tay lau sạch giữa lớp bụi** — dấu vết người sống |
 | 6 | `hs_bai_vi_khuyet_danh` | `{x:130, y:500, width:250, height:120}` | `COLLECT_ITEM` | `item_id: item_bai_vi_khuyet_danh` · `required_item: null` · `required_flags: [flag_puz_tuan_tu_le_cung_solved]` · fallback `txt_thieu_do_bai_vi` | **Chỉ hiện sau khi giải P3.** Mũi neo twist B2 |
-| 7 | `hs_dai_vai_dieu` | `{x:130, y:640, width:250, height:110}` | `COLLECT_ITEM` | `item_id: item_dai_vai_dieu` · `required_item: null` · `required_flags: [flag_puz_ba_hoi_chin_tieng_solved]` · fallback `txt_thieu_do_dai_vai_dieu` | **Chỉ hiện sau khi giải P4.** Nguyên liệu tim đèn cho P5 |
+| 7 | `hs_dai_vai_dieu` | **`{x:130, y:635, width:250, height:120}`** *(vẽ: `{130,640,250,110}` → `visual_bounds`)* | `COLLECT_ITEM` | `item_id: item_dai_vai_dieu` · `required_item: null` · `required_flags: [flag_puz_ba_hoi_chin_tieng_solved]` · fallback `txt_thieu_do_dai_vai_dieu` | **Chỉ hiện sau khi giải P4.** Nguyên liệu tim đèn cho P5 |
 | 8 | `hs_ban_tho_ho` | `{x:640, y:300, width:660, height:420}` | `ZOOM_PUZZLE` | `target_puzzle_id: puz_tuan_tu_le_cung` | **Câu đố P3** |
 | 9 | `hs_gia_pha` | `{x:1600, y:330, width:260, height:300}` | `EXAMINE` | `txt_examine_gia_pha` | **Mũi neo twist B1** + **lời giải ngôi thứ của P6** |
 | 10 | `hs_bat_huong` | `{x:1330, y:520, width:150, height:150}` | `EXAMINE` | `txt_examine_bat_huong` | Điều cấm kỵ thứ Ba đã bị phạm |
 | 11 | `hs_vach_buong` | `{x:1620, y:690, width:240, height:290}` | `DIALOGUE` | `txt_thoai_vach_buong` | **Clue C1 của P4** — nghe lại vô hạn |
 | 12 | `hs_van_khan` | `{x:1330, y:740, width:230, height:140}` | `EXAMINE` | `txt_examine_van_khan` | **Văn bản quan trọng nhất chương** — clue C1 của P3 **và** clue C3 của P4 |
 | 13 | `hs_mo_ca` | `{x:300, y:780, width:240, height:210}` | `ZOOM_PUZZLE` | `target_puzzle_id: puz_ba_hoi_chin_tieng` · fallback `txt_thieu_do_go_mo` | **Câu đố P4** — hotspot phủ trọn **cả cái đôn**: chuông đồng + mõ cá *(id giữ nguyên)* |
-| 14 | `hs_dui_mo` | `{x:560, y:780, width:110, height:120}` | `COLLECT_ITEM` | `item_id: item_dui_mo` · `required_item: null` | Mở khoá P4 · **kích hoạt `scare_di_anh_quay_mat`** |
+| 14 | `hs_dui_mo` | **`{x:555, y:780, width:120, height:120}`** *(vẽ: `{560,780,110,120}` → `visual_bounds`)* | `COLLECT_ITEM` | `item_id: item_dui_mo` · `required_item: null` | Mở khoá P4 · **kích hoạt `scare_di_anh_quay_mat`** |
 | 15 | `hs_chieu_coi` | `{x:700, y:800, width:520, height:190}` | `EXAMINE` | `txt_examine_chieu_coi` | Vết quỳ của một đứa bé lên bảy |
 | 16 | `hs_cua_hau_xuong_bep` | `{x:60, y:790, width:200, height:200}` | `CHANGE_AREA` | `target_area_id: area_bep_gieng` · gate: **đã giải P3** · `txt_khoa_cua_hau` | Xuống Khu 4 |
-| 17 | `hs_ra_hien` | `{x:1300, y:900, width:280, height:95}` | `CHANGE_AREA` | `target_area_id: area_hien_nha` · **không gate** | Đường lùi, luôn mở |
+| 17 | `hs_ra_hien` | **`{x:1300, y:887, width:280, height:120}`** *(vẽ: `{1300,900,280,95}` → `visual_bounds`)* | `CHANGE_AREA` | `target_area_id: area_hien_nha` · **không gate** | Đường lùi, luôn mở |
 
 **Tự kiểm tra bố cục:** 17 hotspot · 136 cặp · **0 giao nhau** · `y_min = 96` ✓ · `y_max = 995` ✓ · nhỏ nhất `hs_dui_mo` 110×120 ⚠️ và `hs_ra_hien` 280×95 ⚠️ *(cùng `hs_khe_mong_cua_gac` và `hs_dai_vai_dieu` — bốn hotspot này được nới lên 120 px ở bước dữ liệu, xem bảng ở đầu Phần 3)*. Ba cặp sát nhau nhất cách 20–50 px theo x.
 
@@ -1572,7 +1585,7 @@ Qua cửa liếp là mảnh sân sau lát gạch vỡ, và **giếng khơi** xâ
 
 ### 3.4.3. Bảng hotspot (14 hotspot)
 
-| # | id | bounds {x, y, w, h} | action_type | Tham số | Vai trò kịch bản |
+| # | id | **`bounds` THẬT trong `data/areas/*.json`** {x, y, w, h} | action_type | Tham số | Vai trò kịch bản |
 |---|---|---|---|---|---|
 | 1 | `hs_so_cho_ba_noi` | `{x:700, y:110, width:220, height:130}` | `EXAMINE` | `txt_examine_so_cho` | **Mũi neo twist B4 — mạnh nhất trước gác xép** |
 | 2 | `hs_gac_bep_bo_dom` | `{x:260, y:200, width:400, height:190}` | `EXAMINE` | `txt_examine_gac_bep` | **Clue C1 của P5** — mẫu đèn tháo rời để tham chiếu |
@@ -1956,7 +1969,7 @@ Sau khi tim người chơi đập lại bình thường, quầng đèn quét đ�
 
 ### 3.5.3. Bảng hotspot (11 hotspot)
 
-| # | id | bounds {x, y, w, h} | action_type | Tham số | Vai trò kịch bản |
+| # | id | **`bounds` THẬT trong `data/areas/*.json`** {x, y, w, h} | action_type | Tham số | Vai trò kịch bản |
 |---|---|---|---|---|---|
 | 1 | `hs_khe_van_san` | `{x:250, y:120, width:300, height:150}` | `DIALOGUE` | `txt_thoai_khe_van_san` | **Cảnh báo point-of-no-return** — giọng bà nội gọi vọng lên |
 | 2 | `hs_nhat_ky_trang_cuoi` | `{x:600, y:170, width:200, height:160}` | `EXAMINE` | `txt_examine_nhat_ky_1996` | Hai trang 1976 và 1996, cùng một nét chữ |
@@ -1968,7 +1981,7 @@ Sau khi tim người chơi đập lại bình thường, quầng đèn quét đ�
 | 8 | `hs_hom_go_nap` | `{x:250, y:600, width:420, height:290}` | `EXAMINE` | `txt_examine_nap_hom` | **Hai trang**: gia phả (clue C1 của P6) + **BẢY ĐIỀU CẤM KỴ** |
 | 9 | `hs_vang_ma_chong` | `{x:1640, y:620, width:240, height:340}` | `EXAMINE` | `txt_examine_vang_ma` | Đủ một bộ tiễn người, sắm sẵn **từ trước khi bà nội mất** |
 | 10 | `hs_giay_khai_sinh` | `{x:1200, y:790, width:280, height:150}` | `EXAMINE` | `txt_examine_giay_khai_sinh` | Khai sinh gốc + dấu **ĐÃ KHAI TỬ** |
-| 11 | `hs_chieu_coi_trai_san` | `{x:730, y:910, width:440, height:88}` | `EXAMINE` | `txt_examine_chieu_moi` | Chiếu trải sẵn cho hình nhân — mà hình nhân cao bằng người chơi |
+| 11 | `hs_chieu_coi_trai_san` | **`{x:730, y:901, width:440, height:120}`** *(vẽ: `{730,910,440,88}` → `visual_bounds`)* | `EXAMINE` | `txt_examine_chieu_moi` | Chiếu trải sẵn cho hình nhân — mà hình nhân cao bằng người chơi |
 
 **Tự kiểm tra bố cục:** 11 hotspot · 55 cặp · **0 giao nhau** · `y_min = 120` ✓ · `y_max` **nét vẽ** = 998 ✓ · nhỏ nhất `hs_chieu_coi_trai_san` **nét vẽ** 440×**88** ⚠️ — **thấp nhất toàn chương và là hotspot phải nới nhiều nhất** (88 → 120 px vùng chạm). Đã nới **xuống dưới** chứ không lên trên, để không phải cắt chiều cao `hs_hinh_nhan`; vùng chạm sau khi nới là `{730,901,440,120}` và đệm với hình nhân còn 1 px — xem ghi chú ⚠️ ngay dưới đây.
 
@@ -2554,7 +2567,7 @@ Xem chi tiết ở **Phần 8 — Kết chương** (nhịp 4 của `seq_ending_c
 | **Bộ đếm sai** | Mỗi câu đố có `fail_count` riêng, **reset về 0** sau khi (a) giải đúng, hoặc (b) jumpscare đã bắn |
 | **Mốc phản hồi chung** | Sai 1 = phản hồi nhẹ (âm thanh + animation, không phạt) · Sai 2 = phản hồi nặng hơn + gợi ý môi trường · Sai 3 = bắn jumpscare (`max_fails: 3`) rồi reset đếm |
 | **Không khoá vĩnh viễn** | **Không câu đố nào khoá vĩnh viễn người chơi khi sai. Không mất vật phẩm vĩnh viễn.** Số lần thử là **vô hạn** ở mọi câu đố |
-| **Hệ thống gợi ý** | Nút **"Thắp nhang xin keo"** ở `{x:1700, y:930, width:150, height:110}`. **Tier 1** mở sau 60 s kẹt hoặc 1 lần sai · **Tier 2** sau 150 s hoặc 2 lần sai · **Tier 3** sau 300 s hoặc 4 lần sai. **Tier 3 luôn là đáp án trực tiếp** |
+| **Hệ thống gợi ý** | Nút **"Thắp nhang xin keo"**, vùng chạm **`{x:1700, y:920, width:150, height:130}`** *(hình vẽ `150 × 110`; giá trị lấy từ `hint_system.hint_button.bounds`)*. **Tier 1** mở sau 60 s kẹt hoặc 1 lần sai · **Tier 2** sau 150 s hoặc 2 lần sai · **Tier 3** sau 300 s hoặc 4 lần sai. **Tier 3 luôn là đáp án trực tiếp** |
 | **Ràng buộc LiveOps** | Tier 1 & 2 **miễn phí**. Tier 3 gắn LiveOps nhưng **luôn có đường mở miễn phí bằng thời gian chờ 300 s** — **không được phép biến thành tường trả phí** |
 | **Ràng buộc an toàn** | `max_fails`, `solution`, `reward_item_id`, `type`, `wrong_action_jumpscare`, thời gian mở hint — **KHÔNG BAO GIỜ** bị tuỳ chọn an toàn override. Chỉ cường độ trình diễn của jumpscare thay đổi |
 
@@ -2631,7 +2644,7 @@ item_bai_vi_khuyet_danh ──────────────────�
 | Mọi `target_puzzle_id` trỏ tới puzzle **trong cùng file area** | ✅ ĐẠT (6/6) |
 | Mọi `target_area_id` tồn tại trong chapter manifest | ✅ ĐẠT (8/8 hotspot `CHANGE_AREA`) |
 | Mọi `required_item` của `USE_ITEM` khác `null` | ✅ ĐẠT (4/4: `hs_o_lom_binh_phong`, `hs_khe_mong_cua_gac`, `hs_gieng_khoi`, `hs_hinh_nhan`) |
-| Mọi `COLLECT_ITEM` có `item_id` và trường `required_item` | ✅ ĐẠT (7/7) |
+| Mọi `COLLECT_ITEM` có `item_id` và trường `required_item` | ✅ ĐẠT (**8/8** — đếm từ `data/areas/*.json`: `hs_den_dau_treo`, `hs_ban_rap_tren_binh_phong`, `hs_giay_ban_va_than`, `hs_bai_vi_khuyet_danh`, `hs_dai_vai_dieu`, `hs_dui_mo`, `hs_chai_dau_hoa`, `hs_ao_cuoi_giay`; 8 `item_id` phân biệt) |
 | Mọi `EXAMINE` / `DIALOGUE` có `text_key` | ✅ ĐẠT |
 | Mọi `reward_item_id` trùng khớp SPINE | ✅ 6/6 |
 | Mọi `type` nằm trong tập hợp lệ | ✅ ROTATION_LOCK / PATTERN_TRACE / SEQUENCE_ORDER / AUDIO_MATCH / ITEM_COMBINE / SLIDING_TILE — **mỗi loại dùng đúng một lần, phủ trọn 6/6 loại** |

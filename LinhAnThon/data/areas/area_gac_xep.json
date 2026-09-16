@@ -84,7 +84,7 @@
       "grants_flag": "flag_chapter_01_hoan_thanh",
       "fallback_text_key": "txt_thieu_do_hinh_nhan",
       "one_shot": true,
-      "ghi_chu_vi": "HÀNH ĐỘNG KẾT CHƯƠNG: khoác áo cưới giấy lên hình nhân -> khởi động cutscene seq_ending_ch01_khoac_ao, scare_ao_cuoi_quay_dau bắn theo ON_TIMER. consumes_item = true - vật phẩm DUY NHẤT của cả chương bị tiêu huỷ thật, và không một hotspot/câu đố/điều kiện mở khoá nào sau đó cần tới nó nữa. Hiệu ứng máy đọc được: bật cờ flag_chapter_01_hoan_thanh. Căn cứ: docs/01_KICH_BAN_CHAPTER_01.md mục 4.3."
+      "ghi_chu_vi": "HÀNH ĐỘNG KẾT CHƯƠNG: khoác áo cưới giấy lên hình nhân -> khởi động cutscene seq_ending_ch01_khoac_ao, scare_ao_cuoi_quay_dau bắn theo ON_TIMER. Hiệu ứng máy đọc được: bật cờ flag_chapter_01_hoan_thanh. consumes_item = true - vật phẩm DUY NHẤT của cả chương bị tiêu huỷ thật, không chỗ nào sau đó cần tới nó nữa. CỐ Ý không khai locks_item: trường đó chỉ có nghĩa khi vật phẩm còn ở lại trong túi, nên schema cấm khai kèm consumes_item = true. Căn cứ: docs/01_KICH_BAN_CHAPTER_01.md mục 4.3."
     },
     {
       "id": "hs_so_ghi_ten",

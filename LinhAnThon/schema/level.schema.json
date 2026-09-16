@@ -234,7 +234,7 @@
         },
         "locks_item": {
           "type": "boolean",
-          "description": "TUY CHON, va CHI co nghia khi consumes_item = false. true = vat pham O LAI trong tui do nhung bi KHOA: xam di, khong keo-tha len hotspot khac duoc nua, van EXAMINE duoc (vd bai vi lam then cua gac). false / vang mat = dung lai tu do. Can cu: docs/01_KICH_BAN_CHAPTER_01.md muc 4.3, chot X19."
+          "description": "BAT BUOC CO MAT khi \"consumes_item\": false, va BI CAM khi \"consumes_item\": true (vat pham da bi xoa han khoi tui do thi khong the dong thoi o lai ma bi khoa). true = vat pham O LAI trong tui do nhung bi KHOA: xam di, khong keo-tha len hotspot khac duoc nua, van EXAMINE duoc (vd bai vi lam then cua gac). false = o lai va dung tiep tu do. Ban truoc de truong nay la TUY CHON: ba trong bon hotspot USE_ITEM khai no, mot cai khong, va khong lop nao noi duoc do la co y hay bo sot - nguoi doc phai TU CHON mot gia dinh ve gia tri mac dinh, dung kieu mo ho ma ca schema lan validator dang di don. Nay su co mat cua no do consumes_item quyet dinh hoan toan. Can cu: docs/01_KICH_BAN_CHAPTER_01.md muc 4.3, chot X19."
         },
         "text_key": { "$ref": "#/$defs/text_key" },
         "grants_flag": {
@@ -330,13 +330,25 @@
           }
         },
         {
-          "title": "locks_item chi co nghia khi consumes_item = false",
+          "title": "consumes_item = true CAM khai locks_item",
           "$comment": "Vat pham da bi xoa han khoi tui do thi khong the dong thoi 'o lai nhung bi khoa'. Khai bao ca hai la mot mau thuan im lang.",
           "if": {
             "required": ["consumes_item"],
             "properties": { "consumes_item": { "const": true } }
           },
           "then": { "not": { "required": ["locks_item"] } }
+        },
+        {
+          "title": "consumes_item = false BAT BUOC khai locks_item",
+          "$comment": "Hai luat nay cong lai bien 'locks_item' tu mot truong tuy chon thanh mot truong co su co mat DO consumes_item quyet dinh: false thi phai co, true thi cam co. Ban truoc de no tuy chon, nen hs_hinh_nhan la hotspot USE_ITEM duy nhat khong khai locks_item ma khong lop nao noi duoc do la co y hay bo sot; nguoi doc phai tu chon mot gia dinh ve gia tri mac dinh. tools/validate_level.py kiem dung hai chieu nay.",
+          "if": {
+            "required": ["consumes_item"],
+            "properties": { "consumes_item": { "const": false } }
+          },
+          "then": {
+            "required": ["locks_item"],
+            "properties": { "locks_item": { "type": "boolean" } }
+          }
         },
         {
           "title": "CHANGE_AREA bat buoc co target_area_id KHAC null",

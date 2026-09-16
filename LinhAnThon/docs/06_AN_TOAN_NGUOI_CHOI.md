@@ -9,7 +9,7 @@ Nền tảng: Android / iOS. Chơi bằng **loa điện thoại ở nơi công c
 Ngôn ngữ: giải thích **tiếng Việt có dấu**; mọi `id` / khoá JSON **snake_case không dấu**.
 
 > **Vì sao tài liệu này tồn tại và vì sao nó phải là deliverable.**
-> Chương 1 có **8 jump-scare**, **4 cú có `screen_flash: true`**, haptic ở 7/8 cú, và đề tài tang lễ / cái chết của trẻ em. Tổ mỹ thuật phải xuất **16 file biến thể an toàn** (`_soft`, `_static`), tổ code phải dựng **`ScareConfigResolver`**, tổ LiveOps phải giữ **5 cờ `*_free`**, QA phải chạy **kiểm định nhạy sáng đo được** trước mỗi build. Bốn tổ đọc chung một hợp đồng. Nếu hợp đồng đó chỉ nằm trong file nháp nội bộ thì mọi liên kết chéo đều gãy và mỗi tổ tự suy diễn một kiểu — đúng lúc phần rủi ro pháp lý và rủi ro sức khoẻ cao nhất.
+> Chương 1 có **8 jump-scare**, **4 cú có `screen_flash: true`** (S1, S2, S5, S7 — đếm từ `data/areas/*.json`), **haptic ở cả 8 cú** (bảng §4.4.1 không có một ô Haptic nào trống; bốn cú "tĩnh" S3/S4/S6/S8 vẫn rung, chỉ là `hap_long_rumble` biên độ thấp), và đề tài tang lễ / cái chết của trẻ em. Tổ mỹ thuật phải xuất **16 file biến thể an toàn** (`_soft`, `_static`), tổ code phải dựng **`ScareConfigResolver`**, tổ LiveOps phải giữ **5 cờ `*_free`**, QA phải chạy **kiểm định nhạy sáng đo được** trước mỗi build. Bốn tổ đọc chung một hợp đồng. Nếu hợp đồng đó chỉ nằm trong file nháp nội bộ thì mọi liên kết chéo đều gãy và mỗi tổ tự suy diễn một kiểu — đúng lúc phần rủi ro pháp lý và rủi ro sức khoẻ cao nhất.
 
 ---
 
@@ -439,18 +439,22 @@ Luật 90 giây không đứng một mình. Ba cơ chế dưới đây do `01_KI
 **Không tuỳ chọn nào ghi đè lên file trong `data/areas/*.json`.** File trên đĩa luôn giữ giá trị thiết kế gốc và **đủ toàn bộ trường Master Form**, để `tools/validate_level.py` luôn kiểm được đúng thứ designer định. Override xảy ra ở **lớp trang trí lúc chạy** (`ScareConfigResolver`):
 
 ```
-gia tri goc trong data/areas/<area_id>.json          (nguon su that, bat bien)
-        v
-gia tri bo sung trong data/config/scare_runtime.json (theo scare_id)
+gia tri goc trong data/areas/<area_id>.json          (nguon su that, bat bien - TANG 2)
         v
 ho so an toan (gentle_mode / photosensitive_safe / reduce_motion)
         v
-tuy chon le do nguoi choi dat                        (thang tat ca)
+tuy chon le do nguoi choi dat trong persistent/      (thang tat ca)
         v
-=> ScareRuntimeConfig thuc thi
+=> ScareRuntimeConfig thuc thi (chi ton tai trong bo nho, khong ghi ra dia)
 ```
 
-### 8.2. Trường runtime bị ảnh hưởng (`data/config/scare_runtime.json`)
+> **⚠️ `data/config/scare_runtime.json` KHÔNG TỒN TẠI — và ở kiến trúc hôm nay thì nó không cần tồn tại.** Bản trước của mục này đặt một tầng *"giá trị bổ sung trong `data/config/scare_runtime.json` (theo `scare_id`)"* vào giữa sơ đồ. **Đường dẫn ấy không có trong repo**, và nó cũng **không nằm trong kiến trúc ba tầng** của `docs/03_DATA_SPEC.md` §1 (tầng 1 `data/chapter_01.json` · tầng 2 `data/areas/*.json` · tầng 3 `data/liveops_chapter_01.json`). Một tầng dữ liệu thứ tư không ai khai báo là một tầng không validator nào kiểm.
+>
+> **Mọi giá trị bản trước định đặt vào file ấy đều đã có chỗ:** thông số doạ trên đĩa nằm ở `jumpscares[]` của `data/areas/*.json` và được in đầy đủ ở **§4.4.1**; phép biến đổi theo hồ sơ an toàn nằm ở **§4.4.2** và **§8.2** ngay dưới; tuỳ chọn của người chơi nằm ở `persistent/player_settings.json` (**§8.3**). `ScareRuntimeConfig` là **đối tượng dựng trong bộ nhớ** bởi `ScareConfigResolver`, không phải một file.
+
+### 8.2. Trường runtime bị ảnh hưởng (trường của `ScareRuntimeConfig` **trong bộ nhớ**)
+
+> **Đọc bảng này thế nào.** Cột đầu **không** phải khoá trong một file JSON — không có file nào tên `scare_runtime.json` trong repo (§8.1). Đó là tên **trường của đối tượng `ScareRuntimeConfig`** mà `ScareConfigResolver` dựng lúc chạy. Giá trị khởi điểm của mỗi trường lấy từ `jumpscares[]` trong `data/areas/*.json` khi trường ấy có mặt trên đĩa (`screen_flash`, `audio_asset`, `sprite_animation`, `cooldown_sec`, `delay_sec`, `max_fails`, `trigger_item_id`), và từ bảng **§4.4.1** của tài liệu này khi không — envelope, camera, haptic, tell và `loudness_jump_lu_max` **không** nằm trên đĩa, chúng là hợp đồng do tài liệu này sở hữu.
 
 | Trường runtime | `gentle_mode` | `photosensitive_safe` | `reduce_motion` | `haptic_enabled = false` |
 |---|---|---|---|---|
@@ -681,7 +685,7 @@ Cột "Khoá cấu hình" là **đường dẫn JSON nguyên văn** trong `data/
 | `docs/01_KICH_BAN_CHAPTER_01.md` | Chủ sở hữu của nhịp kinh dị và đường cong sợ hãi (§6 của tài liệu ấy) trích về đây cho **mọi** ràng buộc an toàn; và §3.3.6 của tài liệu ấy là nguồn cho hoán vai nhạc khí X14 mà §7.2 dưới đây phải theo |
 | `docs/02_PROMPT_DO_HOA.md` | Yêu cầu **16 file biến thể** `_soft` / `_static` (§4.3), trần độ sáng & bảng màu flash hợp lệ (§2.4), ràng buộc "không tài sản an toàn nào sau tường trả phí" (§1) |
 | `docs/03_DATA_SPEC.md` | Ranh giới dữ liệu ↔ runtime: **những trường nào của `jumpscares[]` bị `gentle_mode` ghi đè lúc chạy** (ghi ở §2.5.1 của tài liệu ấy), điều kiện miễn trừ `cooldown_exempt` (§2.7.9 ↔ §6.3.1 ở đây), và sàn chạm 120 × 120 px là **sàn trợ năng** không được hạ (§2.2 mức G3 ↔ §1.2 ở đây) |
-| `docs/05_TICH_HOP_UNITY_ADDRESSABLES.md` | Luật đóng gói: **24 file biến thể an toàn** (16 sprite + 8 stinger `_soft`) phải nằm **cùng bundle, cùng nhãn** với bản gốc — một nhãn tải riêng là một **cổng mạng**, vi phạm N3 (§8.2 của tài liệu ấy) |
+| `docs/05_TICH_HOP_UNITY_ADDRESSABLES.md` | Luật đóng gói: **24 file biến thể an toàn** (16 sprite + 8 stinger `_soft`) phải nằm **cùng bundle, cùng nhãn** với bản gốc — một nhãn tải riêng là một **cổng mạng**, vi phạm N3. Luật gốc: **§2.1** của tài liệu ấy (khung *"Vì sao `_soft` và `_static` KHÔNG được tách nhãn riêng"*); cổng kiểm trước phát hành: **§8.2**. `docs/02_PROMPT_DO_HOA.md` §2.3 đã được sửa cho khớp ở vòng này |
 | `docs/04_LIVEOPS_MONETIZATION.md` | **Ràng buộc cứng**: 5 cờ `*_free`, `accessibility_never_gated`, chặn quảng cáo quanh cú doạ, cấm kill switch cho trợ năng (§10) |
 | `data/areas/*.json` | Danh sách 8 jump-scare với **6 trường** Master Form giữ nguyên trên đĩa (§4.4.1) — **không** tuỳ chọn nào sửa file |
 | `data/liveops_chapter_01.json` | Bảng truy vết đầy đủ ở §10 — mọi khoá đã tồn tại, không thêm khoá mới, không đổi tên khoá nào |

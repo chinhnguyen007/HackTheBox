@@ -141,7 +141,7 @@ Hai thứ đó không khớp nhau. **Luật hoà giải, áp cho cả engine l�
 |---|---|---|---|
 | G1 | `width ≤ 0` hoặc `height ≤ 0` | **[LỖI]** | Vùng chạm suy biến, người chơi không bao giờ bấm trúng |
 | G2 | `x + width > 1920` hoặc `y + height > 1080` | **[LỖI]** | Tràn ra ngoài khung thiết kế; trên máy tỉ lệ khác sẽ bị cắt mất |
-| G3 | `width < 120` hoặc `height < 120` | **[LỖI]** | **Sàn chạm duy nhất của dự án: 120 × 120 px @1920, không ngoại lệ.** Chốt ở `01_KICH_BAN_CHAPTER_01.md` §6 (mục X18) và Phần 3 của tài liệu ấy. Toàn bộ dữ liệu Chương 1 hiện đã đạt sàn này — nhỏ nhất là `hs_dui_mo` và `hs_khe_mong_cua_gac`, cùng `120 × 120` — nên [LỖI] không phá gì cả |
+| G3 | `width < 120` hoặc `height < 120` | **[LỖI]** | **Sàn chạm duy nhất của dự án: 120 × 120 px @1920, không ngoại lệ.** Chốt ở `01_KICH_BAN_CHAPTER_01.md` §6 (mục X18) và Phần 3 của tài liệu ấy. Toàn bộ dữ liệu Chương 1 hiện đã đạt sàn này — **cạnh nhỏ nhất toàn chương đúng bằng 120 px**, và hotspot **duy nhất** vuông khít `120 × 120` là `hs_dui_mo`. (`hs_khe_mong_cua_gac` là `150 × 120`, xem trích §2.6 — nó chạm sàn ở chiều **cao**, không phải cả hai chiều.) Nên [LỖI] không phá gì cả |
 | G4 | `min(width, height) = 120` (vừa khít sàn) **và KHÔNG** khai `visual_bounds` | **[CẢNH BÁO]** | Hotspot vừa khít sàn hầu như luôn là hotspot **đã phải nới** từ một sprite nhỏ hơn. Hai khả năng, cả hai đều phải sửa: hoặc quên **nới**, hoặc đã nới nhưng quên **khai** `visual_bounds`. Xem §2.3.5 |
 | G5 | `min(width, height) = 120` **và CÓ** khai `visual_bounds` | **Chấp nhận** | Khai `visual_bounds` là cách nói với trình kiểm *"nhỏ ở đây là có chủ đích, không phải bỏ sót"* (nguyên văn mô tả trong `schema/level.schema.json`) |
 
@@ -237,7 +237,7 @@ Chương 1 có **đúng 4 hotspot `USE_ITEM`**. Bảng này là bảng chốt: m
 | **Mặc định** | **KHÔNG CÓ MẶC ĐỊNH.** Engine **cấm** suy ra giá trị từ bất cứ thứ gì — không từ `item_id`, không từ `grants_flag`, không từ `one_shot`, không từ `ghi_chu_vi` |
 | **`true` nghĩa là** | Sau khi thao tác thành công, `required_item` **bị gỡ khỏi túi đồ vĩnh viễn**. Nó không quay lại, kể cả khi người chơi vào lại khu vực |
 | **`false` nghĩa là** | Vật phẩm **ở nguyên trong túi đồ** sau thao tác. Hotspot có thể `one_shot` hay không, đó là chuyện khác và độc lập |
-| **Quan hệ với `one_shot`** | **Hai trường độc lập.** `one_shot` nói *hotspot* có biến mất không; `consumes_item` nói *vật phẩm* có biến mất không. Cả 4 hotspot `USE_ITEM` của Chương 1 đều `one_shot: true`, nhưng chỉ **1 trong 4** có `consumes_item: true` |
+| **Quan hệ với `one_shot`** | **Hai trường độc lập.** `one_shot` nói *hotspot* có biến mất không; `consumes_item` nói *vật phẩm* có biến mất không. Số đếm thật trên `data/areas/*.json`: **4** hotspot `USE_ITEM`; **3 trong 4** khai `one_shot: true` (`hs_o_lom_binh_phong`, `hs_khe_mong_cua_gac`, `hs_hinh_nhan`), còn **`hs_gieng_khoi` KHÔNG khai `one_shot`** — soi đèn xuống giếng là thao tác lặp lại được, cố ý; và **1 trong 4** có `consumes_item: true` (`hs_hinh_nhan`). Chính vì là hai trường độc lập nên hai con số **3** và **1** không bằng nhau, và **không được suy con số này ra con số kia** |
 | **Quan hệ với `locks_item`** | `locks_item` chỉ có nghĩa khi `consumes_item: false` — xem §2.3.4.2. Ba trạng thái hợp lệ, không có trạng thái thứ tư |
 
 #### 2.3.4.1. Validator kiểm gì
@@ -449,7 +449,11 @@ Bảng soát cho tổ đồ hoạ, thay cho một dòng cũ:
 
 ## 2.6. Ví dụ đầy đủ — `data/areas/area_gian_tho.json` (trích)
 
-Trích này lấy **nguyên văn giá trị từ dữ liệu thật**, và cố ý trưng ra cả **mười một** trường logic mở rộng của §2.7. Nó cũng là **bản mẫu bắt buộc** cho luật Master Form ở §2.3.2: **mọi** hotspot in đủ bốn khoá `item_id` / `required_item` / `target_puzzle_id` / `target_area_id`, dùng `null` ở chỗ không áp dụng.
+Trích này lấy **nguyên văn giá trị từ dữ liệu thật**, và cố ý trưng ra cả **mười một** trường logic mở rộng **đã hiện thực** của §2.7 (đếm từ `data/areas/area_gian_tho.json`: khu vực này một mình trưng đủ 11/11).
+
+> **Một dòng trong trích KHÔNG có trong dữ liệu thật, và đó là chủ ý:** `"ambience_address": "remote_ambience_gian_tho"`. Đây là **đề nghị bổ sung schema** ở §2.1.2, **chưa** có trong `schema/level.schema.json` lẫn `data/areas/*.json`. Nó được in ở đây để thấy trường ấy sẽ nằm ở đâu nếu được duyệt. **Đừng chép dòng này vào dữ liệu trước khi schema được sửa** — `additionalProperties: false` sẽ từ chối cả file.
+
+ Nó cũng là **bản mẫu bắt buộc** cho luật Master Form ở §2.3.2: **mọi** hotspot in đủ bốn khoá `item_id` / `required_item` / `target_puzzle_id` / `target_area_id`, dùng `null` ở chỗ không áp dụng.
 
 ```json
 {
@@ -578,7 +582,11 @@ Trích này lấy **nguyên văn giá trị từ dữ liệu thật**, và cố 
 
 ## 2.7. Đặc tả đầy đủ các trường logic mở rộng
 
-Chín trường dưới đây được thêm vào dữ liệu **song song** với việc tài liệu này được viết. Tám trong chín đã có trong `schema/level.schema.json` và đã có mặt trong `data/areas/*.json`; chỉ `ambience_address` (§2.1.2) là **đề nghị bổ sung**. Mục này là đặc tả đầy đủ của chúng — mỗi trường: **kiểu · bắt buộc khi nào · ý nghĩa · ràng buộc · ví dụ**.
+**Mười một trường** được đánh số trong bảng dưới đây được thêm vào dữ liệu **song song** với việc tài liệu này được viết. Đếm lại từ nguồn ở vòng này: **cả mười một đều đã có trong `schema/level.schema.json` và đều đã có mặt trong `data/areas/*.json`** — không còn trường nào ở trạng thái "có trong schema mà chưa có trong dữ liệu". Dòng thứ mười hai, `areas[].ambience_address` (§2.1.2), **không** được đánh số vì nó **chưa có ở cả hai nơi** — nó là **đề nghị bổ sung**, không phải hiện trạng.
+
+> **⚠️ Hai con số ở câu mở đầu cũ đều sai.** Bản trước mở đầu bằng *"Chín trường… Tám trong chín đã có trong schema"* — **9** và **8** — trong khi bảng ngay dưới đã đánh số tới **11** và §2.6 cũng viết **"mười một"**. Nguyên nhân: hai dòng `consumes_item` và `locks_item` được thêm vào bảng ở vòng 3 mà câu mở đầu không được đếm lại. Con số đúng, đếm bằng script từ `data/areas/*.json` và `schema/level.schema.json`, là **11 trường đã hiện thực (11/11 có trong cả schema lẫn dữ liệu) + 1 đề nghị chưa hiện thực**. Dùng đúng cặp số này ở mọi chỗ khác trong tài liệu.
+
+Mục này là đặc tả đầy đủ của chúng — mỗi trường: **kiểu · bắt buộc khi nào · ý nghĩa · ràng buộc · ví dụ**.
 
 | # | Trường | Kiểu | Trạng thái schema | Không có nó thì mất gì |
 |---|---|---|---|---|
@@ -1004,7 +1012,7 @@ JSON Schema chỉ nhìn được **một file tại một thời điểm**. Các
 | B7 | Vật phẩm nhặt được mà **không nơi nào dùng tới** | **[CẢNH BÁO]** | 9 |
 | B8 | **Khả giải**: tới được mọi khu vực, giải được mọi câu đố, cầm được mọi vật phẩm, tới được khu vực kết chương | **[LỖI]** | 10 |
 | B9 | Mọi cờ trong `required_flags` **và** `unlock_condition.required_flags` đều có nguồn cấp **tường minh** — một `grants_flag` ghi thẳng trong dữ liệu (§5.3) | **[LỖI]** | 7a |
-| B10 | 16 bất biến LiveOps trong `validation.invariants` | **[LỖI]** | 11 |
+| B10 | **17** bất biến LiveOps trong `validation.invariants` | **[LỖI]** | 11 |
 | B11 | `visual_bounds` nằm **trọn** trong `bounds` của cùng hotspot (bốn bất đẳng thức, §2.3.5.1) | **[LỖI]** | 5 |
 | B12 | `basename` của `background_asset_url` bằng đúng `"bg_" + area_id` đã bỏ tiền tố `area_` (§2.1.1) | **[LỖI]** | 7b |
 | B13 | `ambience_address` khác `null` thì phần sau tiền tố phải bằng `area_id` (§2.1.2) | **[LỖI]** | 7b |
@@ -1128,7 +1136,7 @@ Luật này đọc từ **cấu trúc dữ liệu** (`action_type` + `item_id`),
 | `txt_` | Khoá localization | File localization | `txt_examine_van_khan` |
 | `anim_` | Hoạt ảnh | Addressables | `anim_khoi_tu_dang_nguoi` |
 
-> **⚠️ `scare_` LÀ TIỀN TỐ CỦA *ĐỊNH DANH CÚ DOẠ*, KHÔNG PHẢI CỦA MỌI THỨ CÓ CHỮ "SCARE".** Ba khoá `scare_intensity`, `scare_pre_warning` và `scare_runtime` xuất hiện ở `docs/06_AN_TOAN_NGUOI_CHOI.md` §4 **không** phải định danh cú doạ và **không** phải id trong `data/areas/*.json` — chúng là **tuỳ chọn trợ năng phía máy người chơi**, thuộc lớp thiết lập, không thuộc hợp đồng dữ liệu màn chơi. Validator chỉ áp luật tiền tố **bên trong dữ liệu màn chơi**, nên không có xung đột chức năng; ghi ra đây để không ai đi tìm `scare_intensity` trong `jumpscares[]` rồi báo thiếu.
+> **⚠️ `scare_` LÀ TIỀN TỐ CỦA *ĐỊNH DANH CÚ DOẠ*, KHÔNG PHẢI CỦA MỌI THỨ CÓ CHỮ "SCARE".** Hai khoá `scare_intensity`, `scare_pre_warning` và một tên kiểu `ScareRuntimeConfig` xuất hiện ở `docs/06_AN_TOAN_NGUOI_CHOI.md` §4 và §8 **không** phải định danh cú doạ và **không** phải id trong `data/areas/*.json` — hai khoá đầu là **tuỳ chọn trợ năng phía máy người chơi** (`persistent/player_settings.json`, `docs/06` §8.3), còn `ScareRuntimeConfig` là **đối tượng dựng trong bộ nhớ lúc chạy**, không phải file dữ liệu; không thứ nào thuộc hợp đồng dữ liệu màn chơi. Validator chỉ áp luật tiền tố **bên trong dữ liệu màn chơi**, nên không có xung đột chức năng; ghi ra đây để không ai đi tìm `scare_intensity` trong `jumpscares[]` rồi báo thiếu.
 
 Mọi `id` chỉ dùng `[a-z0-9_]`: **không dấu tiếng Việt, không chữ hoa, không gạch ngang, không khoảng trắng**. Dấu tiếng Việt chỉ xuất hiện trong `ten_vi`, `mo_ta_vi`, `ghi_chu_vi` và trong file localization.
 
