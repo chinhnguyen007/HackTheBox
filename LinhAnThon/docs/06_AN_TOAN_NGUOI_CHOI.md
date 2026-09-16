@@ -192,7 +192,7 @@ Không tuỳ chọn nào làm bạn mất nội dung hay phần thưởng.
 | **Mô tả từng tuỳ chọn** | Mỗi tuỳ chọn có một dòng giải thích bằng tiếng Việt thường ngày. Không dùng từ kỹ thuật (`alpha`, `envelope`, `LFO`) trong UI. |
 | **Nhãn trấn an** | Ngay dưới tiêu đề mục: *"Mọi tuỳ chọn ở đây đều miễn phí và không làm bạn mất nội dung hay phần thưởng nào."* |
 | **Không cổng** | Không khoá theo tiến trình, không khoá theo tài khoản, không "mở khoá sau chương 1". |
-| **Kích thước chạm** | Mọi nút, công tắc và tay trượt trong mục này **≥ 120 × 120 px @1920** — cùng sàn chạm với hotspot trong game (`docs/03_DATA_SPEC.md` §2.2 mức G3, `01_KICH_BAN_CHAPTER_01.md` §6 mục X18). Người đang run tay sau một cú doạ là **đúng** người đang cần bấm trúng ngay lần đầu. Ngưỡng 88 px của bản cũ đã bị bãi bỏ. |
+| **Kích thước chạm** | Mọi nút, công tắc và tay trượt trong mục này **≥ 120 × 120 px @1920** — cùng sàn chạm với hotspot trong game (`docs/03_DATA_SPEC.md` §2.2 mức G3, `docs/01_KICH_BAN_CHAPTER_01.md` §0.3 mục X18). Người đang run tay sau một cú doạ là **đúng** người đang cần bấm trúng ngay lần đầu. Ngưỡng 88 px của bản cũ đã bị bãi bỏ. |
 
 ---
 

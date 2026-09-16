@@ -49,8 +49,8 @@ Bốn tài liệu nguồn viết song song nên có chỗ mâu thuẫn. Bảng d
 >
 > | Tên nháp | Đọc ở đâu trong repo hôm nay |
 > |---|---|
-> | `01_narrative.md` | **Chính tài liệu này** (`docs/01_KICH_BAN_CHAPTER_01.md`) — Phần 2 (lore, niên biểu) và Phần 4 |
-> | `02_puzzle.md` | **Chính tài liệu này** Phần 4 (sáu câu đố, `solution`, đồ thị phụ thuộc) + `data/areas/*.json` mảng `puzzles[]` + `docs/04_LIVEOPS_MONETIZATION.md` §2 (ba bậc gợi ý) |
+> | `01_narrative.md` | **Chính tài liệu này** (`docs/01_KICH_BAN_CHAPTER_01.md`) — Phần 2 (lore, niên biểu), Phần 3 (văn bản đọc được từng khu vực), Phần 4 (mô tả vật phẩm) và Phần 8 (cảnh kết) |
+> | `02_puzzle.md` | **Chính tài liệu này** Phần 5 (sáu câu đố, `solution`, đồ thị phụ thuộc) + Phần 7 (chứng minh khả giải) + `data/areas/*.json` mảng `puzzles[]` + `docs/04_LIVEOPS_MONETIZATION.md` §2 (ba bậc gợi ý) |
 > | `03_world.md` | **`docs/03_DATA_SPEC.md` + `data/areas/*.json`** — đã kết tinh, xem mục 0.4 |
 > | `04_horror.md` | **`docs/06_AN_TOAN_NGUOI_CHOI.md`** §4.4.1 (thông số doạ) và §1–§6 (an toàn) + `data/areas/*.json` mảng `jumpscares[]` |
 >
@@ -62,7 +62,7 @@ Bốn tài liệu nguồn viết song song nên có chỗ mâu thuẫn. Bảng d
 |---|---|---|---|---|
 | X1 | Tuổi Bà Cô lúc mất | 17 tuổi *(niên biểu 1936–1953)* | 19 tuổi *(vài chuỗi văn bản)* | **17 tuổi.** Mọi chuỗi ghi "mười chín" phải sửa thành "mười bảy" |
 | X2 | Năm khắc trên năm vạch dao ở cột bếp | 1953 / 1961 / 1968 / 1976 / *(trống)* | 1992 → 1996 | **1953 / 1961 / 1968 / 1976 / (trống).** Năm vạch = năm lần lễ, gắn niên biểu hủ tục |
-| X3 | Nội dung Bảy Điều Cấm Kỵ | Bản gắn chặt với cơ chế câu đố | Bản khác nội dung | **Bản gắn cơ chế** (mục 2.4.5). Mỗi điều phải ánh xạ được vào một câu đố hoặc một jumpscare |
+| X3 | Nội dung Bảy Điều Cấm Kỵ | Bản gắn chặt với cơ chế câu đố | Bản khác nội dung | **Bản gắn cơ chế** (mục 2.3.6). Mỗi điều phải ánh xạ được vào một câu đố hoặc một jumpscare |
 | X4 | Tuổi thọ bà nội trên cáo phó | 79 *(1918–1996)* | 78 | **79 tuổi** |
 | X5 | Số ngày nhà bỏ không | 10 ngày | 9 ngày | **10 ngày** (tang 25-8, chơi 28-8, tính từ hôm đưa tang) |
 | X6 | Chữ khắc lòng gáo dừa | "ĐỪNG SOI" | "ĐỪNG SOI LÂU" | **"ĐỪNG MỞ"** — hai chữ, ngắn hơn, lạnh hơn. Xem X9: cảnh báo phải trỏ vào **hành vi thật sự làm `scare_bong_trong_chum` nổ** (cố mở ổ khoá), không trỏ vào việc soi nước |

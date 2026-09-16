@@ -2,7 +2,14 @@
 ## BỘ PROMPT ĐỒ HOẠ CHUẨN NGỮ CẢNH (MIDJOURNEY / STABLE DIFFUSION)
 
 Tài liệu: `docs/02_PROMPT_DO_HOA.md` — **Deliverable BƯỚC 2 của Master Form**
-Nguồn sự thật: **SPINE đã chốt** + `data/areas/*.json` (bounds hotspot, 8 `sprite_animation`) + `03_world.md` (bản phác bố cục dùng dựng ControlNet) + `02_puzzle.md` (khung zoom câu đố) + `01_narrative.md` (không khí, bảng màu, danh sách cấm) + **`docs/06_AN_TOAN_NGUOI_CHOI.md`** (mọi yêu cầu biến thể an toàn `_soft` / `_static`, trần độ sáng, bảng màu flash hợp lệ).
+Nguồn sự thật: **SPINE đã chốt** + `data/areas/*.json` (bounds hotspot, 8 `sprite_animation`) + `03_world.md`\* (bản phác bố cục dùng dựng ControlNet) + `02_puzzle.md`\* (khung zoom câu đố) + `01_narrative.md`\* (không khí, bảng màu, danh sách cấm) + **`docs/06_AN_TOAN_NGUOI_CHOI.md`** (mọi yêu cầu biến thể an toàn `_soft` / `_static`, trần độ sáng, bảng màu flash hợp lệ).
+
+> **\* KHAI BÁO BỐN FILE NHÁP NỘI BỘ — đọc trước khi lần theo bất kỳ trích dẫn nào.**
+> `03_world.md`, `02_puzzle.md`, `01_narrative.md` và `04_horror.md` là **file nháp nội bộ của giai đoạn tiền sản xuất**. **Cả bốn đều KHÔNG tồn tại trong repo và KHÔNG phát hành kèm repo.** Chúng chỉ được nêu để ghi công nguồn gốc thiết kế — **không file nào trong số đó là nguồn sự thật**.
+>
+> **Luật trích dẫn, áp dứt điểm từ vòng này:** *không tài liệu nào được trích **số mục** của bốn file ấy.* Chỗ nào nội dung đã chuyển vào bộ bàn giao `docs/01`–`docs/06` hoặc vào `data/` thì **trỏ thẳng vào đích thật** (tên file + số mục có thật). Chỗ nào chưa chuyển thì **chỉ giữ tên file nháp kèm nhãn** *(file nháp nội bộ, không phát hành kèm repo)* và **bỏ hẳn số mục**.
+>
+> Bảng chuyển tiếp ở `docs/01_KICH_BAN_CHAPTER_01.md` §0.2 ánh xạ ở mức **tài liệu**; ánh xạ ở mức **số mục** nằm tại chính từng chỗ trích trong tài liệu này.
 
 Độ phân giải thiết kế: **1920 x 1080**, gốc toạ độ **(0,0) ở góc TRÊN-BÊN TRÁI**.
 Ngôn ngữ: phần giải thích bằng **tiếng Việt có dấu**; **prompt giữ nguyên tiếng Anh** để dán thẳng vào Midjourney / Stable Diffusion.
@@ -61,7 +68,7 @@ Toàn bộ 24 tài sản dùng **đúng 14 màu này**. Hoạ sĩ được pha t
 - **Một nguồn sáng ấm duy nhất** (`lamp_warm` / than hồng) chọi với **fill lạnh** (`dusk_violet`). Không bao giờ có hai nguồn ấm cân bằng nhau trong một khung.
 - **`xo_white` là tài nguyên hiếm**: mỗi khung hình chỉ được **một** mảng trắng thật. Ở Area 1 là mảnh khăn xô; ở Area 3 là bát cơm úp; ở Area 5 là khuôn mặt bị khoét.
 - Độ bão hoà trung bình toàn khung **≤ 25%**. `votive_red` là ngoại lệ duy nhất được phép chói.
-- **Không bao giờ vẽ mặt ma** (`01_narrative.md` Phụ lục B.1). Bóng ma luôn là **bóng, khói, giấy, hoặc mặt vẽ bằng than hai chấm một vạch**.
+- **Không bao giờ vẽ mặt ma** (`docs/01_KICH_BAN_CHAPTER_01.md` §6.8 — *Danh sách CẤM*; bản đầy đủ cho tổ mỹ thuật ở §1.5 dưới đây). Bóng ma luôn là **bóng, khói, giấy, hoặc mặt vẽ bằng than hai chấm một vạch**.
 
 ### 1.2. Chuỗi khoá phong cách `SL-CORE` — BẮT BUỘC xuất hiện trong MỌI prompt
 
@@ -83,7 +90,7 @@ Ba nhóm trong `NEG-CORE` và lý do:
 - **Nhóm kỹ thuật** (3D, HDR, DOF, perspective): game là **Orthographic phẳng**, mọi hiệu ứng ống kính sẽ phá cảm giác mặt phẳng và làm hotspot lệch khỏi bounds.
 - **Nhóm sai văn hoá** (Chinese new year, **yin-yang / tube-and-pan roof tiles**, torii, kimono, Thai temple, crucifix, pentagram): mô hình rất hay trượt từ "Asian folk horror" sang Trung/Nhật/Thái hoặc sang exorcism phương Tây. Đây là lỗi **chí mạng** với dự án này.
   > **Chỗ trượt âm thầm nhất là MÁI NHÀ.** Hễ nhắc "clay roof tiles" là mô hình vẽ **ngói âm dương** (ngói ống + ngói lòng máng úp ngửa xen kẽ) — đó là ngói Hoa / nhà miền núi phía Bắc, **không phải** nhà ba gian đồng bằng Bắc Bộ. Nhà ba gian Bắc Bộ lợp **ngói mũi hài** (ngói ta): viên dẹt, đầu bo tròn hình mũi hài, **xếp lớp chồng mép kiểu vảy cá**, mái thẳng dốc thoải, bờ nóc trơn, không đao cong. Mọi prompt có mái nhà **bắt buộc** ghi rõ `mui-hai` + `fish-scale courses`, và `yin-yang clay roof tiles` phải nằm trong negative.
-- **Nhóm cliché bị cấm** (Sadako, ghost face, blood, gore): trích thẳng từ `01_narrative.md` Phụ lục B.1. Đặc biệt `long-haired white ghost climbing out of a well` **phải luôn có mặt** vì Area 4 có giếng khơi — mô hình sẽ tự động vẽ Sadako nếu không chặn.
+- **Nhóm cliché bị cấm** (Sadako, ghost face, blood, gore): trích thẳng từ `docs/01_KICH_BAN_CHAPTER_01.md` §6.8. Đặc biệt `long-haired white ghost climbing out of a well` **phải luôn có mặt** vì Area 4 có giếng khơi — mô hình sẽ tự động vẽ Sadako nếu không chặn.
 
 ### 1.4. Giao thức seed / `--sref` / LoRA để giữ đồng bộ
 
@@ -130,12 +137,12 @@ Chọn **1 tấm tốt nhất** → upscale → lưu `art/_anchor/style_anchor_l
 | Steps | **34** (bối cảnh) / **28** (sprite) |
 | CFG | **6.5** (bối cảnh) / **7.0** (sprite, cần bám mô tả chặt hơn) |
 | Hires fix | Latent (nearest-exact), scale **1.5x**, denoise **0.38** |
-| ControlNet | `lineart` weight **0.55** từ **bản phác bố cục ASCII trong `03_world.md`** đã dựng lại thành sketch — đây là cách giữ hotspot đúng bounds |
+| ControlNet | `lineart` weight **0.55** từ **bản phác bố cục ASCII trong `03_world.md`** *(file nháp nội bộ, không phát hành kèm repo)* đã dựng lại thành sketch — đây là cách giữ hotspot đúng bounds |
 | Clip skip | 2 |
 
-> **Vì sao phải dùng ControlNet cho MỤC A:** bounds hotspot trong `03_world.md` là **hợp đồng cứng** với tổ code. Nếu cái chum nước rơi lệch 200px so với `{x:330, y:730, width:300, height:260}` thì người chơi bấm vào khoảng không. ControlNet lineart từ bản phác là cách duy nhất ép mô hình đặt đồ vật đúng ô.
+> **Vì sao phải dùng ControlNet cho MỤC A:** bounds hotspot trong `data/areas/*.json` là **hợp đồng cứng** với tổ code. Nếu cái chum nước rơi lệch 200px so với `{x:330, y:730, width:300, height:260}` thì người chơi bấm vào khoảng không. ControlNet lineart từ bản phác là cách duy nhất ép mô hình đặt đồ vật đúng ô.
 
-### 1.5. Danh sách CẤM tuyệt đối (kế thừa `01_narrative.md` Phụ lục B.1)
+### 1.5. Danh sách CẤM tuyệt đối (kế thừa `docs/01_KICH_BAN_CHAPTER_01.md` §6.8)
 
 Áp cho **mọi** khâu mỹ thuật, kể cả ảnh nháp gửi nội bộ:
 
@@ -228,7 +235,7 @@ art/icon/icon_item_dui_mo.png         320 x 320 -> atlas 160 x 160 @1x
 
 # 3. MỤC A — PROMPT BỐI CẢNH (2D BACKGROUND)
 
-**5 prompt riêng biệt, mỗi area một prompt.** Không có prompt chung. Chuỗi `[TÊN KHU VỰC]` của Master Form đã được thay bằng mô tả thật, và mỗi prompt được bổ sung **danh sách đồ vật bắt buộc phải nhìn thấy** — chính là các hotspot trong `03_world.md`, đặt đúng vùng màn hình tương ứng với bounds.
+**5 prompt riêng biệt, mỗi area một prompt.** Không có prompt chung. Chuỗi `[TÊN KHU VỰC]` của Master Form đã được thay bằng mô tả thật, và mỗi prompt được bổ sung **danh sách đồ vật bắt buộc phải nhìn thấy** — chính là các hotspot trong `data/areas/*.json`, đặt đúng vùng màn hình tương ứng với bounds.
 
 > **Luật chung của MỤC A:** không người, không bàn tay, không ma trong bản nền. Mọi thứ động đều là sprite rời (MỤC C). Ngoại lệ duy nhất: **hình nhân thế mạng ở Area 5** — nó là đồ vật có thật, đứng đó suốt chương, nên nằm trong lớp MIDGROUND của bản nền.
 
@@ -265,11 +272,11 @@ Aspect ratio: **16:9 — 1920 x 1080**
 
 ```plaintext
 Sampler DPM++ 2M Karras | Steps 34 | CFG 6.5 | Seed 179612 | Size 1024x576 -> Hires Latent 1.5x denoise 0.38 -> 1920x1080
-ControlNet lineart weight 0.55, ảnh điều khiển = sketch dựng lại từ bản phác 03_world.md §1.1.1
+ControlNet lineart weight 0.55, ảnh điều khiển = sketch dựng lại từ bản phác bố cục trong 03_world.md (file nháp nội bộ, không phát hành kèm repo)
 LoRA linhanthon_style_v1 : 0.75 | Clip skip 2
 ```
 
-**Chốt bố cục (bắt buộc khớp bounds `03_world.md` §1.1.2):**
+**Chốt bố cục (bắt buộc khớp `bounds` THẬT trong `data/areas/area_san_gach.json` — bảng đối chiếu ở `docs/01_KICH_BAN_CHAPTER_01.md` §3.1.3, 13 hotspot):**
 
 | Đồ vật trong prompt | Hotspot | Vùng màn hình |
 |---|---|---|
@@ -326,11 +333,11 @@ Aspect ratio: **16:9 — 1920 x 1080**
 
 ```plaintext
 Sampler DPM++ 2M Karras | Steps 34 | CFG 6.5 | Seed 179613 | Size 1024x576 -> Hires Latent 1.5x denoise 0.38 -> 1920x1080
-ControlNet lineart weight 0.55, ảnh điều khiển = sketch dựng lại từ bản phác 03_world.md §1.2.1
+ControlNet lineart weight 0.55, ảnh điều khiển = sketch dựng lại từ bản phác bố cục trong 03_world.md (file nháp nội bộ, không phát hành kèm repo)
 LoRA linhanthon_style_v1 : 0.75 | Clip skip 2
 ```
 
-**Chốt bố cục (bắt buộc khớp bounds `03_world.md` §1.2.2):**
+**Chốt bố cục (bắt buộc khớp `bounds` THẬT trong `data/areas/area_hien_nha.json` — bảng đối chiếu ở `docs/01_KICH_BAN_CHAPTER_01.md` §3.2.3, 12 hotspot):**
 
 | Đồ vật trong prompt | Hotspot | Vùng màn hình |
 |---|---|---|
@@ -379,11 +386,11 @@ Aspect ratio: **16:9 — 1920 x 1080**
 
 ```plaintext
 Sampler DPM++ 2M Karras | Steps 34 | CFG 6.5 | Seed 179614 | Size 1024x576 -> Hires Latent 1.5x denoise 0.38 -> 1920x1080
-ControlNet lineart weight 0.60 (area đông hotspot nhất, cần siết chặt hơn), ảnh điều khiển = sketch dựng lại từ bản phác 03_world.md §1.3.1
+ControlNet lineart weight 0.60 (area đông hotspot nhất, cần siết chặt hơn), ảnh điều khiển = sketch dựng lại từ bản phác bố cục trong 03_world.md (file nháp nội bộ, không phát hành kèm repo)
 LoRA linhanthon_style_v1 : 0.75 | Clip skip 2
 ```
 
-**Chốt bố cục (17 hotspot — `03_world.md` §1.3.2). Bốn chỗ dễ sai nhất:**
+**Chốt bố cục (17 hotspot — `bounds` THẬT trong `data/areas/area_gian_tho.json`, bảng đối chiếu ở `docs/01_KICH_BAN_CHAPTER_01.md` §3.3.3). Bốn chỗ dễ sai nhất:**
 
 - **Bát hương phải lệch 45°** so với hoành phi (`hs_bat_huong` `{1330,520,150,150}`). Đây là điềm nặng nhất trong tín ngưỡng Bắc Bộ — hoạ sĩ vẽ thẳng hàng là **hỏng cả beat B05a**.
 - **Khám thờ Bà Cô** (`hs_kham_tho_ba_co` `{110,240,290,240}`) phải **thấp hơn bát hương gia tiên một tấc** và **bịt kín bằng vải điều**, không ảnh, không tên, không bát hương riêng.
@@ -425,12 +432,12 @@ Aspect ratio: **16:9 — 1920 x 1080**
 
 ```plaintext
 Sampler DPM++ 2M Karras | Steps 34 | CFG 6.5 | Seed 179615 | Size 1024x576 -> Hires Latent 1.5x denoise 0.38 -> 1920x1080
-ControlNet lineart weight 0.55, ảnh điều khiển = sketch dựng lại từ bản phác 03_world.md §1.4.1
+ControlNet lineart weight 0.55, ảnh điều khiển = sketch dựng lại từ bản phác bố cục trong 03_world.md (file nháp nội bộ, không phát hành kèm repo)
 LoRA linhanthon_style_v1 : 0.75 | Clip skip 2
 Ghi chú: xuất thêm bản "đã thắp đèn" — cùng seed, sửa prompt thành ambient brightness fifty-five percent within one oil-lamp halo radius 520px, đặt tên bg_bep_gieng_lit_*
 ```
 
-**Chốt bố cục (14 hotspot — `03_world.md` §1.4.2):**
+**Chốt bố cục (14 hotspot — `bounds` THẬT trong `data/areas/area_bep_gieng.json`, bảng đối chiếu ở `docs/01_KICH_BAN_CHAPTER_01.md` §3.4.3):**
 
 - Mọi hotspot "trong bếp" có `x + width ≤ 1150`; mọi hotspot "ngoài sân sau" có `x ≥ 1200`.
 - `hs_gieng_khoi` `{1300,520,460,420}` là hotspot **to nhất area** — miệng giếng phải chiếm khối lớn rõ ràng vì người chơi sẽ chạm nó trong điều kiện màn hình tối.
@@ -472,12 +479,12 @@ Aspect ratio: **16:9 — 1920 x 1080**
 
 ```plaintext
 Sampler DPM++ 2M Karras | Steps 34 | CFG 6.5 | Seed 179616 | Size 1024x576 -> Hires Latent 1.5x denoise 0.38 -> 1920x1080
-ControlNet lineart weight 0.55, ảnh điều khiển = sketch dựng lại từ bản phác 03_world.md §1.5.1
+ControlNet lineart weight 0.55, ảnh điều khiển = sketch dựng lại từ bản phác bố cục trong 03_world.md (file nháp nội bộ, không phát hành kèm repo)
 LoRA linhanthon_style_v1 : 0.75 | Clip skip 2
 Ghi chú: lớp _l3_fx xuất RIÊNG quầng đèn dạng radial alpha 520px để engine gắn theo con trỏ, KHÔNG nung quầng sáng vào _l1_mid
 ```
 
-**Chốt bố cục (11 hotspot — `03_world.md` §1.5.2). Hai chỗ dễ sai:**
+**Chốt bố cục (11 hotspot — `bounds` THẬT trong `data/areas/area_gac_xep.json`, bảng đối chiếu ở `docs/01_KICH_BAN_CHAPTER_01.md` §3.5.3). Hai chỗ dễ sai:**
 
 - `hs_ao_cuoi_giay` `{1650,200,230,370}` **chỉ hiện sau khi giải `puz_xep_anh_gia_pha`** → vẽ thành lớp bật/tắt riêng, nền mặc định là **móc gỗ trống sau lưng khung ảnh**.
 - `hs_hinh_nhan` `{820,280,290,620}` kết thúc ở `y = 900`; `hs_chieu_coi_trai_san` có **vùng chạm** `{730,901,440,120}` bắt đầu ngay ở `y = 901` — **cách nhau đúng 1 px**, cặp sát nhất toàn chương. **Nhưng phần VẼ của chiếu vẫn là `{730,910,440,88}`** (`visual_bounds`), tức mép trên nét vẽ vẫn cách chân hình nhân 10 px. **Hoạ sĩ vẽ theo `visual_bounds`, không vẽ theo vùng chạm.** Phải giữ ranh giới chân hình nhân / mép chiếu thật rõ, đừng vẽ tà giấy tràn xuống chiếu.
@@ -486,12 +493,12 @@ Ghi chú: lớp _l3_fx xuất RIÊNG quầng đèn dạng radial alpha 520px đ�
 
 # 4. MỤC B — PROMPT ZOOM CẬN CẢNH GIẢI ĐỐ
 
-**6 prompt riêng biệt, mỗi câu đố một prompt.** Khung zoom, kích thước phần tử và vùng chạm lấy nguyên từ `02_puzzle.md`.
+**6 prompt riêng biệt, mỗi câu đố một prompt.** Khung zoom, kích thước phần tử và vùng chạm lấy nguyên từ `02_puzzle.md` *(file nháp nội bộ, không phát hành kèm repo)*; số liệu ràng buộc được kiểm lại theo `data/areas/*.json` và `docs/01_KICH_BAN_CHAPTER_01.md` §5.
 
 > **Luật chung của MỤC B — đọc trước khi sinh tấm đầu tiên:**
 > 1. Mỗi câu đố xuất **hai file**: `_plate` (nền tĩnh, không có phần tử thao tác được) và `_parts` (atlas các phần tử rời, nền trong suốt). Nếu vẽ dính vào nhau thì không lập trình được.
 > 2. **Không vẽ UI.** Nút bấm, thanh nhịp, ô chiếu lễ do tổ UI dựng bằng 9-slice. Prompt chỉ mô tả **chỗ trống đã chừa sẵn** cho chúng.
-> 3. **Mỗi phần tử thao tác được phải ≥ 120 x 120 px @1920** — sàn chạm chính thức của dự án (`01_KICH_BAN_CHAPTER_01.md` §6 mục X18, `docs/03_DATA_SPEC.md` §2.2 mức G3). **Ngưỡng 88 px của bản cũ đã bị bãi bỏ** vì quy đổi *"88 px ≈ 44 pt"* là sai số học: fit-width cho ra 29–43 pt/dp, dưới cả Apple HIG lẫn Material. Phần tử còn phải có silhouette phân biệt được **khi nhìn ở 30% độ sáng** — vì Area 4 và Area 5 tối.
+> 3. **Mỗi phần tử thao tác được phải ≥ 120 x 120 px @1920** — sàn chạm chính thức của dự án (`docs/01_KICH_BAN_CHAPTER_01.md` §0.3 mục X18 và §5.5, `docs/03_DATA_SPEC.md` §2.2 mức G3). **Ngưỡng 88 px của bản cũ đã bị bãi bỏ** vì quy đổi *"88 px ≈ 44 pt"* là sai số học: fit-width cho ra 29–43 pt/dp, dưới cả Apple HIG lẫn Material. Phần tử còn phải có silhouette phân biệt được **khi nhìn ở 30% độ sáng** — vì Area 4 và Area 5 tối.
 >
 >    **Một ngoại lệ, và chỉ một:** **bề rộng NÉT** trong `B2 · PATTERN_TRACE` là **≥ 44 px**, không phải 120 px. Nét là **đường vuốt**, không phải mục tiêu chạm: ngón tay bám theo nét chứ không phải bấm trúng nó một lần. Sàn 120 px áp cho **mục tiêu chạm rời rạc** — nút, icon, ô, phần tử kéo-thả. Mọi con số khác của MỤC B đều đã ở trên sàn: B1 vành 800/600/400, B3 icon 150×150, B5 phần tử ≥ 160×160, B6 ô 280×280.
 > 4. Ánh sáng zoom **kế thừa ánh sáng của area mẹ**, không được đột ngột sáng lên chỉ vì đang "cận cảnh".
@@ -694,7 +701,7 @@ LoRA linhanthon_style_v1 : 0.70 | Clip skip 2
 Ghi chú: xuất thêm bản _lit (cùng seed, thêm "wick lit, flame the size of a rice grain, halo radius 520px") dùng cho khoảnh khắc giải xong
 ```
 
-**Yêu cầu xuất riêng:** ngọn lửa cuối cùng **cao đúng bằng một hạt thóc** (`03_world.md` §2, mô tả `item_den_dau_sang`). Vẽ ngọn lửa to là phá vỡ toàn bộ thiết kế ánh sáng của Area 4 và Area 5.
+**Yêu cầu xuất riêng:** ngọn lửa cuối cùng **cao đúng bằng một hạt thóc** (`docs/01_KICH_BAN_CHAPTER_01.md` §4.1, hàng 9 — mô tả túi đồ của `item_den_dau_sang`). Vẽ ngọn lửa to là phá vỡ toàn bộ thiết kế ánh sáng của Area 4 và Area 5.
 
 ---
 
@@ -971,7 +978,7 @@ Format: 2D sprite sheet of 6 frames — 1 frame of empty door slats, 3 frames of
 NEG-CORE, hollow black eye sockets, screaming mouth, open jaw, sharp teeth, bloodshot eyes, glowing eyes, distorted face, zombie, rotting skin, blood, wounds, long wet hair covering the face, Sadako, jump scare face, extreme close up nostrils, cast shadow, background scenery
 ```
 
-> **Kiểm duyệt bắt buộc:** đây là sprite **sát ranh giới cấm nhất** của cả bộ (`01_narrative.md` B.1 cấm "mặt ma cận cảnh hốc mắt đen"). Được phép **duy nhất** vì khuôn mặt này **bình thường** và **đứng yên**. Art Lead phải ký duyệt từng bản trước khi đóng bundle; bất kỳ bản nào có biểu cảm dữ tợn đều **loại**.
+> **Kiểm duyệt bắt buộc:** đây là sprite **sát ranh giới cấm nhất** của cả bộ (`docs/01_KICH_BAN_CHAPTER_01.md` §6.8 cấm "mặt ma cận cảnh hốc mắt đen"). Được phép **duy nhất** vì khuôn mặt này **bình thường** và **đứng yên**. Art Lead phải ký duyệt từng bản trước khi đóng bundle; bất kỳ bản nào có biểu cảm dữ tợn đều **loại**.
 
 Aspect ratio: **1:1 — 1024 x 1024 / khung**
 
@@ -1030,7 +1037,7 @@ LoRA linhanthon_style_v1 : 0.65 | Clip skip 2 | Tách nền: ngưỡng #808080, 
 
 ## C8 · `spr_ao_cuoi_giay` — Áo cưới giấy khổ người lớn (cô dâu giấy / Bà Cô)
 
-*`item_ao_cuoi_giay` · vật phẩm nhan đề của cả dự án ("Áo Cưới Giấy Style"). Treo trên móc gỗ sau lưng khung ảnh, **tà áo còn phẳng như chưa ai mặc**, nhưng **vai áo hơi trĩu xuống, như vừa có ai mặc thử** (`01_narrative.md` §2.2). Gấu áo có mấy con số bằng bút chì — **khớp số đo của chính người chơi**.*
+*`item_ao_cuoi_giay` · vật phẩm nhan đề của cả dự án ("Áo Cưới Giấy Style"). Treo trên móc gỗ sau lưng khung ảnh, **tà áo còn phẳng như chưa ai mặc**, nhưng **vai áo hơi trĩu xuống, như vừa có ai mặc thử** (`docs/01_KICH_BAN_CHAPTER_01.md` §2.2.2). Gấu áo có mấy con số bằng bút chì — **khớp số đo của chính người chơi**.*
 
 **Prompt**
 
@@ -1142,7 +1149,7 @@ Ghi chú: DÙNG LẠI seed của C7 cho phần thân (179637) khi ghép, để c
 
 ## C11 · `spr_ba_dong_to` — Bà đồng Tơ, bóng người dưới sân ở khung hình cuối
 
-*Nhân vật sống duy nhất có tác động trong Chapter 1, và **không xuất hiện trên màn hình cho tới khung hình cuối cùng** (`01_narrative.md` §2.6, §6.1 nhịp 7–8). 84 tuổi, lưng còng, khăn mỏ quạ, tay cầm một nắm hương vòng đang cháy đỏ. Nhìn từ trên gác xuống, **qua khe ván sàn**, nên chỉ thấy **bóng nhỏ ở đầu ngõ tre**, tách khỏi hai hàng đuốc.*
+*Nhân vật sống duy nhất có tác động trong Chapter 1, và **không xuất hiện trên màn hình cho tới khung hình cuối cùng** (`docs/01_KICH_BAN_CHAPTER_01.md` §2.2.6 và §8.1 — NHỊP 7–8). 84 tuổi, lưng còng, khăn mỏ quạ, tay cầm một nắm hương vòng đang cháy đỏ. Nhìn từ trên gác xuống, **qua khe ván sàn**, nên chỉ thấy **bóng nhỏ ở đầu ngõ tre**, tách khỏi hai hàng đuốc.*
 
 **Prompt**
 
@@ -1159,7 +1166,7 @@ Format: 2D sprite sheet of 6 frames with almost no movement — only the incense
 NEG-CORE, witch, hag caricature, hooked nose, warts, glowing eyes, floating ghost, transparent figure, Chinese peasant costume, Japanese kimono, conical hat non la worn indoors, cheerful grandmother, smiling, bright clothing, cast shadow, background scenery
 ```
 
-> Bà Tơ **không phải phù thuỷ**. `01_narrative.md` nói rõ: trong đầu bà, bà đang **cứu cả làng**. Vẽ bà thành mụ phù thuỷ là phá hỏng luận điểm chủ đề lớn nhất của dự án — *hủ tục là do người sống bịa ra, và người sống tin rằng mình đang làm điều tốt*.
+> Bà Tơ **không phải phù thuỷ**. `docs/01_KICH_BAN_CHAPTER_01.md` §2.2.6 nói rõ: trong đầu bà, bà đang **cứu cả làng**. Vẽ bà thành mụ phù thuỷ là phá hỏng luận điểm chủ đề lớn nhất của dự án — *hủ tục là do người sống bịa ra, và người sống tin rằng mình đang làm điều tốt*.
 
 Aspect ratio: **9:16 — 768 x 1365 / khung**
 
@@ -1182,7 +1189,7 @@ LoRA linhanthon_style_v1 : 0.65 | Clip skip 2 | Tách nền: ngưỡng #808080, 
 
 ## C12 · `spr_ban_tay_nguoi_choi` — Bàn tay người chơi (thợ may)
 
-*Người chơi **không có sprite toàn thân** (`01_narrative.md` §2.1). Chỉ thấy **bàn tay** khi tương tác, **bóng đổ** trên sân gạch, và mặt phản chiếu trong chum nước (luôn bị che/mờ). Nhân vật là **thợ may bậc 3** — bàn tay phải kể được điều đó.*
+*Người chơi **không có sprite toàn thân** (`docs/01_KICH_BAN_CHAPTER_01.md` §2.2.1). Chỉ thấy **bàn tay** khi tương tác, **bóng đổ** trên sân gạch, và mặt phản chiếu trong chum nước (luôn bị che/mờ). Nhân vật là **thợ may bậc 3** — bàn tay phải kể được điều đó.*
 
 **Prompt**
 
@@ -1358,7 +1365,7 @@ Mỗi zoom = **`_plate` + `_parts`** → **12 file**, cộng 2 biến thể ph�
 - [ ] Mỗi khung hình có **đúng một** mảng trắng `xo_white`.
 - [ ] Đã khoá `--v 6.1` / model hash trong suốt chương, không đổi giữa chừng.
 
-**Đúng ngữ cảnh văn hoá (soát theo `01_narrative.md` B.1)**
+**Đúng ngữ cảnh văn hoá (soát theo `docs/01_KICH_BAN_CHAPTER_01.md` §6.8 và §1.5 của tài liệu này)**
 - [ ] Không có chi tiết Trung Hoa / Nhật Bản / Thái Lan lẫn vào (đèn lồng đỏ, torii, kimono, mái cong chùa Tàu).
 - [ ] Không có thánh giá, ngũ giác, ouija, phù thuỷ phương Tây.
 - [ ] **Giếng ở A4 không có gì trèo lên.** Không tóc dài, không bàn tay trên thành giếng.
@@ -1366,7 +1373,7 @@ Mỗi zoom = **`_plate` + `_parts`** → **12 file**, cộng 2 biến thể ph�
 - [ ] Không vẽ mặt ma. Kiểm từng sprite: chỉ được bóng phẳng / khói / mặt than hai chấm một vạch. C6 là ngoại lệ duy nhất và **phải có chữ ký Art Lead**.
 - [ ] Bà đồng Tơ **không** bị vẽ thành mụ phù thuỷ.
 
-**Khớp dữ liệu (soát chéo `03_world.md` + `data/areas/*.json`)**
+**Khớp dữ liệu (soát chéo `data/areas/*.json` + `docs/01_KICH_BAN_CHAPTER_01.md` §3.1.3–§3.5.3)**
 - [ ] Mỗi đồ vật tương tác được nằm **đúng vùng `visual_bounds`** của hotspot tương ứng, sai số ≤ 24px. **Đừng soát theo `bounds`** — `bounds` là VÙNG CHẠM và cố ý lớn hơn hình vẽ (sàn 120 x 120 px @1920). Luật hoà giải đầy đủ ở `docs/03_DATA_SPEC.md` §2.3.5.4.
 - [ ] Không có hai đồ vật tương tác vẽ dính nhau ở chỗ bounds cách nhau 20px (đặc biệt `hs_binh_phong` ↔ `hs_o_lom_binh_phong`, `hs_mo_ca` ↔ `hs_dui_mo`, `hs_hinh_nhan` ↔ `hs_chieu_coi_trai_san`).
 - [ ] Không đồ vật quan trọng nào nằm trong dải `y < 80` (notch) hoặc `y > 1000` (inventory bar) — luật này áp cho **nét vẽ** (`visual_bounds`); vùng chạm được phép chạm mép dưới khung.

@@ -49,15 +49,27 @@ QUY TAC VANG CUA GIAI DOAN 10 - phien ban da go sach canh ao:
   bi tieu hao" nua, no doc truong consumes_item (va locks_item) cua tung hotspot USE_ITEM.
 
 CHE DO TU KIEM DOT BIEN (--self-test):
-  Hai ho dot bien, chay noi tiep:
-    (A) Lan luot XOA tung truong grants_flag (moi puzzle, moi hotspot co khai bao) ngay
-        trong bo nho, chay lai toan bo phep kiem, va doi trinh kiem PHAI bao loi o lop
-        logic (GIAI DOAN 7a hoac 10).
-    (B) Lan luot SUA tung gia tri ma manifest LAP LAI tu file khu vuc (puzzle_index,
-        jumpscare_index, flag_registry, areas[].background_asset_url, area_files) va doi
-        phep doi chieu guong (GIAI DOAN 7c) PHAI bao loi.
+  HAI TOAN TU dot bien, cham diem TACH RIENG:
+    DOI GIA TRI  doi gia tri cua mot khoa dang co mat -> ban sao lech
+    XOA KHOA     xoa han mot khoa                     -> ban sao khuyet
+  Ba ho dot bien, chay noi tiep:
+    (A) [XOA KHOA] Lan luot XOA tung truong grants_flag (moi puzzle, moi hotspot co khai
+        bao) trong data/areas/* ngay trong bo nho, chay lai toan bo phep kiem, va doi
+        trinh kiem PHAI bao loi o lop logic (GIAI DOAN 7a hoac 10).
+    (B1) [DOI GIA TRI] Lan luot SUA tung gia tri ma manifest LAP LAI tu file khu vuc
+        (puzzle_index, jumpscare_index, flag_registry, areas[].background_asset_url,
+        areas[].order, area_files) va doi GIAI DOAN 7c PHAI bao loi.
+    (B2) [XOA KHOA] Cung nhung ban sao ay, nhung XOA HAN khoa - bao gom ca khoa guong
+        grants_flag trong chapter_01.json. Bo qua area_files (muc o do la chuoi tran,
+        khong co khoa de xoa).
   Diem nao bi dot bien ma van bao sach la bang chung trinh kiem khong thuc su doc truong
-  do. Thoat 0 chi khi phat hien 100%.
+  do. Thoat 0 chi khi CA HAI toan tu deu dat 100%.
+
+  VI SAO PHAI CO TOAN TU THU HAI: ban truoc chi co DOI GIA TRI, va mot toan tu chi biet
+  doi gia tri thi chi tham do duoc nhung khoa DANG CO MAT. No mu hoan toan truoc lop lo
+  hong "khoa vang mat khong ai gac" - va vi mu nen no van in "DAT (100%)" trong khi 68
+  trong 82 khoa guong cua puzzle_index + jumpscare_index bi xoa han van thoat 0. Chinh
+  ban tu kiem da tu bao cao rong hon pham vi no tham do, dung kieu loi no sinh ra de bat.
 
 THU MUC DATA MAC DINH:
   Suy ra TUONG DOI tu vi tri file script (<tools>/../data), khong go cung duong dan tuyet
@@ -135,7 +147,31 @@ HARD_MIN_TOUCH_SIZE = 88
 # data/liveops_chapter_01.json -> validation.invariants. Hai con so lech nhau la [LOI]:
 # mot bat bien duoc khai ma khong ai kiem thi no khong ton tai, du no nam trong file.
 # Bat bien 17 la cai vua them: iap.products[*].requires.flag phai co nguon cap that.
-N_LIVEOPS_INVARIANTS_IMPLEMENTED = 17
+#
+# Danh sach nay duoc DUY TRI BANG TAY (khong co registry tu dang ky), nhung viec ghi ten
+# tung bat bien thay vi go mot con so tran co hai cai loi: (1) con so duoi day duoc SINH RA
+# bang len(), khong the lech khoi danh sach; (2) them mot phep kiem ma quen them ten vao day
+# se lo ra ngay khi doi chieu, thay vi tang thang mot con so khong ai doc duoc.
+LIVEOPS_INVARIANTS_IMPLEMENTED = (
+    "hint_tier_gem_cost_tang_dan",
+    "hint_tier_unlock_free_tang_dan",
+    "hint_tier3_trong_max_wait",
+    "hint_free_path_guaranteed",
+    "iap_product_id_duy_nhat",
+    "iap_regional_pricing_du_vung",
+    "event_start_truoc_event_end",
+    "event_khong_chong_cua_so",
+    "event_override_bg_trong_bundles",
+    "event_theme_khong_doi_gameplay",
+    "ads_chan_trong_va_sau_jumpscare",
+    "no_loot_box",
+    "telemetry_event_name_hop_le",
+    "ab_test_allocation_cong_100",
+    "remote_config_key_duy_nhat",
+    "gem_economy_earn_du_bu_spend",
+    "iap_requires_flag_co_nguon_cap",
+)
+N_LIVEOPS_INVARIANTS_IMPLEMENTED = len(LIVEOPS_INVARIANTS_IMPLEMENTED)
 
 # KHOA MASTER FORM CUA HOTSPOT - phai CO MAT tren moi hotspot, ke ca khi khong ap dung
 # (luc do ghi null). Ba khoa dau (id / bounds / action_type) duoc kiem rieng vi thieu chung
@@ -329,7 +365,12 @@ class Report:
         elif n_warn:
             verdict = self.p.yellow("DAT - nhung con canh bao can xu ly truoc khi khoa ban.")
         else:
-            verdict = self.p.green("DAT - du lieu sach hoan toan.")
+            # "du lieu sach hoan toan" la mot cau RONG HON pham vi cua trinh kiem: no
+            # noi ve DU LIEU, trong khi cai dem duoc chi la so [LOI] cua nhung phep kiem
+            # ma file nay hien thuc. Chinh cau chu nay tung duoc in ra trong khi mo phong
+            # con canh ao va manifest con ban sao khong ai gac (xem docstring dau file).
+            verdict = self.p.green("DAT - khong [LOI] nao trong pham vi cac giai doan da "
+                                   "chay.")
         print("  %s  |  %s: %d  |  %s: %d" % (
             verdict,
             self.p.red("[LOI]"), n_err,
@@ -1424,8 +1465,13 @@ def check_cross_references(ch: Chapter, rep: Report) -> None:
                       "Truong 'nhat_o_area' = '%s' khong ton tai." % home)
 
     if not broken:
-        rep.ok("Toan bo tham chieu cheo (target_puzzle_id, wrong_action_jumpscare, item_id, "
-               "required_item, target_area_id) deu tro toi doi tuong co that.")
+        # Liet ke DU nhung truong vong tren that su duyet. Mot danh sach cat ngan khien
+        # nguoi doc tuong pham vi hep hon thuc te; mot danh sach phong len thi nguoc lai.
+        rep.ok("Toan bo tham chieu cheo deu tro toi doi tuong co that: target_puzzle_id, "
+               "target_area_id, hotspot.item_id, hotspot.required_item, "
+               "wrong_action_jumpscare, puzzle.reward_item_id, puzzle.required_items, "
+               "jumpscare.trigger_item_id, unlock_condition.{required_items, from_area_id, "
+               "entry_hotspot_id}, item_catalog.{nguon, nhat_o_area}.")
 
 
 # --------------------------------------------------------------------------
@@ -1447,6 +1493,22 @@ def check_cross_references(ch: Chapter, rep: Report) -> None:
 # Luat cua giai doan nay: cai gi duoc LAP LAI thi phai TRUNG KHOP gia tri THAT, va cai gi
 # co that thi phai co mat trong ban sao. Mot khoa duoc lap lai ma trinh kiem khong biet
 # cach doi chieu -> [CANH BAO], vi do lai la mot ban sao khong ai gac.
+#
+# BAN TRUOC TUYEN BO CAU TREN NHUNG CHI LAM DUOC MOT NUA, va do chinh la kieu loi ma du an
+# nay da vap bon lan: mot phep kiem tu bao cao rong hon nhung gi no thuc su kiem. Ve chieu
+# "co that thi phai co mat trong ban sao", no chi gac o MUC BAN GHI (thieu han mot muc
+# puzzle_index -> bao loi). O MUC TUNG TRUONG no chi duyet nhung khoa CON NAM trong
+# manifest ("for key in sorted(entry)"), nen XOA HAN mot khoa guong la lot sach: quet rong
+# cho thay 68 trong 82 khoa guong cua puzzle_index + jumpscare_index bi xoa deu khong bi
+# bat, trinh kiem van in "DAT - du lieu sach hoan toan" va thoat 0. Chi 14 khoa dinh danh
+# (puzzle_id / scare_id) bi bat, va bat vi mot ly do khac: muc index mat dinh danh.
+#
+# Tu ban nay, ca 7c.1, 7c.2 va 7c.4 duyet HOP (union) cac khoa cua ban guong va ban goc:
+#   - khoa co o goc ma thieu o guong   -> [LOI] BAN SAO THIEU KHOA
+#   - khoa co o guong ma thieu o goc   -> [LOI]
+#   - khoa co o ca hai ma lech gia tri -> [LOI] LECH BAN SAO
+# 7c.3 (flag_registry) von da hai chieu san: no so sanh CA BO ba (nguon_kieu, nguon_id,
+# area_id) dung .get(), nen xoa mot khoa bien bo ba thanh lech va van bao loi.
 
 _ABSENT = object()
 
@@ -1727,27 +1789,45 @@ def check_manifest_mirror(ch: Chapter, rep: Report) -> None:
             continue        # da bao o cho khac
         area = ch.areas[area_id]
 
-        if "background_asset_url" in entry:
+        # Cung luat HAI CHIEU nhu 7c.1/7c.2: khoa vang mat o BEN NAO cung la lech ban sao.
+        copied_bg = entry.get("background_asset_url", _ABSENT)
+        real_bg = area.get("background_asset_url", _ABSENT)
+        if not (copied_bg is _ABSENT and real_bg is _ABSENT):
             n_checked += 1
-            real = area.get("background_asset_url", _ABSENT)
-            if not mirror_equal(entry["background_asset_url"], real):
+            if copied_bg is _ABSENT:
+                rep.error(where,
+                          "BAN SAO THIEU KHOA: file khu vuc '%s' khai bao background_asset_url "
+                          "= %s, nhung muc areas[%d] trong manifest KHONG chep lai khoa nay."
+                          % (area_id, _mirror_show(real_bg), idx),
+                          "Them \"background_asset_url\": %s vao muc areas[%d]."
+                          % (_mirror_show(real_bg), idx))
+                n_bad += 1
+            elif not mirror_equal(copied_bg, real_bg):
                 rep.error(where,
                           "LECH BAN SAO: manifest chep background_asset_url = %s cho '%s', "
                           "gia tri THAT trong file khu vuc la %s."
-                          % (_mirror_show(entry["background_asset_url"]), area_id,
-                             _mirror_show(real)),
+                          % (_mirror_show(copied_bg), area_id, _mirror_show(real_bg)),
                           "Engine nap anh nen tu file khu vuc; ban sao trong manifest lech di "
                           "la mot lo trinh bay sai cho moi cong cu doc manifest.")
                 n_bad += 1
 
-        if "order" in entry:
+        copied_order = entry.get("order", _ABSENT)
+        real_order = ch.area_order.index(area_id) + 1 if area_id in ch.area_order else _ABSENT
+        if not (copied_order is _ABSENT and real_order is _ABSENT):
             n_checked += 1
-            real_order = ch.area_order.index(area_id) + 1 if area_id in ch.area_order else _ABSENT
-            if not mirror_equal(entry["order"], real_order):
+            if copied_order is _ABSENT:
+                rep.error(where,
+                          "BAN SAO THIEU KHOA: '%s' dung thu %s trong 'area_order', nhung muc "
+                          "areas[%d] trong manifest KHONG chep lai khoa 'order'."
+                          % (area_id, _mirror_show(real_order), idx),
+                          "Them \"order\": %s vao muc areas[%d]."
+                          % (_mirror_show(real_order), idx))
+                n_bad += 1
+            elif not mirror_equal(copied_order, real_order):
                 rep.error(where,
                           "LECH BAN SAO: areas[%d].order = %s cho '%s', nhung vi tri THAT cua "
                           "khu vuc nay trong 'area_order' la %s."
-                          % (idx, _mirror_show(entry["order"]), area_id,
+                          % (idx, _mirror_show(copied_order), area_id,
                              _mirror_show(real_order)),
                           "'area_order' la thu tu that; 'order' chi la ban sao de doc cho de.")
                 n_bad += 1
@@ -1778,8 +1858,9 @@ def check_manifest_mirror(ch: Chapter, rep: Report) -> None:
                         n_bad += 1
 
     if not n_bad:
-        rep.ok("Doi chieu guong: %d gia tri manifest chep lai deu TRUNG KHOP gia tri that "
-               "(%d cau do, %d cu doa, %d co tien trinh, %d khu vuc)."
+        rep.ok("Doi chieu guong HAI CHIEU tren %d cap khoa (%d cau do, %d cu doa, %d co "
+               "tien trinh, %d khu vuc): khong khoa nao thieu o ban guong, khong khoa nao "
+               "thieu o ban goc, khong gia tri nao lech."
                % (n_checked, len(ch.puzzles), len(ch.jumpscares), len(ch.flag_producers),
                   len(ch.areas)))
 
@@ -2217,7 +2298,8 @@ def check_dead_jumpscares(ch: Chapter, rep: Report) -> None:
         if hs.get("action_type") == "USE_ITEM" and is_str(hs.get("item_id")):
             reward_of.setdefault(hs["item_id"], "san pham cua hotspot USE_ITEM '%s'" % hs_id)
 
-    dead = 0
+    dead = 0          # [LOI] - chung minh duoc la khong bao gio ban
+    nghi_ngo = 0      # [CANH BAO] - co dau hieu khong bao gio ban, chua chung minh duoc
     for js_id, (area_id, js) in sorted(ch.jumpscares.items()):
         where = "%s / %s" % (area_id, js_id)
         trig = js.get("trigger_type")
@@ -2257,6 +2339,7 @@ def check_dead_jumpscares(ch: Chapter, rep: Report) -> None:
             users = [pz_id for pz_id, (_, pz) in ch.puzzles.items()
                      if pz.get("wrong_action_jumpscare") == js_id]
             if not users:
+                nghi_ngo += 1
                 rep.warn(
                     where,
                     "Cu doa ON_PUZZLE_FAIL_COUNT nay khong duoc cau do nao tro toi qua "
@@ -2271,14 +2354,32 @@ def check_dead_jumpscares(ch: Chapter, rep: Report) -> None:
             if is_str(tii) and tii in ch.items and not any(
                     h.get("required_item") == tii or h.get("item_id") == tii
                     for _, (_, h) in ch.hotspots.items()):
+                nghi_ngo += 1
                 rep.warn(
                     where,
                     "Cu doa ON_WRONG_ITEM_USE tro toi '%s' nhung khong hotspot nao dung toi vat "
                     "pham do - kha nang cao no khong bao gio ban." % tii,
                 )
 
-    if not dead:
-        rep.ok("Khong co cu doa chet: moi jumpscare deu co duong kich hoat co that.")
+    # PHAM VI THAT SU CUA PHEP KIEM NAY, noi cho dung:
+    #   ON_COLLECT_ITEM      duoc chung minh den noi ([LOI] neu vat pham khong nhat duoc).
+    #   ON_PUZZLE_FAIL_COUNT / ON_WRONG_ITEM_USE  chi soi duoc mot dau hieu -> [CANH BAO].
+    #   ON_ENTER_AREA / ON_TIMER  KHONG duoc soi o day chut nao.
+    # Ban truoc in "moi jumpscare deu co duong kich hoat co that" khi 'dead' = 0, ma 'dead'
+    # chi dem rieng nhanh ON_COLLECT_ITEM - nen cau ay van duoc in ngay ben duoi mot
+    # [CANH BAO] cua chinh no noi "no khong bao gio ban". Cau chu rong hon phep kiem.
+    if not dead and not nghi_ngo:
+        n_soi = sum(1 for _, (_, js) in ch.jumpscares.items()
+                    if js.get("trigger_type") in ("ON_COLLECT_ITEM", "ON_PUZZLE_FAIL_COUNT",
+                                                  "ON_WRONG_ITEM_USE"))
+        rep.ok("Khong cu doa chet nao trong %d/%d cu doa ma giai doan nay soi duoc "
+               "(ON_COLLECT_ITEM, ON_PUZZLE_FAIL_COUNT, ON_WRONG_ITEM_USE). "
+               "ON_ENTER_AREA / ON_TIMER khong duoc soi o day."
+               % (n_soi, len(ch.jumpscares)))
+    elif not dead:
+        rep.info("Khong cu doa chet nao o muc [LOI], nhung con %d cu doa bi danh dau "
+                 "[CANH BAO] la co the khong bao gio ban - xem cac muc tren."
+                 % nghi_ngo)
 
 
 # --------------------------------------------------------------------------
@@ -3205,8 +3306,16 @@ def check_liveops(cfg, ch: Chapter, rep: Report) -> None:
                       "Hien thuc not trong check_liveops() roi tang "
                       "N_LIVEOPS_INVARIANTS_IMPLEMENTED, hoac bo dong khai bao thua.")
         else:
-            rep.info("File cau hinh tu khai bao %d bat bien; trinh kiem nay hien thuc dung %d "
-                     "bat bien do (bo dem duoc doi chieu, khong ghi cung)."
+            # Phep kiem nay doi chieu HAI CON SO, khong doi chieu NOI DUNG. No khong the
+            # ket luan "dung nhung bat bien do" - doi ten hoac thay hang mot dong trong
+            # 'invariants' ma van giu so luong thi no khong thay gi. Cau chu phai dung
+            # bang pham vi ay.
+            rep.info("File cau hinh khai bao %d bat bien va trinh kiem hien thuc %d - HAI "
+                     "CON SO KHOP. So thu hai duoc sinh ra bang len(LIVEOPS_INVARIANTS_"
+                     "IMPLEMENTED), nhung DANH SACH ay do nguoi viet duy tri bang tay. "
+                     "Va day la phep dem, khong phai phep doi chieu tung bat bien: viec tung "
+                     "dong trong 'invariants' co ung voi dung phep kiem nao khong van phai "
+                     "ra soat tay."
                      % (n_declared, N_LIVEOPS_INVARIANTS_IMPLEMENTED))
 
 
@@ -3418,8 +3527,12 @@ def check_level(ch: Chapter, rep: Report, trace: bool = False) -> None:
                 ch.jumpscares[js["id"]] = (area_id, js)
 
     if ch.areas and len(rep.errors) == n_err_before:
-        rep.ok("Moi hotspot / puzzle / jumpscare deu du KHOA MASTER FORM, dung enum va nam tron "
-               "trong khung %dx%d." % (DESIGN_WIDTH, DESIGN_HEIGHT))
+        # Vong lap tren chi di qua ch.area_order. File khu vuc khong duoc manifest tham
+        # chieu KHONG duoc kiem o day (chi co mot [CANH BAO] rieng luc doc file), nen cau
+        # chu phai noi dung pham vi da duyet thay vi "moi hotspot" chung chung.
+        rep.ok("Trong %d khu vuc cua 'area_order': moi hotspot / puzzle / jumpscare deu du "
+               "KHOA MASTER FORM, dung enum va nam tron trong khung %dx%d."
+               % (len(ch.area_order), DESIGN_WIDTH, DESIGN_HEIGHT))
 
     # ---- GIAI DOAN 5: chong lan -------------------------------------------
     rep.section("GIAI DOAN 5 - HOTSPOT CHONG LAN TRONG CUNG KHU VUC")
@@ -3491,13 +3604,27 @@ SELF_TEST_LOGIC_SECTIONS = (
 # puzzle_index / jumpscare_index / flag_registry / areas[].background_asset_url / area_files
 # deu CHEP LAI gia tri von thuoc ve data/areas/*.json. Truoc ban nay khong ham nao doc chung,
 # nen mot ban sao lech khong lop nao bat duoc - dung kieu loi "con so chep qua lai giua cac
-# file ma khong ai dem lai tu nguon". Phep thu: sua mot gia tri trong ban sao, va doi phep
-# doi chieu guong (GIAI DOAN 7c) phai bao loi. Chi tinh la phat hien khi loi den tu 7c: mot
-# loi o giai doan khac nghia la dot bien ay bi bat NHO MOT LY DO KHAC, khong chung minh duoc
-# rang ban sao dang duoc doi chieu.
+# file ma khong ai dem lai tu nguon". Phep thu: lam lech mot ban sao, va doi phep doi chieu
+# guong (GIAI DOAN 7c) phai bao loi. Chi tinh la phat hien khi loi den tu 7c: mot loi o giai
+# doan khac nghia la dot bien ay bi bat NHO MOT LY DO KHAC, khong chung minh duoc rang ban
+# sao dang duoc doi chieu.
 SELF_TEST_MIRROR_SECTIONS = (
     ("GIAI DOAN 7c", "7c doi chieu guong"),
 )
+
+# HAI TOAN TU DOT BIEN, va ly do phai co ca hai.
+#
+# Vong 5 chi co MOT toan tu: doi gia tri (mutate_value). Mot toan tu chi biet doi gia tri
+# thi chi tham do duoc nhung khoa DANG CO MAT, nen no mu hoan toan truoc lop lo hong "khoa
+# vang mat khong ai gac" - va vi mu nen no van in "DAT (100%)". Ban tu kiem ay tu bao cao
+# rong hon nhung gi no thuc su tham do, dung kieu loi ma no sinh ra de bat.
+#
+# Tu ban nay co hai toan tu, dem va bao cao TACH RIENG:
+#   DOI GIA TRI  doi gia tri cua mot khoa dang co -> ban sao lech
+#   XOA KHOA     xoa han mot khoa -> ban sao khuyet
+# Thoat 0 chi khi CA HAI loai deu dat 100%. Mot loai dat 100%% khong noi gi ve loai kia.
+OP_VALUE = "DOI GIA TRI"
+OP_DELETE = "XOA KHOA"
 
 
 def _clone(obj):
@@ -3631,6 +3758,71 @@ def run_one_mirror_mutation(manifest, areas_raw, point):
     return changed, old, new, rep
 
 
+def collect_manifest_mirror_delete_points(manifest):
+    """
+    Moi KHOA guong co the XOA khoi manifest = mot diem dot bien cua toan tu XOA KHOA.
+
+    Khac voi collect_manifest_mirror_points (toan tu doi gia tri), danh sach nay bo qua
+    'area_files': cac muc o do la chuoi tran, khong co khoa nao de xoa - xoa mot muc la
+    doi DO DAI mang, mot phep dot bien khac han va da co luat rieng gac.
+    """
+    points = []
+
+    def add(block, idx, key):
+        points.append({"block": block, "idx": idx, "key": key,
+                       "label": "%s[%d].%s" % (block, idx, key)})
+
+    for block_key, mirror in (("puzzle_index", PUZZLE_INDEX_MIRROR),
+                              ("jumpscare_index", JUMPSCARE_INDEX_MIRROR)):
+        for idx, entry in enumerate(manifest.get(block_key) or []):
+            if not is_dict(entry):
+                continue
+            for key in sorted(entry):
+                if key in mirror:
+                    add(block_key, idx, key)
+
+    for idx, entry in enumerate(manifest.get("flag_registry") or []):
+        if not is_dict(entry):
+            continue
+        for key in FLAG_REGISTRY_MIRROR:
+            if key in entry:
+                add("flag_registry", idx, key)
+
+    for idx, entry in enumerate(manifest.get("areas") or []):
+        if not is_dict(entry):
+            continue
+        for key in ("background_asset_url", "order"):
+            if key in entry:
+                add("areas", idx, key)
+
+    return points
+
+
+def run_one_mirror_delete(manifest, areas_raw, point):
+    """
+    XOA HAN mot khoa ban sao trong manifest (trong bo nho) roi chay lai toan bo phep kiem.
+
+    Tra ve (da_xoa_duoc, gia_tri_cu, report).
+    """
+    man2 = _clone(manifest)
+    areas2 = dict((k, _clone(v)) for k, v in areas_raw.items())
+
+    block = man2.get(point["block"])
+    old = None
+    removed = False
+    if is_list(block) and 0 <= point["idx"] < len(block):
+        entry = block[point["idx"]]
+        if is_dict(entry) and point["key"] in entry:
+            old = entry.pop(point["key"])
+            removed = True
+
+    rep = Report(Palette(False), quiet=True, strict=False)
+    rep.section("GIAI DOAN 1 - DOC & PHAN TICH JSON")
+    ch = build_chapter(man2, areas2, rep)
+    check_level(ch, rep, trace=False)
+    return removed, old, rep
+
+
 def detected_sections(rep: Report, expected):
     """(danh sach giai doan co loi, cac giai doan MONG DOI that su co loi)."""
     sections = sorted(set(sec for _, _, sec in rep.errors))
@@ -3646,18 +3838,35 @@ def run_self_test(args) -> int:
     print(p.bold("=" * 78))
     print(p.bold("  TU KIEM DOT BIEN - trinh kiem co THAT SU doc nhung truong no khai khong?"))
     print(p.bold("=" * 78))
-    print("  HO A - grants_flag: voi moi puzzle va moi hotspot co khai bao 'grants_flag', xoa")
-    print("  truong do trong bo nho (KHONG ghi ra dia), chay lai toan bo phep kiem, va doi no")
-    print("  phai BAO LOI. Chi tinh la phat hien khi loi den tu %s - day la"
-          % " hoac ".join(label for _, label in SELF_TEST_LOGIC_SECTIONS))
-    print("  nhung lop THAT SU dung gia tri cua truong, chu khong phai lop chi kiem xem truong")
-    print("  co ton tai.")
+    print("  HAI TOAN TU DOT BIEN, dem va cham diem TACH RIENG:")
+    print("    %s  doi gia tri cua mot khoa dang co mat  -> ban sao lech" % OP_VALUE)
+    print("    %s     xoa han mot khoa                      -> ban sao khuyet" % OP_DELETE)
+    print("  Ban truoc chi co toan tu %s. Mot toan tu chi biet doi gia tri chi tham do duoc"
+          % OP_VALUE)
+    print("  nhung khoa DANG CO MAT, nen no khong the nhin thay lop lo hong 'khoa vang mat")
+    print("  khong ai gac' - va van in DAT (100%). Vi vay ty le phat hien duoi day duoc bao")
+    print("  cao rieng cho tung toan tu, va ma thoat 0 doi CA HAI deu dat 100%.")
     print("")
-    print("  HO B - ban sao trong manifest: voi moi gia tri ma chapter_01.json chep lai tu")
-    print("  data/areas/*.json (puzzle_index, jumpscare_index, flag_registry,")
-    print("  areas[].background_asset_url, area_files), sua gia tri do trong bo nho va doi")
+    print("  HO A [%s] - grants_flag trong data/areas/*: voi moi puzzle va moi hotspot co"
+          % OP_DELETE)
+    print("  khai bao 'grants_flag', xoa truong do trong bo nho (KHONG ghi ra dia), chay lai")
+    print("  toan bo phep kiem, va doi no phai BAO LOI. Chi tinh la phat hien khi loi den tu")
+    print("  %s - day la nhung lop THAT SU dung gia tri cua truong, chu"
+          % " hoac ".join(label for _, label in SELF_TEST_LOGIC_SECTIONS))
+    print("  khong phai lop chi kiem xem truong co ton tai.")
+    print("")
+    print("  HO B1 [%s] - ban sao trong manifest: voi moi gia tri ma chapter_01.json"
+          % OP_VALUE)
+    print("  chep lai tu data/areas/* (puzzle_index, jumpscare_index, flag_registry,")
+    print("  areas[].background_asset_url, areas[].order, area_files), SUA gia tri do va doi")
     print("  phep doi chieu guong (%s) phai BAO LOI."
           % ", ".join(label for _, label in SELF_TEST_MIRROR_SECTIONS))
+    print("")
+    print("  HO B2 [%s] - cung nhung ban sao ay, nhung XOA HAN khoa thay vi sua gia tri."
+          % OP_DELETE)
+    print("  Day la ho bao phu khoa guong grants_flag trong chapter_01.json, va la ho ma ban")
+    print("  truoc khong co. Bo qua 'area_files': cac muc o do la chuoi tran, khong co khoa")
+    print("  nao de xoa.")
     print("")
 
     base_rep = Report(Palette(False), quiet=True, strict=False)
@@ -3709,7 +3918,8 @@ def run_self_test(args) -> int:
                   "ket luan kha giai cua no khong phu thuoc vao '%s'." % flag)
 
     print("")
-    print(p.bold("  BANG KET QUA - HO A: XOA TRUONG grants_flag"))
+    print(p.bold("  BANG KET QUA - HO A [%s]: XOA TRUONG grants_flag TRONG data/areas/*"
+                 % OP_DELETE))
     print("  %-8s %-27s %-34s %-9s %s"
           % ("LOAI", "DINH DANH", "TRUONG grants_flag da xoa", "PHAT HIEN", "BOI GIAI DOAN"))
     print("  " + "-" * 92)
@@ -3753,7 +3963,8 @@ def run_self_test(args) -> int:
 
     if mirror_points:
         print("")
-        print(p.bold("  BANG KET QUA - HO B: SUA BAN SAO TRONG MANIFEST"))
+        print(p.bold("  BANG KET QUA - HO B1 [%s]: SUA GIA TRI BAN SAO TRONG MANIFEST"
+                     % OP_VALUE))
         print("  %-44s %-32s %-9s %s"
               % ("GIA TRI BAN SAO DA SUA", "SUA THANH", "PHAT HIEN", "BOI GIAI DOAN"))
         print("  " + "-" * 104)
@@ -3768,23 +3979,100 @@ def run_self_test(args) -> int:
               % (len(mirror_rows), n_mirror_detected,
                  len(mirror_rows) - n_mirror_detected))
 
+    # --------------------------------------------------------------- HO B2 --
+    del_points = collect_manifest_mirror_delete_points(manifest)
+    del_rows = []
+    n_del_detected = 0
+    if not del_points:
+        print("")
+        print("  %s Manifest khong co khoa guong nao de XOA." % p.yellow("[CANH BAO]"))
+    for point in del_points:
+        removed, old, rep = run_one_mirror_delete(manifest, areas_raw, point)
+        sections, hit = detected_sections(rep, SELF_TEST_MIRROR_SECTIONS)
+        ok = bool(removed) and bool(hit)
+        if ok:
+            n_del_detected += 1
+        del_rows.append((point["label"], old, removed, len(rep.errors), hit, ok))
+
+        if not removed:
+            print("  %s xoa khoa '%s': KHONG xoa duoc - khoa nay khong ton tai trong manifest."
+                  % (p.red("[LOI]"), point["label"]))
+        elif not ok:
+            print("  %s XOA HAN khoa '%s' (gia tri cu %s): phep doi chieu guong VAN BAO SACH "
+                  "(%d loi, den tu %s)."
+                  % (p.red("[LOI]"), point["label"],
+                     json.dumps(old, ensure_ascii=False), len(rep.errors),
+                     fmt_list(sections) or "khong lop nao"))
+            print("        Ban sao nay chi duoc gac MOT CHIEU: lech gia tri thi bat, nhung "
+                  "khuyet han khoa thi lot. Xem luat duyet HOP o GIAI DOAN 7c.")
+
+    if del_points:
+        print("")
+        print(p.bold("  BANG KET QUA - HO B2 [%s]: XOA HAN KHOA GUONG TRONG MANIFEST"
+                     % OP_DELETE))
+        print("  %-44s %-32s %-9s %s"
+              % ("KHOA GUONG DA XOA", "GIA TRI CU", "PHAT HIEN", "BOI GIAI DOAN"))
+        print("  " + "-" * 104)
+        for label, old, removed, n_err, hit, ok in del_rows:
+            mark = p.green("%-9s" % "co") if ok else p.red("%-9s" % "KHONG")
+            print("  %-44s %-32s %s %s"
+                  % (label, json.dumps(old, ensure_ascii=False)[:32], mark,
+                     ("%s (%d loi)" % (" + ".join(lb for _, lb in hit), n_err))
+                     if hit else "khong lop doi chieu nao (%d loi)" % n_err))
+        print("  " + "-" * 104)
+        print("  Da dot bien %d diem  |  phat hien %d  |  bo sot %d"
+              % (len(del_rows), n_del_detected, len(del_rows) - n_del_detected))
+
     # ---------------------------------------------------------------- TONG --
-    total = len(rows) + len(mirror_rows)
-    total_detected = n_detected + n_mirror_detected
+    # Cham diem TACH RIENG theo TOAN TU. Gop chung hai loai lai thanh mot ty le duy nhat se
+    # cho phep mot loai gan nhu mu van an theo diem cua loai kia - dung kieu tu bao cao rong
+    # hon thuc te ma ban tu kiem nay sinh ra de chan.
+    n_value = len(mirror_rows)
+    n_value_ok = n_mirror_detected
+    n_del = len(rows) + len(del_rows)
+    n_del_ok = n_detected + n_del_detected
+
+    def pct(ok, n):
+        return "%.0f%%" % (100.0 * ok / n) if n else "n/a"
 
     print("")
     print(p.bold("=" * 78))
-    print("  TONG: %d diem dot bien (%d truong grants_flag + %d gia tri ban sao)  |  "
-          "phat hien %d  |  bo sot %d"
-          % (total, len(rows), len(mirror_rows), total_detected, total - total_detected))
-    if total_detected == total and total:
-        print("  %s  Moi diem dot bien deu bi bat dung lop chiu trach nhiem - khong con "
-              "canh ao trong mo phong, khong con ban sao khong ai gac."
-              % p.green("DAT (100%)"))
+    print(p.bold("  TONG KET THEO TOAN TU"))
+    print("  %-14s %-52s %-8s %-8s %s"
+          % ("TOAN TU", "DIEM DOT BIEN", "SO DIEM", "BAT DUOC", "TY LE"))
+    print("  " + "-" * 92)
+    print("  %-14s %-52s %-8d %-8d %s"
+          % (OP_VALUE, "ho B1: gia tri ban sao trong manifest",
+             n_value, n_value_ok, pct(n_value_ok, n_value)))
+    print("  %-14s %-52s %-8d %-8d %s"
+          % (OP_DELETE, "ho A: %d truong grants_flag + ho B2: %d khoa guong"
+             % (len(rows), len(del_rows)), n_del, n_del_ok, pct(n_del_ok, n_del)))
+    print("  " + "-" * 92)
+
+    total = n_value + n_del
+    total_detected = n_value_ok + n_del_ok
+    value_pass = bool(n_value) and n_value_ok == n_value
+    del_pass = bool(n_del) and n_del_ok == n_del
+
+    print("  TONG: %d diem dot bien  |  phat hien %d  |  bo sot %d"
+          % (total, total_detected, total - total_detected))
+    if value_pass and del_pass:
+        print("  %s  Ca hai toan tu deu dat 100%%: %d diem %s va %d diem %s deu bi bat dung "
+              "lop chiu trach nhiem."
+              % (p.green("DAT"), n_value, OP_VALUE, n_del, OP_DELETE))
+        print("        Pham vi cua ket luan nay dung bang pham vi da tham do: hai toan tu "
+              "tren, tren nhung diem da liet ke o bang, khong hon.")
         print(p.bold("=" * 78))
         return 0
-    print("  %s  %d/%d diem dot bien KHONG bi phat hien. Trinh kiem dang ket luan bang "
-          "thu no khong doc." % (p.red("THAT BAI"), total - total_detected, total))
+    for label, ok, n_ok, n_all in ((OP_VALUE, value_pass, n_value_ok, n_value),
+                                   (OP_DELETE, del_pass, n_del_ok, n_del)):
+        if not n_all:
+            print("  %s  Toan tu %s khong co diem nao de dot bien - khong ket luan duoc gi "
+                  "ve loai lo hong no phu trach." % (p.red("THAT BAI"), label))
+        elif not ok:
+            print("  %s  Toan tu %s: %d/%d diem KHONG bi phat hien. Trinh kiem dang ket luan "
+                  "bang thu no khong doc."
+                  % (p.red("THAT BAI"), label, n_all - n_ok, n_all))
     print(p.bold("=" * 78))
     return 1
 
@@ -3846,9 +4134,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--skip-liveops", action="store_true",
                         help="Bo qua giai doan 11 (chi kiem du lieu man choi)")
     parser.add_argument("--self-test", dest="self_test", action="store_true",
-                        help="CHE DO TU KIEM DOT BIEN: lan luot xoa tung truong 'grants_flag' "
-                             "trong bo nho, chay lai toan bo phep kiem, va doi trinh kiem phai "
-                             "BAO LOI. Thoat 0 chi khi phat hien 100%% so diem da dot bien.")
+                        help="CHE DO TU KIEM DOT BIEN: hai toan tu - DOI GIA TRI (sua mot "
+                             "khoa dang co) va XOA KHOA (xoa han mot khoa) - ap len truong "
+                             "'grants_flag' va len moi ban sao manifest, trong bo nho, roi doi "
+                             "trinh kiem phai BAO LOI. Ty le phat hien duoc bao cao RIENG cho "
+                             "tung toan tu; thoat 0 chi khi CA HAI dat 100%%.")
     parser.add_argument("--strict", action="store_true",
                         help="NANG moi [CANH BAO] thanh [LOI] ngay tren ban in va trong ma "
                              "thoat - dung cho cong CI truoc khi khoa ban")

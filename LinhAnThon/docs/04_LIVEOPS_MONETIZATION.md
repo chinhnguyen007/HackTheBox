@@ -9,7 +9,7 @@
 | Schema kiểm tra | `schema/liveops.schema.json` |
 | Công cụ kiểm tra | `tools/validate_level.py --liveops data/liveops_chapter_01.json` |
 | Nền tảng | Android & iOS — APK engine ≤ 30 MB, toàn bộ asset qua Unity Addressables |
-| Nguồn sự thật | SPINE đã chốt + `02_puzzle.md` (hệ gợi ý 3 tier) + **`docs/06_AN_TOAN_NGUOI_CHOI.md`** (mọi ràng buộc an toàn — **deliverable chính thức, thay cho file nháp `04_horror.md`**) + `data/liveops_chapter_01.json` |
+| Nguồn sự thật | SPINE đã chốt + `02_puzzle.md` *(file nháp nội bộ, không phát hành kèm repo — hệ gợi ý 3 tier nay đặc tả đầy đủ ở PHẦN 2 của chính tài liệu này)* + **`docs/06_AN_TOAN_NGUOI_CHOI.md`** (mọi ràng buộc an toàn — **deliverable chính thức, thay cho file nháp `04_horror.md`**) + `data/liveops_chapter_01.json` |
 | Ngôn ngữ | Tài liệu: tiếng Việt có dấu. Mọi `id` / khoá JSON: snake_case không dấu |
 | Ngày cập nhật | 2026-09-15 |
 
@@ -60,7 +60,7 @@ Bảng đối chiếu bắt buộc. Cột **"Vị trí trong JSON"** là đườ
 
 ## 2.1. Ba tier gợi ý
 
-Kế thừa nguyên vẹn thiết kế ở `02_puzzle.md` §0.3: **Tier 1 và Tier 2 luôn có đường miễn phí, Tier 3 là đáp án trực tiếp.** LiveOps **không** phát minh tier mới, chỉ thêm đường mở sớm.
+Kế thừa nguyên vẹn thiết kế ba tier của giai đoạn tiền sản xuất, nay đặc tả đầy đủ ở **§2.1 của chính tài liệu này**: **Tier 1 và Tier 2 luôn có đường miễn phí, Tier 3 là đáp án trực tiếp.** LiveOps **không** phát minh tier mới, chỉ thêm đường mở sớm.
 
 | Tier | Tên trong game | Loại nội dung | Mở miễn phí sau | Hoặc sau số lần sai | Giá Gem | Số lượt quảng cáo | Khoá JSON |
 |---|---|---|---|---|---|---|---|
@@ -162,7 +162,7 @@ Cơ chế quan trọng nhất của toàn hệ gợi ý. Khi người chơi **k�
 ```
 
 Ràng buộc UI bắt buộc:
-- **Kích thước nút gợi ý và mọi nút trong bảng ba lựa chọn: ≥ 120 × 120 px @1920.** Đây là **sàn chạm chính thức của dự án**, dùng chung với hotspot trong game — `01_KICH_BAN_CHAPTER_01.md` §6 (mục X18) và `docs/03_DATA_SPEC.md` §2.2 mức G3. **Ngưỡng 88 px của bản cũ đã bị bãi bỏ**: quy đổi *"88 px ≈ 44 pt"* là sai số học, fit-width chỉ cho ra 29–43 pt/dp. Khoảng đệm giữa hai nút kề nhau ≥ 20 px — **người đang bực vì kẹt câu đố là đúng người dễ bấm nhầm nhất**, và bấm nhầm ở đây là bấm nhầm vào nút tiêu gem.
+- **Kích thước nút gợi ý và mọi nút trong bảng ba lựa chọn: ≥ 120 × 120 px @1920.** Đây là **sàn chạm chính thức của dự án**, dùng chung với hotspot trong game — `docs/01_KICH_BAN_CHAPTER_01.md` §0.3 (mục X18) và `docs/03_DATA_SPEC.md` §2.2 mức G3. **Ngưỡng 88 px của bản cũ đã bị bãi bỏ**: quy đổi *"88 px ≈ 44 pt"* là sai số học, fit-width chỉ cho ra 29–43 pt/dp. Khoảng đệm giữa hai nút kề nhau ≥ 20 px — **người đang bực vì kẹt câu đố là đúng người dễ bấm nhầm nhất**, và bấm nhầm ở đây là bấm nhầm vào nút tiêu gem.
 - Đường **miễn phí luôn nằm trên cùng**, cỡ chữ bằng hai đường còn lại, **không làm mờ, không thu nhỏ**.
 - Luôn hiện **số dư gem** và **số lượt quảng cáo còn lại** trước khi người chơi chọn.
 - Tiêu gem phải **xác nhận hai bước**; Tier 3 còn thêm một lớp hỏi: *"Đọc đáp án thật chứ? Không quay lại được cảm giác tự giải đâu."* (`txt_hint_xac_nhan_doc_dap_an`).
@@ -324,7 +324,7 @@ Ba thông báo bắt buộc: `txt_iap_khoi_phuc_thanh_cong`, `txt_iap_khong_tim_
 
 | Không đổi | Vì sao |
 |---|---|
-| `hotspot_bounds` | Đổi toạ độ là đổi độ khó và phá chứng minh không-chồng-lấn ở `03_world.md` |
+| `hotspot_bounds` | Đổi toạ độ là đổi độ khó và phá chứng minh không-chồng-lấn ở `docs/03_DATA_SPEC.md` §5.2 (bất biến B5) |
 | `puzzle_solution` | Người chơi sự kiện và người chơi thường phải giải cùng một câu đố |
 | `jumpscare_trigger_type` | Nhịp doạ thuộc thiết kế kinh dị, không thuộc LiveOps |
 | `max_fails` | Kế thừa `data/areas/*.json`; **`docs/06_AN_TOAN_NGUOI_CHOI.md` §1.2** liệt nó vào danh sách không bao giờ bị override — kể cả bởi `gentle_mode` |
@@ -402,7 +402,28 @@ Ba thông báo bắt buộc: `txt_iap_khoi_phuc_thanh_cong`, `txt_iap_khong_tim_
 | `src_rewarded_ad` | Xem quảng cáo thưởng, chọn nhận gem | **2** | 6 lượt/ngày | Quảng cáo |
 | `src_iap_gem_pack` | Mua túi nén hương | 60 / 220 | Không giới hạn | IAP |
 
-`[[ src_read_all_text_in_area là nguồn thu cố ý nhất trong bảng: nó trả tiền cho hành vi ĐỌC. Toàn bộ 57 khoá localization phân biệt của chương (đếm từ data/areas/*.json: 39 txt_examine_ + 11 txt_thieu_do_ + 4 txt_khoa_ + 3 txt_thoai_ = 57) đều là cài cắm twist — người đọc hết sẽ hiểu cú twist sâu hơn, và game thưởng cho điều đó. Lưu ý phạm vi của chính nguồn thu này: nó chỉ đếm hotspot EXAMINE và DIALOGUE trong một khu vực, tức nhánh 39 + 3; nhóm txt_thieu_do_ và txt_khoa_ chỉ hiện khi người chơi bấm vào chỗ chưa đủ điều kiện, không tính vào mốc đọc hết. ]]`
+`[[ src_read_all_text_in_area là nguồn thu cố ý nhất trong bảng: nó trả tiền cho hành vi ĐỌC. Toàn bộ 57 khoá localization phân biệt của chương (đếm từ data/areas/*.json: 39 txt_examine_ + 11 txt_thieu_do_ + 4 txt_khoa_ + 3 txt_thoai_ = 57) đều là cài cắm twist — người đọc hết sẽ hiểu cú twist sâu hơn, và game thưởng cho điều đó. Lưu ý phạm vi của chính nguồn thu này: nó chỉ đếm hotspot EXAMINE và DIALOGUE trong một khu vực, tức nhánh 38 + 3; nhóm txt_thieu_do_ và txt_khoa_ chỉ hiện khi người chơi bấm vào chỗ chưa đủ điều kiện, không tính vào mốc đọc hết. Phép cộng 39 + 11 + 4 + 3 = 57 ở trên vẫn đúng vì nó đếm KHOÁ; nhánh 38 + 3 đếm HOTSPOT, và hai cách đếm lệch nhau đúng một đơn vị — xem ngoại lệ đặt tên ngay dưới bảng này. ]]`
+
+### 5.1.1. Ngoại lệ đặt tên `txt_examine_ghep_den_thieu_do` — và cách hiện thực `src_read_all_text_in_area` cho đúng
+
+> **Đừng hiện thực mốc "đọc hết" bằng cách đếm tiền tố khoá.** Toàn chương có **39** khoá tiền tố `txt_examine_` nhưng chỉ có **38** hotspot `EXAMINE`. Khoá thứ 39 là **`txt_examine_ghep_den_thieu_do`**: nó là `fallback_text_key` của **`hs_den_dau_ghep`**, một hotspot **`ZOOM_PUZZLE`** ở `area_bep_gieng`. Về ngữ nghĩa nó thuộc **nhóm thiếu-đồ** — loại câu chỉ hiện khi người chơi bấm vào chỗ **chưa đủ điều kiện** — tức đúng nhóm mà §5.1 vừa tuyên bố là **KHÔNG tính** vào mốc đọc hết. Nó mang tiền tố `txt_examine_` **vì lý do lịch sử**, không phải vì ngữ nghĩa.
+
+**Hậu quả nếu hiện thực sai.** Nếu dev cài `src_read_all_text_in_area` theo luật *"đã thấy hết khoá `txt_examine_` của khu vực"* thì ở `area_bep_gieng` người chơi phải thấy **11** khoá trong khi khu vực chỉ có **10** hotspot `EXAMINE` — mốc **vĩnh viễn không đạt được**, và **3 gem** của khu vực đó **không bao giờ trả**. Bốn khu vực còn lại có delta bằng **0**, nên lỗi chỉ lộ ở **đúng một** khu vực và rất dễ lọt qua test.
+
+**Luật hiện thực bắt buộc:** đếm theo **danh sách hotspot** `action_type ∈ {EXAMINE, DIALOGUE}` của khu vực, **không** đếm theo tiền tố khoá localization.
+
+**Bảng đối chiếu từng khu vực** *(đếm bằng script từ `data/areas/*.json`)*:
+
+| `area_id` | hotspot `EXAMINE` | hotspot `DIALOGUE` | **Mốc "đọc hết" = EX + DI** | khoá `txt_examine_` | delta |
+|---|---|---|---|---|---|
+| `area_san_gach` | 10 | 1 | **11** | 10 | 0 |
+| `area_hien_nha` | 5 | 0 | **5** | 5 | 0 |
+| `area_gian_tho` | 7 | 1 | **8** | 7 | 0 |
+| `area_bep_gieng` | 10 | 0 | **10** | 11 | **+1** ⚠️ `txt_examine_ghep_den_thieu_do` |
+| `area_gac_xep` | 6 | 1 | **7** | 6 | 0 |
+| **Tổng** | **38** | **3** | **41** | **39** | **+1** |
+
+`[[ area_bep_gieng là khu vực DUY NHẤT có delta khác 0. Nếu một vòng sau có người đổi tên khoá này cho đúng ngữ nghĩa (txt_thieu_do_ghep_den), hãy xoá mục 5.1.1 này và đưa bảng về delta 0 trên cả năm khu vực — đừng để lại ngoại lệ đã chết. ]]`
 
 ## 5.2. Nguồn chi (sinks)
 
@@ -691,7 +712,7 @@ Ba phép đo, đối chiếu chéo với **`docs/06_AN_TOAN_NGUOI_CHOI.md`** (§
 | Cường độ jumpscare, `screen_flash`, cooldown | Đây là an toàn sinh lý, không phải tham số kinh doanh |
 | Có/không có đường gợi ý miễn phí | Vi phạm nguyên tắc N1 |
 | Có/không có tuỳ chọn trợ năng | Vi phạm nguyên tắc N4 |
-| Lời giải câu đố, `max_fails`, `bounds` hotspot | Phá chứng minh khả giải của `02_puzzle.md` §8 |
+| Lời giải câu đố, `max_fails`, `bounds` hotspot | Phá chứng minh khả giải ở `docs/01_KICH_BAN_CHAPTER_01.md` §7 (và thuật toán kiểm ở `docs/03_DATA_SPEC.md` §5.5) |
 | Nội dung cốt truyện của cú twist | Một game chỉ có một sự thật |
 
 ---

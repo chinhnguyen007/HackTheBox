@@ -141,7 +141,7 @@ Hai thứ đó không khớp nhau. **Luật hoà giải, áp cho cả engine l�
 |---|---|---|---|
 | G1 | `width ≤ 0` hoặc `height ≤ 0` | **[LỖI]** | Vùng chạm suy biến, người chơi không bao giờ bấm trúng |
 | G2 | `x + width > 1920` hoặc `y + height > 1080` | **[LỖI]** | Tràn ra ngoài khung thiết kế; trên máy tỉ lệ khác sẽ bị cắt mất |
-| G3 | `width < 120` hoặc `height < 120` | **[LỖI]** | **Sàn chạm duy nhất của dự án: 120 × 120 px @1920, không ngoại lệ.** Chốt ở `01_KICH_BAN_CHAPTER_01.md` §6 (mục X18) và Phần 3 của tài liệu ấy. Toàn bộ dữ liệu Chương 1 hiện đã đạt sàn này — **cạnh nhỏ nhất toàn chương đúng bằng 120 px**, và hotspot **duy nhất** vuông khít `120 × 120` là `hs_dui_mo`. (`hs_khe_mong_cua_gac` là `150 × 120`, xem trích §2.6 — nó chạm sàn ở chiều **cao**, không phải cả hai chiều.) Nên [LỖI] không phá gì cả |
+| G3 | `width < 120` hoặc `height < 120` | **[LỖI]** | **Sàn chạm duy nhất của dự án: 120 × 120 px @1920, không ngoại lệ.** Chốt ở `docs/01_KICH_BAN_CHAPTER_01.md` §0.3 (mục X18), kiểm lại ở §5.5, và Phần 3 của tài liệu ấy. Toàn bộ dữ liệu Chương 1 hiện đã đạt sàn này — **cạnh nhỏ nhất toàn chương đúng bằng 120 px**, và hotspot **duy nhất** vuông khít `120 × 120` là `hs_dui_mo`. (`hs_khe_mong_cua_gac` là `150 × 120`, xem trích §2.6 — nó chạm sàn ở chiều **cao**, không phải cả hai chiều.) Nên [LỖI] không phá gì cả |
 | G4 | `min(width, height) = 120` (vừa khít sàn) **và KHÔNG** khai `visual_bounds` | **[CẢNH BÁO]** | Hotspot vừa khít sàn hầu như luôn là hotspot **đã phải nới** từ một sprite nhỏ hơn. Hai khả năng, cả hai đều phải sửa: hoặc quên **nới**, hoặc đã nới nhưng quên **khai** `visual_bounds`. Xem §2.3.5 |
 | G5 | `min(width, height) = 120` **và CÓ** khai `visual_bounds` | **Chấp nhận** | Khai `visual_bounds` là cách nói với trình kiểm *"nhỏ ở đây là có chủ đích, không phải bỏ sót"* (nguyên văn mô tả trong `schema/level.schema.json`) |
 
@@ -558,7 +558,7 @@ Trích này lấy **nguyên văn giá trị từ dữ liệu thật**, và cố 
       "audio_asset": "sfx_scare_chan_nhang_boc.ogg",
       "sprite_animation": "anim_di_anh_dong_loat_quay",
       "screen_flash": false,
-      "ghi_chu_vi": "S3 - impulse. Ban 250 ms sau khi dui roi khoi mo (nhat item_dui_mo). Mot lan duy nhat moi chuong."
+      "ghi_chu_vi": "S3 - impulse. Bắn 250 ms sau khi dùi rời khỏi mõ (nhặt item_dui_mo). Một lần duy nhất mỗi chương."
     }
   ]
 }
